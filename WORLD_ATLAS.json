@@ -1,0 +1,309 @@
+{
+  "server_name": "NorthStar Living Multiverse (VORATH Public Realm)",
+  "website": "https://northstarprime.net/realm/",
+  "mirror_guide": "https://northstarprime.net/minecraft/",
+  "connection": {
+    "java_edition": {
+      "version": "1.21.1 (Vanilla / Fabric compatible \u2014 zero client mods required)",
+      "address": "play.northstarprime.net",
+      "port": 25565
+    },
+    "bedrock_edition": {
+      "platforms": [
+        "Windows 10/11",
+        "iOS",
+        "Android",
+        "Tablet"
+      ],
+      "address": "play.northstarprime.net",
+      "port": 25130,
+      "quick_add_uri": "minecraft://?addExternalServer=NorthStar%20Realm|play.northstarprime.net:25130"
+    },
+    "xbox_console": {
+      "platforms": [
+        "Xbox Series X|S",
+        "Xbox One"
+      ],
+      "method": "Friends Tab (MCXboxBroadcast 24/7)",
+      "xbox_gamertag": "UncleVorath",
+      "steps": [
+        "Add Xbox gamertag UncleVorath as a friend (auto-accepts within seconds).",
+        "Open Minecraft -> Play -> Friends tab.",
+        "Select UncleVorath under Joinable Friends to enter the NorthStar world."
+      ]
+    }
+  },
+  "in_world_commands_and_events": [
+    {
+      "name": "Founders Week (Oct 19-25, 2026)",
+      "usage": "Automatic on first join at Civic Spawn",
+      "description": "Every player who joins during Founders Week receives a permanent gold [Founder] tag and a signed Founders Week Certificate book."
+    },
+    {
+      "name": "Fly a UFO Saucer",
+      "usage": "/trigger saucer",
+      "description": "Spawn and pilot a custom server-side UFO flying saucer over 286 builds with zero client mods required."
+    },
+    {
+      "name": "Safari Zoo Tour",
+      "usage": "/trigger safari",
+      "description": "Visit the NorthStar Safari Zoo & Menagerie habitats."
+    },
+    {
+      "name": "Grand Discovery Rail",
+      "usage": "Board at Civic Station (512, 65, -135)",
+      "description": "Automated scenic minecart rail network linking the major districts and landmarks."
+    }
+  ],
+  "landmarks": {
+    "arrival_plaza": {
+      "name": "the Arrival Plaza",
+      "pos": [
+        436,
+        null,
+        -70
+      ],
+      "range": 4,
+      "lookAt": [
+        436,
+        70,
+        -78
+      ],
+      "refuge": true,
+      "seen": "Live spawn at Arrival Plaza (436, 65, -70); verified in run 1 and p1_run2."
+    },
+    "east_lanes": {
+      "name": "the copper-roofed lanes",
+      "pos": [
+        504,
+        null,
+        -27
+      ],
+      "range": 6,
+      "lookAt": [
+        508,
+        75,
+        -25
+      ],
+      "seen": "Weathered and oxidized cut copper roofs around 504..508, -25..-32; verified in run 1 and p1_run2."
+    },
+    "market_hall": {
+      "name": "the Grand Market Hall",
+      "pos": [
+        517,
+        null,
+        -120
+      ],
+      "range": 4,
+      "lookAt": [
+        500,
+        82,
+        -120
+      ],
+      "refuge": true,
+      "seen": "Civic Wave 2b.1 Grand Covered Market Hall brick-and-stone arcade (X=480..516, Z=-140..-100), approached from the paved 3-block east pedestrian street (X=517..519)."
+    },
+    "halloween_eye_wonder": {
+      "name": "the Great Lantern Eye",
+      "pos": [
+        540,
+        null,
+        -98
+      ],
+      "range": 4,
+      "lookAt": [
+        540,
+        92,
+        -105
+      ],
+      "refuge": true,
+      "seen": "P5 Colossal Carved Jack-o'-Lantern Wonder (X=520..560, Z=-140..-100, Y=64..119) featuring the blazing 8-point NorthStar Eye carved on its south forehead above the walk-in rotunda tunnel at (540, 66, -101)."
+    },
+    "courthouse": {
+      "name": "the Supreme Courthouse",
+      "pos": [
+        552,
+        null,
+        -95
+      ],
+      "range": 5,
+      "lookAt": [
+        552,
+        92,
+        -65
+      ],
+      "refuge": true,
+      "seen": "Civic Wave 2c.1 Supreme Courthouse (courthouse_v2c) classical portico facing the paved avenue at Z=-95."
+    },
+    "opera_house": {
+      "name": "the Grand Opera House",
+      "pos": [
+        621,
+        null,
+        -95
+      ],
+      "range": 5,
+      "lookAt": [
+        621,
+        98,
+        -65
+      ],
+      "refuge": true,
+      "seen": "Civic Wave 2c.4 Palais Garnier Grand Opera House paired Corinthian columns, green copper dome, and rooftop Golden Lyre (X=591..651, Z=34..96 / south-north civic avenue)."
+    },
+    "civic_quarter": {
+      "name": "the Civic Quarter",
+      "pos": [
+        540,
+        null,
+        0
+      ],
+      "range": 4,
+      "lookAt": [
+        582,
+        110,
+        1
+      ],
+      "refuge": true,
+      "seen": "Stone-brick civic plaza at 540, 68, 0; verified in run 1 and p1_run2."
+    },
+    "clock_tower": {
+      "name": "the Clock Tower",
+      "pos": [
+        520,
+        null,
+        18
+      ],
+      "range": 4,
+      "lookAt": [
+        524,
+        140,
+        29
+      ],
+      "seen": "Sovereign Clock Tower cluster centred 524, 29, top Y=149; verified in run 1 and p1_run2."
+    },
+    "cathedral": {
+      "name": "the Cathedral",
+      "pos": [
+        572,
+        null,
+        0
+      ],
+      "range": 4,
+      "lookAt": [
+        582,
+        120,
+        1
+      ],
+      "seen": "Cathedral cluster centred 582, 1, top Y=132..139; verified in run 1 and p1_run2."
+    },
+    "quidditch_stadium": {
+      "name": "the Quidditch Stadium",
+      "pos": [
+        500,
+        null,
+        215
+      ],
+      "range": 6,
+      "lookAt": [
+        500,
+        105,
+        280
+      ],
+      "seen": "Regulation 150x60m Quidditch Stadium north approach looking across the 6 golden hoops and 4 House towers at (500, 72, 280)."
+    },
+    "grand_pantheon": {
+      "name": "the Grand Pantheon",
+      "pos": [
+        575,
+        null,
+        258
+      ],
+      "range": 5,
+      "lookAt": [
+        575,
+        108,
+        285
+      ],
+      "refuge": true,
+      "seen": "Civic Wave 2a Grand Pantheon Corinthian octastyle portico and coffered oculus dome (X=540..610, Z=260..350)."
+    },
+    "temple_pagoda": {
+      "name": "the Celestial Temple Pagoda",
+      "pos": [
+        635,
+        null,
+        258
+      ],
+      "range": 5,
+      "lookAt": [
+        635,
+        118,
+        285
+      ],
+      "seen": "Civic Wave 2a Five-Story Celestial Temple Pagoda (X=615..680, Z=260..350)."
+    },
+    "wonders_parvis": {
+      "name": "the Valley of Wonders Gate",
+      "pos": [
+        760,
+        null,
+        792
+      ],
+      "range": 5,
+      "lookAt": [
+        735,
+        110,
+        792
+      ],
+      "refuge": true,
+      "seen": "Valley of Wonders Wave W1 West Arrival Parvis & VIP Node 114 Compass Medallion (760, 64, 792), connected via World Quality Wave 2.3 East Avenue."
+    },
+    "pharos_lighthouse": {
+      "name": "the Pharos of Alexandria",
+      "pos": [
+        768,
+        null,
+        726
+      ],
+      "range": 5,
+      "lookAt": [
+        768,
+        128,
+        692
+      ],
+      "seen": "Valley of Wonders Wave W3a Drowned Pharos of Alexandria & 3 Active Prismarine Conduits (X=736..800, Z=660..724, Y=40..138)."
+    },
+    "disco_mirror_dome": {
+      "name": "the Disco Laser Dome",
+      "pos": [
+        766,
+        null,
+        862
+      ],
+      "range": 5,
+      "lookAt": [
+        766,
+        130,
+        902
+      ],
+      "seen": "Valley of Wonders Wave W3b Colossal 42m Disco-Ball Machine & 16-Beacon Rainbow Laser Ring (X=728..804, Z=864..940, Y=40..176)."
+    },
+    "grand_library_eye": {
+      "name": "the Eye of the Grand Library",
+      "pos": [
+        880,
+        null,
+        792
+      ],
+      "range": 5,
+      "lookAt": [
+        892,
+        112,
+        792
+      ],
+      "refuge": true,
+      "seen": "Valley of Wonders Wave W1 Grand Library of Wonders West Celsus Portico crowned with the golden NorthStar Eye pediment (X=884..996, Z=736..848)."
+    }
+  }
+}
