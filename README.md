@@ -34,32 +34,38 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 
 | Feature / Event | Command / Location | Details |
 | :--- | :--- | :--- |
-| **Founders Week (Oct 19–25, 2026)** | Automatic on join at Civic Spawn | Claim your permanent gold **`[Founder]`** chat/tab tag and signed Founders Week Certificate book. |
-| **Fly a UFO Saucer** | `/trigger saucer` | Pilot a server-side flying saucer across all 286 builds (100% vanilla-compatible, zero client mods). |
+| **Founders Week (Oct 19–25, 2026)** | Arrival Plaza (`436, 65, -70`). The window has closed. | The gold `[Founder]` tag was claimed on first join during that window. |
+| **Fly a UFO Saucer** | `/trigger saucer` | Pilot a server-side flying saucer across the builds (100% vanilla-compatible, zero client mods). |
 | **Safari Zoo & Menagerie** | `/trigger safari` | Teleport to the curated biome habitats and exotic creature enclosures. |
-| **Grand Discovery Rail Tour** | Civic Station (`512, 65, -135`) | Hop in a minecart for a guided rail tour across the Civic District and outer wonders. |
-| **Halloween Eye Monument** | Civic Street (`540, 92, -105`) | Stand on the lantern-lit street between Market Hall and the Courthouse and look up at the Halloween Eye. |
+| **Grand Discovery Rail Tour** | Arrival Plaza (`436, 65, -70`) | The atlas event used to say Civic Station `512, 65, -135`. That point is not a landmark in `WORLD_ATLAS.json`. |
+| **Halloween Eye Monument** | Viewpoint (`540, 65, -98`), looking at (`540, 92, -105`) | Matches `halloween_eye_wonder` in the atlas. |
 
 ---
 
-## Verified Landmark Coordinates (`WORLD_ATLAS.json`)
+## Landmark coordinates (`WORLD_ATLAS.json`)
 
-| Landmark ID | Name | Coordinates (`X, Y, Z`) | District / Zone |
+This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is left blank. The old README figures for a civic plaza at `525, 65, -135`, a market at `512, 65, -105`, a courthouse at `568, 65, -105`, and a quidditch pitch at `-172, 127, 816` were not in the JSON. They are removed.
+
+| Landmark ID | Name | Position (`X, Y, Z`) | Look at |
 | :--- | :--- | :--- | :--- |
-| `civic_plaza` | **Civic Spawn Plaza** | `525, 65, -135` | Civic District |
-| `market_hall` | **Grand Market Hall** | `512, 65, -105` | Civic District |
-| `courthouse` | **Civic Courthouse** | `568, 65, -105` | Civic District |
-| `halloween_eye` | **The Halloween Eye (Street Viewpoint)** | `540, 65, -98` *(looking at `540, 92, -105`)* | Civic District |
-| `town_square_east` | **East Town Square & Bell Tower** | `615, 65, -135` | Civic District |
-| `library_plaza` | **Civic Library & Archives** | `465, 65, -135` | Civic District |
-| `botanical_conservatory` | **Botanical Glass Conservatory** | `410, 65, -175` | West Gardens |
-| `harbor_promenade` | **NorthStar Harbor Promenade** | `348, 64, -210` | Waterfront |
-| `east_gate_overlook` | **Eastern Gate & Lantern Road** | `700, 68, -135` | East Frontier |
-| `grand_library` | **The Grand Library of Alexandria** | `880, 72, 792` *(looking at `892, 112, 792`)* | Outer Wonders |
-| `observatory_ridge` | **Celestial Observatory** | `-605, 114, -772` | Northern Peaks |
-| `quidditch_arena` | **NorthStar Quidditch Pitch** | `-172, 127, 816` | Southern Highlands |
-| `vorath_citadel` | **Vorath Obsidian Citadel** | `-196, 125, -456` | Northwestern Wastes |
-| `sunken_atlantis` | **Sunken Atlantis Dome** | `543, 62, 540` | Southern Ocean |
+| `arrival_plaza` | Arrival Plaza | `436, 65, -70` | `436, 70, -78` |
+| `east_lanes` | Copper-roofed lanes | `504, —, -27` | `508, 75, -25` |
+| `market_hall` | Grand Market Hall | `517, —, -120` | `500, 82, -120` |
+| `halloween_eye_wonder` | Great Lantern Eye | `540, —, -98` | `540, 92, -105` |
+| `courthouse` | Supreme Courthouse | `552, —, -95` | `552, 92, -65` |
+| `opera_house` | Grand Opera House | `621, —, -95` | `621, 98, -65` |
+| `civic_quarter` | Civic Quarter | `540, 68, 0` | `582, 110, 1` |
+| `clock_tower` | Clock Tower | `520, —, 18` | `524, 140, 29` |
+| `cathedral` | Cathedral | `572, —, 0` | `582, 120, 1` |
+| `quidditch_stadium` | Quidditch Stadium | `500, —, 215` | `500, 105, 280` |
+| `grand_pantheon` | Grand Pantheon | `575, —, 258` | `575, 108, 285` |
+| `temple_pagoda` | Celestial Temple Pagoda | `635, —, 258` | `635, 118, 285` |
+| `wonders_parvis` | Valley of Wonders Gate | `760, —, 792` | `735, 110, 792` |
+| `pharos_lighthouse` | Pharos of Alexandria | `768, —, 726` | `768, 128, 692` |
+| `disco_mirror_dome` | Disco Laser Dome | `766, —, 862` | `766, 130, 902` |
+| `grand_library_eye` | Eye of the Grand Library | `880, —, 792` | `892, 112, 792` |
+
+Arrival Plaza height `65` and Civic Quarter height `68` come from the `seen` notes. The other heights in `pos` are null in the JSON.
 
 ---
 
