@@ -1,0 +1,8 @@
+{
+  "url": "https://raw.githubusercontent.com/PrismarineJS/minecraft-data/e27f32c998ab2618230e521bbf54844910798c19/data/pc/1.21.1/protocol.json",
+  "upstream_file_sha256": "f21fa44b487b973d6e70fde2712d63442267f57cbe11cf61d859db1f58455749",
+  "original_recipe_schema_sha256": "b14e51524e58d20ebd5f16143f3aa559a8a50803d164dada1474f0a4a91b4694",
+  "fixed_recipe_schema_sha256": "f3d44b0e5c98d99fe56f0c68cfcf4e8f458b936e97c0fd617235f9c237f88012",
+  "exact_delta_verified": true,
+  "live_packet_proof": "pending next isolated CI"
+}

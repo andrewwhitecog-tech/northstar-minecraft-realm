@@ -1,3 +1,4 @@
+require('./recipe_protocol_1_21_1_fix.cjs');
 const {test}=require('node:test');const assert=require('node:assert/strict');const {once}=require('node:events');const mineflayer=require('mineflayer');const {rcon,delay}=require('./common.cjs');
 function waitEvent(emitter,event,ms=20000){return Promise.race([once(emitter,event),delay(ms).then(()=>{throw Error('Timeout '+event);})]);}
 let bot;async function connect(){bot=mineflayer.createBot({host:'127.0.0.1',port:26224,username:'NSPGearQA',version:'1.21.1',auth:'offline',hideErrors:false});bot.on('error',e=>console.error(e));await waitEvent(bot,'spawn');return bot;}

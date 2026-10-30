@@ -71,7 +71,7 @@ try:
  via=fetch('https://github.com/ViaVersion/ViaProxy/releases/download/v3.4.12/ViaProxy-3.4.12.jar',RUN/'viaproxy/ViaProxy-3.4.12.jar','sha256','32ce9ad871aeb03286823c29da262ebd75992864e7857db283f103525c7fc0cb')
  # New test-only configs, no account or cached-login files are copied.
  (RUN/'viaproxy/ViaProxy.yml').write_text('bind-address: 127.0.0.1:26226\ntarget-address: 127.0.0.1:26224\ntarget-version: 1.21-1.21.1\nproxy-online-mode: false\nauth-method: NONE\nignore-protocol-translation-errors: false\n')
- (RUN/'geyser/config.yml').write_text('bedrock:\n  address: 127.0.0.1\n  port: 19224\njava:\n  address: 127.0.0.1\n  port: 26226\n  auth-type: offline\nenable-metrics: false\nsaved-user-logins: []\nconfig-version: 7\n')
+ (RUN/'geyser/config.yml').write_text('bedrock:\n  address: 127.0.0.1\n  port: 19224\njava:\n  address: 127.0.0.1\n  port: 26226\n  auth-type: offline\nenable-metrics: false\nsaved-user-logins: []\nadvanced:\n  bedrock:\n    validate-bedrock-login: false\nconfig-version: 7\n')
  spawn('viaproxy',[JAVA,'-XX:ActiveProcessorCount=2','-Xmx384M','-Djava.awt.headless=true','-jar',via.name,'config','ViaProxy.yml'],via.parent)
  spawn('geyser',[JAVA,'-XX:ActiveProcessorCount=2','-Xmx512M','-Djava.awt.headless=true','-jar',geyser.name,'--nogui'],geyser.parent);time.sleep(12);test('bedrock');stop(server)
  report['passed']=report.get('java_exit_code')==0 and report.get('bedrock_exit_code')==0
