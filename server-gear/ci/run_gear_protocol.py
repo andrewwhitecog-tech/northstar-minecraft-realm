@@ -54,7 +54,7 @@ def start(level,fabric,phase):
   except OSError:time.sleep(.5)
  raise TimeoutError('CI fixture server readiness: '+phase)
 def test(name):
- env=os.environ.copy();env['NSP_CASE_PATTERN']='Disconnect while|Death while|Full PLAYER' if name=='java' else 'Every tier|Closed backpack actual|Full bag|Death with menu|Disconnect while|Full PLAYER'
+ env=os.environ.copy();env['NSP_CASE_PATTERN']='Disconnect while|Death while|Full PLAYER' if name=='java' else '.*'
  p=subprocess.run(['node','--test','protocol_tests/'+name+'_inventory.test.cjs'],cwd=ROOT,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf8',timeout=480)
  (RUN/(name+'_protocol.tap')).write_text(p.stdout);print(p.stdout,flush=True);report[name+'_exit_code']=p.returncode;report[name+'_packet_parse_errors']=[line for line in p.stdout.splitlines() if any(x in line for x in ['PartialReadError','Read error for undefined','PacketParseError'])]
 try:
