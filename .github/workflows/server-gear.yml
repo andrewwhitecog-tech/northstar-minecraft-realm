@@ -33,3 +33,34 @@ jobs:
             server-gear/build/libs/*.jar
             server-gear/build/test-results/test/*.xml
             server-gear/build/reports/tests/test/**
+  pack-engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Execute real v3 pack tests on a generated world copy
+        run: |
+          python -m venv .ci-venv
+          .ci-venv/bin/python -m pip install -r packv3/ci/requirements.txt
+          .ci-venv/bin/python -u packv3/ci/run_pack_engine.py
+      - name: Upload safe engine evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: northstar-pack-v3-engine-ci
+          retention-days: 1
+          path: |
+            packv3/ci/ACTUAL_PACK_ENGINE.json
+            packv3/ci/COMMANDS_ACTUAL.json
+            packv3/ci/unittest_actual.log
+            packv3/ci/runtime/baseline.log
+            packv3/ci/runtime/test.log
