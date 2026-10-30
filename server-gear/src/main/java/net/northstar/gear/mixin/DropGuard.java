@@ -1,4 +1,5 @@
-package net.northstar.gear;
+package net.northstar.gear.mixin;
+import net.northstar.gear.GearMenu;
 import eu.pb4.sgui.api.GuiHelpers;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

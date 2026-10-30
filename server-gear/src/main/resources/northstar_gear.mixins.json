@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.northstar.gear",
+  "package": "net.northstar.gear.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "DropGuard"
