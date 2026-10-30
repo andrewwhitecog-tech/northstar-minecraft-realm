@@ -44,7 +44,7 @@ def stop(server):
  except subprocess.TimeoutExpired:server.terminate();server.wait(timeout=15)
  report.setdefault('owned_server_exits',[]).append(server.returncode)
 def start(level,fabric,phase):
- props={'server-ip':'127.0.0.1','server-port':'26224','enable-rcon':'true','rcon.port':'26225','rcon.password':password,'online-mode':'false','enforce-secure-profile':'false','network-compression-threshold':'-1','enable-query':'false','max-players':'3','spawn-protection':'0','view-distance':'2','simulation-distance':'2','difficulty':'peaceful','gamemode':'survival','level-name':level,'level-type':'minecraft:flat','generate-structures':'false','max-tick-time':'120000','require-resource-pack':'false','motd':'NorthStar Gear CI COPY ONLY','generator-settings':json.dumps({'biome':'minecraft:plains','layers':[{'block':'minecraft:bedrock','height':1},{'block':'minecraft:dirt','height':2},{'block':'minecraft:grass_block','height':1}]})}
+ props={'server-ip':'127.0.0.1','server-port':'26224','enable-rcon':'true','rcon.port':'26225','rcon.password':password,'online-mode':'false','allow-flight':'true','enforce-secure-profile':'false','network-compression-threshold':'-1','enable-query':'false','max-players':'3','spawn-protection':'0','view-distance':'2','simulation-distance':'2','difficulty':'peaceful','gamemode':'survival','level-name':level,'level-type':'minecraft:flat','generate-structures':'false','max-tick-time':'120000','require-resource-pack':'false','motd':'NorthStar Gear CI COPY ONLY','generator-settings':json.dumps({'biome':'minecraft:plains','layers':[{'block':'minecraft:bedrock','height':1},{'block':'minecraft:dirt','height':2},{'block':'minecraft:grass_block','height':1}]})}
  (RUN/'server.properties').write_text('\n'.join(k+'='+v for k,v in props.items())+'\n');(RUN/'eula.txt').write_text('eula=true\n')
  p=spawn(phase,[JAVA,'-XX:ActiveProcessorCount=2','-Xms256M','-Xmx1500M','-Djava.awt.headless=true','-jar','fabric-server-launch.jar' if fabric else 'server.jar','nogui'],RUN)
  end=time.monotonic()+180
@@ -54,7 +54,8 @@ def start(level,fabric,phase):
   except OSError:time.sleep(.5)
  raise TimeoutError('CI fixture server readiness: '+phase)
 def test(name):
- p=subprocess.run(['node','--test','protocol_tests/'+name+'_inventory.test.cjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf8',timeout=480)
+ env=os.environ.copy();env['NSP_CASE_PATTERN']='Disconnect while|Death while|Full PLAYER' if name=='java' else 'Every tier|Closed backpack actual|Full bag|Death with menu|Disconnect while|Full PLAYER'
+ p=subprocess.run(['node','--test','protocol_tests/'+name+'_inventory.test.cjs'],cwd=ROOT,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf8',timeout=480)
  (RUN/(name+'_protocol.tap')).write_text(p.stdout);print(p.stdout,flush=True);report[name+'_exit_code']=p.returncode;report[name+'_packet_parse_errors']=[line for line in p.stdout.splitlines() if any(x in line for x in ['PartialReadError','Read error for undefined','PacketParseError'])]
 try:
  meta=urljson('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json');version=next(v for v in meta['versions']if v['id']=='1.21.1');entry=urljson(version['url'])['downloads']['server'];fetch(entry['url'],RUN/'server.jar','sha1',entry['sha1'])
