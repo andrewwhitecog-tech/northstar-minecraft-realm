@@ -44,6 +44,7 @@ jobs:
         run: |
           git config --global url.https://github.com/.insteadOf ssh://git@github.com/
           npm ci --ignore-scripts --no-audit --no-fund
+          node prepare_native.cjs
       - name: Test real Java and Bedrock inventories on an isolated world copy
         run: python3 -u ci/run_gear_protocol.py
       - name: Upload safe protocol results

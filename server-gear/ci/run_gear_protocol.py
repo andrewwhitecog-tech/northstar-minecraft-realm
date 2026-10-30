@@ -54,8 +54,8 @@ def start(level,fabric,phase):
   except OSError:time.sleep(.5)
  raise TimeoutError('CI fixture server readiness: '+phase)
 def test(name):
- p=subprocess.run(['node','--test','protocol_tests/'+name+'_inventory.test.cjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf8',timeout=280)
- (RUN/(name+'_protocol.tap')).write_text(p.stdout);print(p.stdout,flush=True);report[name+'_exit_code']=p.returncode
+ p=subprocess.run(['node','--test','protocol_tests/'+name+'_inventory.test.cjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf8',timeout=480)
+ (RUN/(name+'_protocol.tap')).write_text(p.stdout);print(p.stdout,flush=True);report[name+'_exit_code']=p.returncode;report[name+'_packet_parse_errors']=[line for line in p.stdout.splitlines() if any(x in line for x in ['PartialReadError','Read error for undefined','PacketParseError'])]
 try:
  meta=urljson('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json');version=next(v for v in meta['versions']if v['id']=='1.21.1');entry=urljson(version['url'])['downloads']['server'];fetch(entry['url'],RUN/'server.jar','sha1',entry['sha1'])
  fetch('https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.5/1.0.1/server/jar',RUN/'fabric-server-launch.jar','sha256','243ac92e0ddb12b031218d46d71f211d99d4d61a73fb2538bf73beee1ab37556')
@@ -74,7 +74,7 @@ try:
  (RUN/'geyser/config.yml').write_text('bedrock:\n  address: 127.0.0.1\n  port: 19224\njava:\n  address: 127.0.0.1\n  port: 26226\n  auth-type: offline\nenable-metrics: false\nsaved-user-logins: []\nadvanced:\n  bedrock:\n    validate-bedrock-login: false\nconfig-version: 7\n')
  spawn('viaproxy',[JAVA,'-XX:ActiveProcessorCount=2','-Xmx384M','-Djava.awt.headless=true','-jar',via.name,'config','ViaProxy.yml'],via.parent)
  spawn('geyser',[JAVA,'-XX:ActiveProcessorCount=2','-Xmx512M','-Djava.awt.headless=true','-jar',geyser.name,'--nogui'],geyser.parent);time.sleep(12);test('bedrock');stop(server)
- report['passed']=report.get('java_exit_code')==0 and report.get('bedrock_exit_code')==0
+ report['passed']=report.get('java_exit_code')==0 and report.get('bedrock_exit_code')==0 and not report.get('java_packet_parse_errors') and not report.get('bedrock_packet_parse_errors')
 except BaseException:report.update(passed=False,error=traceback.format_exc());print(report['error'],file=sys.stderr)
 finally:
  for p in reversed(children):
