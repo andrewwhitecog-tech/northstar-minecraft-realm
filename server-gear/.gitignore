@@ -10,3 +10,4 @@ runs/
 BEDROCK_PACKET_EVIDENCE.json
 *.pid
 .ci_upload/
+ci_runtime/

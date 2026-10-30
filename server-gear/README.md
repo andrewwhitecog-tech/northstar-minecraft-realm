@@ -23,3 +23,5 @@ The deliverable's verification status is in CURRENT.md. A successful build or he
 Java21, Gradle8.8 wrapper, Fabric Loader0.16.5, Fabric API0.105.0+1.21.1 and included sgui1.6.1+1.21.1. JUnit tests plus actual Java/Bedrock protocol tests accompany the source. The built server JAR includes sgui; install Fabric API separately in a copy. Do not install into the live server from this prototype packet.
 
 ROUTE_DECISION.md contains the primary-source comparison with Trinkets Polymer Port and NETS, transaction design and limitations. Source is preserved in this local Git repository; no remote push is claimed.
+
+Night Eye refreshes 260 ticks of night vision to avoid vanilla fade/blink. It may linger for up to 13 seconds after unequipping; unrelated potion effects are not removed. Other potion rings refresh 45 ticks.

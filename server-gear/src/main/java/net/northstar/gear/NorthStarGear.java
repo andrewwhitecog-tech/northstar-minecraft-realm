@@ -39,7 +39,7 @@ public final class NorthStarGear implements ModInitializer {
   ServerLifecycleEvents.SERVER_STOPPING.register(LanternLights::clear);
  }
  static void open(ServerPlayerEntity p,String kind){if(p.currentScreenHandler!=p.playerScreenHandler)p.closeHandledScreen();for(int i=0;i<p.getInventory().size();i++)if(GearItems.kind(p.getInventory().getStack(i)).equals(kind)){new GearMenu(p,i).open();return;}p.sendMessage(Text.literal("Craft a "+(kind.equals("pouch")?"pouch":"backpack")+" at /ringwright first."),false);}
- static void status(ServerPlayerEntity p,RegistryEntry<StatusEffect> e){p.addStatusEffect(new StatusEffectInstance(e,45,0,true,false,true));}
+ static void status(ServerPlayerEntity p,RegistryEntry<StatusEffect> e){p.addStatusEffect(new StatusEffectInstance(e,e==StatusEffects.NIGHT_VISION?260:45,0,true,false,true));}
  private void tick(MinecraftServer server){
   LanternLights.clear(server);var connected=new HashSet<UUID>();
   for(var p:server.getPlayerManager().getPlayerList()){

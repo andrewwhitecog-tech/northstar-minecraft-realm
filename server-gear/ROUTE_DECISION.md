@@ -19,3 +19,5 @@ Rings use level-I vanilla effects, different effects coexist and duplicates do n
 
 ## Explicit gaps
 All gear uses the noningredient vanilla recovery compass carrier; native recipe ingredients are scanned in the runtime self-test. Knowledge books were inspected and rejected because their use method consumes one even without recipes. No original VORATH meshes/CMDs are substituted for the models owned by Antigravity; vanilla item appearance only. No worn backpack render. Bench's styled Alchemy-quarter architecture is not built here. Functional bench is a real smithing/anvil/heat arrangement on a world copy. Automatic ordinary smithing UI recipes are not present; /ringwright is the transactional crafting interface at the bench. Real Geyser/Xbox menu and all edge-case client tests are required before acceptance. No Bloom access/writes/restart.
+
+Night Eye refreshes 260 ticks of night vision to avoid vanilla fade/blink. It may linger for up to 13 seconds after unequipping; unrelated potion effects are not removed. Other potion rings refresh 45 ticks.

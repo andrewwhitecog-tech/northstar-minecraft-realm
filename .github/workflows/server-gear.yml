@@ -2,6 +2,9 @@ name: NorthStar server gear prototype
 on:
   push:
     branches: ["codex/server-gear-prototype-20261030"]
+concurrency:
+  group: northstar-server-gear-prototype
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -33,3 +36,25 @@ jobs:
             server-gear/build/libs/*.jar
             server-gear/build/test-results/test/*.xml
             server-gear/build/reports/tests/test/**
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install pinned protocol clients
+        working-directory: server-gear/protocol_tests
+        run: |
+          git config --global url.https://github.com/.insteadOf ssh://git@github.com/
+          npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test real Java and Bedrock inventories on an isolated world copy
+        run: python3 -u ci/run_gear_protocol.py
+      - name: Upload safe protocol results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: northstar-gear-protocol-ci
+          retention-days: 1
+          path: |
+            server-gear/CI_PROTOCOL_ACTUAL.json
+            server-gear/CI_COMMANDS_ACTUAL.json
+            server-gear/BEDROCK_PACKET_EVIDENCE.json
+            server-gear/ci_runtime/*.log
+            server-gear/ci_runtime/*.tap
