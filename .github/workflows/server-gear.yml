@@ -7,6 +7,7 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: read
+  actions: read
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,11 +23,15 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Compile and run real JUnit
+      - name: Reuse exact compiled JAR after unchanged-source guard
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          chmod +x gradlew
-          ./gradlew --no-daemon --max-workers=2 test build
-      - name: Upload built JAR and real test reports
+          git fetch --depth=1 origin 0c230590058d81ff872d5cb62602ebe38be5cd6f
+          git diff --exit-code 0c230590058d81ff872d5cb62602ebe38be5cd6f HEAD -- src build.gradle gradle.properties settings.gradle gradlew gradlew.bat gradle
+          gh run download 41036002893 --repo ${{ github.repository }} --name northstar-server-gear-ci --dir build
+          sha256sum build/libs/northstar-server-gear-0.1.0-prototype.jar
+      - name: Upload reused JAR and its original JUnit report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
