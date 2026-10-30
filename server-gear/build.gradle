@@ -1,0 +1,17 @@
+plugins { id 'fabric-loom' version '1.7-SNAPSHOT'; id 'java' }
+version='0.1.0-prototype'; group='net.northstar'
+base { archivesName='northstar-server-gear' }
+repositories { mavenCentral(); maven { url 'https://maven.nucleoid.xyz/' } }
+dependencies {
+ minecraft 'com.mojang:minecraft:1.21.1'
+ mappings 'net.fabricmc:yarn:1.21.1+build.3:v2'
+ modImplementation 'net.fabricmc:fabric-loader:0.16.5'
+ modImplementation 'net.fabricmc.fabric-api:fabric-api:0.105.0+1.21.1'
+ modImplementation include('eu.pb4:sgui:1.6.1+1.21.1')
+ testImplementation platform('org.junit:junit-bom:5.10.3')
+ testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+java { sourceCompatibility=JavaVersion.VERSION_21; targetCompatibility=JavaVersion.VERSION_21; withSourcesJar() }
+test { useJUnitPlatform(); maxParallelForks=1 }
+
+loom { mixin { defaultRefmapName = 'northstar_gear.refmap.json' } }

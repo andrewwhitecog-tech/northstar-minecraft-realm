@@ -1,0 +1,36 @@
+package net.northstar.gear;
+import eu.pb4.sgui.api.gui.SimpleGui;
+import eu.pb4.sgui.api.elements.GuiElementBuilder;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.*;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.component.DataComponentTypes;
+import java.util.*;
+import java.util.function.Predicate;
+public final class Ringwright {
+ public static boolean nearby(ServerPlayerEntity p){var w=p.getServerWorld();for(BlockPos pos:BlockPos.iterate(p.getBlockPos().add(-4,-3,-4),p.getBlockPos().add(4,3,4))){if(!w.getBlockState(pos).isOf(Blocks.SMITHING_TABLE))continue;boolean anvil=false,heat=false;for(BlockPos q:BlockPos.iterate(pos.add(-2,-1,-2),pos.add(2,1,2))){var b=w.getBlockState(q).getBlock();if(b==Blocks.ANVIL||b==Blocks.CHIPPED_ANVIL||b==Blocks.DAMAGED_ANVIL)anvil=true;if(b==Blocks.FIRE||b==Blocks.SOUL_FIRE||b==Blocks.LAVA||((b==Blocks.CAMPFIRE||b==Blocks.SOUL_CAMPFIRE)&&w.getBlockState(q).get(net.minecraft.state.property.Properties.LIT)))heat=true;}if(anvil&&heat)return true;}return false;}
+ record Cost(Predicate<ItemStack> matches,int count){}
+ static Cost vanilla(Item item,int n){return new Cost(s->s.isOf(item)&&GearItems.kind(s).isEmpty(),n);}
+ static Cost material(String id,int n){return new Cost(s->GearItems.data(s).getString("nsp_material").equals(id),n);}
+ /** Compute the full payment before mutation. Every cost sees earlier reserved counts. */
+ static boolean pay(ServerPlayerEntity p,List<Cost> costs){int[] taken=new int[p.getInventory().size()];for(Cost c:costs){int need=c.count;for(int i=0;i<taken.length&&need>0;i++){ItemStack s=p.getInventory().getStack(i);if(!c.matches.test(s))continue;int n=Math.min(need,s.getCount()-taken[i]);taken[i]+=n;need-=n;}if(need>0)return false;}for(int i=0;i<taken.length;i++)p.getInventory().getStack(i).decrement(taken[i]);p.getInventory().markDirty();return true;}
+ static void output(ServerPlayerEntity p,ItemStack item){if(!p.getInventory().insertStack(item))p.dropItem(item,false);}
+ static void recipe(ServerPlayerEntity p,List<Cost> costs,ItemStack output){if(!nearby(p)){p.sendMessage(Text.literal("Work at a Ringwright's Bench: smithing table, nearby anvil and heat."),false);return;}if(pay(p,costs)){Text craftedName=output.getName().copy();output(p,output);p.sendMessage(Text.literal("Forged ").append(craftedName),false);}else p.sendMessage(Text.literal("Missing ingredients. No materials consumed."),false);}
+ public static void open(ServerPlayerEntity p){if(!nearby(p)){p.sendMessage(Text.literal("A Ringwright's Bench needs a smithing table, anvil and heat within two blocks."),false);return;}
+  SimpleGui g=new SimpleGui(ScreenHandlerType.GENERIC_9X6,p,false);g.setTitle(Text.literal("Ringwright · Band → Setting → Enchant"));int index=0;
+  Item[] metal={Items.COPPER_INGOT,Items.IRON_INGOT,Items.GOLD_INGOT,Items.NETHERITE_INGOT,Items.NETHERITE_INGOT};
+  for(int j=0;j<5;j++){String band=GearPolicy.BANDS.get(j);Item m=metal[j];List<Cost> cs=j==4?List.of(vanilla(m,1),vanilla(Items.ECHO_SHARD,2),vanilla(Items.AMETHYST_SHARD,4)):List.of(vanilla(m,j==3?1:4));String hint=j==4?"1 netherite + 2 echo + 4 amethyst":(j==3?"1 ":"4 ")+m.getName().getString();g.setSlot(index++,new GuiElementBuilder(m).setName(Text.literal(band+" band")).addLoreLine(Text.literal(hint)).setCallback((a,b,c)->recipe(p,cs,GearItems.stage(band,""))));}
+  g.setSlot(8,new GuiElementBuilder(Items.RABBIT_HIDE).setName(Text.literal("Accessory Pouch")).addLoreLine(Text.literal("4 leather + 2 string + 1 amethyst")).setCallback((a,b,c)->recipe(p,List.of(vanilla(Items.LEATHER,4),vanilla(Items.STRING,2),vanilla(Items.AMETHYST_SHARD,1)),GearItems.make("pouch",0,""))));
+  index=9;String[] gems={"amethyst","emerald","diamond","prismarine","echo"};Item[] gemItems={Items.AMETHYST_SHARD,Items.EMERALD,Items.DIAMOND,Items.PRISMARINE_CRYSTALS,Items.ECHO_SHARD};
+  for(int j=0;j<gems.length;j++){String gem=gems[j];Item m=gemItems[j];g.setSlot(index++,new GuiElementBuilder(m).setName(Text.literal("Set "+gem)).addLoreLine(Text.literal("Hold a band; consumes band + 1 gem" )).setCallback((a,b,c)->{ItemStack held=p.getMainHandStack();if(!GearItems.kind(held).equals("band"))return;String band=GearItems.data(held).getString("nsp_band");recipe(p,List.of(new Cost(s->s==held,1),vanilla(m,1)),GearItems.stage(band,gem));}));}
+  String[] required={"amethyst","emerald","diamond","prismarine","echo","prismarine","amethyst","emerald","echo"};
+  for(int j=0;j<GearPolicy.RINGS.size();j++){String effect=GearPolicy.RINGS.get(j),gem=required[j];g.setSlot(18+j,new GuiElementBuilder(Items.ENCHANTED_BOOK).setName(Text.literal(effect.replace('_',' '))).addLoreLine(Text.literal("Hold "+gem+" setting; 8 lapis + 4 redstone + 3 levels")).setCallback((a,b,c)->{ItemStack held=p.getMainHandStack();if(!GearItems.kind(held).equals("setting")||!GearItems.data(held).getString("nsp_gem").equals(gem)||p.experienceLevel<3)return;if(nearby(p)&&pay(p,List.of(new Cost(s->s==held,1),vanilla(Items.LAPIS_LAZULI,8),vanilla(Items.REDSTONE,4)))){p.addExperienceLevels(-3);output(p,GearItems.make("ring",0,effect));}}));}
+  g.setSlot(27,new GuiElementBuilder(Items.LEATHER).setName(Text.literal("Leather Backpack · 9 slots")).addLoreLine(Text.literal("8 leather + 2 string + 1 chest")).setCallback((a,b,c)->recipe(p,List.of(vanilla(Items.LEATHER,8),vanilla(Items.STRING,2),vanilla(Items.CHEST,1)),GearItems.make("backpack",0,""))));
+  for(int j=1;j<4;j++){int tier=j;List<Cost> cs=j==1?List.of(material("bison_hide",4),material("elk_leather",2)):j==2?List.of(material("moose_hide",4),vanilla(Items.IRON_INGOT,4)):List.of(material("beaver_pelt",4),vanilla(Items.NETHERITE_INGOT,1),vanilla(Items.ECHO_SHARD,2));g.setSlot(27+j,new GuiElementBuilder(Items.LEATHER).setName(Text.literal("Upgrade held backpack → "+GearPolicy.capacity(j)+" slots")).addLoreLine(Text.literal(j==1?"4 bison hide + 2 elk leather":j==2?"4 moose hide + 4 iron":"4 beaver pelt + netherite + 2 echo")).setCallback((a,b,c)->{ItemStack held=p.getMainHandStack();if(!GearItems.kind(held).equals("backpack")||GearItems.tier(held)!=tier-1)return;if(nearby(p)&&pay(p,cs)){var n=GearItems.data(held);n.putInt("nsp_tier",tier);held.set(DataComponentTypes.CUSTOM_DATA,net.minecraft.component.type.NbtComponent.of(n));held.set(DataComponentTypes.CUSTOM_NAME,Text.literal(List.of("Leather","Hide","Reinforced","VORATH").get(tier)+" Backpack"));}}));}
+  g.setSlot(36,new GuiElementBuilder(Items.FEATHER).setName(Text.literal("Slowfall Amulet")).addLoreLine(Text.literal("4 gold + 1 diamond + 1 phantom membrane + 2 echo")).setCallback((a,b,c)->recipe(p,List.of(vanilla(Items.GOLD_INGOT,4),vanilla(Items.DIAMOND,1),vanilla(Items.PHANTOM_MEMBRANE,1),vanilla(Items.ECHO_SHARD,2)),GearItems.make("amulet",0,"slowfall"))));
+  g.setSlot(37,new GuiElementBuilder(Items.SPIDER_EYE).setName(Text.literal("Spectral Charm")).addLoreLine(Text.literal("4 gold + 4 echo + 1 ender eye")).setCallback((a,b,c)->recipe(p,List.of(vanilla(Items.GOLD_INGOT,4),vanilla(Items.ECHO_SHARD,4),vanilla(Items.ENDER_EYE,1)),GearItems.make("charm",0,"spectral_sight"))));g.open();
+ }
+}

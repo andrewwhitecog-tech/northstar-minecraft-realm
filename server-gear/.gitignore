@@ -1,0 +1,12 @@
+.gradle/
+build/
+runtime_copy_v01/
+*.secret
+node_modules/
+.nsp/
+runs/
+*.log
+*_ACTUAL.json
+BEDROCK_PACKET_EVIDENCE.json
+*.pid
+.ci_upload/

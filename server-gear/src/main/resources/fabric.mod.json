@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "northstar_gear",
+  "version": "0.1.0-prototype",
+  "name": "NorthStar Server Gear",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "net.northstar.gear.NorthStarGear"
+    ]
+  },
+  "mixins": [
+    "northstar_gear.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.5",
+    "minecraft": "1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "sgui": ">=1.6.1"
+  }
+}

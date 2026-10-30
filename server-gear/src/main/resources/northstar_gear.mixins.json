@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.northstar.gear",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "DropGuard"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "northstar_gear.refmap.json"
+}
