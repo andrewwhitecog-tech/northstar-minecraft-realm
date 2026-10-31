@@ -7,7 +7,7 @@
 
 ![NorthStar Public Minecraft World](https://northstarprime.net/static/front/realm/mushroom-island.png)
 
-Welcome to the public player directory and world atlas for the **NorthStar Living Multiverse** (`play.northstarprime.net`) — a free-to-join, zero-pay-to-win cross-platform Minecraft world featuring **hundreds of hand-built and procedural architectural landmarks**, server-side **flyable UFO saucers (`/trigger saucer`)**, a **Safari Zoo (`/trigger safari`)**, the **Grand Discovery Rail Tour**, and the seasonal **Halloween Eye** monument.
+Welcome to the public player directory and world atlas for the **NorthStar Living Multiverse** (`play.northstarprime.net`) — a free-to-join, zero-pay-to-win Java 26.3 Minecraft world featuring **hundreds of hand-built and procedural architectural landmarks**, server-side **flyable UFO saucers (`/trigger saucer`)**, a **Safari Zoo (`/trigger safari`)**, **warp boards** beside Arrival Plaza to 14 destinations, and the seasonal **Halloween Eye** monument.
 
 ---
 
@@ -45,7 +45,7 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 
 ## Landmark coordinates (`WORLD_ATLAS.json`)
 
-This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is left blank. The old README figures for a civic plaza at `525, 65, -135`, a market at `512, 65, -105`, a courthouse at `568, 65, -105`, and a quidditch pitch at `-172, 127, 816` were not in the JSON. They are removed.
+This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is left blank. The old README figures for a civic plaza at `525, 65, -135`, a market at `512, 65, -105`, a courthouse at `568, 65, -105`, and a stadium at `-172, 127, 816` were not in the JSON. They are removed.
 
 | Landmark ID | Name | Position (`X, Y, Z`) | Look at |
 | :--- | :--- | :--- | :--- |
