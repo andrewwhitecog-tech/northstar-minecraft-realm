@@ -1,29 +1,31 @@
-# NorthStar Living Multiverse — Public Minecraft Server (Java 1.21.1 · Bedrock · Xbox)
+# NorthStar Living Multiverse — Public Minecraft Server (Java 26.3)
 
 [![Server Website](https://img.shields.io/badge/Join_Guide-northstarprime.net%2Frealm-e9c781?style=for-the-badge)](https://northstarprime.net/realm/)
-[![Java 1.21.1](https://img.shields.io/badge/Java_1.21.1-play.northstarprime.net%3A25565-58d68d?style=for-the-badge)](https://northstarprime.net/realm/#java)
+[![Java 26.3](https://img.shields.io/badge/Java_26.3-play.northstarprime.net%3A25565-58d68d?style=for-the-badge)](https://northstarprime.net/realm/#java)
 [![Bedrock Port](https://img.shields.io/badge/Bedrock_UDP-play.northstarprime.net%3A25130-5dade2?style=for-the-badge)](https://northstarprime.net/realm/#bedrock)
 [![Xbox Friends](https://img.shields.io/badge/Xbox_Friend-UncleVorath-107c10?style=for-the-badge)](https://northstarprime.net/realm/#xbox)
 
 ![NorthStar Public Minecraft World](https://northstarprime.net/static/front/realm/mushroom-island.png)
 
-Welcome to the public player directory and world atlas for the **NorthStar Living Multiverse** (`play.northstarprime.net`) — a free-to-join, zero-pay-to-win cross-platform Minecraft world featuring **286 hand-built and procedural architectural landmarks**, server-side **flyable UFO saucers (`/trigger saucer`)**, a **Safari Zoo (`/trigger safari`)**, the **Grand Discovery Rail Tour**, and the seasonal **Halloween Eye** monument.
+Welcome to the public player directory and world atlas for the **NorthStar Living Multiverse** (`play.northstarprime.net`) — a free-to-join, zero-pay-to-win cross-platform Minecraft world featuring **hundreds of hand-built and procedural architectural landmarks**, server-side **flyable UFO saucers (`/trigger saucer`)**, a **Safari Zoo (`/trigger safari`)**, the **Grand Discovery Rail Tour**, and the seasonal **Halloween Eye** monument.
 
 ---
 
 ## Quick Connection Guide (Zero Client Mods Required)
 
-### 1. Minecraft Java Edition (1.21.1)
+### 1. Minecraft Java Edition (26.3)
 - **Server Address:** `play.northstarprime.net`
 - **Port:** `25565` (default)
-- **Client Version:** Release `1.21.1` (standard Vanilla or Fabric client — no mods or custom launcher required)
+- **Client Version:** Release `26.3`, the launcher's Latest Release at the time of writing (no mods or custom launcher required)
 
 ### 2. Minecraft Bedrock Edition (Windows 10/11, iOS, Android, Tablet)
+*Not re-tested since the server moved to 26.3 on October 30, 2026. The port answers, but no full join has been checked.*
 - **Server Address:** `play.northstarprime.net`
 - **Port:** `25130` (UDP)
-- **One-Click Launch:** Open [https://northstarprime.net/realm/#bedrock](https://northstarprime.net/realm/#bedrock) and click **Add to Minecraft Bedrock** (`minecraft://?addExternalServer=NorthStar%20Realm|play.northstarprime.net:25130`).
+- **One-Click Launch:** Open [https://northstarprime.net/realm/#bedrock](https://northstarprime.net/realm/#bedrock) and click **Add to Minecraft Bedrock** (`minecraft://?addExternalServer=NorthStar|play.northstarprime.net:25130`).
 
 ### 3. Xbox Series X|S & Xbox One (Friends Tab Route)
+*Not re-tested since the server moved to 26.3 on October 30, 2026.*
 1. Add Xbox gamertag **`UncleVorath`** as a friend (our 24/7 broadcaster automatically accepts friend requests within seconds).
 2. Open Minecraft, choose **Play**, and switch to the **Friends** tab.
 3. Select **`UncleVorath`** under **Joinable Friends** to enter the NorthStar world.
@@ -34,10 +36,9 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 
 | Feature / Event | Command / Location | Details |
 | :--- | :--- | :--- |
-| **Founders Week (Oct 19–25, 2026)** | Arrival Plaza (`436, 65, -70`). The window has closed. | The gold `[Founder]` tag was claimed on first join during that window. |
 | **Fly a UFO Saucer** | `/trigger saucer` | Pilot a server-side flying saucer across the builds (100% vanilla-compatible, zero client mods). |
 | **Safari Zoo & Menagerie** | `/trigger safari` | Teleport to the curated biome habitats and exotic creature enclosures. |
-| **Grand Discovery Rail Tour** | Arrival Plaza (`436, 65, -70`) | The atlas event used to say Civic Station `512, 65, -135`. That point is not a landmark in `WORLD_ATLAS.json`. |
+| **Warp boards** | Beside Arrival Plaza (`429, 65, -58` and `443, 65, -58`) | Press a button with an empty hand to travel to any of 14 destinations. |
 | **Halloween Eye Monument** | Viewpoint (`540, 65, -98`), looking at (`540, 92, -105`) | Matches `halloween_eye_wonder` in the atlas. |
 
 ---
@@ -57,7 +58,7 @@ This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is
 | `civic_quarter` | Civic Quarter | `540, 68, 0` | `582, 110, 1` |
 | `clock_tower` | Clock Tower | `520, —, 18` | `524, 140, 29` |
 | `cathedral` | Cathedral | `572, —, 0` | `582, 120, 1` |
-| `quidditch_stadium` | Quidditch Stadium | `500, —, 215` | `500, 105, 280` |
+| `sky_pitch_stadium` | Sky Pitch Stadium | `500, —, 215` | `500, 105, 280` |
 | `grand_pantheon` | Grand Pantheon | `575, —, 258` | `575, 108, 285` |
 | `temple_pagoda` | Celestial Temple Pagoda | `635, —, 258` | `635, 118, 285` |
 | `wonders_parvis` | Valley of Wonders Gate | `760, —, 792` | `735, 110, 792` |
