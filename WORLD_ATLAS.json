@@ -1,10 +1,10 @@
 {
-  "server_name": "NorthStar Living Multiverse (VORATH Public Realm)",
+  "server_name": "NorthStar Living Multiverse",
   "website": "https://northstarprime.net/realm/",
   "mirror_guide": "https://northstarprime.net/minecraft/",
   "connection": {
     "java_edition": {
-      "version": "1.21.1 (Vanilla / Fabric compatible \u2014 zero client mods required)",
+      "version": "26.3 (zero client mods required)",
       "address": "play.northstarprime.net",
       "port": 25565
     },
@@ -17,7 +17,8 @@
       ],
       "address": "play.northstarprime.net",
       "port": 25130,
-      "quick_add_uri": "minecraft://?addExternalServer=NorthStar%20Realm|play.northstarprime.net:25130"
+      "quick_add_uri": "minecraft://?addExternalServer=NorthStar|play.northstarprime.net:25130",
+      "note": "Not re-tested since the server moved to 26.3 on October 30, 2026."
     },
     "xbox_console": {
       "platforms": [
@@ -25,6 +26,7 @@
         "Xbox One"
       ],
       "method": "Friends Tab (MCXboxBroadcast 24/7)",
+      "note": "Not re-tested since the server moved to 26.3 on October 30, 2026.",
       "xbox_gamertag": "UncleVorath",
       "steps": [
         "Add Xbox gamertag UncleVorath as a friend (auto-accepts within seconds).",
@@ -35,14 +37,9 @@
   },
   "in_world_commands_and_events": [
     {
-      "name": "Founders Week (Oct 19-25, 2026)",
-      "usage": "Automatic on first join. Verified spawn is Arrival Plaza (436, 65, -70). The Oct 19-25 2026 window has closed.",
-      "description": "Every player who joins during Founders Week receives a permanent gold [Founder] tag and a signed Founders Week Certificate book."
-    },
-    {
       "name": "Fly a UFO Saucer",
       "usage": "/trigger saucer",
-      "description": "Spawn and pilot a custom server-side UFO flying saucer over 286 builds with zero client mods required."
+      "description": "Spawn and pilot a custom server-side UFO flying saucer across the world with zero client mods required."
     },
     {
       "name": "Safari Zoo Tour",
@@ -50,9 +47,9 @@
       "description": "Visit the NorthStar Safari Zoo & Menagerie habitats."
     },
     {
-      "name": "Grand Discovery Rail",
-      "usage": "Board at Arrival Plaza (436, 65, -70). The older Civic Station figure (512, 65, -135) is not a landmark in this file.",
-      "description": "Automated scenic minecart rail network linking the major districts and landmarks."
+      "name": "Warp boards",
+      "usage": "Two boards beside Arrival Plaza at (429, 65, -58) and (443, 65, -58). Press a button with an empty hand.",
+      "description": "Travel to any of 14 destinations."
     }
   ],
   "landmarks": {
@@ -125,12 +122,12 @@
       "lookAt": [582, 120, 1],
       "seen": "Cathedral cluster centred 582, 1, top Y=132..139; verified in run 1 and p1_run2."
     },
-    "quidditch_stadium": {
-      "name": "the Quidditch Stadium",
+    "sky_pitch_stadium": {
+      "name": "the Sky Pitch Stadium",
       "pos": [500, null, 215],
       "range": 6,
       "lookAt": [500, 105, 280],
-      "seen": "Regulation 150x60m Quidditch Stadium north approach looking across the 6 golden hoops and 4 House towers at (500, 72, 280)."
+      "seen": "Sky Pitch Stadium north approach looking across the 6 golden hoops and 4 towers at (500, 72, 280)."
     },
     "grand_pantheon": {
       "name": "the Grand Pantheon",
