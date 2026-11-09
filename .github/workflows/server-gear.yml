@@ -2,8 +2,10 @@ name: NorthStar server gear prototype
 on:
   push:
     branches: ["codex/server-gear-prototype-20261030"]
+  pull_request:
+    paths: ["server-gear/**", ".github/workflows/server-gear.yml"]
 concurrency:
-  group: northstar-server-gear-prototype
+  group: northstar-server-gear-${{ github.ref }}
   cancel-in-progress: true
 permissions:
   contents: read
@@ -23,20 +25,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Reuse exact compiled JAR after unchanged-source guard
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Build and test the checked-out source
         run: |
-          git fetch --depth=1 origin 0c230590058d81ff872d5cb62602ebe38be5cd6f
-          git diff --exit-code 0c230590058d81ff872d5cb62602ebe38be5cd6f HEAD -- src build.gradle gradle.properties settings.gradle gradlew gradlew.bat gradle
-          gh run download 41036002893 --repo ${{ github.repository }} --name northstar-server-gear-ci --dir build
-          sha256sum build/libs/northstar-server-gear-0.1.0-prototype.jar
-      - name: Upload reused JAR and its original JUnit report
+          chmod +x gradlew
+          ./gradlew --no-daemon --max-workers=2 clean test build
+      - name: Upload freshly built JAR and JUnit report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: northstar-server-gear-ci
-          retention-days: 1
+          retention-days: 14
           path: |
             server-gear/build/libs/*.jar
             server-gear/build/test-results/test/*.xml
@@ -57,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: northstar-gear-protocol-ci
-          retention-days: 1
+          retention-days: 14
           path: |
             server-gear/CI_PROTOCOL_ACTUAL.json
             server-gear/CI_COMMANDS_ACTUAL.json
