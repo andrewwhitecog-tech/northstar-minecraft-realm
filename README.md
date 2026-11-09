@@ -17,15 +17,16 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 - **Server Address:** `play.northstarprime.net`
 - **Port:** `25565` (default)
 - **Client Version:** Release `26.3`, the launcher's Latest Release at the time of writing (no mods or custom launcher required)
+- **List check, 9 Nov 2026:** version name `26.3`, protocol `777`, 0 of 100. The list did not say 1.21.1.
 
 ### 2. Minecraft Bedrock Edition (Windows 10/11, iOS, Android, Tablet)
-*Not re-tested since the server moved to 26.3 on October 30, 2026. The port answers, but no full join has been checked.*
+The port answers. A list ping on 9 Nov 2026 reported version 26.60, protocol 2225, 0 of 100. A direct join on this port has not been recorded since 30 Oct 2026. The public guide records a Friends-route Bedrock join on 4 Nov 2026.
 - **Server Address:** `play.northstarprime.net`
 - **Port:** `25130` (UDP)
 - **One-Click Launch:** Open [https://northstarprime.net/realm/#bedrock](https://northstarprime.net/realm/#bedrock) and click **Add to Minecraft Bedrock** (`minecraft://?addExternalServer=NorthStar|play.northstarprime.net:25130`).
 
 ### 3. Xbox Series X|S & Xbox One (Friends Tab Route)
-*Not re-tested since the server moved to 26.3 on October 30, 2026.*
+The public guide last saw an Xbox console on 2 Nov 2026, after the move to 26.3, and a Friends-route Bedrock join from Windows on 4 Nov 2026. Those joins were not repeated in the 9 Nov list check.
 1. Add Xbox gamertag **`UncleVorath`** as a friend (our 24/7 broadcaster automatically accepts friend requests within seconds).
 2. Open Minecraft, choose **Play**, and switch to the **Friends** tab.
 3. Select **`UncleVorath`** under **Joinable Friends** to enter the NorthStar world.
