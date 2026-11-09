@@ -1,0 +1,22 @@
+name: Atlas consistency
+on:
+  push:
+    branches: [main]
+    paths: ['README.md', 'WORLD_ATLAS.json', 'scripts/validate_atlas.mjs', 'tests/**', '.github/workflows/atlas.yml']
+  pull_request:
+    paths: ['README.md', 'WORLD_ATLAS.json', 'scripts/validate_atlas.mjs', 'tests/**', '.github/workflows/atlas.yml']
+permissions:
+  contents: read
+jobs:
+  atlas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: node --test tests/*.test.mjs
+      - run: node scripts/validate_atlas.mjs
