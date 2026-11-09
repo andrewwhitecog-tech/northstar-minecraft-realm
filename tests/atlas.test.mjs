@@ -1,0 +1,17 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { validateAtlas, renderTable, updateReadme } from '../scripts/validate_atlas.mjs';
+const original = JSON.parse(fs.readFileSync(new URL('../WORLD_ATLAS.json', import.meta.url), 'utf8'));
+const fixture = () => structuredClone(original);
+test('retained atlas satisfies the structural contract', () => assert.doesNotThrow(() => validateAtlas(original)));
+test('negative X/Z and unknown Y survive table generation', () => { const a=fixture(); a.landmarks.arrival_plaza.pos=[-90,null,-120]; assert.ok(renderTable(a).includes('-90, —, -120')); });
+test('fractional and nonfinite coordinates are rejected', () => { for(const bad of [1.5,Infinity,NaN]) { const a=fixture(); a.landmarks.arrival_plaza.pos[0]=bad; assert.throws(()=>validateAtlas(a),/integer/); } });
+test('null is allowed only for arrival height', () => { for(const index of [0,2]) { const a=fixture(); a.landmarks.arrival_plaza.pos[index]=null; assert.throws(()=>validateAtlas(a),/integer/); } const a=fixture(); a.landmarks.arrival_plaza.lookAt[1]=null; assert.throws(()=>validateAtlas(a),/integer/); });
+test('malformed triples are rejected', () => { const a=fixture(); a.landmarks.arrival_plaza.pos=[1,2]; assert.throws(()=>validateAtlas(a),/three coordinates/); });
+test('connection ports must be usable integers', () => { for(const port of [0,65536,1.5,'25130']) { const a=fixture(); a.connection.bedrock_edition.port=port; assert.throws(()=>validateAtlas(a)); } });
+test('quick-add URI must track the address and port', () => { const a=fixture(); a.connection.bedrock_edition.address='other.example'; assert.throws(()=>validateAtlas(a),/quick-add/); });
+test('missing landmark evidence and invalid range are rejected', () => { const a=fixture(); a.landmarks.arrival_plaza.seen=''; assert.throws(()=>validateAtlas(a),/seen/); const b=fixture(); b.landmarks.arrival_plaza.range=0; assert.throws(()=>validateAtlas(b),/positive/); });
+test('landmark names cannot inject rows', () => { const a=fixture(); a.landmarks.arrival_plaza.name='x|broken'; assert.throws(()=>validateAtlas(a),/Markdown/); });
+test('generation preserves surrounding prose and is idempotent', () => { const source='before\n<!-- atlas:begin -->\nstale\n<!-- atlas:end -->\nafter'; const next=updateReadme(source,original); assert.ok(next.startsWith('before\n')); assert.ok(next.endsWith('\nafter')); assert.equal(updateReadme(next,original),next); assert.ok(!next.includes('stale')); });
+test('missing, reversed and duplicate markers fail closed', () => { for(const source of ['', '<!-- atlas:end --><!-- atlas:begin -->','<!-- atlas:begin --><!-- atlas:begin --><!-- atlas:end -->']) assert.throws(()=>updateReadme(source,original),/marker pair/); });

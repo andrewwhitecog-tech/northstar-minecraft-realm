@@ -47,15 +47,16 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 
 This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is left blank. The old README figures for a civic plaza at `525, 65, -135`, a market at `512, 65, -105`, a courthouse at `568, 65, -105`, and a stadium at `-172, 127, 816` were not in the JSON. They are removed.
 
+<!-- atlas:begin -->
 | Landmark ID | Name | Position (`X, Y, Z`) | Look at |
 | :--- | :--- | :--- | :--- |
-| `arrival_plaza` | Arrival Plaza | `436, 65, -70` | `436, 70, -78` |
+| `arrival_plaza` | Arrival Plaza | `436, —, -70` | `436, 70, -78` |
 | `east_lanes` | Copper-roofed lanes | `504, —, -27` | `508, 75, -25` |
 | `market_hall` | Grand Market Hall | `517, —, -120` | `500, 82, -120` |
 | `halloween_eye_wonder` | Great Lantern Eye | `540, —, -98` | `540, 92, -105` |
 | `courthouse` | Supreme Courthouse | `552, —, -95` | `552, 92, -65` |
 | `opera_house` | Grand Opera House | `621, —, -95` | `621, 98, -65` |
-| `civic_quarter` | Civic Quarter | `540, 68, 0` | `582, 110, 1` |
+| `civic_quarter` | Civic Quarter | `540, —, 0` | `582, 110, 1` |
 | `clock_tower` | Clock Tower | `520, —, 18` | `524, 140, 29` |
 | `cathedral` | Cathedral | `572, —, 0` | `582, 120, 1` |
 | `sky_pitch_stadium` | Sky Pitch Stadium | `500, —, 215` | `500, 105, 280` |
@@ -65,8 +66,9 @@ This table is the landmark list in `WORLD_ATLAS.json`. A null height in `pos` is
 | `pharos_lighthouse` | Pharos of Alexandria | `768, —, 726` | `768, 128, 692` |
 | `disco_mirror_dome` | Disco Laser Dome | `766, —, 862` | `766, 130, 902` |
 | `grand_library_eye` | Eye of the Grand Library | `880, —, 792` | `892, 112, 792` |
+<!-- atlas:end -->
 
-Arrival Plaza height `65` and Civic Quarter height `68` come from the `seen` notes. The other heights in `pos` are null in the JSON.
+The `seen` notes record Arrival Plaza height `65` and Civic Quarter height `68`. Their `pos` heights remain null in the atlas, so the generated table keeps those heights blank too.
 
 ---
 
@@ -78,3 +80,7 @@ Arrival Plaza height `65` and Civic Quarter height `68` come from the `seen` not
 - **NorthStar Prime Main Portal:** [https://northstarprime.net/](https://northstarprime.net/)
 
 *Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.*
+
+## Repository checks
+
+The landmark table is generated from `WORLD_ATLAS.json`. After editing the atlas, run `node scripts/validate_atlas.mjs --write`. Run `node --test tests/*.test.mjs` and `node scripts/validate_atlas.mjs` before opening a pull request. These checks verify source consistency; they do not prove server availability, landmark existence, client joins, or gameplay.
