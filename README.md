@@ -84,4 +84,4 @@ The `seen` notes record Arrival Plaza height `65` and Civic Quarter height `68`.
 
 ## Repository checks
 
-The landmark table is generated from `WORLD_ATLAS.json`. After editing the atlas, run `node scripts/validate_atlas.mjs --write`. Run `node --test tests/*.test.mjs` and `node scripts/validate_atlas.mjs` before opening a pull request. These checks verify source consistency; they do not prove server availability, landmark existence, client joins, or gameplay.
+The landmark table is generated from `WORLD_ATLAS.json`. After editing the atlas, run `node scripts/validate_atlas.mjs --write`. Run `node --test tests/*.test.mjs` and `node scripts/validate_atlas.mjs` before opening a pull request. The quick connection guide also checks its Java version, addresses, ports, Bedrock launch URI and Xbox friend steps against the atlas. These checks verify source consistency; they do not prove server availability, landmark existence, client joins, or gameplay.
