@@ -132,7 +132,9 @@ def execute(config,loaded,reviewed_hash,benchmark_iterations=0):
         cmd('setblock {x} {y} {z} minecraft:air replace'.format(**site))
         cmd(fixture_command(site));cmd('data modify storage nsp_crafter_refill:t first set value {proof_sentinel:1b}')
         check('fixture actually has17stacks',condition('if data block {x} {y} {z} Items[16]'.format(**site)))
-        check('fixture first native item matches',condition('if data block {x} {y} {z} Items[0]{{id:"minecraft:{item}"}}'.format(**site)))
+        cmd('data modify storage nsp_mg_proof:fixture first set from block {x} {y} {z} Items[0]'.format(**site))
+        first_item=cmd('data get storage nsp_mg_proof:fixture first')
+        check('fixture first native item matches',condition('if data storage nsp_mg_proof:fixture first{{id:"minecraft:{item}"}}'.format(**site)),{'first_item':first_item})
     try:
         require_hosted_ci()
         report['admission']={'route':'EXPLICIT_GITHUB_HOSTED_LINUX_CI','repository':os.environ['GITHUB_REPOSITORY'],'run_id':os.environ['GITHUB_RUN_ID'],'job':os.environ.get('GITHUB_JOB'),'local_governor_bypass':False};write()
@@ -362,7 +364,7 @@ def main():
     code,receipt=execute(config,{'case_plan':plan,'classpath':cp},hash_file(PREPARATION/'PREPARED.json'),args.benchmark_iterations)
     result=json.loads(receipt.read_text())
     summary={'status':result['status'],'exit_code':code,'case_results':result['case_results'],'not_run_cases':result['not_run_cases'],'checks':result['checks'],
-             'errors':result['errors'],'server_exit_code':result.get('server_exit_code'),'server_close_observed':result.get('server_close_observed'),'admission':result.get('admission'),
+             'errors':result['errors'],'command_tail':result['commands'][-12:],'server_exit_code':result.get('server_exit_code'),'server_close_observed':result.get('server_close_observed'),'admission':result.get('admission'),
              'benchmark':result['benchmark'],'native_execution':result['native_execution'],'isolated_fixture_world_actions':result['isolated_fixture_world_actions'],
              'hold_clearance':False,'full56_acceptance':False,'native_server_sha256':transport['classpath_members'][0]['sha256']}
     print(json.dumps(summary,indent=2))

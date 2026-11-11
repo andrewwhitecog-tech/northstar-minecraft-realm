@@ -37,10 +37,10 @@ jobs:
         run: uv run --no-project --python 3.12 test_source.py
       - name: Validate reviewed source payload without starting a server
         working-directory: tools/legacy_guard_native
-        run: uv run --no-project --python 3.12 ci_runner.py --reviewed-payload-sha256 2bc9e3e7decbba6af2f42ae0ddcb4a8323eb575dcb55331c8a8bfe6f7c06c84f
+        run: uv run --no-project --python 3.12 ci_runner.py --reviewed-payload-sha256 fd8bcb6469251c2e72833fdb3817c0b6005d769494da185d6e8f74a21b338b5d
       - name: Execute two genuine native cases and six-site latency samples
         working-directory: tools/legacy_guard_native
-        run: uv run --no-project --python 3.12 ci_runner.py --ci --execute --reviewed-payload-sha256 2bc9e3e7decbba6af2f42ae0ddcb4a8323eb575dcb55331c8a8bfe6f7c06c84f --benchmark-iterations 1
+        run: uv run --no-project --python 3.12 ci_runner.py --ci --execute --reviewed-payload-sha256 fd8bcb6469251c2e72833fdb3817c0b6005d769494da185d6e8f74a21b338b5d --benchmark-iterations 1
   compile-walk-harness:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
