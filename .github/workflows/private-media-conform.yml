@@ -1,0 +1,69 @@
+name: Private Minecraft promo source QC and conform
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: Two manual phases; conform requires reviewed source-QC ZIP approval in manifest
+        type: choice
+        required: true
+        options: [source-qc, conform]
+      reviewed_sha:
+        description: Exact Root-reviewed current main commit, separate from earlier canary SHA
+        type: string
+        required: true
+permissions: {}
+concurrency:
+  group: private-minecraft-promo-v16
+  cancel-in-progress: false
+jobs:
+  private-media:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' &&
+      github.repository_owner == 'andrewwhitecog-tech' &&
+      github.actor == 'andrewwhitecog-tech' &&
+      github.triggering_actor == 'andrewwhitecog-tech' &&
+      github.event.repository.private == false &&
+      github.event.repository.default_branch == 'main' &&
+      github.ref == 'refs/heads/main' &&
+      github.sha == inputs.reviewed_sha &&
+      github.workflow_sha == inputs.reviewed_sha &&
+      github.workflow_ref == 'andrewwhitecog-tech/northstar-minecraft-realm/.github/workflows/private-media-conform.yml@refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write # SAME unpublished draft assets; never publish/edit/delete release.
+      actions: read # Verify prior canary/source-QC successful run identity.
+    env:
+      UV_PYTHON_DOWNLOADS: never
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.10.4'
+          enable-cache: false
+          save-cache: false
+          restore-cache: false
+      - name: Guard/source unit tests only; no media or network
+        working-directory: tools/private_media_conform
+        run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest discover -s tests -v
+      - name: Check clean reviewed source
+        run: git diff --exit-code
+      - name: Official Ubuntu FFmpeg package for hosted-only project QC
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Manual private technical phase
+        working-directory: tools/private_media_conform
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEWED_SHA: ${{ inputs.reviewed_sha }}
+          MEDIA_PHASE: ${{ inputs.phase }}
+          PYTHONUTF8: '1'
+          PYTHONIOENCODING: utf-8
+        run: nice -n 19 uv run --no-project --python 3.12 python -B cloud_worker.py --phase "$MEDIA_PHASE" --reviewed-sha "$REVIEWED_SHA" --config media-config.json
