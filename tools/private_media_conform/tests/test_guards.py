@@ -30,6 +30,11 @@ def approval(c):
  return c
 
 class GuardTests(unittest.TestCase):
+ def test_unsupported_phase_rejects_before_any_configuration(self):
+  with patch.object(cw,'configured',side_effect=AssertionError('configuration must not run')):
+   for phase in ('source-study','unknown'):
+    with self.subTest(phase=phase):
+     with self.assertRaisesRegex(pg.GuardError,'UNSUPPORTED_MEDIA_PHASE'):cw.perform({},phase,'a'*40)
  def denied(self,fn,code):
   with self.assertRaises(pg.GuardError) as e:fn()
   self.assertEqual(e.exception.code,code)
@@ -154,7 +159,11 @@ class GuardTests(unittest.TestCase):
    self.assertTrue(calls[0][calls[0].index('-vf')+1].startswith(chain+','));self.assertTrue(calls[1][calls[1].index('-vf')+1].startswith(chain+','));self.assertIn('[1:v]'+chain+',',calls[2][calls[2].index('-filter_complex')+1]);self.assertTrue(all('-ss' not in call and '-t' not in call for call in calls))
    self.denied(lambda:m.raw(Path('source.mp4'),'motion',start=1,window=True),'CANONICAL_WINDOW_NO_SEEK')
  def test_workflow_uses_pinned_uv_and_no_artifact_cache(self):
-  text=(cw.ROOT/'workflow.template.yml').read_text();self.assertIn('actions/checkout@11d5960a326750d5838078e36cf38b85af677262',text);self.assertIn('astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78',text);self.assertIn('UV_PYTHON_DOWNLOADS: never',text);self.assertEqual(text.count('nice -n 19 uv run --no-project --python 3.12 python -B'),2);self.assertNotIn('run: python3',text);self.assertNotIn('upload-artifact@',text);self.assertIn('enable-cache: false',text)
+  text=(cw.ROOT/'workflow.template.yml').read_text();self.assertIn('actions/checkout@11d5960a326750d5838078e36cf38b85af677262',text);self.assertIn('astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78',text);self.assertIn('UV_PYTHON_DOWNLOADS: never',text);self.assertNotIn('run: python3',text);self.assertNotIn('upload-artifact@',text);self.assertIn('enable-cache: false',text)
+
+  execution_lines=[line for line in text.splitlines() if 'python -B' in line]
+  self.assertTrue(execution_lines)
+  for line in execution_lines:self.assertIn('nice -n 19 uv run --no-project --python 3.12 python -B',line)
  def test_media_commands_are_not_started_on_import_or_validate(self):
   with patch('subprocess.run',side_effect=AssertionError('no media execution')):
    import media_pipeline

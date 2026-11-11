@@ -4,13 +4,13 @@
   "files": [
     {
       "file": "cloud_worker.py",
-      "size": 9957,
-      "sha256": "5df3ed50f1e84c2e8f5a32944efc552024f2bf2f1f75309884e85d7fb7d9d0ae"
+      "size": 10026,
+      "sha256": "6a2156cfdc995f714cd389ad301df08327fa9db86d7cf317a614d6db5ec1e963"
     },
     {
       "file": "private_github.py",
-      "size": 9552,
-      "sha256": "9aba6e667e6c70204abdab57ac730135ee77689047d518f696f61109d2ea25a4"
+      "size": 9565,
+      "sha256": "26b59c12577fd32d87345c9ab885a45aa2f8bc67188488f95676bea636ad5c53"
     },
     {
       "file": "media_pipeline.py",
@@ -24,23 +24,38 @@
     },
     {
       "file": "workflow.template.yml",
-      "size": 3452,
-      "sha256": "49994f798c2118be5eb61316b1c929d108e7bcf85a811ecc9b0f2c6c8fbefb6e"
+      "size": 4037,
+      "sha256": "5f8db6a0cb24fb38f348243a261f2a3074f1e76f1765bbd6d0bb306afd6559cb"
     },
     {
       "file": "tests/test_guards.py",
-      "size": 14769,
-      "sha256": "49bdc9ab71c4e6f89b73dc24d6639ccca4361cb35e9917845251f32b14d59dd8"
+      "size": 15246,
+      "sha256": "ce857625b506bf43a363c51c80caf50f1f3008fd5597c24f7a6f007490ad2e66"
     },
     {
       "file": "README.md",
-      "size": 7027,
-      "sha256": "22eca37db0f8b9d3a7cdc00cfa27f94a5a5580a071eb0cb28f0beca5579878fd"
+      "size": 7427,
+      "sha256": "7daf3f4000f9fc8b2ba7a9c64c664a7572a7c8c60ede8b86612af31ee87d748a"
     },
     {
       "file": "SOURCE_TEST_RECEIPT.json",
       "size": 3570,
       "sha256": "a076942dc9be9f2b92e445f10517b13e628d576504f91cf798d2a38ea1f778c0"
+    },
+    {
+      "file": "study_worker.py",
+      "size": 5245,
+      "sha256": "355329fefe84b0389d6c38a7845dcbedb9d0b93c7d5b19b0c5d90b9f074c3837"
+    },
+    {
+      "file": "study_media.py",
+      "size": 5603,
+      "sha256": "e5261438348f0d9489f9903e26bc23ef12f397f149c54dff31d94609bd5548fc"
+    },
+    {
+      "file": "test_study.py",
+      "size": 7962,
+      "sha256": "0ef0061b8fdde8fa4f3b6edefa74e087d812d34e55a44695220b7c3e2b41d7ec"
     }
   ]
 }

@@ -58,6 +58,7 @@ def zip_outputs(out):
  require(0<len(buffer.getbuffer())<=MAX_ASSET,'OUTPUT_ZIP_LIMIT');return buffer.getvalue()
 
 def perform(c,phase,reviewed_sha):
+ require(phase in ('source-qc','conform'),'UNSUPPORTED_MEDIA_PHASE')
  configured(c);hosted(c,os.environ,reviewed_sha)
  # The token is never saved, returned, echoed or inherited by FFmpeg.
  token=os.environ.pop('GITHUB_TOKEN',None);api=GitHub(c,token);run_id=int(os.environ['GITHUB_RUN_ID']);attempt=1
