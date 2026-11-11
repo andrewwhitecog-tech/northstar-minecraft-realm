@@ -7,6 +7,21 @@ import download_runtime as runtime
 from nbt_region import Nbt, fresh_servers_dat, read_dat
 
 class SourceTests(unittest.TestCase):
+    def test_graphics_failure_requires_both_backends(self):
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            p=Path(tmp)/'client.log'
+            self.assertIsNone(cal.client_graphics_failure(p))
+            p.write_text('Failed to create backend OpenGL\nVulkan initialized')
+            self.assertIsNone(cal.client_graphics_failure(p))
+            p.write_text('Failed to create backend OpenGL\nFailed to create backend Vulkan')
+            self.assertIn('both graphics backends',cal.client_graphics_failure(p))
+    def test_graphics_failure_reads_a_bounded_tail(self):
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            p=Path(tmp)/'client.log'
+            p.write_bytes(b'x'*100000+b'Failed to create backend OpenGL\nFailed to create backend Vulkan\n')
+            self.assertIsNotNone(cal.client_graphics_failure(p))
+            p.write_bytes(b'Failed to create backend OpenGL\nFailed to create backend Vulkan\n'+b'x'*100000)
+            self.assertIsNone(cal.client_graphics_failure(p))
     def test_public_hosted_gate_rejects_local_or_missing_context(self):
         with patch.dict(os.environ,{},clear=True):
             with self.assertRaises(RuntimeError):cal.hosted_gate()

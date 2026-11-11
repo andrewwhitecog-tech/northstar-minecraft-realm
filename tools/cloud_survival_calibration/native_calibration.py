@@ -22,6 +22,16 @@ def hosted_gate():
     require(Path(os.environ.get('GITHUB_WORKSPACE','/')).resolve().is_relative_to('/home/runner/work'),'Not a hosted workspace')
     require(os.environ.get('GITHUB_RUN_ID','').isdigit(),'Hosted run ID absent')
 
+def client_graphics_failure(log_path):
+    """Fail only when BOTH fallback backends failed, not a harmless first fallback."""
+    path=Path(log_path)
+    if not path.exists():return None
+    with path.open('rb') as handle:
+        handle.seek(0,2);size=handle.tell();handle.seek(max(0,size-65536));tail=handle.read(65536).decode('utf8','replace')
+    if 'Failed to create backend OpenGL' in tail and 'Failed to create backend Vulkan' in tail:
+        return 'Real client failed both graphics backends; inspect client.actual.log'
+    return None
+
 def offline_uuid(name):
     b=bytearray(hashlib.md5(('OfflinePlayer:'+name).encode()).digest());b[6]=(b[6]&15)|48;b[8]=(b[8]&63)|128
     return uuid.UUID(bytes=bytes(b))
@@ -104,7 +114,7 @@ def execute(lock):
     hosted_gate();os.nice(19)
     for port in (27091,27092):
         with socket.socket() as s:s.bind(('127.0.0.1',port))
-    require(shutil.which('java') and shutil.which('Xvfb'),'Hosted Java25 or Xvfb absent; no silent fake client')
+    require(shutil.which('java') and shutil.which('Xvfb') and shutil.which('glxinfo'),'Hosted Java25/Xvfb/Mesa glxinfo absent; no silent fake client')
     v=subprocess.run(['java','-version'],capture_output=True,text=True,timeout=10)
     require(v.returncode==0 and '25.0.5' in v.stderr+v.stdout,'Pinned Java patch differs')
     run_id='cal'+secrets.token_hex(4);name='Cal'+secrets.token_hex(4);player_uuid=offline_uuid(name)
@@ -126,7 +136,9 @@ def execute(lock):
         deadline=min(end,time.monotonic()+seconds)
         while time.monotonic()<deadline:
             if server is not None:require(server.poll() is None,'Owned server exited')
-            if client is not None:require(client.poll() is None,'Real client exited before proof: inspect client.actual.log')
+            if client is not None:
+                require(client.poll() is None,'Real client exited before proof: inspect client.actual.log')
+                failure=client_graphics_failure(root/'client.actual.log');require(failure is None,failure or '')
             if predicate():return
             time.sleep(.25)
         raise RuntimeError(why)
@@ -210,10 +222,9 @@ def execute(lock):
         for label,target,protected in TARGETS:cmd('setblock '+' '.join(map(str,target))+' minecraft:bone_block[axis=y] replace')
         display=':'+str(90+secrets.randbelow(100));check('own X display number unused',not Path('/tmp/.X11-unix/X'+display[1:]).exists())
         x=launch(['Xvfb',display,'-screen','0','800x450x24','-nolisten','tcp','+extension','GLX','+render','-noreset'],root,'xvfb.actual.log');time.sleep(1);check('Xvfb is alive',x.poll() is None)
-        extra={'DISPLAY':display,'LIBGL_ALWAYS_SOFTWARE':'1','GALLIUM_DRIVER':'llvmpipe','ALSOFT_DRIVERS':'null'}
-        if shutil.which('glxinfo'):
-            g=subprocess.run(['glxinfo','-B'],env=dict(env,**extra),capture_output=True,text=True,timeout=20);result['glxinfo']={'exit':g.returncode,'output':g.stdout+g.stderr};write();check('Mesa OpenGL preflight succeeds',g.returncode==0)
-        (profile/'options.txt').write_text('renderDistance:2\nsimulationDistance:2\nmaxFps:20\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\n')
+        extra={'DISPLAY':display,'LIBGL_ALWAYS_SOFTWARE':'1','GALLIUM_DRIVER':'llvmpipe','LP_NUM_THREADS':'2','SDL_VIDEO_DRIVER':'x11','ALSOFT_DRIVERS':'null'}
+        g=subprocess.run(['glxinfo','-B'],env=dict(env,**extra),capture_output=True,text=True,timeout=20);result['glxinfo']={'exit':g.returncode,'output':g.stdout+g.stderr};write();check('Mesa OpenGL preflight succeeds',g.returncode==0 and 'llvmpipe' in g.stdout.lower())
+        (profile/'options.txt').write_text('renderDistance:2\nsimulationDistance:5\nmaxFps:20\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\n')
         fresh_servers_dat(profile/'servers.dat','127.0.0.1:27091')
         values={'auth_player_name':name,'version_name':'26.3','game_directory':profile,'assets_root':runtime['assets'],'assets_index_name':'34','auth_uuid':player_uuid.hex,'auth_access_token':'0','clientid':'0','auth_xuid':'0','version_type':'release','resolution_width':800,'resolution_height':450,'quickPlayPath':str(profile/'quickplay.json'),'quickPlayMultiplayer':'127.0.0.1:27091','natives_directory':runtime['natives'],'launcher_name':'northstar-calibration','launcher_version':'1','classpath':runtime['client_classpath']}
         features={'has_custom_resolution':True,'has_quick_plays_support':True,'is_quick_play_multiplayer':True}
