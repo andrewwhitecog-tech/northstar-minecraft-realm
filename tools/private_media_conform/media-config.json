@@ -1,0 +1,81 @@
+{
+  "schema": "northstar.private-promo-media-config.v1",
+  "repository": "andrewwhitecog-tech/northstar-minecraft-realm",
+  "repository_id": 1429072701,
+  "draft_release_id": 441868120,
+  "draft_tag": "private-staging-canary-43048013064-1-b65dee43",
+  "draft_target": "bf1cb49a41795b021b5fb62ec1c8c52496abcc61",
+  "allowed_actors": [
+    "andrewwhitecog-tech"
+  ],
+  "allowed_reviewers": [
+    "codex-root"
+  ],
+  "canary": {
+    "run_id": 43048013064,
+    "run_attempt": 1,
+    "source_sha": "bf1cb49a41795b021b5fb62ec1c8c52496abcc61",
+    "proof_asset_id": 735956517,
+    "proof_size": 1255,
+    "proof_sha256": "c2919cbe853e326be84396a82b13f1ebb0f7dbffc0a91cd9e58782b62fa87cbe"
+  },
+  "inputs": {
+    "base": {
+      "name": "P4_RING_OPENS_9x16_v14R_YT_SFX_PICTURE_NOCARD.mp4",
+      "size": 50449975,
+      "sha256": "d4b005e7b7ac902817f8f93d5ae2c681bab11b227d4c60d2ff5e74e90025d9ab",
+      "asset_id": 735960683
+    },
+    "c6": {
+      "name": "C6_best.mp4",
+      "size": 31755143,
+      "sha256": "0d4c4c98b2a06173d5be441909d41d5de534c85db86f21593cc345b5244e20c1",
+      "asset_id": 735960686
+    },
+    "p1": {
+      "name": "P1_WAKE_9x16_v07.mp4",
+      "size": 18358215,
+      "sha256": "4e5bd8d790ce1729122f333c496e91a0d4bbe1b93ad10a61a9d41fd945818614",
+      "asset_id": 735960681
+    },
+    "p2": {
+      "name": "P2_SOMETHING_WOKE_9x16_v08.mp4",
+      "size": 19702438,
+      "sha256": "cbe1f68ccf9f4eb664d6c8139ca53599111bf4d7ad9aadfa748c63938799f1db",
+      "asset_id": 735960679
+    },
+    "p3": {
+      "name": "P3_THE_COST_9x16_v13.mp4",
+      "size": 11724172,
+      "sha256": "78e3ae0ec296ac33a308e36b16b643227aec9ae1111abb8433f96a7f86d676af",
+      "asset_id": 735960684
+    }
+  },
+  "source_qc": {
+    "asset_id": null,
+    "size": null,
+    "sha256": null,
+    "run_id": null,
+    "run_attempt": null,
+    "source_sha": null
+  },
+  "approval": {
+    "decision": null,
+    "reviewer": null,
+    "reviewed_utc": null,
+    "source_qc_asset_id": null,
+    "source_qc_zip_sha256": null,
+    "source_qc_run_id": null,
+    "input_manifest_sha256": null,
+    "source_frames_personally_viewed": false,
+    "motion_and_reuse_personally_reviewed": false,
+    "source_frames": [
+      83,
+      147
+    ],
+    "replacement_frames": [
+      878,
+      942
+    ]
+  }
+}

@@ -54,10 +54,50 @@ jobs:
         run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest discover -s tests -v
       - name: Check clean reviewed source
         run: git diff --exit-code
-      - name: Official Ubuntu FFmpeg package for hosted-only project QC
+      - name: Bounded official Ubuntu dependencies
+        timeout-minutes: 5
+        env:
+          # Native: xvfb mesa-utils libgl1-mesa-dri libglx-mesa0
+          # Media: ffmpeg
+          NSP_APT_PACKAGES: 'ffmpeg'
+        shell: bash
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends ffmpeg
+          set -euo pipefail
+          [[ "$CI" == true && "$GITHUB_ACTIONS" == true && "$RUNNER_ENVIRONMENT" == github-hosted && "$RUNNER_OS" == Linux && "$ImageOS" == ubuntu24 ]]
+          [[ "$GITHUB_REPOSITORY" == andrewwhitecog-tech/northstar-minecraft-realm && "$GITHUB_REF" == refs/heads/main && "$GITHUB_EVENT_NAME" == workflow_dispatch ]]
+          case "$NSP_APT_PACKAGES" in
+            'xvfb mesa-utils libgl1-mesa-dri libglx-mesa0') packages=(xvfb mesa-utils libgl1-mesa-dri libglx-mesa0) ;;
+            ffmpeg) packages=(ffmpeg) ;;
+            *) echo 'UNREVIEWED_PACKAGE_SET'; exit 2 ;;
+          esac
+          network_ok=1
+          for host in archive.ubuntu.com security.ubuntu.com; do
+            echo "DNS_IPV4 $host"
+            if ! timeout 8s getent ahostsv4 "$host"; then echo "DNS_FAILED $host"; network_ok=0; continue; fi
+            suite=noble
+            [[ "$host" != security.ubuntu.com ]] || suite=noble-security
+            if ! curl -4 --proto '=https' --fail --silent --show-error --connect-timeout 8 --max-time 20 --retry 0 --output /dev/null --write-out 'http=%{http_code} ip=%{remote_ip} seconds=%{time_total}\n' "https://$host/ubuntu/dists/$suite/InRelease"; then echo "HTTPS_FAILED $host"; network_ok=0; fi
+          done
+          [[ "$network_ok" == 1 ]] || { echo 'OFFICIAL_ARCHIVE_NETWORK_FAILED'; exit 2; }
+          test -r /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          aptstate=$(mktemp -d "$RUNNER_TEMP/nsp-official-apt.XXXXXX")
+          chmod 755 "$aptstate"
+          mkdir -p "$aptstate/lists/partial" "$aptstate/sources.empty"
+          printf '%s\n' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble main universe' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble-updates main universe' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://security.ubuntu.com/ubuntu noble-security main universe' > "$aptstate/official.list"
+          apt_options=(
+            -o "Dir::Etc::sourcelist=$aptstate/official.list"
+            -o "Dir::Etc::sourceparts=$aptstate/sources.empty"
+            -o "Dir::State::lists=$aptstate/lists"
+            -o Acquire::ForceIPv4=true -o Acquire::Retries=0
+            -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20
+            -o Acquire::Languages=none
+          )
+          timeout 100s sudo nice -n 19 apt-get "${apt_options[@]}" --error-on=any update
+          timeout 120s sudo env DEBIAN_FRONTEND=noninteractive nice -n 19 apt-get "${apt_options[@]}" install -y --no-install-recommends "${packages[@]}"
+          # Real GLX/Minecraft or FFmpeg QC follows; package success is not acceptance.
       - name: Manual private technical phase
         working-directory: tools/private_media_conform
         env:
