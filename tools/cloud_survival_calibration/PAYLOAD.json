@@ -6,7 +6,7 @@
   "files": {
     "FEASIBILITY.md": "91ed2b50f6a23a601b13f42f6c71b8a28a756dd7e8e278a62adf9f9dc308c3ae",
     "LOCK.json": "906e05ccd4802edd7cee05965416bd69728ea7191dbc5dbc802c0ebc9d010e84",
-    "README.md": "78f44f0b9a3aaa830f05b05015fdfddce0ceb6ae1d6924276b0e44b61df6883b",
+    "README.md": "0fa311f6e859c9b51b533433052f37278bebb009f4d9df8af7c3f9d808157f58",
     "download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "harness/nsp-route-walk-heldproof-v02.jar": "b19fefcfee9980099dbf3ebd8426fe8da1f13346c37c347723b6ebc4cc99b532",
     "metadata/assets-34.json": "fbaf1d88b1f14358682a986a8a1a21d26e3e0cefec12881768d6395001ee6508",
@@ -14,12 +14,14 @@
     "metadata/fabric-server-0.20.1.json": "316aed046c606b51581413107bfb6d04b51357825a5a231a1d043743b34b54c8",
     "metadata/minecraft-26.3.json": "a1831b3e5ffa479c02d88a441794ff0a69813215e5d0e945edf03a99c7608c2e",
     "metadata/server-transport.json": "4ed2159a2ace665510228b511fdd6ca7f6433065b38dbc1ef783f7e4eb96eaf4",
-    "native_calibration.py": "b519877115e9d2cb593058397db2c2b054891955f18a5970367973e2124ba6bf",
+    "native_calibration.py": "0be7624f84a472c7c4f1ee3a1242b325e5924464b76c2125a6056e7a0ee3a7cc",
     "nbt_region.py": "d08bbfea241807d117219963bbb345626206fd79ac17dc1598e6e0aca53f568b",
     "test_source.py": "4f0671086e445b27f63c42cf934c5295cbc5cf2e744b776702ac01553a569a6e",
-    "workflow.template.yml": "5eb6e18fcf0c53f2e18f89d3f8d94d6b01b3140eee82e60ba2dc3cca908e3126",
+    "workflow.template.yml": "5d30a51e2fab7bf5526954702a0476dae18bc990cbcb48b18851565d3f8d7ef0",
     "real_glx_probe.py": "44fa170d1c4d1e46bcf8850ed979fd86681940b294b9557ef3e42e5541e09abc",
     "test_probe_source.py": "c8ab3d7007b74090bbab3b37d0e0c28096fc580a5601734cca6d84c2867d24bc",
-    "fixtures/native_judge_before_noapt.txt": "8b8c61f7bcdfba6ed8ac1732e2e9abbb42c778d65e1e5431ad8310be9e77a660"
+    "fixtures/native_judge_before_noapt.txt": "8b8c61f7bcdfba6ed8ac1732e2e9abbb42c778d65e1e5431ad8310be9e77a660",
+    "real_sdl_probe.py": "01f4452986196cc860b7f7898a760ef24990eb1e7277ca50b2b8ecc3b754b002",
+    "test_sdl_probe_source.py": "03fa24d37faa695f1903a87fc225d8ad05409c6f4df3dbdbad758c2220d4d7bf"
   }
 }

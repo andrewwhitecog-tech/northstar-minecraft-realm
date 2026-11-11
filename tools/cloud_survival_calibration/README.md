@@ -35,3 +35,11 @@ Run43044823507 downloaded the official runtime and booted the real Fabric/Flan s
 ## No-APT recovery revision
 
 The attempted Ubuntu package recovery failed DNS resolution before native execution. This revision uses a real ctypes GLX context probe against the libraries already installed, capturing actual renderer strings and a completed clear/error check. It removes APT, preserves SDL X11/software settings, and leaves every mining/persistence judge unchanged. A successful legacy context is only a preflight; actual Minecraft rendering, joining and all three survival legs remain mandatory and unproven before the next run.
+
+## Bundled SDL3 client-context recovery
+
+Run43050699763 passed the legacy GLX probe but failed before client join: its OpenGL window had no matching GLX visual, and Vulkan lacked VK_KHR_surface. No survival leg ran. Authentic official26.3 client bytecode requests OpenGL3.3 core, forward-compatible flags and an sRGB-capable framebuffer, using SDL3 and window flags8226. The legacy probe does not establish those requirements.
+
+The driver now probes the actual pinned bundled SDL3 library against those unchanged requirements in the same owned Xvfb display. It tries GLX, then EGL only if GLX fails. A mode is selected only from successful process exit plus observed SDL/GL attributes, llvmpipe renderer, clear/error result and owned cleanup; the real client receives that exact selected mode. Both failed probes stop before client launch. There are no version overrides, package installs or relaxed mining/persistence controls. A probe success still gives no Minecraft acceptance or hold clearance.
+
+SDL documents attribute observation at https://wiki.libsdl.org/SDL3/SDL_GL_SetAttribute and the pre-initialization SDL_VIDEO_FORCE_EGL hint at https://wiki.libsdl.org/SDL3/SDL_HINT_VIDEO_FORCE_EGL. This recovery needs a fresh actual hosted run; source tests alone cannot establish renderer, player-join or survival success.

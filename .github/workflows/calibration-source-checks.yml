@@ -1,0 +1,32 @@
+name: Calibration source and graphics guards
+on:
+  pull_request:
+    paths:
+      - 'tools/cloud_survival_calibration/**'
+      - '.github/workflows/cloud-survival-calibration.yml'
+      - '.github/workflows/calibration-source-checks.yml'
+permissions:
+  contents: read
+concurrency:
+  group: calibration-source-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  source-guards:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Source guards only; no game, libraries or runtime downloads
+        working-directory: tools/cloud_survival_calibration
+        run: python3 -B -m unittest -v test_source test_probe_source test_sdl_probe_source
+      - name: Validate exact source payload only
+        working-directory: tools/cloud_survival_calibration
+        run: python3 -B native_calibration.py
+      - name: Confirm checks leave tracked source unchanged
+        run: git diff --exit-code
