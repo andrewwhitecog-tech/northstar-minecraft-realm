@@ -1,0 +1,2 @@
+tools/legacy_guard_native/** -text
+tools/walk_harness_compile/** -text

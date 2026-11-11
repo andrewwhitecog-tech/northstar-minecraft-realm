@@ -1,0 +1,9 @@
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:bolt_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:dune_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:flow_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:host_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:tide_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:ward_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_exposed_copper_golem_statue"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_weathered_cut_copper_stairs"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:wild_armor_trim_smithing_template"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b

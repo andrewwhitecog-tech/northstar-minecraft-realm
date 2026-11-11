@@ -1,0 +1,1 @@
+{"required": true, "package": "nsp.walk.mixin", "compatibilityLevel": "JAVA_25", "client": ["MinecraftFrameMixin"], "injectors": {"defaultRequire": 1}}

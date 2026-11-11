@@ -1,0 +1,237 @@
+{
+  "schema": "northstar.public-two-trim-smoke-plan.v1",
+  "status": "PREPARED_NOT_RUN",
+  "source_plan_sha256": "57fa13bdeda7b2d442b10601551529970a80fc6075c37992d6300b336a66ef31",
+  "cases": [
+    {
+      "label": "authentic_trim_0",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_INSTANTIATION_AND_GUARD_ACCEPT"
+    },
+    {
+      "label": "authentic_trim_1",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "authentic_trim_2",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "authentic_trim_3",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "authentic_trim_4",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "authentic_trim_5",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_signed_int_boundaries",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_int_as_string_raw_equivalent",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_x_double",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_x_long",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_x_list",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_x_compound",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_missing_argument",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_extra_id",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_extra_coordinates",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_close_command_root",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_newline",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_semicolon",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_escaped_quote",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_x_compound_field_injection",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_item_unknown_registry",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,z:153,item:\"not_a_registered_item_zzzz\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT"
+    },
+    {
+      "label": "trim_leading_zero_string_classification",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_zero",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_signed",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_short",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_long",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_list",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_long_array",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_string_equivalent",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_extra_name",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_duplicate_uuid",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_root_injection",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "check_missing",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_zero",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_signed",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_short",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_long",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_list",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_long_array",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_string_equivalent",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_extra_name",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_duplicate_uuid",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_root_injection",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "bind_self_missing",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_hex_literal",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_hex_string",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_suffix_i_literal",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_suffix_i_string",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_underscores_literal",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_underscores_string",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_leading_plus_literal",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "trim_spelling_leading_plus_string",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "nsp_owner_flight_check_mismatch_execute_if_function",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "nsp_owner_flight_check_mismatch_execute_store_result",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "nsp_owner_flight_bind_self_mismatch_execute_if_function",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    },
+    {
+      "label": "nsp_owner_flight_bind_self_mismatch_execute_store_result",
+      "status": "NOT_IMPLEMENTED_NOT_RUN"
+    }
+  ],
+  "all24_original_holds_retained": true,
+  "hold_clearance": false
+}

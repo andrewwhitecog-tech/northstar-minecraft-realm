@@ -1,0 +1,24 @@
+{
+  "utc": "2026-11-11T13:31:03.483Z",
+  "scope": "source metadata, payload validation and compile-refusal checks only",
+  "syntaxCheck": {
+    "runner": "node --check cloud-compile.mjs",
+    "exitCode": 0
+  },
+  "sourceTests": {
+    "runner": "node --test test/payload.test.mjs (logical public command; workstation invocation path omitted)",
+    "exitCode": 0,
+    "stdout": "✔ actual public payload validates with exact source/resource pins and legacy classpath order (50.0799ms)\n✔ required public Minecraft/Fabric/Mixin downloads have verified publisher metadata and pins (0.8091ms)\n✔ default command actually validates without creating compiler/download output (836.3132ms)\n✔ actual compile CLI refuses without explicit CI opt-in before downloads or JVM launch (811.6566ms)\n✔ host guard rejects Windows, WSL, self-hosted and missing explicit public CI authority (1.2019ms)\n✔ authentic resources retain expected entrypoint and mixin without any dependency shading input (4.1406ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2040.3233\n",
+    "stderr": ""
+  },
+  "officialMetadata": {
+    "versionMetadataSha1": "9f67e10ed013deeaad20ac3c800652765d493408",
+    "clientHeadStatus": 200,
+    "clientLibrariesVerified": 74,
+    "mavenArtifactsVerified": 51,
+    "dependencyBinariesDownloaded": 0
+  },
+  "compilation": "NOT_RUN",
+  "cloudJob": "NOT_STARTED",
+  "nativeProof": "NOT_RUN"
+}

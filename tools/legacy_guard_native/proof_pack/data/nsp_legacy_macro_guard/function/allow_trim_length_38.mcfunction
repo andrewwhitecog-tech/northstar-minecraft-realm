@@ -1,0 +1,11 @@
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:chiseled_polished_blackstone"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:field_masoned_banner_pattern"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:light_blue_glazed_terracotta"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:light_gray_glazed_terracotta"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:music_disc_creator_music_box"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:oxidized_copper_golem_statue"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_exposed_copper_lantern"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_oxidized_lightning_rod"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_weathered_copper_chain"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_weathered_copper_chest"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
+execute if data storage nsp_legacy_macro_guard:trim raw{id:"minecraft:waxed_weathered_copper_grate"} run data modify storage nsp_legacy_macro_guard:trim flags.id set value 1b
