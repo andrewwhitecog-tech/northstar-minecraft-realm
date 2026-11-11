@@ -10,7 +10,8 @@ sys.dont_write_bytecode=True
 HOME=Path(__file__).resolve().parent
 CONFIG=HOME/'PAYLOAD.json'
 PREPARATION=HOME/'ci-prepared'
-SMOKE_LABELS=('authentic_trim_0','trim_item_unknown_registry')
+from trim_extension import run_trim_cases
+SMOKE_LABELS=["authentic_trim_0","authentic_trim_1","authentic_trim_2","authentic_trim_3","authentic_trim_4","authentic_trim_5","trim_int_as_string_raw_equivalent","trim_x_double","trim_x_list","trim_x_compound","trim_missing_argument","trim_item_extra_coordinates","trim_item_semicolon","trim_item_escaped_quote","trim_x_compound_field_injection","trim_item_unknown_registry"]
 NO_WINDOW=0
 BELOW_NORMAL=0
 
@@ -183,32 +184,8 @@ def execute(config,loaded,reviewed_hash,benchmark_iterations=0):
             time.sleep(0.5)
         check('owned fixture chunk loaded',condition('if block {x} {y} {z} minecraft:barrel'.format(**site)))
         cases={c['label']:c for c in loaded['case_plan']['cases']}
-        accepted=cases['authentic_trim_0'];args_snbt=accepted['arguments_snbt']
-        start_case('authentic_trim_0')
-        reset(site);baseline_before=cmd('data get block {x} {y} {z} Items'.format(**site))
-        cmd('scoreboard players reset #original_result nspmg');cmd('scoreboard players reset #original_success nspmg')
-        cmd('execute store result score #original_result nspmg store success score #original_success nspmg run function nsp_mg_proof:original_trim '+args_snbt)
-        baseline_after=cmd('data get block {x} {y} {z} Items'.format(**site))
-        check('original operative body removes exactly one list item',condition('if data block {x} {y} {z} Items[15]'.format(**site))and not condition('if data block {x} {y} {z} Items[16]'.format(**site)))
-        baseline_result=score('#original_result',allow_unset=True);baseline_success=score('#original_success',allow_unset=True)
-        reset(site);cmd('function nsp_mg_proof:authentic_trim_0')
-        guarded_after=cmd('data get block {x} {y} {z} Items'.format(**site))
-        check('guarded public body side effects equal exact original',guarded_after==baseline_after,{'original':baseline_after,'guarded':guarded_after})
-        check('accepted guard valid flag',condition('if data storage nsp_legacy_macro_guard:trim flags{valid:1b}'))
-        check('caller continuation after accepted child',score('#after')==1)
-        guarded_result=score('#result',allow_unset=True);guarded_success=score('#success',allow_unset=True)
-        check('accepted result presence and value match original',(guarded_result,guarded_success)==(baseline_result,baseline_success),{'original':[baseline_result,baseline_success],'guarded':[guarded_result,guarded_success]})
-        report['case_results'].append({'label':'authentic_trim_0','status':'PASS','original_result':baseline_result,'original_success':baseline_success,'guarded_result':guarded_result,'guarded_success':guarded_success,'before':baseline_before,'after':guarded_after});write()
-        start_case('trim_item_unknown_registry')
-        reset(site);rejected_before=cmd('data get block {x} {y} {z} Items'.format(**site))
-        cmd('function nsp_mg_proof:trim_item_unknown_registry')
-        rejected_after=cmd('data get block {x} {y} {z} Items'.format(**site))
-        check('rejected guard leaves barrel unchanged',rejected_before==rejected_after)
-        check('rejected guard leaves operative storage sentinel untouched',condition('if data storage nsp_crafter_refill:t first{proof_sentinel:1b}'))
-        check('rejected guard resets valid flag',condition('if data storage nsp_legacy_macro_guard:trim flags{valid:0b}'))
-        check('early return value is zero',score('#result')==0)
-        check('early return discards child frame only; caller continues',score('#after')==1)
-        report['case_results'].append({'label':'trim_item_unknown_registry','status':'PASS','result':score('#result'),'success':score('#success'),'caller_after':score('#after')});write()
+        report['dispatch_labels']=list(SMOKE_LABELS)
+        run_trim_cases(cases,sites,cmd,score,condition,reset,check,start_case,report,write)
         if benchmark_iterations:
             profiler_start=cmd('debug start')
             rows=[]
@@ -355,7 +332,7 @@ def main():
     args=ap.parse_args()
     payload,plan=validate_payload(args.reviewed_payload_sha256)
     if not args.execute:
-        print(json.dumps({'status':'SOURCE_PAYLOAD_VALIDATED_NATIVE_NOT_RUN','files':len(payload['files']),'implemented_cases':list(SMOKE_LABELS),'remaining_cases':54,'hold_clearance':False}));return 0
+        print(json.dumps({'status':'SOURCE_PAYLOAD_VALIDATED_NATIVE_NOT_RUN','files':len(payload['files']),'implemented_cases':list(SMOKE_LABELS),'remaining_cases':len(plan['cases'])-len(SMOKE_LABELS),'hold_clearance':False}));return 0
     require(args.ci and args.reviewed_payload_sha256 is not None,'Explicit --ci --execute and reviewed payload hash required')
     require_hosted_ci()
     require(not PREPARATION.exists(),'Existing CI preparation must be preserved; use a fresh hosted checkout')

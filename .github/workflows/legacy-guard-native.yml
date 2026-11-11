@@ -38,10 +38,10 @@ jobs:
         run: uv run --no-project --python 3.12 test_source.py
       - name: Validate reviewed source payload without starting a server
         working-directory: tools/legacy_guard_native
-        run: uv run --no-project --python 3.12 ci_runner.py --reviewed-payload-sha256 934e8bbdd729af27412ecd001204930864ed072988563657baf5e85c2e64def9
-      - name: Execute two genuine native cases and six-site latency samples
+        run: uv run --no-project --python 3.12 ci_runner.py --reviewed-payload-sha256 60f43f707572072442641fbc66f7a5188851fad8addfe741962b17e0141d5d92
+      - name: Execute sixteen genuine native cases
         working-directory: tools/legacy_guard_native
-        run: uv run --no-project --python 3.12 ci_runner.py --ci --execute --reviewed-payload-sha256 934e8bbdd729af27412ecd001204930864ed072988563657baf5e85c2e64def9 --benchmark-iterations 1
+        run: uv run --no-project --python 3.12 ci_runner.py --ci --execute --reviewed-payload-sha256 60f43f707572072442641fbc66f7a5188851fad8addfe741962b17e0141d5d92
   compile-walk-harness:
     if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false
     runs-on: ubuntu-24.04

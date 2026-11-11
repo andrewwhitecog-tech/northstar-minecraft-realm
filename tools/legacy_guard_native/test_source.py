@@ -64,8 +64,8 @@ class PreparationTests(unittest.TestCase):
         config=json.loads(runner.CONFIG.read_text(encoding='utf8'))
         plan=json.loads((runner.HOME/'cases.json').read_text(encoding='utf8'))
         chosen={c['label']for c in plan['cases']} & set(runner.SMOKE_LABELS)
-        self.assertEqual(len(chosen),2)
-        self.assertEqual(len(plan['cases'])-len(chosen),54)
+        self.assertEqual(len(chosen),len(runner.SMOKE_LABELS))
+        self.assertEqual(len(plan['cases'])-len(chosen),56-len(runner.SMOKE_LABELS))
     def test_denied_native_admission_cannot_disappear_two_unrun_cases(self):
         plan={'cases':[{'label':'a'},{'label':'b'},{'label':'c'}]}
         self.assertEqual(runner.remaining_labels(plan,[]),['a','b','c'])
@@ -111,5 +111,40 @@ class HostedGateTests(unittest.TestCase):
             try:(root/'alias').symlink_to(target)
             except OSError:self.skipTest('OS symlink privilege unavailable; hostedLinuxmustexecute')
             with self.assertRaisesRegex(RuntimeError,'alias'):runner.validate_file_bindings(root,{'real':runner.hash_file(target),'alias':runner.hash_file(target)})
+
+
+class ExtendedObservationTests(unittest.TestCase):
+    def test_observation_requires_exact_unset_return_and_storage_equality(self):
+        from trim_extension import assert_same_observation
+        a={'items':'actual Items response','storage':'actual first response','result':None,'success':None}
+        assert_same_observation(a,dict(a))
+        for key,value in [('result',0),('success',0),('storage','different first response'),('items','different Items response')]:
+            with self.subTest(key=key):
+                b=dict(a);b[key]=value
+                with self.assertRaises(RuntimeError):assert_same_observation(a,b)
+    def test_unknown_native_refusal_evidence_fails_instead_of_guessing(self):
+        from trim_extension import rejection_kind
+        with self.assertRaises(RuntimeError):rejection_kind('Running function nsp_crafter_refill:trim',False,True)
+        with self.assertRaises(RuntimeError):rejection_kind('Expected integer',False,False)
+        self.assertEqual(rejection_kind('Expected integer',False,True),'NATIVE_PARSER_REFUSAL')
+        self.assertEqual(rejection_kind('Failed to instantiate macro: missing argument z',False,True),'NATIVE_INSTANTIATION_REFUSAL')
+        self.assertEqual(rejection_kind('Running function nsp_crafter_refill:trim',True,False),'GUARD_REJECTION')
+    def test_all_differential_wrappers_compare_same_arguments_in_both_frames(self):
+        plan=json.loads((runner.HOME/'cases.json').read_text())
+        for c in plan['cases']:
+            if c.get('native_mode')!='DIFFERENTIAL_LITERAL':continue
+            guarded=(runner.HOME/'proof_pack/data/nsp_mg_proof/function'/ (c['label']+'.mcfunction')).read_text()
+            original=(runner.HOME/'proof_pack/data/nsp_mg_proof/function'/ ('original_'+c['label']+'.mcfunction')).read_text()
+            self.assertIn('run function nsp_crafter_refill:trim '+c['arguments_snbt'],guarded)
+            self.assertIn('run function nsp_mg_proof:original_trim '+c['arguments_snbt'],original)
+            self.assertIn('scoreboard players add #original_after nspmg 1',original)
+    def test_only_concrete_public_trim_cases_are_dispatched(self):
+        plan=json.loads((runner.HOME/'cases.json').read_text());cases={c['label']:c for c in plan['cases']}
+        for label in runner.SMOKE_LABELS:
+            c=cases[label];self.assertEqual(c['function'],'nsp_crafter_refill:trim')
+            self.assertNotIn('owner_flight',c['arguments_snbt']);self.assertIn('arguments_snbt',c)
+        for label in ('trim_signed_int_boundaries','trim_x_long','trim_spelling_hex_literal','trim_item_newline','trim_item_close_command_root'):
+            self.assertNotIn(label,runner.SMOKE_LABELS)
+
 
 if __name__=='__main__':unittest.main(verbosity=2)
