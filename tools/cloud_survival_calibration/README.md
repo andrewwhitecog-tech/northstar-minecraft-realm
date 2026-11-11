@@ -31,3 +31,7 @@ Adoption stays with the director/Root after a genuine3-leg pass and independent 
 ## First actual hosted attempt and graphics recovery
 
 Run43044823507 downloaded the official runtime and booted the real Fabric/Flan server, but the client could not create a GLX visual and its Vulkan fallback also failed; no client joined and no mining leg passed. Server shut down cleanly, exit0. The recovery installs official Ubuntu Mesa/GLX diagnostics, requires an actual llvmpipe OpenGL preflight, chooses SDL X11 explicitly, fixes the rejected client simulation-distance value and fails early if both graphics backends fail. Native judge/expectations are unchanged; the next actual run must establish compatibility and mining behavior.
+
+## No-APT recovery revision
+
+The attempted Ubuntu package recovery failed DNS resolution before native execution. This revision uses a real ctypes GLX context probe against the libraries already installed, capturing actual renderer strings and a completed clear/error check. It removes APT, preserves SDL X11/software settings, and leaves every mining/persistence judge unchanged. A successful legacy context is only a preflight; actual Minecraft rendering, joining and all three survival legs remain mandatory and unproven before the next run.

@@ -24,8 +24,8 @@
     },
     {
       "file": "workflow.template.yml",
-      "size": 5777,
-      "sha256": "485c9dcb11dfec3c3c7ac17632dbe605ba429343017fb2d86b49da33d2b2f000"
+      "size": 3452,
+      "sha256": "49994f798c2118be5eb61316b1c929d108e7bcf85a811ecc9b0f2c6c8fbefb6e"
     },
     {
       "file": "tests/test_guards.py",
