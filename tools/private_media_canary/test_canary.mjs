@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {
   REPOSITORY, OWNER, WORKFLOW, INPUT, OUTPUT, validateContext, safeUrl, validateApiUrl,
   validateStorageRedirect, validateBrowserUrl, privacyStatus, decodeJson,
-  validateRelease, validateAsset, buildProof, summarizeReport,
+  validateRelease, validateAsset, buildProof, summarizeReport, repositoryDiagnostics, assertRepositoryDiagnostics,
 } from './canary.mjs';
 import { createHash } from 'node:crypto';
 
@@ -144,6 +144,7 @@ function proofFixture() {
     ...['final_release_metadata', 'final_synthetic-input-v1.txt_asset_api',
       'final_synthetic-input-v1.txt_browser', 'final_synthetic-output-v1.txt_asset_api',
       'final_synthetic-output-v1.txt_browser'].map(check => ({ check, denied: true, status: 404 })),
+    { check: 'draft_creation_write_authorized', pass: true, status: 201 },
   ] };
 }
 test('SOURCE_ONLY: proof assembly binds observed synthetic fixture without self-ID recursion', () => {
@@ -162,7 +163,7 @@ test('SOURCE_ONLY: proof assembly binds observed synthetic fixture without self-
 });
 test('SOURCE_ONLY: missing/failed/ambiguous proof observations never become success', () => {
   const c = validateContext(env(), SHA, 'linux');
-  const missing = proofFixture(); missing.observations.pop();
+  const missing = proofFixture(); missing.observations = missing.observations.filter(row => row.check !== 'final_synthetic-output-v1.txt_browser');
   assert.throws(() => buildProof(missing, c, expected, { id: 11 }, { id: 12 }), /incomplete/);
   const failed = proofFixture(); failed.observations[4].status = 200;
   assert.throws(() => buildProof(failed, c, expected, { id: 11 }, { id: 12 }), /incomplete/);
@@ -195,4 +196,57 @@ test('SOURCE_ONLY: 403 throttling or abuse refusal is inconclusive and cannot si
     assert.throws(() => buildProof(r, validateContext(env(), SHA, 'linux'), expected, { id: 11 }, { id: 12 }),
       /incomplete/);
   }
+});
+
+function repositoryFixture() {
+  return { id: 123456, full_name: REPOSITORY, private: false, default_branch: 'main',
+    owner: { login: OWNER }, permissions: { push: true } };
+}
+test('SOURCE_ONLY: exact repository diagnostics expose booleans and push metadata state only', () => {
+  const fixture = { ...repositoryFixture(), temp_clone_token: 'SYNTHETIC_MUST_NOT_LOG' };
+  const d = repositoryDiagnostics(fixture, 123456);
+  assert.equal(d.push_metadata, 'PRESENT_TRUE');
+  assert.equal(d.full_name_matches, true);
+  assert.equal(d.permissions_field_present, true);
+  assert.equal(JSON.stringify(d).includes('SYNTHETIC_MUST_NOT_LOG'), false);
+  assert.doesNotThrow(() => assertRepositoryDiagnostics(d));
+});
+test('SOURCE_ONLY: absent push metadata stays UNKNOWN; explicit false or malformed metadata rejects', () => {
+  for (const fixture of [
+    { ...repositoryFixture(), permissions: {} },
+    Object.fromEntries(Object.entries(repositoryFixture()).filter(([key]) => key !== 'permissions')),
+  ]) {
+    const d = repositoryDiagnostics(fixture, 123456);
+    assert.equal(d.push_metadata, 'ABSENT_UNKNOWN');
+    assert.doesNotThrow(() => assertRepositoryDiagnostics(d));
+  }
+  const denied = repositoryDiagnostics({ ...repositoryFixture(), permissions: { push: false } }, 123456);
+  assert.equal(denied.push_metadata, 'EXPLICIT_FALSE');
+  assert.throws(() => assertRepositoryDiagnostics(denied), /push_explicit_false/);
+  for (const permissions of [null, false, { push: 'true' }, { push: 1 }]) {
+    const d = repositoryDiagnostics({ ...repositoryFixture(), permissions }, 123456);
+    assert.equal(d.push_metadata, 'INVALID');
+    assert.throws(() => assertRepositoryDiagnostics(d), /metadata_invalid/);
+  }
+});
+test('SOURCE_ONLY: actual repository identity mismatches have precise independent codes', () => {
+  for (const [key, value, code] of [
+    ['full_name', 'other/repo', 'full_name_matches'], ['id', 999, 'repository_id_matches'],
+    ['owner', { login: 'outsider' }, 'owner_login_matches'],
+    ['private', true, 'public_visibility_matches'], ['default_branch', 'feature', 'default_branch_matches'],
+  ]) {
+    const fixture = { ...repositoryFixture(), [key]: value };
+    assert.throws(() => assertRepositoryDiagnostics(repositoryDiagnostics(fixture, 123456)),
+      new RegExp('repository_check_failed_' + code));
+  }
+});
+test('SOURCE_ONLY: repository push metadata alone never substitutes for actual draft201 proof', () => {
+  const r = proofFixture();
+  r.observations = r.observations.filter(row => row.check !== 'draft_creation_write_authorized');
+  assert.throws(() => buildProof(r, validateContext(env(), SHA, 'linux'), expected, { id: 11 }, { id: 12 }),
+    /draft_write_not_proven/);
+  const wrong = proofFixture();
+  wrong.observations.find(row => row.check === 'draft_creation_write_authorized').status = 200;
+  assert.throws(() => buildProof(wrong, validateContext(env(), SHA, 'linux'), expected, { id: 11 }, { id: 12 }),
+    /draft_write_not_proven/);
 });

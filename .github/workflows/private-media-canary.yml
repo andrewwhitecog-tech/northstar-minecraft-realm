@@ -2,6 +2,12 @@ name: Synthetic private media canary
 on:
   workflow_dispatch:
     inputs:
+      operation:
+        description: Read-only diagnostics or explicit synthetic canary
+        required: true
+        type: choice
+        default: diagnose
+        options: [diagnose, canary]
       reviewed_sha:
         description: Exact reviewed main commit SHA; synthetic bytes only
         required: true
@@ -41,7 +47,14 @@ jobs:
       - name: Source-only regressions; no provider calls
         working-directory: tools/private_media_canary
         run: node --test --test-concurrency=1 test_canary.mjs
+      - name: Read-only exact-context repository diagnostics
+        working-directory: tools/private_media_canary
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEWED_SHA: ${{ inputs.reviewed_sha }}
+        run: node canary.mjs --diagnose --reviewed-sha "$REVIEWED_SHA"
       - name: Exact-context synthetic draft canary
+        if: inputs.operation == 'canary'
         working-directory: tools/private_media_canary
         env:
           GITHUB_TOKEN: ${{ github.token }}
