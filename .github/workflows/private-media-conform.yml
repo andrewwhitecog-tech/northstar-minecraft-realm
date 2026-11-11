@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       phase:
-        description: Source-study never approves; conform still requires separately reviewed source-QC ZIP
+        description: Study and separately approved v17 review; conform retains original approval gate
         type: choice
         required: true
-        options: [source-qc, conform, source-study]
+        options: [source-qc, conform, source-study, v17-review-render]
       reviewed_sha:
         description: Exact Root-reviewed current main commit, separate from earlier canary SHA
         type: string
@@ -55,6 +55,9 @@ jobs:
       - name: Native source-study guard tests only; no media or network
         working-directory: tools/private_media_conform
         run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest -v test_study
+      - name: V17 source guards only; no media or network
+        working-directory: tools/private_media_conform
+        run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest -v test_v17
       - name: Check clean reviewed source
         run: git diff --exit-code
       - name: Verify pinned public FFmpeg downloader source guards
@@ -80,6 +83,9 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: |
           case "$MEDIA_PHASE" in
+            v17-review-render)
+              nice -n 19 uv run --no-project --python 3.12 python -B v17_worker.py --phase v17-review-render --reviewed-sha "$REVIEWED_SHA" --config media-config.json
+              ;;
             source-study)
               nice -n 19 uv run --no-project --python 3.12 python -B study_worker.py --phase source-study --reviewed-sha "$REVIEWED_SHA" --config media-config.json
               ;;
