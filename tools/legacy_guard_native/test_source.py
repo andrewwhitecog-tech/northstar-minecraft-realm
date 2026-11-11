@@ -27,9 +27,20 @@ class PreparationTests(unittest.TestCase):
     def test_wrapper_calls_real_public_function_and_continues_parent(self):
         c={'function':'nsp_crafter_refill:trim','arguments_snbt':'{x:725,y:73,z:153,item:"coal"}'}
         lines=runner.wrapper_commands(c)
-        self.assertIn('run function nsp_crafter_refill:trim '+c['arguments_snbt'],lines[1])
-        self.assertEqual(lines[2],'scoreboard players add #after nspmg 1')
-        self.assertIn('store result score #result',lines[1])
+        expected='execute store result score #result nspmg store success score #success nspmg run function nsp_crafter_refill:trim '+c['arguments_snbt']
+        self.assertEqual(lines.count(expected),1)
+        call_at=lines.index(expected)
+        self.assertLess(lines.index('scoreboard players reset #result nspmg'),call_at)
+        self.assertLess(lines.index('scoreboard players reset #success nspmg'),call_at)
+        self.assertEqual(lines[-1],'scoreboard players add #after nspmg 1')
+        self.assertLess(call_at,len(lines)-1)
+    def test_observed_native_score_and_unset_are_distinct_without_default_zero(self):
+        # Actual responses retained from native run43031332423. No Minecraft outcome is simulated.
+        self.assertEqual(runner.parse_native_score_response('#probe has 1 [nspmg]','#probe'),1)
+        raw="Can't get value of nspmg for #original_result; none is set"
+        self.assertIsNone(runner.parse_native_score_response(raw,'#original_result',True))
+        with self.assertRaises(RuntimeError):runner.parse_native_score_response(raw,'#original_result')
+        with self.assertRaises(RuntimeError):runner.parse_native_score_response('Running function nsp_mg_proof:original_trim','#original_result',True)
     def test_multiline_commands_and_unsupported_public_functions_are_refused(self):
         for c in [{'function':'nsp_crafter_refill:trim','arguments_snbt':'{}\nstop'},{'function':'nsp_owner_flight:check','arguments_snbt':'{}'}]:
             with self.assertRaises(RuntimeError):runner.wrapper_commands(c)

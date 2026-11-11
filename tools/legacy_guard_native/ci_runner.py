@@ -54,12 +54,20 @@ def wrapper_commands(case):
     require(case['function']=='nsp_crafter_refill:trim' and '\n' not in case['arguments_snbt'] and '\r' not in case['arguments_snbt'],'Unsupported smoke wrapper')
     return [
         'scoreboard players set #after nspmg 0',
+        'scoreboard players reset #result nspmg',
+        'scoreboard players reset #success nspmg',
         'execute store result score #result nspmg store success score #success nspmg run function '+case['function']+' '+case['arguments_snbt'],
         'scoreboard players add #after nspmg 1',
     ]
 
 def remaining_labels(plan,attempted):
     return [c['label']for c in plan['cases']if c['label']not in attempted]
+
+def parse_native_score_response(raw,name,allow_unset=False):
+    m=re.search(r'has (-?\d+)',raw)
+    if m is not None:return int(m.group(1))
+    if allow_unset and raw=="Can't get value of nspmg for "+name+"; none is set":return None
+    raise RuntimeError('Native scoreboard response is not an integer or explicitly allowed unset: '+raw)
 
 class Rcon:
     """Bounded Source-RCON protocol; own localhost endpoint only. No library/mock dispatcher."""
@@ -120,10 +128,8 @@ def execute(config,loaded,reviewed_hash,benchmark_iterations=0):
     def cmd(command):
         start=time.perf_counter();answer=r.cmd(command)
         report['commands'].append({'command':command,'response':answer,'roundtrip_seconds':time.perf_counter()-start});write();return answer
-    def score(name):
-        raw=cmd('scoreboard players get '+name+' nspmg');m=re.search(r'has (-?\d+)',raw)
-        require(m is not None,'Native scoreboard response is not an integer: '+raw)
-        return int(m.group(1))
+    def score(name,allow_unset=False):
+        return parse_native_score_response(cmd('scoreboard players get '+name+' nspmg'),name,allow_unset)
     def condition(clause):
         cmd('scoreboard players set #probe nspmg -1')
         cmd('execute store success score #probe nspmg run execute '+clause)
@@ -180,16 +186,19 @@ def execute(config,loaded,reviewed_hash,benchmark_iterations=0):
         accepted=cases['authentic_trim_0'];args_snbt=accepted['arguments_snbt']
         start_case('authentic_trim_0')
         reset(site);baseline_before=cmd('data get block {x} {y} {z} Items'.format(**site))
+        cmd('scoreboard players reset #original_result nspmg');cmd('scoreboard players reset #original_success nspmg')
         cmd('execute store result score #original_result nspmg store success score #original_success nspmg run function nsp_mg_proof:original_trim '+args_snbt)
         baseline_after=cmd('data get block {x} {y} {z} Items'.format(**site))
         check('original operative body removes exactly one list item',condition('if data block {x} {y} {z} Items[15]'.format(**site))and not condition('if data block {x} {y} {z} Items[16]'.format(**site)))
-        baseline_result=score('#original_result');baseline_success=score('#original_success')
+        baseline_result=score('#original_result',allow_unset=True);baseline_success=score('#original_success',allow_unset=True)
         reset(site);cmd('function nsp_mg_proof:authentic_trim_0')
         guarded_after=cmd('data get block {x} {y} {z} Items'.format(**site))
         check('guarded public body side effects equal exact original',guarded_after==baseline_after,{'original':baseline_after,'guarded':guarded_after})
         check('accepted guard valid flag',condition('if data storage nsp_legacy_macro_guard:trim flags{valid:1b}'))
         check('caller continuation after accepted child',score('#after')==1)
-        report['case_results'].append({'label':'authentic_trim_0','status':'PASS','original_result':baseline_result,'original_success':baseline_success,'guarded_result':score('#result'),'guarded_success':score('#success'),'before':baseline_before,'after':guarded_after});write()
+        guarded_result=score('#result',allow_unset=True);guarded_success=score('#success',allow_unset=True)
+        check('accepted result presence and value match original',(guarded_result,guarded_success)==(baseline_result,baseline_success),{'original':[baseline_result,baseline_success],'guarded':[guarded_result,guarded_success]})
+        report['case_results'].append({'label':'authentic_trim_0','status':'PASS','original_result':baseline_result,'original_success':baseline_success,'guarded_result':guarded_result,'guarded_success':guarded_success,'before':baseline_before,'after':guarded_after});write()
         start_case('trim_item_unknown_registry')
         reset(site);rejected_before=cmd('data get block {x} {y} {z} Items'.format(**site))
         cmd('function nsp_mg_proof:trim_item_unknown_registry')
