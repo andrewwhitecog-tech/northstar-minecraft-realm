@@ -112,6 +112,27 @@ class SourceTests(unittest.TestCase):
             self.assertEqual(len(digs),2 if protected else 1)
             if protected:self.assertEqual(digs[1]['ticks'],3)
             self.assertTrue(all(s['ticks']==1200 for s in steps if 'await' in s))
+    def test_fresh_private_access_keeps_one_exact_offline_player_nonop(self):
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            home=Path(tmp);name='Cal1234abcd';identity=cal.offline_uuid(name)
+            props=cal.fresh_private_access(home,name,identity)
+            self.assertEqual(props,{'white-list':'true','enforce-whitelist':'true'})
+            self.assertEqual(json.loads((home/'ops.json').read_text()),[])
+            self.assertEqual(json.loads((home/'whitelist.json').read_text()),[{'uuid':str(identity),'name':name}])
+
+    def test_private_access_rejects_mismatched_identity_before_writing(self):
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            home=Path(tmp)
+            for name,identity in [('Cal1234abcd',cal.offline_uuid('Calabcd1234')),('OtherPlayer',cal.offline_uuid('OtherPlayer'))]:
+                with self.assertRaises(RuntimeError):cal.fresh_private_access(home,name,identity)
+                self.assertEqual(list(home.iterdir()),[])
+
+    def test_private_access_never_overwrites_existing_access_files(self):
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            home=Path(tmp);existing=home/'whitelist.json';existing.write_text('preserve-existing')
+            with self.assertRaises(RuntimeError):cal.fresh_private_access(home,'Cal1234abcd',cal.offline_uuid('Cal1234abcd'))
+            self.assertEqual(existing.read_text(),'preserve-existing');self.assertFalse((home/'ops.json').exists())
+
     def test_fresh_servers_file_matches_client_uncompressed_nbt_reader(self):
         # Actual 26.3 ServerList.load invokes NbtIo.read(Path), not readCompressed.
         with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
