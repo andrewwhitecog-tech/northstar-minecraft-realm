@@ -25,7 +25,7 @@ jobs:
           persist-credentials: false
       - name: Source guards only; no game, libraries or runtime downloads
         working-directory: tools/cloud_survival_calibration
-        run: python3 -B -m unittest -v test_source test_probe_source test_sdl_probe_source test_graphics_environment
+        run: python3 -B -m unittest -v test_source test_probe_source test_sdl_probe_source test_graphics_environment test_egl_runtime
       - name: Validate exact source payload only
         working-directory: tools/cloud_survival_calibration
         run: python3 -B native_calibration.py

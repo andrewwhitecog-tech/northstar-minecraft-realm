@@ -208,5 +208,16 @@ class GraphicsEnvironmentTests(unittest.TestCase):
                         self.assertIs(value.value, False)
 
 
+    def test_isolated_egl_env_is_accepted_only_when_explicitly_approved(self):
+        approved={'SDL_EGL_LIBRARY':'/home/runner/work/repo/repo/run/egl-runtime/libEGL.so.1.1.0','__EGL_VENDOR_LIBRARY_FILENAMES':'/home/runner/work/repo/repo/run/egl-runtime/50_mesa.owned.json'}
+        with self.effects_forbidden():
+            with self.assertRaises(p.ProbeError):p.environment_values(approved)
+            observed=p.environment_values(approved,approved)
+            self.assertEqual(observed['SDL_EGL_LIBRARY'],approved['SDL_EGL_LIBRARY'])
+            self.assertEqual(observed['__EGL_VENDOR_LIBRARY_FILENAMES'],approved['__EGL_VENDOR_LIBRARY_FILENAMES'])
+            with self.assertRaises(p.ProbeError):p.environment_values(dict(approved,SDL_EGL_LIBRARY='/unapproved/library'),approved)
+            with self.assertRaises(p.ProbeError):p.environment_values(approved,dict(approved,LD_PRELOAD='/forbidden'))
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -2,6 +2,11 @@ name: Reviewed graphics environment diagnostic
 on:
   workflow_dispatch:
     inputs:
+      prepare_egl_runtime:
+        description: Prepare only the isolated pinned missing EGL runtime
+        required: false
+        default: false
+        type: boolean
       reviewed_commit_sha:
         description: Exact reviewed main commit
         required: true
@@ -34,6 +39,7 @@ jobs:
       UV_PYTHON_DOWNLOADS: never
       NSP_PUBLIC_REPOSITORY: 'true'
       NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION: '1'
+      PREPARE_EGL_RUNTIME: ${{ inputs.prepare_egl_runtime }}
       REVIEWED_PAYLOAD_SHA256: ${{ inputs.reviewed_payload_sha256 }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -48,11 +54,16 @@ jobs:
           restore-cache: false
       - name: Pure source and guard checks
         working-directory: tools/cloud_survival_calibration
-        run: uv run --no-project --python 3.12 python -B -m unittest -v test_source test_probe_source test_sdl_probe_source test_graphics_environment
+        run: uv run --no-project --python 3.12 python -B -m unittest -v test_source test_probe_source test_sdl_probe_source test_graphics_environment test_egl_runtime
       - name: Exact reviewed source payload; no native execution
         working-directory: tools/cloud_survival_calibration
         run: uv run --no-project --python 3.12 python -B native_calibration.py --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
       - name: Observe isolated existing graphics libraries and pinned SDL only
         working-directory: tools/cloud_survival_calibration
-        run: uv run --no-project --python 3.12 python -B graphics_environment.py --execute --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
-# No Minecraft server/client, package installation, cache, artifact upload or workstation access.
+        run: |
+          if [ "$PREPARE_EGL_RUNTIME" = "true" ]; then
+            uv run --no-project --python 3.12 python -B graphics_environment.py --execute --prepare-egl --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
+          else
+            uv run --no-project --python 3.12 python -B graphics_environment.py --execute --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
+          fi
+# No Minecraft server/client, global package installation, cache, artifact upload or workstation access.
