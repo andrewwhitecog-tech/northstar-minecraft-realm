@@ -36,6 +36,15 @@ def offline_uuid(name):
     b=bytearray(hashlib.md5(('OfflinePlayer:'+name).encode()).digest());b[6]=(b[6]&15)|48;b[8]=(b[8]&63)|128
     return uuid.UUID(bytes=bytes(b))
 
+def fresh_private_access(server_home,name,player_uuid):
+    require(re.fullmatch(r'Cal[0-9a-f]{8}',name) is not None,'Exact fresh calibration name required')
+    require(player_uuid==offline_uuid(name),'Private whitelist UUID must match offline client identity')
+    paths=[server_home/'ops.json',server_home/'whitelist.json']
+    require(all(not p.exists() and not p.is_symlink() for p in paths),'Fresh private access files required')
+    paths[0].write_text('[]\n')
+    paths[1].write_text(json.dumps([{'uuid':str(player_uuid),'name':name}],indent=2)+'\n')
+    return {'white-list':'true','enforce-whitelist':'true'}
+
 def route(run_id,label,target,protected,limits):
     prefix=run_id+'_'+label
     steps=[{'slot':0},{'wait':40},{'mark':prefix+'_ready'},{'await':prefix+'_ready','ticks':limits['awaitTicks']},
@@ -200,8 +209,9 @@ def execute(lock):
         for p in (srv,profile/'mods',route_dir):p.mkdir(parents=True,exist_ok=True)
         claim={'ID':str(uuid.uuid4()),'Name':'Owned calibration protected bay','PosxXzZY':[16,31,16,31,-64],'Home':[24,65,26],'Potions':{},'AllowedEntries':{},'GlobalPerms':DEFAULT_PERMS,'PermGroup':{}}
         claims=world/'dimensions/minecraft/overworld/data/claims/!AdminClaims.json';claims.parent.mkdir(parents=True);save(claims,[claim]);result['claims']=[claim]
-        (srv/'ops.json').write_text('[]\n');password=secrets.token_hex(24)
+        private_access=fresh_private_access(srv,name,player_uuid);password=secrets.token_hex(24)
         props={'server-ip':'127.0.0.1','server-port':27091,'enable-rcon':'true','rcon.port':27092,'rcon.password':password,'online-mode':'false','enforce-secure-profile':'false','max-players':1,'level-name':'world','level-seed':1,'level-type':'minecraft:flat','generator-settings':json.dumps({'layers':[{'height':1,'block':'minecraft:bedrock'},{'height':2,'block':'minecraft:dirt'},{'height':1,'block':'minecraft:grass_block'}],'biome':'minecraft:plains'}),'generate-structures':'false','difficulty':'peaceful','spawn-protection':0,'view-distance':2,'simulation-distance':2,'pause-when-empty-seconds':0,'max-tick-time':60000,'broadcast-rcon-to-ops':'false','motd':'Owned calibration only'}
+        props.update(private_access)
         (srv/'server.properties').write_text('\n'.join(k+'='+str(v).replace(':','\\:') for k,v in props.items())+'\n');(srv/'eula.txt').write_text('eula=true\n')
         (srv/'mods').mkdir();api=runtime['mods']['0.165.0+26.3'];flan=runtime['mods']['26.3-1.12.8.b-fabric']
         shutil.copyfile(api,srv/'mods/fabric-api.jar');shutil.copyfile(flan,srv/'mods/flan.jar');shutil.copyfile(api,profile/'mods/fabric-api.jar');shutil.copyfile(HOME/lock['harness']['path'],profile/'mods/nsp-route-walk.jar')
