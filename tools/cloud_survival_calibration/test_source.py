@@ -112,10 +112,21 @@ class SourceTests(unittest.TestCase):
             self.assertEqual(len(digs),2 if protected else 1)
             if protected:self.assertEqual(digs[1]['ticks'],3)
             self.assertTrue(all(s['ticks']==1200 for s in steps if 'await' in s))
-    def test_fresh_servers_file_is_actual_compressed_nbt_not_private_profile_copy(self):
+    def test_fresh_servers_file_matches_client_uncompressed_nbt_reader(self):
+        # Actual 26.3 ServerList.load invokes NbtIo.read(Path), not readCompressed.
         with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
             p=Path(tmp)/'servers.dat';fresh_servers_dat(p,'127.0.0.1:27091')
-            data=read_dat(p);self.assertEqual(data['servers'][0]['ip'],'127.0.0.1:27091');self.assertEqual(len(data['servers']),1)
+            raw=p.read_bytes();self.assertEqual(raw[:3],b'\x0a\0\0')
+            self.assertFalse(raw.startswith(b'\x1f\x8b'))
+            reader=Nbt(raw);data=reader.root();self.assertEqual(reader.f.read(),b'')
+            self.assertEqual(data,{'servers':[{'name':'Owned cloud calibration','ip':'127.0.0.1:27091','acceptTextures':0}]})
+
+    def test_world_and_player_reader_still_accepts_compressed_nbt(self):
+        import gzip
+        raw=b'\x0a\0\0\x03\0\x01x\0\0\0\x07\0'
+        with tempfile.TemporaryDirectory(dir=cal.HOME) as tmp:
+            p=Path(tmp)/'player-fixture.dat';p.write_bytes(gzip.compress(raw))
+            self.assertEqual(read_dat(p),{'x':7})
     def test_nbt_reader_refuses_truncation_instead_of_fake_air(self):
         with self.assertRaises(ValueError):Nbt(b'\x0a\0\0\x03\0\x01x').root()
     def test_public_download_path_cannot_escape_owned_root(self):

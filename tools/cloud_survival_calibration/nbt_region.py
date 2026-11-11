@@ -73,4 +73,5 @@ def fresh_servers_dat(path,address):
     def field(t,n,payload):return bytes([t])+text(n)+payload
     server=field(8,'name',text('Owned cloud calibration'))+field(8,'ip',text(address))+field(1,'acceptTextures',b'\0')+b'\0'
     raw=b'\x0a\0\0'+field(9,'servers',b'\x0a'+struct.pack('>i',1)+server)+b'\0'
-    Path(path).write_bytes(gzip.compress(raw))
+    # ServerList.load uses NbtIo.read(Path): servers.dat is uncompressed NBT.
+    Path(path).write_bytes(raw)
