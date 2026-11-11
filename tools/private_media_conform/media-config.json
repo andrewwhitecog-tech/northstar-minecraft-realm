@@ -128,5 +128,79 @@
       "sha256": "25bba98e8448801669f05b848098a8020fadbebd3a4e600108fdf30d50af3756",
       "asset_id": 736019218
     }
+  },
+  "v17_review_render": {
+    "source_study": {
+      "asset_id": 736057082,
+      "size": 11142310,
+      "sha256": "893480ef1143de2d1ac5e14db7e7a7dbe2969b19cf6814876f2dc9f70abae09f",
+      "run_id": 43053663678,
+      "run_attempt": 1,
+      "source_sha": "c36463d09c7b6557e047606052ff0b45bb094923",
+      "study_input_manifest_sha256": "bc061d8a92db70159dfc17bcabb37ee56c574424bb6c67ae6f4efe4ce42ba250",
+      "input_manifest_sha256": "be5141ba3f8983726469f6510b3321489fbe1bcd4aa56db44d013a71afab3b64"
+    },
+    "replacements": [
+      {
+        "base_frames": [
+          75,
+          120
+        ],
+        "role": "c1",
+        "source_start_frame": 120
+      },
+      {
+        "base_frames": [
+          555,
+          653
+        ],
+        "role": "c9",
+        "source_start_frame": 30
+      },
+      {
+        "base_frames": [
+          675,
+          705
+        ],
+        "role": "c8",
+        "source_start_frame": 38
+      },
+      {
+        "base_frames": [
+          705,
+          765
+        ],
+        "role": "c4",
+        "source_start_frame": 90
+      },
+      {
+        "base_frames": [
+          855,
+          900
+        ],
+        "role": "c11",
+        "source_start_frame": 190
+      }
+    ],
+    "approval": {
+      "decision": "APPROVE_V17_REVIEW_RENDER",
+      "reviewer": "codex-root",
+      "reviewed_utc": "2026-11-11T16:09:30Z",
+      "study_asset_id": 736057082,
+      "study_zip_sha256": "893480ef1143de2d1ac5e14db7e7a7dbe2969b19cf6814876f2dc9f70abae09f",
+      "study_run_id": 43053663678,
+      "study_input_manifest_sha256": "bc061d8a92db70159dfc17bcabb37ee56c574424bb6c67ae6f4efe4ce42ba250",
+      "input_manifest_sha256": "be5141ba3f8983726469f6510b3321489fbe1bcd4aa56db44d013a71afab3b64",
+      "replacement_manifest_sha256": "608f339e1f3447ef2a8fe3e064ac8352054e7132199d503093a8ac9f21bd7c20",
+      "reviewed_roles": [
+        "c1",
+        "c4",
+        "c8",
+        "c9",
+        "c11"
+      ],
+      "source_samples_personally_viewed": true,
+      "motion_and_reuse_reviewed": true
+    }
   }
 }

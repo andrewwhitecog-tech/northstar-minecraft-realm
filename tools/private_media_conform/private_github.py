@@ -100,7 +100,7 @@ class GitHub:
    self.binary(asset_id,e);self.anonymous_denied(asset_id,e)
   self.draft();return p
  def upload_zip(self,name,data):
-  require(re.fullmatch(r'promo-v16-(source-qc|source-study|conform)-[0-9]+-[0-9]+\.zip',name) is not None and 0<len(data)<=MAX_ASSET,'OUTPUT_NAME_OR_SIZE')
+  require(re.fullmatch(r'promo-(v16-(source-qc|source-study|conform)|v17-review-render)-[0-9]+-[0-9]+\.zip',name) is not None and 0<len(data)<=MAX_ASSET,'OUTPUT_NAME_OR_SIZE')
   self.draft();require(not any(a.get('name')==name for a in self.assets()),'OUTPUT_ALREADY_EXISTS')
   url='https://uploads.github.com'+self.prefix+'/releases/'+str(self.c['draft_release_id'])+'/assets?'+urllib.parse.urlencode({'name':name})
   h=self.headers();h['Content-Type']='application/zip';self.draft();status,headers,body=self.t.request('POST',url,h,data,MAX_JSON);require(status==201,'OUTPUT_UPLOAD_HTTP')
