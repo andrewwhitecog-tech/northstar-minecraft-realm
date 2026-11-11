@@ -1,0 +1,49 @@
+name: Synthetic private media canary
+on:
+  workflow_dispatch:
+    inputs:
+      reviewed_sha:
+        description: Exact reviewed main commit SHA; synthetic bytes only
+        required: true
+        type: string
+permissions: {}
+concurrency:
+  group: synthetic-private-media-canary
+  cancel-in-progress: false
+jobs:
+  canary:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' &&
+      github.repository_owner == 'andrewwhitecog-tech' &&
+      github.actor == 'andrewwhitecog-tech' &&
+      github.triggering_actor == 'andrewwhitecog-tech' &&
+      github.event.repository.private == false &&
+      github.event.repository.default_branch == 'main' &&
+      github.ref == 'refs/heads/main' &&
+      github.sha == inputs.reviewed_sha &&
+      github.workflow_sha == inputs.reviewed_sha &&
+      github.workflow_ref == 'andrewwhitecog-tech/northstar-minecraft-realm/.github/workflows/private-media-canary.yml@refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # Draft access and synthetic asset upload; no other token permissions.
+    env:
+      NSP_REPOSITORY_PRIVATE: ${{ toJSON(github.event.repository.private) }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Source-only regressions; no provider calls
+        working-directory: tools/private_media_canary
+        run: node --test --test-concurrency=1 test_canary.mjs
+      - name: Exact-context synthetic draft canary
+        working-directory: tools/private_media_canary
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEWED_SHA: ${{ inputs.reviewed_sha }}
+        run: node canary.mjs --execute --reviewed-sha "$REVIEWED_SHA"
