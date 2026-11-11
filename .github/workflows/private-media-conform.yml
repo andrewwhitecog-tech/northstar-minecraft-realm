@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       phase:
-        description: Two manual phases; conform requires reviewed source-QC ZIP approval in manifest
+        description: Source-study never approves; conform still requires separately reviewed source-QC ZIP
         type: choice
         required: true
-        options: [source-qc, conform]
+        options: [source-qc, conform, source-study]
       reviewed_sha:
         description: Exact Root-reviewed current main commit, separate from earlier canary SHA
         type: string
@@ -52,6 +52,9 @@ jobs:
       - name: Guard/source unit tests only; no media or network
         working-directory: tools/private_media_conform
         run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest discover -s tests -v
+      - name: Native source-study guard tests only; no media or network
+        working-directory: tools/private_media_conform
+        run: nice -n 19 uv run --no-project --python 3.12 python -B -m unittest -v test_study
       - name: Check clean reviewed source
         run: git diff --exit-code
       - name: Verify pinned public FFmpeg downloader source guards
@@ -75,4 +78,13 @@ jobs:
           MEDIA_PHASE: ${{ inputs.phase }}
           PYTHONUTF8: '1'
           PYTHONIOENCODING: utf-8
-        run: nice -n 19 uv run --no-project --python 3.12 python -B cloud_worker.py --phase "$MEDIA_PHASE" --reviewed-sha "$REVIEWED_SHA" --config media-config.json
+        run: |
+          case "$MEDIA_PHASE" in
+            source-study)
+              nice -n 19 uv run --no-project --python 3.12 python -B study_worker.py --phase source-study --reviewed-sha "$REVIEWED_SHA" --config media-config.json
+              ;;
+            source-qc|conform)
+              nice -n 19 uv run --no-project --python 3.12 python -B cloud_worker.py --phase "$MEDIA_PHASE" --reviewed-sha "$REVIEWED_SHA" --config media-config.json
+              ;;
+            *) exit 2 ;;
+          esac

@@ -77,5 +77,56 @@
       878,
       942
     ]
+  },
+  "study_schema": "northstar.promo.native-source-study-config.v1",
+  "study_inputs": {
+    "c11": {
+      "name": "C11_best.mp4",
+      "size": 23972924,
+      "sha256": "777a7231c8945d487434aced49f54c5f4be15f8aee91d2c32f65ad9265c1d4ea",
+      "asset_id": 736019059
+    },
+    "c12": {
+      "name": "C12_best.mp4",
+      "size": 3969257,
+      "sha256": "aeeef9a496778218decce7226700357f5c898f2690ac30a9ce2c6d9af12f28fe",
+      "asset_id": 736019065
+    },
+    "c1": {
+      "name": "C1_best.mp4",
+      "size": 63340622,
+      "sha256": "7523dfb6e3044fe811dfc67d90a6a3d66b32db168ad480e4f00600fa7c9704f1",
+      "asset_id": 736019057
+    },
+    "c3": {
+      "name": "C3_best.mp4",
+      "size": 2000129,
+      "sha256": "fcae4e79b8068ace74d96b9c6ab75fcae1854cb29658929b95e034f1e8362ca7",
+      "asset_id": 736019061
+    },
+    "c4": {
+      "name": "C4_best.mp4",
+      "size": 26457503,
+      "sha256": "eee615e2f9bca06909c0244a3ff8d0a7c322aa3388e367841b21f28bb6b6e170",
+      "asset_id": 736019058
+    },
+    "c5": {
+      "name": "C5_best.mp4",
+      "size": 15841413,
+      "sha256": "a7c19608b4bd3ab54aeb8686591c4e35f1b045b500f1a06bb35694bb6763cc60",
+      "asset_id": 736019133
+    },
+    "c8": {
+      "name": "C8_best.mp4",
+      "size": 13849948,
+      "sha256": "37a745728cf2f3fad6928682c9472bf635932c00a44ffcd8ace3d55958f094d9",
+      "asset_id": 736019158
+    },
+    "c9": {
+      "name": "C9_best.mp4",
+      "size": 30818706,
+      "sha256": "25bba98e8448801669f05b848098a8020fadbebd3a4e600108fdf30d50af3756",
+      "asset_id": 736019218
+    }
   }
 }

@@ -43,3 +43,7 @@ An output is promo-v16-source-qc-RUN-ATTEMPT.zip or promo-v16-conform-RUN-ATTEMP
     nice -n 19 uv run --no-project --python 3.12 python -B -m unittest discover -s tests -v
 
 Tests are stdlib-only and launch no FFmpeg, JVM, network or renderer. Read SOURCE_TEST_RECEIPT.json for the actual last local source-only test run. Hosted FFmpeg syntax, actual API permissions/privacy, upload persistence, final pixels and actual audio remain unrun until Root's real dispatch and review. Standard hosted compute/release-asset cost assumptions belong to Root's feasibility review; no third-party fee is initiated here.
+
+## Fresh native source study
+
+The separately routed source-study phase reads eight exact pinned native captures and returns private decoded frames plus motion/reuse estimates. It never edits or approves footage. Its schema cannot satisfy conform approval; an ineligible earlier source-QC result remains ineligible. The existing worker rejects unknown phases before configuration, tokens or network.
