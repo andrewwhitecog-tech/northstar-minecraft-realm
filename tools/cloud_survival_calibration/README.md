@@ -27,3 +27,7 @@ Latest checks/revision_02_guards/source_tests.actual.*: actual uv/unittest execu
 Unknown native response, absent tool/position/mark, no client prediction, failed positive control, missing persisted file, unsupported actual NBT/compression, renderer/client boot failure or cleanup failure makes the native run FAILED/INCONCLUSIVE. Nothing is defaulted to a native pass. Exact fresh-world server/client logs, commands, real rows, saved states and optional real fixture PNGs are emitted through job logs; no paid artifact/cache storage is requested. Root must decode/inspect PNGs before claiming visual proof.
 
 Adoption stays with the director/Root after a genuine3-leg pass and independent review. This bundle does not install or mutate any canonical harness, server, world or account.
+
+## First actual hosted attempt and graphics recovery
+
+Run43044823507 downloaded the official runtime and booted the real Fabric/Flan server, but the client could not create a GLX visual and its Vulkan fallback also failed; no client joined and no mining leg passed. Server shut down cleanly, exit0. The recovery installs official Ubuntu Mesa/GLX diagnostics, requires an actual llvmpipe OpenGL preflight, chooses SDL X11 explicitly, fixes the rejected client simulation-distance value and fails early if both graphics backends fail. Native judge/expectations are unchanged; the next actual run must establish compatibility and mining behavior.

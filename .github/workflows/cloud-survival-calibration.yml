@@ -37,6 +37,10 @@ jobs:
           enable-cache: false
           save-cache: false
           restore-cache: false
+      - name: Hosted X11 Mesa software graphics prerequisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends xvfb mesa-utils libgl1-mesa-dri libglx-mesa0
       - name: Actual source checks only
         working-directory: tools/cloud_survival_calibration
         run: uv run --no-project --python 3.12 test_source.py
