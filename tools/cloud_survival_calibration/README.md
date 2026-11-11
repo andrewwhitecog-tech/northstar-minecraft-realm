@@ -43,3 +43,9 @@ Run43050699763 passed the legacy GLX probe but failed before client join: its Op
 The driver now probes the actual pinned bundled SDL3 library against those unchanged requirements in the same owned Xvfb display. It tries GLX, then EGL only if GLX fails. A mode is selected only from successful process exit plus observed SDL/GL attributes, llvmpipe renderer, clear/error result and owned cleanup; the real client receives that exact selected mode. Both failed probes stop before client launch. There are no version overrides, package installs or relaxed mining/persistence controls. A probe success still gives no Minecraft acceptance or hold clearance.
 
 SDL documents attribute observation at https://wiki.libsdl.org/SDL3/SDL_GL_SetAttribute and the pre-initialization SDL_VIDEO_FORCE_EGL hint at https://wiki.libsdl.org/SDL3/SDL_HINT_VIDEO_FORCE_EGL. This recovery needs a fresh actual hosted run; source tests alone cannot establish renderer, player-join or survival success.
+
+## Bounded graphics environment diagnostic
+
+Run43116083813 reproduced both failures with the actual bundled SDL library: GLX had no matching visual; EGL could not load its library. SDL source shows the EGL failure occurs while loading the EGL provider, before framebuffer or core-context selection. Missing soname, transitive dependency and required symbol remain distinct possibilities.
+
+The separately reviewed graphics-environment workflow observes targeted installed-package versions, graphics library paths and raw EGL loading errors, then runs both unchanged strict SDL probes on one owned Xvfb display. It downloads only the pinned1.67MB SDL archive, starts no Minecraft server/client, installs no packages and changes no workstation settings. Diagnostic completion never grants client acceptance, a survival pass or hold clearance.
