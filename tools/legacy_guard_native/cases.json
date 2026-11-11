@@ -7,27 +7,61 @@
       "label": "authentic_trim_0",
       "function": "nsp_crafter_refill:trim",
       "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\"}",
-      "expectation": "NATIVE_INSTANTIATION_AND_GUARD_ACCEPT"
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 0,
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "input_provenance": "Pinned benchmark_sites.json index0; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "authentic_trim_1",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:728,y:73,z:153,item:\"redstone\"}",
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 1,
+      "input_provenance": "Pinned benchmark_sites.json index1; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "authentic_trim_2",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:733,y:73,z:153,item:\"blue_ice\"}",
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 2,
+      "input_provenance": "Pinned benchmark_sites.json index2; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "authentic_trim_3",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:935,y:66,z:-277,item:\"iron_ingot\"}",
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 3,
+      "input_provenance": "Pinned benchmark_sites.json index3; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "authentic_trim_4",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:938,y:66,z:-277,item:\"bone_meal\"}",
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 4,
+      "input_provenance": "Pinned benchmark_sites.json index4; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "authentic_trim_5",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:942,y:66,z:-277,item:\"slime_ball\"}",
+      "expectation": "REQUIRE_ACTUAL_ORIGINAL_GUARD_DIFFERENTIAL_EQUIVALENCE",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 5,
+      "input_provenance": "Pinned benchmark_sites.json index5; independently agrees with FINITE_NATIVE_INSTANTIATION_PLAN argument_snbt"
     },
     {
       "label": "trim_signed_int_boundaries",
@@ -35,11 +69,23 @@
     },
     {
       "label": "trim_int_as_string_raw_equivalent",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:\"725\",y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_INSTANTIATION_AND_GUARD_ACCEPT",
+      "native_mode": "DIFFERENTIAL_LITERAL",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_x_double",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725.5d,y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_x_long",
@@ -47,15 +93,33 @@
     },
     {
       "label": "trim_x_list",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:[725],y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_x_compound",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:{v:725},y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_missing_argument",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,item:\"coal\"}",
+      "expectation": "NATIVE_INSTANTIATION_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_item_extra_id",
@@ -63,7 +127,13 @@
     },
     {
       "label": "trim_item_extra_coordinates",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\\\",x:725,y:73,z:153,id:\\\"minecraft:diamond\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_item_close_command_root",
@@ -75,21 +145,43 @@
     },
     {
       "label": "trim_item_semicolon",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\\\"};say injected;{id:\\\"minecraft:coal\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_item_escaped_quote",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\\\\\\\",id:\\\\\\\"minecraft:diamond\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_x_compound_field_injection",
-      "status": "NOT_IMPLEMENTED_NOT_RUN"
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "function": "nsp_crafter_refill:trim",
+      "arguments_snbt": "{x:\"725,y:73,z:153,id:\\\"minecraft:coal\\\"\",y:73,z:153,item:\"coal\"}",
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_item_unknown_registry",
       "function": "nsp_crafter_refill:trim",
       "arguments_snbt": "{x:725,y:73,z:153,item:\"not_a_registered_item_zzzz\"}",
-      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT"
+      "expectation": "NATIVE_REJECT_OR_GUARD_REJECT",
+      "native_mode": "REJECTION_REQUIRED",
+      "fixture_site_index": 0,
+      "status": "IMPLEMENTED_NATIVE_NOT_RUN",
+      "input_provenance": "NATIVE_CASE_PLAN_v02 exact arguments_snbt; no spelling normalization"
     },
     {
       "label": "trim_leading_zero_string_classification",
