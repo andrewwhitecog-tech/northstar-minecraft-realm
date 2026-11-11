@@ -1,0 +1,46 @@
+{
+  "schema": "northstar.cloud-media-source-pins.v1",
+  "revision": 2,
+  "files": [
+    {
+      "file": "cloud_worker.py",
+      "size": 9957,
+      "sha256": "5df3ed50f1e84c2e8f5a32944efc552024f2bf2f1f75309884e85d7fb7d9d0ae"
+    },
+    {
+      "file": "private_github.py",
+      "size": 9552,
+      "sha256": "9aba6e667e6c70204abdab57ac730135ee77689047d518f696f61109d2ea25a4"
+    },
+    {
+      "file": "media_pipeline.py",
+      "size": 9867,
+      "sha256": "623b0c33c1f69d0277b4093f1fb33fd6da594ab3dee970ce3a82a211ac74534b"
+    },
+    {
+      "file": "config.template.json",
+      "size": 1674,
+      "sha256": "c0c89cd07923573450b5f2b12a879312bf13e75213da89dc57ee5c8a9bbd21bc"
+    },
+    {
+      "file": "workflow.template.yml",
+      "size": 2902,
+      "sha256": "047fa6f1e554dfab88f04b527f59da06bd038e81f7ed2c0d315115bfc6fcb4f1"
+    },
+    {
+      "file": "tests/test_guards.py",
+      "size": 14769,
+      "sha256": "49bdc9ab71c4e6f89b73dc24d6639ccca4361cb35e9917845251f32b14d59dd8"
+    },
+    {
+      "file": "README.md",
+      "size": 7027,
+      "sha256": "22eca37db0f8b9d3a7cdc00cfa27f94a5a5580a071eb0cb28f0beca5579878fd"
+    },
+    {
+      "file": "SOURCE_TEST_RECEIPT.json",
+      "size": 3570,
+      "sha256": "a076942dc9be9f2b92e445f10517b13e628d576504f91cf798d2a38ea1f778c0"
+    }
+  ]
+}

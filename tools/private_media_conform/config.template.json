@@ -1,0 +1,77 @@
+{
+  "schema": "northstar.private-promo-media-config.v1",
+  "repository": "andrewwhitecog-tech/northstar-minecraft-realm",
+  "repository_id": null,
+  "draft_release_id": null,
+  "draft_tag": null,
+  "draft_target": null,
+  "allowed_actors": [],
+  "allowed_reviewers": [],
+  "canary": {
+    "run_id": null,
+    "run_attempt": null,
+    "source_sha": null,
+    "proof_asset_id": null,
+    "proof_size": null,
+    "proof_sha256": null
+  },
+  "inputs": {
+    "base": {
+      "asset_id": null,
+      "name": "P4_RING_OPENS_9x16_v14R_YT_SFX_PICTURE_NOCARD.mp4",
+      "size": null,
+      "sha256": null
+    },
+    "c6": {
+      "asset_id": null,
+      "name": "C6_best.mp4",
+      "size": null,
+      "sha256": null
+    },
+    "p1": {
+      "asset_id": null,
+      "name": "P1_WAKE_9x16_v07.mp4",
+      "size": null,
+      "sha256": null
+    },
+    "p2": {
+      "asset_id": null,
+      "name": "P2_SOMETHING_WOKE_9x16_v08.mp4",
+      "size": null,
+      "sha256": null
+    },
+    "p3": {
+      "asset_id": null,
+      "name": "P3_THE_COST_9x16_v13.mp4",
+      "size": null,
+      "sha256": null
+    }
+  },
+  "source_qc": {
+    "asset_id": null,
+    "size": null,
+    "sha256": null,
+    "run_id": null,
+    "run_attempt": null,
+    "source_sha": null
+  },
+  "approval": {
+    "decision": null,
+    "reviewer": null,
+    "reviewed_utc": null,
+    "source_qc_asset_id": null,
+    "source_qc_zip_sha256": null,
+    "source_qc_run_id": null,
+    "input_manifest_sha256": null,
+    "source_frames_personally_viewed": false,
+    "motion_and_reuse_personally_reviewed": false,
+    "source_frames": [
+      83,
+      147
+    ],
+    "replacement_frames": [
+      878,
+      942
+    ]
+  }
+}
