@@ -83,6 +83,12 @@ export function validateBrowserUrl(raw, name) {
   return u;
 }
 
+export function anonymousApiAccept(raw) {
+  const u = validateApiUrl(raw, 'GET');
+  return new RegExp('^' + PREFIX + '/releases/[1-9][0-9]*$').test(u.pathname)
+    ? 'application/vnd.github+json' : 'application/octet-stream';
+}
+
 export function privacyStatus(status) {
   need(DENIALS.has(status), 'anonymous_access_not_proven_denied_status_' + status);
   return status;
@@ -271,7 +277,7 @@ export async function runCanary(env, reviewed, { diagnosticOnly = false } = {}) 
       validateBrowserUrl(url, label.includes(PROOF_NAME) ? PROOF_NAME : label.includes('output') ? OUTPUT_NAME : INPUT_NAME);
       try { response = await fetch(url, { headers: { 'User-Agent': 'NorthStar-synthetic-draft-canary' }, redirect: 'manual', signal: AbortSignal.timeout(15000) }); }
       catch { throw new Error('network_or_timeout_not_privacy_proof'); }
-    } else response = await request(url, { authenticated: false, accept: 'application/octet-stream' });
+    } else response = await request(url, { authenticated: false, accept: anonymousApiAccept(url) });
     report.observations.push({ check: label, status: response.status, denied: DENIALS.has(response.status) });
     await response.body?.cancel();
     await record();
