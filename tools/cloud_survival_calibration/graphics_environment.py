@@ -32,7 +32,7 @@ SDL_SIZE = 4104744
 MAX_ARCHIVE = 2_000_000
 MAX_OUTPUT = 262144
 ENV_NAMES = ('SDL_EGL_LIBRARY', 'SDL_OPENGL_LIBRARY', 'SDL_VIDEO_FORCE_EGL',
-             'SDL_VIDEO_DRIVER', 'LIBGL_ALWAYS_SOFTWARE', 'GALLIUM_DRIVER', 'LD_LIBRARY_PATH')
+             'SDL_VIDEO_DRIVER', 'LIBGL_ALWAYS_SOFTWARE', 'GALLIUM_DRIVER', 'LD_LIBRARY_PATH', '__EGL_VENDOR_LIBRARY_FILENAMES')
 PACKAGES = ('libegl1', 'libegl-mesa0', 'libglvnd0', 'libgbm1', 'libglx-mesa0', 'libgl1-mesa-dri')
 HOST_FIELDS = {
     'CI': 'true', 'GITHUB_ACTIONS': 'true', 'RUNNER_ENVIRONMENT': 'github-hosted',
@@ -43,14 +43,17 @@ HOST_FIELDS = {
 }
 
 
-def environment_values(env):
+def environment_values(env, approved_egl=None):
     """Log only these names and their explicitly allowed values; never dump the environment."""
     values = {name: env.get(name) for name in ENV_NAMES}
-    choices = {'SDL_EGL_LIBRARY': (None, ''), 'SDL_OPENGL_LIBRARY': (None, ''),
+    approved_egl = {} if approved_egl is None else approved_egl
+    require(isinstance(approved_egl, dict) and set(approved_egl) in (set(), {'SDL_EGL_LIBRARY', '__EGL_VENDOR_LIBRARY_FILENAMES'}), 'EXACT_APPROVED_EGL_ENV_REQUIRED')
+    choices = {'SDL_EGL_LIBRARY': (None, '', approved_egl.get('SDL_EGL_LIBRARY')), 'SDL_OPENGL_LIBRARY': (None, ''),
                'SDL_VIDEO_FORCE_EGL': (None, '', '0', '1'), 'SDL_VIDEO_DRIVER': (None, '', 'x11'),
                'LIBGL_ALWAYS_SOFTWARE': (None, '', '1'), 'GALLIUM_DRIVER': (None, '', 'llvmpipe')}
     for name, allowed in choices.items():
         require(values[name] in allowed, 'UNREVIEWED_GRAPHICS_ENV_' + name)
+    require(values['__EGL_VENDOR_LIBRARY_FILENAMES'] in (None, '', approved_egl.get('__EGL_VENDOR_LIBRARY_FILENAMES')), 'UNREVIEWED_GRAPHICS_ENV_EGL_VENDOR')
     ldpath = values['LD_LIBRARY_PATH']
     require(ldpath in (None, '') or (len(ldpath) <= 1024 and all(
         re.fullmatch(r'/(?:usr/)?lib(?:64)?(?:/[A-Za-z0-9_.+-]+)*', p) and '..' not in p.split('/')
@@ -226,7 +229,7 @@ def egl_loader():
     return result
 
 
-def execute(reviewed):
+def execute(reviewed, prepare_egl_runtime=False):
     workspace = hosted_guard()  # Before CDLL, native subprocesses, or networking.
     require(isinstance(reviewed, str) and re.fullmatch(r'[0-9a-f]{64}', reviewed), 'REVIEWED_PAYLOAD_SHA256_REQUIRED')
     calibration.validate_payload(reviewed)
@@ -254,6 +257,12 @@ def execute(reviewed):
             r'\b(?:libEGL|libGLX|libGL|libOpenGL|libgbm)\.so', line))
         result['loader_cache'] = cache
         result['egl_loader'] = egl_loader()
+        approved_egl = {}
+        if prepare_egl_runtime:
+            from egl_runtime import prepare_egl
+            prepared = prepare_egl(root)
+            result['isolated_egl_runtime'] = prepared['provenance']
+            approved_egl = prepared['env']
         read_fd, write_fd = os.pipe()
         xvfb_log = (root / 'xvfb.actual.log').open('xb')
         xvfb = subprocess.Popen(['/usr/bin/Xvfb', '-displayfd', str(write_fd), '-screen', '0', '800x450x24',
@@ -270,11 +279,12 @@ def execute(reviewed):
         result['sdl_probes'] = []
         for mode in ('glx', 'egl'):
             probe_env = child_env(display)
+            probe_env.update(approved_egl)
             probe_env['SDL_VIDEO_FORCE_EGL'] = '1' if mode == 'egl' else '0'
             actual = capture([sys.executable, '-X', 'utf8', '-S', '-B', str(HOME / 'real_sdl_probe.py'),
                               '--execute', '--native-home', str(native_home), '--mode', mode], root,
                              'sdl-' + mode, probe_env)
-            actual.update(mode=mode, graphics_environment=environment_values(probe_env))
+            actual.update(mode=mode, graphics_environment=environment_values(probe_env, approved_egl))
             result['sdl_probes'].append(actual)
             try:
                 observed = json.loads(actual['stdout'])
@@ -314,6 +324,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--reviewed-payload-sha256')
+    parser.add_argument('--prepare-egl', action='store_true')
     args = parser.parse_args(argv)
     if not args.execute:
         calibration.validate_payload(args.reviewed_payload_sha256)
@@ -321,7 +332,7 @@ def main(argv=None):
                           'minecraft_client_acceptance': False, 'holdClearance': False}))
         return 0
     try:
-        return execute(args.reviewed_payload_sha256)
+        return execute(args.reviewed_payload_sha256, args.prepare_egl)
     except Exception as error:
         print(json.dumps({'schema': SCHEMA, 'status': 'HOSTED_DIAGNOSTIC_REFUSED',
                           'reason': str(error), 'error_type': type(error).__name__,

@@ -46,6 +46,9 @@ jobs:
       - name: Actual SDL graphics-probe source checks only
         working-directory: tools/cloud_survival_calibration
         run: uv run --no-project --python 3.12 test_sdl_probe_source.py
+      - name: Actual isolated EGL preparation source guards only
+        working-directory: tools/cloud_survival_calibration
+        run: uv run --no-project --python 3.12 test_egl_runtime.py
       - name: Validate exact reviewed public payload
         working-directory: tools/cloud_survival_calibration
         run: uv run --no-project --python 3.12 native_calibration.py --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"

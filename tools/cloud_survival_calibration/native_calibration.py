@@ -233,6 +233,8 @@ def execute(lock):
         # Match the actual bundled 26.3 client's SDL3 core/forward-compatible/sRGB
         # requirements. Legacy GLX success alone does not establish client compatibility.
         from real_sdl_probe import observation_ok
+        from egl_runtime import prepare_egl
+        prepared_egl=prepare_egl(root);result['isolated_egl_runtime']=prepared_egl['provenance'];extra.update(prepared_egl['env']);write()
         result['sdl_probes']=[];selected_extra=None
         for mode in ('glx','egl'):
             attempted_extra=dict(extra,SDL_VIDEO_FORCE_EGL='1' if mode=='egl' else '0')
