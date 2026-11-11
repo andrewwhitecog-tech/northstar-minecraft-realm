@@ -211,7 +211,7 @@ test('SOURCE_ONLY: exact repository diagnostics expose booleans and push metadat
   assert.equal(JSON.stringify(d).includes('SYNTHETIC_MUST_NOT_LOG'), false);
   assert.doesNotThrow(() => assertRepositoryDiagnostics(d));
 });
-test('SOURCE_ONLY: absent push metadata stays UNKNOWN; explicit false or malformed metadata rejects', () => {
+test('SOURCE_ONLY: absent and false push metadata are informational; malformed metadata rejects', () => {
   for (const fixture of [
     { ...repositoryFixture(), permissions: {} },
     Object.fromEntries(Object.entries(repositoryFixture()).filter(([key]) => key !== 'permissions')),
@@ -220,9 +220,16 @@ test('SOURCE_ONLY: absent push metadata stays UNKNOWN; explicit false or malform
     assert.equal(d.push_metadata, 'ABSENT_UNKNOWN');
     assert.doesNotThrow(() => assertRepositoryDiagnostics(d));
   }
-  const denied = repositoryDiagnostics({ ...repositoryFixture(), permissions: { push: false } }, 123456);
-  assert.equal(denied.push_metadata, 'EXPLICIT_FALSE');
-  assert.throws(() => assertRepositoryDiagnostics(denied), /push_explicit_false/);
+  const reportedFalse = repositoryDiagnostics({ ...repositoryFixture(), permissions: { push: false } }, 123456);
+  assert.equal(reportedFalse.push_metadata, 'EXPLICIT_FALSE');
+  assert.doesNotThrow(() => assertRepositoryDiagnostics(reportedFalse));
+  assert.equal(reportedFalse.push_metadata, 'EXPLICIT_FALSE'); // Never rewrite false into true.
+  const unproven = proofFixture();
+  unproven.repository_diagnostics = reportedFalse;
+  unproven.write_authorization = 'UNKNOWN_NOT_PROVEN';
+  unproven.observations = unproven.observations.filter(row => row.check !== 'draft_creation_write_authorized');
+  assert.throws(() => buildProof(unproven, validateContext(env(), SHA, 'linux'), expected, { id: 11 }, { id: 12 }),
+    /draft_write_not_proven/);
   for (const permissions of [null, false, { push: 'true' }, { push: 1 }]) {
     const d = repositoryDiagnostics({ ...repositoryFixture(), permissions }, 123456);
     assert.equal(d.push_metadata, 'INVALID');

@@ -119,10 +119,9 @@ export function assertRepositoryDiagnostics(d) {
   for (const key of ['repository_object_present', 'full_name_matches', 'repository_id_present',
     'repository_id_matches', 'owner_login_matches', 'public_visibility_matches', 'default_branch_matches'])
     need(d[key] === true, 'repository_check_failed_' + key);
-  need(d.push_metadata !== 'EXPLICIT_FALSE', 'repository_push_explicit_false');
   need(d.push_metadata !== 'INVALID', 'repository_push_metadata_invalid');
-  need(['PRESENT_TRUE', 'ABSENT_UNKNOWN'].includes(d.push_metadata), 'repository_push_state_invalid');
-  return d; // UNKNOWN is not write proof. Only the later actual draft-creation201 can prove it.
+  need(['PRESENT_TRUE', 'EXPLICIT_FALSE', 'ABSENT_UNKNOWN'].includes(d.push_metadata), 'repository_push_state_invalid');
+  return d; // Installation-token push metadata is informational; only validated draft-creation201 proves write.
 }
 
 export function validateRelease(value, expected) {
