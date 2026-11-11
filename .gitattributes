@@ -1,2 +1,2 @@
-tools/legacy_guard_native/** -text
-tools/walk_harness_compile/** -text
+tools/legacy_guard_native/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/walk_harness_compile/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
