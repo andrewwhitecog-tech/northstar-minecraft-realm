@@ -230,6 +230,21 @@ def execute(lock):
         except (ValueError,TypeError):glx={}
         result['glx_probe']['observed']=glx;write()
         check('Actual existing-library GLX llvmpipe context succeeds',g.returncode==0 and glx.get('schema')=='northstar.actual-glx-probe.v1' and glx.get('status')=='REAL_GLX_CONTEXT_QUERIED' and 'llvmpipe' in glx.get('renderer','').lower() and glx.get('gl_clear_error')==0)
+        # Match the actual bundled 26.3 client's SDL3 core/forward-compatible/sRGB
+        # requirements. Legacy GLX success alone does not establish client compatibility.
+        from real_sdl_probe import observation_ok
+        result['sdl_probes']=[];selected_extra=None
+        for mode in ('glx','egl'):
+            attempted_extra=dict(extra,SDL_VIDEO_FORCE_EGL='1' if mode=='egl' else '0')
+            probe_args=['uv','run','--no-project','--python','3.12','python','-B',str(HOME/'real_sdl_probe.py'),'--execute','--native-home',runtime['natives'],'--mode',mode]
+            sdl_run=subprocess.run(probe_args,env=dict(env,**attempted_extra),capture_output=True,text=True,timeout=25)
+            try:sdl_observed=json.loads(sdl_run.stdout)
+            except (ValueError,TypeError):sdl_observed={}
+            result['sdl_probes'].append({'mode':mode,'exit':sdl_run.returncode,'stdout':sdl_run.stdout,'stderr':sdl_run.stderr,'observed':sdl_observed});write()
+            if sdl_run.returncode==0 and observation_ok(sdl_observed):
+                selected_extra=attempted_extra;result['selected_sdl_mode']=mode;write();break
+        check('Bundled SDL3 real client-context requirements observed',selected_extra is not None,result['sdl_probes'])
+        extra=selected_extra
         (profile/'options.txt').write_text('renderDistance:2\nsimulationDistance:5\nmaxFps:20\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\n')
         fresh_servers_dat(profile/'servers.dat','127.0.0.1:27091')
         values={'auth_player_name':name,'version_name':'26.3','game_directory':profile,'assets_root':runtime['assets'],'assets_index_name':'34','auth_uuid':player_uuid.hex,'auth_access_token':'0','clientid':'0','auth_xuid':'0','version_type':'release','resolution_width':800,'resolution_height':450,'quickPlayPath':str(profile/'quickplay.json'),'quickPlayMultiplayer':'127.0.0.1:27091','natives_directory':runtime['natives'],'launcher_name':'northstar-calibration','launcher_version':'1','classpath':runtime['client_classpath']}
