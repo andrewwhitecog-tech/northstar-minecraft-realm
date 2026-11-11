@@ -1,0 +1,22 @@
+{
+  "schema": "northstar.public-real-client-calibration-payload.v1",
+  "nativeExecution": "NOT_RUN",
+  "privateWorldUploads": false,
+  "holdClearance": false,
+  "files": {
+    "FEASIBILITY.md": "91ed2b50f6a23a601b13f42f6c71b8a28a756dd7e8e278a62adf9f9dc308c3ae",
+    "LOCK.json": "906e05ccd4802edd7cee05965416bd69728ea7191dbc5dbc802c0ebc9d010e84",
+    "README.md": "bb3f5e5c4fdced8c6ba9fce312941802e6acd29b835f083cee5f6371350dc7fb",
+    "download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
+    "harness/nsp-route-walk-heldproof-v02.jar": "b19fefcfee9980099dbf3ebd8426fe8da1f13346c37c347723b6ebc4cc99b532",
+    "metadata/assets-34.json": "fbaf1d88b1f14358682a986a8a1a21d26e3e0cefec12881768d6395001ee6508",
+    "metadata/fabric-client-0.20.1.json": "d4398cf497ce8a3b690439dd0f54bdd2f583a4621c543aca83cc13613206b0ed",
+    "metadata/fabric-server-0.20.1.json": "316aed046c606b51581413107bfb6d04b51357825a5a231a1d043743b34b54c8",
+    "metadata/minecraft-26.3.json": "a1831b3e5ffa479c02d88a441794ff0a69813215e5d0e945edf03a99c7608c2e",
+    "metadata/server-transport.json": "4ed2159a2ace665510228b511fdd6ca7f6433065b38dbc1ef783f7e4eb96eaf4",
+    "native_calibration.py": "6995942b9684c3ad4631ac9bf7b129cf68fbf2ab699d367674836805d0cb08b3",
+    "nbt_region.py": "d08bbfea241807d117219963bbb345626206fd79ac17dc1598e6e0aca53f568b",
+    "test_source.py": "424f17c5485558fe9ed527e43933bd361baf19fa87cd737f5881363ba1e618fc",
+    "workflow.template.yml": "7f8cf9ee521b2556f02dfbf271b3439664d0b9ce3a0b852b669e268cdf7f60c2"
+  }
+}

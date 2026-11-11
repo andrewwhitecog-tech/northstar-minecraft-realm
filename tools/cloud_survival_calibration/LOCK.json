@@ -1,0 +1,98 @@
+{
+  "schema": "northstar.public-survival-calibration-lock.v1",
+  "createdUtc": "2026-11-11T14:38:05.044Z",
+  "minecraft": "26.3",
+  "fabricLoader": "0.20.1",
+  "java": "25.0.5+8",
+  "metadata": {
+    "minecraft-26.3.json": {
+      "sha256": "a1831b3e5ffa479c02d88a441794ff0a69813215e5d0e945edf03a99c7608c2e",
+      "bytes": 44992
+    },
+    "fabric-client-0.20.1.json": {
+      "sha256": "d4398cf497ce8a3b690439dd0f54bdd2f583a4621c543aca83cc13613206b0ed",
+      "bytes": 2778
+    },
+    "fabric-server-0.20.1.json": {
+      "sha256": "316aed046c606b51581413107bfb6d04b51357825a5a231a1d043743b34b54c8",
+      "bytes": 2721
+    },
+    "assets-34.json": {
+      "sha256": "fbaf1d88b1f14358682a986a8a1a21d26e3e0cefec12881768d6395001ee6508",
+      "bytes": 597235
+    }
+  },
+  "loaderSha256": "d0c5a082e07410aaff9de7ab196aa6b4236002870f9ba3ad5c1260fcce5110ad",
+  "mods": [
+    {
+      "id": "LP2w5f7p",
+      "version": "0.165.0+26.3",
+      "hashes": {
+        "sha512": "0a4b8a14e847b71567b557b43d906c2167fa263eeeef37454a821ba286996e3da1616dc2d9647736d28a250d5ecf400541cae808359b29a62324a8a6f2ad5e30",
+        "sha1": "8f8a23d6c9fbf7b075b31b4fb0a1007b0488d1d2"
+      },
+      "url": "https://cdn.modrinth.com/data/P7dR8mSH/versions/EQKgpeKu/fabric-api-0.165.0%2B26.3.jar",
+      "filename": "fabric-api-0.165.0+26.3.jar",
+      "primary": true,
+      "size": 1778588,
+      "file_type": null,
+      "dependencies": []
+    },
+    {
+      "id": "coDBvOki",
+      "version": "26.3-1.12.8.b-fabric",
+      "hashes": {
+        "sha512": "5d389874be2853c79652ee18fd52a35a9789ecf2b46e140a19d0ce7291ce0b99f905ab17bb1e5a7b55283d80aa82f5983cf595463f23e2ac5c96bef987ec256f",
+        "sha1": "48c529020e06c3368f0cc5966c99f7dccf71db18"
+      },
+      "url": "https://cdn.modrinth.com/data/Si383TIH/versions/dAcEMeRZ/flan-26.3-1.12.8.b-fabric.jar",
+      "filename": "flan-26.3-1.12.8.b-fabric.jar",
+      "primary": true,
+      "size": 952253,
+      "file_type": null,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "P7dR8mSH",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    }
+  ],
+  "harness": {
+    "path": "harness/nsp-route-walk-heldproof-v02.jar",
+    "sha256": "b19fefcfee9980099dbf3ebd8426fe8da1f13346c37c347723b6ebc4cc99b532",
+    "bytes": 16685
+  },
+  "sourceProvenance": {
+    "director": "20261111T1406Z /1426Z",
+    "launcher": "Locally inspected retained LSL proof_forest.py; launcher lines327–335. No profile/world/config copied.",
+    "launcherLines": [
+      327,
+      335
+    ],
+    "claimSchema": "Locally inspected foundation flan_monster_spawn_proof.py:364–371; newly generated one-claim fixture only.",
+    "mojangMetadata": "https://piston-meta.mojang.com/v1/packages/9f67e10ed013deeaad20ac3c800652765d493408/26.3.json",
+    "fabricClient": "https://meta.fabricmc.net/v2/versions/loader/26.3/0.20.1/profile/json",
+    "fabricServer": "https://meta.fabricmc.net/v2/versions/loader/26.3/0.20.1/server/json",
+    "mods": [
+      "https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D",
+      "https://api.modrinth.com/v2/project/flan/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D"
+    ]
+  },
+  "limits": {
+    "maxDownloadedBytes": 950000000,
+    "maxAssetObjects": 7000,
+    "downloadSeconds": 600,
+    "nativeSeconds": 600,
+    "holdTicks": 240,
+    "awaitTicks": 1200,
+    "settleSeconds": 6,
+    "settleServerTicks": 120,
+    "clientWidth": 800,
+    "clientHeight": 450,
+    "maxFps": 20
+  },
+  "nativeExecution": "NOT_RUN"
+}

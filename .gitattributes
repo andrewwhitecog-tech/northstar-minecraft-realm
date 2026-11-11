@@ -1,2 +1,3 @@
 tools/legacy_guard_native/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tools/walk_harness_compile/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/cloud_survival_calibration/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

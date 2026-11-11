@@ -1,0 +1,50 @@
+name: Reviewed real survival calibration
+on:
+  workflow_dispatch:
+    inputs:
+      reviewed_payload_sha256:
+        description: Root-reviewed tools/cloud_survival_calibration/PAYLOAD.json SHA256
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: real-survival-calibration-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  real-client-calibration:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'andrewwhitecog-tech'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      UV_PYTHON_DOWNLOADS: never
+      NSP_PUBLIC_REPOSITORY: 'true'
+      NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION: '1'
+      REVIEWED_PAYLOAD_SHA256: ${{ inputs.reviewed_payload_sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.10.4'
+          enable-cache: false
+          save-cache: false
+          restore-cache: false
+      - name: Actual source checks only
+        working-directory: tools/cloud_survival_calibration
+        run: uv run --no-project --python 3.12 test_source.py
+      - name: Validate exact reviewed public payload
+        working-directory: tools/cloud_survival_calibration
+        run: uv run --no-project --python 3.12 native_calibration.py --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
+      - name: Real Fabric client plus Flan server on own Xvfb display
+        working-directory: tools/cloud_survival_calibration
+        run: uv run --no-project --python 3.12 native_calibration.py --execute --reviewed-payload-sha256 "$REVIEWED_PAYLOAD_SHA256"
+# Deliberately no cache or upload-artifact action, no secrets and no PR/push auto-trigger.
+# Missing Xvfb/libGL or a failed real Minecraft renderer is a measured blocker, never a mock pass.
