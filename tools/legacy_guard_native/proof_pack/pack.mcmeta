@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "PRIVATE exact-source generated-guard execution fixture; not an install package",
+    "min_format": 121,
+    "max_format": 121
+  }
+}

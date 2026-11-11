@@ -1,0 +1,7 @@
+tools/legacy_guard_native/__pycache__/
+tools/legacy_guard_native/ci-dependencies/
+tools/legacy_guard_native/ci-prepared/
+tools/legacy_guard_native/runs/
+tools/walk_harness_compile/__pycache__/
+tools/walk_harness_compile/downloads/
+tools/walk_harness_compile/build/

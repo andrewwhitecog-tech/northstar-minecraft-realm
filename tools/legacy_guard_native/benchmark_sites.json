@@ -1,0 +1,44 @@
+[
+  {
+    "x": 725,
+    "y": 73,
+    "z": 153,
+    "item": "coal",
+    "arguments_snbt": "{x:725,y:73,z:153,item:\"coal\"}"
+  },
+  {
+    "x": 728,
+    "y": 73,
+    "z": 153,
+    "item": "redstone",
+    "arguments_snbt": "{x:728,y:73,z:153,item:\"redstone\"}"
+  },
+  {
+    "x": 733,
+    "y": 73,
+    "z": 153,
+    "item": "blue_ice",
+    "arguments_snbt": "{x:733,y:73,z:153,item:\"blue_ice\"}"
+  },
+  {
+    "x": 935,
+    "y": 66,
+    "z": -277,
+    "item": "iron_ingot",
+    "arguments_snbt": "{x:935,y:66,z:-277,item:\"iron_ingot\"}"
+  },
+  {
+    "x": 938,
+    "y": 66,
+    "z": -277,
+    "item": "bone_meal",
+    "arguments_snbt": "{x:938,y:66,z:-277,item:\"bone_meal\"}"
+  },
+  {
+    "x": 942,
+    "y": 66,
+    "z": -277,
+    "item": "slime_ball",
+    "arguments_snbt": "{x:942,y:66,z:-277,item:\"slime_ball\"}"
+  }
+]
