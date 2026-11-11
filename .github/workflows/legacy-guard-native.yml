@@ -12,6 +12,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   native-trim:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -42,6 +43,7 @@ jobs:
         working-directory: tools/legacy_guard_native
         run: uv run --no-project --python 3.12 ci_runner.py --ci --execute --reviewed-payload-sha256 934e8bbdd729af27412ecd001204930864ed072988563657baf5e85c2e64def9 --benchmark-iterations 1
   compile-walk-harness:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
