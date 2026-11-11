@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {
   REPOSITORY, OWNER, WORKFLOW, INPUT, OUTPUT, validateContext, safeUrl, validateApiUrl,
   validateStorageRedirect, validateBrowserUrl, privacyStatus, decodeJson,
-  validateRelease, validateAsset, buildProof, summarizeReport, repositoryDiagnostics, assertRepositoryDiagnostics,
+  validateRelease, validateAsset, buildProof, summarizeReport, repositoryDiagnostics, assertRepositoryDiagnostics, anonymousApiAccept,
 } from './canary.mjs';
 import { createHash } from 'node:crypto';
 
@@ -256,4 +256,11 @@ test('SOURCE_ONLY: repository push metadata alone never substitutes for actual d
   wrong.observations.find(row => row.check === 'draft_creation_write_authorized').status = 200;
   assert.throws(() => buildProof(wrong, validateContext(env(), SHA, 'linux'), expected, { id: 11 }, { id: 12 }),
     /draft_write_not_proven/);
+});
+
+test('SOURCE_ONLY: release metadata asks for JSON while binary asset privacy asks for octets', () => {
+  assert.equal(anonymousApiAccept(api+'/releases/10'), 'application/vnd.github+json');
+  assert.equal(anonymousApiAccept(api+'/releases/assets/11'), 'application/octet-stream');
+  assert.throws(() => anonymousApiAccept('https://attacker.test/metadata'), /allowlisted/);
+  assert.throws(() => privacyStatus(415), /not_proven/);
 });
