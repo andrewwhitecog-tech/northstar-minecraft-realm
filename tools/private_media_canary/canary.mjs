@@ -97,6 +97,34 @@ export function decodeJson(bytes) {
   return parsed;
 }
 
+export function repositoryDiagnostics(value, expectedId) {
+  const repo = object(value) ? value : {};
+  const permissionsPresent = Object.hasOwn(repo, 'permissions');
+  const permissionsObject = object(repo.permissions);
+  const pushPresent = permissionsObject && Object.hasOwn(repo.permissions, 'push');
+  let pushMetadata = 'ABSENT_UNKNOWN';
+  if (permissionsPresent && !permissionsObject) pushMetadata = 'INVALID';
+  else if (pushPresent) pushMetadata = repo.permissions.push === true ? 'PRESENT_TRUE' :
+    repo.permissions.push === false ? 'EXPLICIT_FALSE' : 'INVALID';
+  return {
+    repository_object_present: object(value), full_name_matches: repo.full_name === REPOSITORY,
+    repository_id_present: id(repo.id), repository_id_matches: repo.id === expectedId,
+    owner_login_matches: repo.owner?.login === OWNER, public_visibility_matches: repo.private === false,
+    default_branch_matches: repo.default_branch === 'main',
+    permissions_field_present: permissionsPresent, permissions_object_present: permissionsObject,
+    push_field_present: pushPresent, push_metadata: pushMetadata,
+  };
+}
+export function assertRepositoryDiagnostics(d) {
+  for (const key of ['repository_object_present', 'full_name_matches', 'repository_id_present',
+    'repository_id_matches', 'owner_login_matches', 'public_visibility_matches', 'default_branch_matches'])
+    need(d[key] === true, 'repository_check_failed_' + key);
+  need(d.push_metadata !== 'EXPLICIT_FALSE', 'repository_push_explicit_false');
+  need(d.push_metadata !== 'INVALID', 'repository_push_metadata_invalid');
+  need(['PRESENT_TRUE', 'ABSENT_UNKNOWN'].includes(d.push_metadata), 'repository_push_state_invalid');
+  return d; // UNKNOWN is not write proof. Only the later actual draft-creation201 can prove it.
+}
+
 export function validateRelease(value, expected) {
   need(object(value) && id(value.id), 'release_shape_invalid');
   need(value.draft === true && value.published_at === null, 'release_not_unpublished_draft');
@@ -134,6 +162,8 @@ export function buildProof(report, context, expected, input, output) {
     output_anonymous_browser_denied: denied('final_' + OUTPUT_NAME + '_browser'),
   };
   need(Object.values(checks).every(value => value === true), 'proof_observations_incomplete');
+  need(passed('draft_creation_write_authorized') && observed('draft_creation_write_authorized')[0].status === 201,
+    'proof_draft_write_not_proven');
   need(id(report.repositoryId) && id(expected.id) && id(input.id) && id(output.id), 'proof_identity_invalid');
   return {
     schema: 'northstar.private-media-canary.v1', repository: REPOSITORY,
@@ -167,7 +197,7 @@ async function boundedBytes(response, cap) {
   return Buffer.concat(pieces);
 }
 
-export async function runCanary(env, reviewed) {
+export async function runCanary(env, reviewed, { diagnosticOnly = false } = {}) {
   const context = validateContext(env, reviewed);
   const token = env.GITHUB_TOKEN;
   need(typeof token === 'string' && token.length >= 20, 'job_token_absent');
@@ -176,6 +206,7 @@ export async function runCanary(env, reviewed) {
     providerProof: false, realMediaRead: false, releasePublishedByWorker: false,
     repository: REPOSITORY, reviewedSha: reviewed, runId: context.runId, attempt: context.attempt,
     releaseId: null, assetIds: [], observations: [], errors: [],
+    write_authorization: 'UNKNOWN_NOT_PROVEN', repository_diagnostics: null,
   };
   const expected = {
     reviewed, tag: 'private-staging-canary-' + context.runId + '-' + context.attempt + '-' + randomUUID().slice(0, 8),
@@ -269,11 +300,15 @@ export async function runCanary(env, reviewed) {
   await record();
   try {
     const repository = await jsonRequest(API + '/repos/' + REPOSITORY);
-    need(repository.full_name === REPOSITORY && repository.private === false &&
-      repository.default_branch === 'main' && repository.owner?.login === OWNER &&
-      repository.permissions?.push === true && repository.id === context.repositoryId, 'actual_repository_or_push_permission_mismatch');
+    report.repository_diagnostics = repositoryDiagnostics(repository, context.repositoryId);
+    await record();
+    assertRepositoryDiagnostics(report.repository_diagnostics);
     report.repositoryId = repository.id;
     report.observations.push({ check: 'repository_identity_verified', pass: true });
+    if (diagnosticOnly) {
+      report.status = 'DIAGNOSTICS_ONLY_IDENTITY_VERIFIED_NO_MUTATION';
+      return report;
+    }
     report.status = 'ONE_DRAFT_SUBMISSION_PENDING_NOT_PROVEN';
     await record(); // Preserve tag even if a timeout makes the one POST outcome ambiguous.
     const created = await jsonRequest(API + PREFIX + '/releases', {
@@ -286,6 +321,9 @@ export async function runCanary(env, reviewed) {
     if (id(created?.id)) { report.releaseId = created.id; expected.id = created.id; await record(); }
     validateRelease(created, expected);
     need(id(expected.id), 'created_release_id_absent');
+    report.write_authorization = 'PROVEN_BY_DRAFT_CREATE_201';
+    report.observations.push({ check: 'draft_creation_write_authorized', pass: true, status: 201 });
+    await record();
     const input = await upload({ name: INPUT_NAME, bytes: INPUT });
     await privacyChecks([input], 'input');
     const output = await upload({ name: OUTPUT_NAME, bytes: OUTPUT });
@@ -323,6 +361,7 @@ export function summarizeReport(report) {
     source_sha: report.reviewedSha, source_workflow_path: '.github/workflows/private-media-canary.yml',
     workflow_run_id: Number(report.runId), workflow_run_attempt: Number(report.attempt),
     private_media_uploaded: false, checks: report.checks || {}, errors: report.errors,
+    repository_diagnostics: report.repository_diagnostics, write_authorization: report.write_authorization,
   };
 }
 
@@ -331,13 +370,14 @@ export async function main(args = process.argv.slice(2), env = process.env) {
     console.log(JSON.stringify({ status: 'SOURCE_ONLY_CANARY_NOT_RUN', providerProof: false, realMediaRead: false }));
     return 0;
   }
-  need(args.length === 3 && args[0] === '--execute' && args[1] === '--reviewed-sha', 'cli_arguments_invalid');
-  const report = await runCanary(env, args[2]);
+  need(args.length === 3 && ['--execute', '--diagnose'].includes(args[0]) && args[1] === '--reviewed-sha', 'cli_arguments_invalid');
+  const diagnosticOnly = args[0] === '--diagnose';
+  const report = await runCanary(env, args[2], { diagnosticOnly });
   // This report contains only our codes, hashes, IDs and HTTP statuses. No response bodies/URLs.
   const result = summarizeReport(report);
   console.log(JSON.stringify(result));
   if (env.GITHUB_STEP_SUMMARY) await appendFile(env.GITHUB_STEP_SUMMARY, '\n## Synthetic draft canary\n\n' + JSON.stringify(result) + '\n');
-  return report.providerProof ? 0 : 1;
+  return report.providerProof || (diagnosticOnly && report.status === 'DIAGNOSTICS_ONLY_IDENTITY_VERIFIED_NO_MUTATION') ? 0 : 1;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().then(code => { process.exitCode = code; }).catch(() => {
