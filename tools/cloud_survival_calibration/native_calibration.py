@@ -114,7 +114,7 @@ def execute(lock):
     hosted_gate();os.nice(19)
     for port in (27091,27092):
         with socket.socket() as s:s.bind(('127.0.0.1',port))
-    require(shutil.which('java') and shutil.which('Xvfb') and shutil.which('glxinfo'),'Hosted Java25/Xvfb/Mesa glxinfo absent; no silent fake client')
+    require(shutil.which('java') and shutil.which('Xvfb') and shutil.which('uv'),'Hosted Java25/Xvfb/uv absent; no silent fake client')
     v=subprocess.run(['java','-version'],capture_output=True,text=True,timeout=10)
     require(v.returncode==0 and '25.0.5' in v.stderr+v.stdout,'Pinned Java patch differs')
     run_id='cal'+secrets.token_hex(4);name='Cal'+secrets.token_hex(4);player_uuid=offline_uuid(name)
@@ -223,7 +223,13 @@ def execute(lock):
         display=':'+str(90+secrets.randbelow(100));check('own X display number unused',not Path('/tmp/.X11-unix/X'+display[1:]).exists())
         x=launch(['Xvfb',display,'-screen','0','800x450x24','-nolisten','tcp','+extension','GLX','+render','-noreset'],root,'xvfb.actual.log');time.sleep(1);check('Xvfb is alive',x.poll() is None)
         extra={'DISPLAY':display,'LIBGL_ALWAYS_SOFTWARE':'1','GALLIUM_DRIVER':'llvmpipe','LP_NUM_THREADS':'2','SDL_VIDEO_DRIVER':'x11','ALSOFT_DRIVERS':'null'}
-        g=subprocess.run(['glxinfo','-B'],env=dict(env,**extra),capture_output=True,text=True,timeout=20);result['glxinfo']={'exit':g.returncode,'output':g.stdout+g.stderr};write();check('Mesa OpenGL preflight succeeds',g.returncode==0 and 'llvmpipe' in g.stdout.lower())
+        require((HOME/'real_glx_probe.py').is_file(),'Reviewed actual GLX probe absent')
+        g=subprocess.run(['uv','run','--no-project','--python','3.12','python','-B',str(HOME/'real_glx_probe.py'),'--execute'],env=dict(env,**extra),capture_output=True,text=True,timeout=20)
+        result['glx_probe']={'exit':g.returncode,'stdout':g.stdout,'stderr':g.stderr};write()
+        try:glx=json.loads(g.stdout)
+        except (ValueError,TypeError):glx={}
+        result['glx_probe']['observed']=glx;write()
+        check('Actual existing-library GLX llvmpipe context succeeds',g.returncode==0 and glx.get('schema')=='northstar.actual-glx-probe.v1' and glx.get('status')=='REAL_GLX_CONTEXT_QUERIED' and 'llvmpipe' in glx.get('renderer','').lower() and glx.get('gl_clear_error')==0)
         (profile/'options.txt').write_text('renderDistance:2\nsimulationDistance:5\nmaxFps:20\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\n')
         fresh_servers_dat(profile/'servers.dat','127.0.0.1:27091')
         values={'auth_player_name':name,'version_name':'26.3','game_directory':profile,'assets_root':runtime['assets'],'assets_index_name':'34','auth_uuid':player_uuid.hex,'auth_access_token':'0','clientid':'0','auth_xuid':'0','version_type':'release','resolution_width':800,'resolution_height':450,'quickPlayPath':str(profile/'quickplay.json'),'quickPlayMultiplayer':'127.0.0.1:27091','natives_directory':runtime['natives'],'launcher_name':'northstar-calibration','launcher_version':'1','classpath':runtime['client_classpath']}
