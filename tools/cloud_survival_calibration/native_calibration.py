@@ -324,7 +324,10 @@ def execute(lock):
                 require(result.get('serverExit')==0 and 'cleanupError' not in result,'Clean server shutdown missing')
                 final={label:block_state(world,*target) for label,target,_ in TARGETS}
                 require(final=={'permitted_a':{'Name':'minecraft:air'},'protected_b':EXPECTED_BONE,'permitted_c':{'Name':'minecraft:air'}},'Final persisted targets differ')
-                player_files=[p for p in (world/'players'/f'{player_uuid}.dat',world/'playerdata'/f'{player_uuid}.dat') if p.is_file()];require(len(player_files)==1,'Ambiguous/missing saved player')
+                # Official 26.3 LevelResource.PLAYER_DATA_DIR is players/data.
+                player_files=[p for p in (world/'players'/'data'/f'{player_uuid}.dat',world/'players'/f'{player_uuid}.dat',world/'playerdata'/f'{player_uuid}.dat') if p.is_file()]
+                result['savedPlayerCandidates']=[str(p.relative_to(world)) for p in player_files]
+                require(len(player_files)==1,'Ambiguous/missing saved player')
                 player=read_dat(player_files[0]);stack=next((x for x in player['Inventory'] if x['Slot']==0),None)
                 require(stack and stack['id']=='minecraft:wooden_pickaxe' and stack.get('count',1)==1,'Final saved tool missing')
                 require(stack.get('components',{}).get('minecraft:damage',0)==2,'Final saved wooden pickaxe damage not2')
