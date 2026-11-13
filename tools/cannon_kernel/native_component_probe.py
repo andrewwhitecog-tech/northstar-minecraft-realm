@@ -95,6 +95,15 @@ def main():
         report['checks'].append({'pass':bool(ok),'label':label,'actual':evidence});save();need(ok,'Actual native check failed: '+label+'; actual='+str(evidence))
     def score(holder,obj):
         reply=cmd('scoreboard players get '+holder+' '+obj);match=re.search(r'\bhas (-?\d+)\b',reply);need(match is not None,'Actual score unreadable: '+reply);return int(match.group(1))
+    def observe(condition):
+        # RCON does not return /say chat. Read the server command's stored success instead.
+        need(condition.startswith('execute ') and 'run say' not in condition,'Internal boolean condition required')
+        cmd('scoreboard players set #native_probe ck_tmp -1')
+        cmd('execute store success score #native_probe ck_tmp run '+condition)
+        actual=score('#native_probe','ck_tmp')
+        report.setdefault('booleanObservations',[]).append({'condition':condition,'successScore':actual,'at':utc()})
+        need(actual in (0,1),'Actual boolean success score must be 0 or 1: '+str(actual))
+        return actual
     def value(query):
         reply=cmd('data get '+query);match=re.search(r':\s*(-?\d+(?:\.\d+)?)[bdfLs]?\s*$',reply);need(match is not None,'Actual NBT scalar unreadable: '+reply);return float(match.group(1))
     def items(predicate):
@@ -115,11 +124,11 @@ def main():
         deadline=min(native_end,time.monotonic()+30)
         observations=[]
         while time.monotonic()<deadline:
-            identity=cmd('execute if entity @a[name='+name+',gamemode=survival] run say CK_NONOP_SURVIVAL')
+            identity=observe('execute if entity @a[name='+name+',gamemode=survival]')
             ops=json.loads((srv/'ops.json').read_text(encoding='utf-8'))
             need(ops==[],'Fresh fixture unexpectedly contains operators during '+name+' readiness')
-            ready='CK_NONOP_SURVIVAL' in identity and ops==[]
-            row={'at':utc(),'identityReply':identity,'ops':ops}
+            ready=identity==1 and ops==[]
+            row={'at':utc(),'identitySuccessScore':identity,'ops':ops}
             observations.append(row)
             report.setdefault('actorReadiness',{})[name]={'timeoutSeconds':30,'observations':observations}
             if ready:
@@ -132,8 +141,8 @@ def main():
     def press(action):
         x,y,z=manifest['config']['guns'][0]['controls'][action]
         cmd(f'player CannonProof look at {x+.5} {y+.06} {z+.5}');cmd('player CannonProof use once');steps(3)
-        actual=cmd(f'execute if block {x} {y} {z} minecraft:stone_button[powered=true] run say CK_PROOF_BUTTON_POWERED')
-        check('CK_PROOF_BUTTON_POWERED' in actual,'Carpet real button use '+action,actual)
+        actual=observe(f'execute if block {x} {y} {z} minecraft:stone_button[powered=true]')
+        check(actual==1,'Carpet real button use '+action,actual)
     def release_button():steps(21)
     def spawn_target(registered=True):
         cmd('kill @e[type=minecraft:marker,tag=ck.proof.target]')
@@ -198,6 +207,9 @@ def main():
         cmd('function nsp_ck:demo/build')
         cmd('player CannonProof spawn at 32.5 65 20.5 facing 0 0 in minecraft:overworld in survival')
         await_actor('CannonProof')
+        observation_positive=observe('execute if entity @a[name=CannonProof,gamemode=survival]')
+        observation_negative=observe('execute if entity @a[name=CannonAbsentFixture]')
+        check(observation_positive==1 and observation_negative==0,'actual boolean observation positive and negative controls',{'existingSurvivalActor':observation_positive,'nonexistentFixtureActor':observation_negative})
         check(score('@e[type=minecraft:marker,tag=nsp_ck.g.battery,limit=1]','ck_ld')==0,'actual controller starts unloaded','ck_ld queried')
         cmd('tick freeze');steps(1)
         load_ammo();check(items(POWDER)==4,'authentic source powder recognized',items(POWDER))
@@ -208,7 +220,7 @@ def main():
         cmd('clone 22 64 23 42 71 43 72 64 23 replace force')
         spawn_target(True);check(score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==40,'owned ship anchor registered',40)
         press('fire');steps(16);check(score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==32,'actual marker trajectory hit owned anchor',score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp'))
-        same=cmd('execute if blocks 22 64 23 42 71 43 72 64 23 all run say CK_PROOF_BLOCKS_UNCHANGED');check('CK_PROOF_BLOCKS_UNCHANGED' in same,'cannon shot leaves actual fixture blocks and inventory unchanged',same)
+        same=observe('execute if blocks 22 64 23 42 71 43 72 64 23 all');check(same==1,'cannon shot leaves actual fixture blocks and inventory unchanged',same)
         check(score('#shots','ck_stat')==1 and score('#hits','ck_stat')==1,'real shot and hit counters',{'shots':score('#shots','ck_stat'),'hits':score('#hits','ck_stat')})
         release_button();before={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')};press('load');check(before=={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')},'load during cooldown consumes nothing',before);release_button()
         steps(125);press('load');release_button();press('fire');steps(20)
@@ -223,14 +235,14 @@ def main():
         observed=[];path_contact=[]
         for _ in range(20):
             steps(1);observed.append(value('entity CannonBystander Health'))
-            contact=cmd('execute as CannonBystander at @s positioned ~ ~0.9 ~ if entity @e[type=minecraft:marker,tag=nsp_ck.shell,distance=..0.95] run say CK_BYSTANDER_PATH_OCCUPIED')
-            path_contact.append('CK_BYSTANDER_PATH_OCCUPIED' in contact)
+            contact=observe('execute as CannonBystander at @s positioned ~ ~0.9 ~ if entity @e[type=minecraft:marker,tag=nsp_ck.shell,distance=..0.95]')
+            path_contact.append(contact)
         check(any(path_contact),'actual shot occupied bystander collision envelope',{'contactSamples':path_contact,'playerPosition':cmd('data get entity CannonBystander Pos')})
         check(all(v==hp for v in observed),'bystander stays unharmed across actual shot ticks',{'before':hp,'observed':observed})
         cmd('damage CannonBystander 1 minecraft:generic');after=value('entity CannonBystander Health');check(after<hp,'negative control proves health/damage observation is live',{'before':hp,'after':after})
         # No broad projectile or explosive entities can be hidden behind cosmetic smoke.
-        forbidden=cmd('execute if entity @e[type=minecraft:tnt] run say CK_FORBIDDEN_TNT')
-        check('CK_FORBIDDEN_TNT' not in forbidden,'no TNT entities after shots',forbidden)
+        forbidden=observe('execute if entity @e[type=minecraft:tnt]')
+        check(forbidden==0,'no TNT entities after shots',forbidden)
         release_button();steps(125)
         before={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')};press('load')
         check(before=={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')} and score('@e[type=minecraft:marker,tag=nsp_ck.g.battery,limit=1]','ck_ld')==0,'missing iron refuses without consuming genuine powder',before)
@@ -242,23 +254,23 @@ def main():
         wall_trace=[];wall_witness=None
         shell_selector='@e[type=minecraft:marker,tag=nsp_ck.shell,limit=1]'
         for _ in range(24):
-            exists=cmd('execute if entity '+shell_selector+' run say CK_WALL_SHELL_ALIVE')
-            if 'CK_WALL_SHELL_ALIVE' not in exists:break
+            exists=observe('execute if entity '+shell_selector)
+            if exists==0:break
             state={key:score(shell_selector,'ck_'+key) for key in ['x','y','z','vx','vy','vz','age']}
             next_pos=[(state[k]+state['v'+k])/1000 for k in ['x','y','z']]
             point=' '.join(f'{v:.6f}' for v in next_pos)
-            solid=cmd('execute positioned '+point+' if block ~ ~ ~ minecraft:stone run say CK_NEXT_STONE')
-            loaded=cmd('execute positioned '+point+' if loaded ~ ~ ~ run say CK_NEXT_LOADED')
-            other=cmd('execute positioned '+point+' if entity @e[tag=nsp_ck.target,distance=..1.1] run say CK_NEXT_TARGET')
-            row={'actualScores':state,'nextFirstSubstep':next_pos,'solidStone':'CK_NEXT_STONE' in solid,'loaded':'CK_NEXT_LOADED' in loaded,'nearRegisteredTarget':'CK_NEXT_TARGET' in other}
+            solid=observe('execute positioned '+point+' if block ~ ~ ~ minecraft:stone')
+            loaded=observe('execute positioned '+point+' if loaded ~ ~ ~')
+            other=observe('execute positioned '+point+' if entity @e[tag=nsp_ck.target,distance=..1.1]')
+            row={'actualScores':state,'nextFirstSubstep':next_pos,'solidStone':solid==1,'loaded':loaded==1,'nearRegisteredTarget':other==1,'observationScores':{'solidStone':solid,'loaded':loaded,'nearRegisteredTarget':other}}
             wall_trace.append(row)
             if row['solidStone'] and row['loaded'] and not row['nearRegisteredTarget'] and state['age']<80 and 31<=next_pos[0]<34 and 65<=next_pos[1]<71 and 40<=next_pos[2]<41:
                 wall_witness=row;steps(1);break
             steps(1)
         report['wallProductionTrace']=wall_trace
         check(wall_witness is not None,'actual moving shell reached loaded solid wall before lifetime/boundary guards',wall_trace)
-        stopped=cmd('execute if entity '+shell_selector+' run say CK_WALL_SHELL_ALIVE')
-        check('CK_WALL_SHELL_ALIVE' not in stopped and score('#hits','ck_stat')==hits_before and score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==40,'production solid-block step removed fired shell without target damage',{'witness':wall_witness,'shellQuery':stopped,'hitsBefore':hits_before,'hitsAfter':score('#hits','ck_stat'),'targetHP':score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')})
+        stopped=observe('execute if entity '+shell_selector)
+        check(stopped==0 and score('#hits','ck_stat')==hits_before and score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==40,'production solid-block step removed fired shell without target damage',{'witness':wall_witness,'shellQuery':stopped,'hitsBefore':hits_before,'hitsAfter':score('#hits','ck_stat'),'targetHP':score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')})
         # Genuine living-entity API component checks, independently of marker trajectory evidence.
         for typ,register,want_damage in [('skeleton',True,True),('drowned',True,True),('skeleton',False,False),('cow',True,False)]:
             cmd('kill @e[tag=ck.proof.mob]')
@@ -278,8 +290,8 @@ def main():
         cmd('execute as '+boat+' at @s run function nsp_ck:api/register_target')
         boat_tags=cmd('data get entity '+boat+' Tags')
         cmd('execute as '+boat+' at @s run function nsp_ck:target/damage');cmd('execute as '+boat+' at @s run function nsp_ck:target/anchor_hit')
-        boat_exists=cmd('execute if entity '+boat+' run say CK_NEUTRAL_BOAT_PRESENT')
-        check('nsp_ck.target' not in boat_tags and 'CK_NEUTRAL_BOAT_PRESENT' in boat_exists and score('#hits','ck_stat')==before_hits,'neutral boat remains untargeted and present',{'tags':boat_tags,'exists':boat_exists,'hitsBefore':before_hits,'hitsAfter':score('#hits','ck_stat')})
+        boat_exists=observe('execute if entity '+boat)
+        check('nsp_ck.target' not in boat_tags and boat_exists==1 and score('#hits','ck_stat')==before_hits,'neutral boat remains untargeted and present',{'tags':boat_tags,'exists':boat_exists,'hitsBefore':before_hits,'hitsAfter':score('#hits','ck_stat')})
         # Boundary regression: a registered target moves out, while the real hit path starts inside.
         spawn_target(True);target='@e[type=minecraft:marker,tag=ck.proof.target,limit=1]'
         maximum=manifest['config']['site']['max'][0];inside_x=maximum+.5;outside_x=maximum+1.3
@@ -289,14 +301,14 @@ def main():
         boundary_pos=cmd('data get entity '+target+' Pos')
         lo=manifest['config']['site']['min'];hi=manifest['config']['site']['max']
         box=','.join([f'x={lo[0]}',f'y={lo[1]}',f'z={lo[2]}',f'dx={hi[0]-lo[0]}',f'dy={hi[1]-lo[1]}',f'dz={hi[2]-lo[2]}'])
-        actual_target_inside=cmd('execute as '+target+' if entity @s['+box+'] run say CK_BOUNDARY_TARGET_INSIDE')
-        check('CK_BOUNDARY_TARGET_INSIDE' not in actual_target_inside,'registered marker really moved outside actual site selector',{'position':boundary_pos,'query':actual_target_inside})
+        actual_target_inside=observe('execute as '+target+' if entity @s['+box+']')
+        check(actual_target_inside==0,'registered marker really moved outside actual site selector',{'position':boundary_pos,'query':actual_target_inside})
         cmd(f'summon minecraft:marker {inside_x:.6f} 67.7 48.5 {{Tags:["nsp_ck.shell","ck.proof.boundary_shell"]}}')
         boundary_shell='@e[type=minecraft:marker,tag=ck.proof.boundary_shell,limit=1]'
-        actual_shell_inside=cmd('execute as '+boundary_shell+' if entity @s['+box+'] run say CK_BOUNDARY_SHELL_INSIDE')
-        check('CK_BOUNDARY_SHELL_INSIDE' in actual_shell_inside,'boundary collision context really starts inside actual site selector',actual_shell_inside)
-        near=cmd('execute at '+boundary_shell+' if entity '+target[:-1]+',distance=..1.1] run say CK_BOUNDARY_TARGET_NEAR')
-        check('CK_BOUNDARY_TARGET_NEAR' in near,'moved-out registered target is in actual boundary hit envelope',{'targetPosition':boundary_pos,'shellPosition':cmd('data get entity '+boundary_shell+' Pos'),'nativeNearQuery':near})
+        actual_shell_inside=observe('execute as '+boundary_shell+' if entity @s['+box+']')
+        check(actual_shell_inside==1,'boundary collision context really starts inside actual site selector',actual_shell_inside)
+        near=observe('execute at '+boundary_shell+' if entity '+target[:-1]+',distance=..1.1]')
+        check(near==1,'moved-out registered target is in actual boundary hit envelope',{'targetPosition':boundary_pos,'shellPosition':cmd('data get entity '+boundary_shell+' Pos'),'nativeNearQuery':near})
         cmd('execute as '+boundary_shell+' at @s run function nsp_ck:hit/anchor')
         check(score(target,'ck_hp')==before_hp and score('#hits','ck_stat')==before_hits,'moved-out anchor cannot be damaged by boundary hit path',{'targetPosition':boundary_pos,'hpBefore':before_hp,'hpAfter':score(target,'ck_hp'),'hitsBefore':before_hits,'hitsAfter':score('#hits','ck_stat')})
         cmd('summon minecraft:skeleton 39.5 65 20.5 {Tags:["ck.proof.boundary_mob"],NoAI:1b,Silent:1b,PersistenceRequired:1b}')
@@ -305,8 +317,8 @@ def main():
         mob_tags=cmd('data get entity '+mob+' Tags');check('nsp_ck.target' in mob_tags,'living boundary fixture truly registered before move',mob_tags)
         mob_x=maximum+2.5;cmd(f'forceload add {int(mob_x)} 20');cmd(f'setblock {int(mob_x)} 64 20 minecraft:stone');cmd(f'tp {mob} {mob_x:.6f} 65 20.5')
         health=value('entity '+mob+' Health');before_hits=score('#hits','ck_stat');position=cmd('data get entity '+mob+' Pos')
-        actual_mob_inside=cmd('execute as '+mob+' if entity @s['+box+'] run say CK_BOUNDARY_MOB_INSIDE')
-        check('CK_BOUNDARY_MOB_INSIDE' not in actual_mob_inside and 'nsp_ck.target' in cmd('data get entity '+mob+' Tags'),'living target remains registered but actually outside site after move',{'position':position,'query':actual_mob_inside})
+        actual_mob_inside=observe('execute as '+mob+' if entity @s['+box+']')
+        check(actual_mob_inside==0 and 'nsp_ck.target' in cmd('data get entity '+mob+' Tags'),'living target remains registered but actually outside site after move',{'position':position,'query':actual_mob_inside})
         cmd('execute as '+mob+' at @s run function nsp_ck:target/damage')
         check(value('entity '+mob+' Health')==health and score('#hits','ck_stat')==before_hits,'moved-out registered living target cannot take entry damage',{'position':position,'healthBefore':health,'healthAfter':value('entity '+mob+' Health'),'hitsBefore':before_hits,'hitsAfter':score('#hits','ck_stat')})
 
