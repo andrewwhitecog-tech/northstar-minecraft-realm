@@ -1,0 +1,82 @@
+name: Original pirate fauna assets
+
+on:
+  pull_request:
+    paths:
+      - 'tools/pirate_fauna/**'
+      - '.github/workflows/original-pirate-fauna-assets.yml'
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Exact reviewed main commit SHA to export
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: original-pirate-fauna-assets-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+        working-directory: tools/pirate_fauna
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare exact source-test environment
+        run: |
+          python3.12 -m venv .venv
+          .venv/bin/python -m pip --disable-pip-version-check install --only-binary=:all: --require-hashes -r requirements-linux.lock
+      - name: Execute genuine source tests without rendering
+        run: |
+          .venv/bin/python -X utf8 -m compileall -q build_original_fauna.py build_fauna_expansion.py validate_fauna_exports.py test_fauna_sources.py run_hosted_exports.py
+          .venv/bin/python -X utf8 -m unittest -v test_fauna_sources.py
+
+  export:
+    if: github.event_name == 'workflow_dispatch' && github.repository_owner == 'andrewwhitecog-tech' && github.event.repository.private == false && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      REVIEWED_SOURCE_COMMIT: ${{ inputs.source_commit }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: tools/pirate_fauna
+    steps:
+      - name: Read only original asset source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Require exact reviewed main commit
+        run: test "$GITHUB_SHA" = "$REVIEWED_SOURCE_COMMIT"
+      - name: Create pinned hosted Python environment
+        run: |
+          python3.12 -m venv .venv
+          .venv/bin/python -m pip --disable-pip-version-check install --only-binary=:all: --require-hashes -r requirements-linux.lock
+      - name: Execute actual tests, exports and byte validation
+        id: export
+        run: .venv/bin/python -X utf8 run_hosted_exports.py
+      - name: Retain actual outputs and failure evidence
+        if: always() && steps.export.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-pirate-fauna-assets-${{ github.run_id }}
+          retention-days: 1
+          compression-level: 6
+          if-no-files-found: error
+          path: |
+            tools/pirate_fauna/generated_base_v01/
+            tools/pirate_fauna/generated_expansion_v02/
+            tools/pirate_fauna/HOSTED_EXPORT_ACTUAL.json
+            tools/pirate_fauna/EXPORTED_ASSET_VALIDATION_ACTUAL.json
+            tools/pirate_fauna/*.stdout
+            tools/pirate_fauna/*.stderr
