@@ -73,6 +73,11 @@ def execute(out):
         receipt['exportStarted']=True
         export=paint_cat_coats.export(out/'export',include_nyan=True)
         receipt['export']={k:export[k] for k in ('exportedSets','pngCount','reusedReferences','status')}
+        import compile_cat_coats
+        original_ids=[r['id'] for r in json.loads((ROOT/'roster_public.json').read_text())['entries'] if not r['reuseVanilla']]
+        pack=compile_cat_coats.compile_coats(out/'export'/'originals',original_ids,out/'game_pack_candidate')
+        receipt['javaCoatPack']=compile_cat_coats.validate_compiled_coats(out/'game_pack_candidate')
+        (out/'COAT_PACK_VALIDATION_ACTUAL.json').write_text(json.dumps(receipt['javaCoatPack'],indent=2)+'\n',encoding='utf-8')
         source_guard() # read-only check that tests/export changed no source bytes
         receipt['passed']=True
     except BaseException:

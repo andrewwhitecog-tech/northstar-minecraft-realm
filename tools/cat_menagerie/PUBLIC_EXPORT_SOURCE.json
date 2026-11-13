@@ -2,7 +2,7 @@
   "schema": "northstar.cat-original-paint-public-packet.v1",
   "status": "SOURCE_ONLY_EXPORT_AND_TEST_EXECUTION_PENDING",
   "namespace": "nsp_cat_coats",
-  "sourceFiles": 29,
+  "sourceFiles": 30,
   "targetEntries": 65,
   "reusedVanillaReferences": 4,
   "newOriginalSets": 61,
@@ -26,8 +26,8 @@
     },
     {
       "path": "run_hosted_export.py",
-      "bytes": 6272,
-      "sha256": "fcad75a933b6cdc3e0d02507876c1d7900d6d32e0c33a76d41527fedcb05384d"
+      "bytes": 6772,
+      "sha256": "22bb24e59d681c894820a7cfc4ccb5106efe784a848d4bebe8cbc06b54aedcce"
     },
     {
       "path": "review_viewer.html",
@@ -56,8 +56,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4894,
-      "sha256": "e1ed163ec89fcf8edb5cdf85e2e12613ffda7af34702879af8492ab1f9746b5f"
+      "bytes": 5377,
+      "sha256": "3744852e24e0cc7e0fd1fb75e02e283a1ad687d66a51d092e56faac381a22607"
     },
     {
       "path": "workflow_candidate.yml",
@@ -158,8 +158,14 @@
       "path": "geometry_source/tall_ear_tufts.geo.json",
       "bytes": 5949,
       "sha256": "2164d0d43b22611a20be709a20823bf2f6db7dcc13a25b7eed6ce2fcc593ba10"
+    },
+    {
+      "path": "compile_cat_coats.py",
+      "bytes": 8107,
+      "sha256": "cbeb90f4915330ff93be44bcee4ef350f3036a932cc884a4267d3d70415c0e0f"
     }
   ],
-  "revision": 2,
-  "supersedesPublicPacketSha256": "77c9e8d9ccb5372c3b746d6b43d64b13d0722c1c5d1b1e6d16415b560444d6d2"
+  "revision": 3,
+  "supersedesPublicPacketSha256": "77c9e8d9ccb5372c3b746d6b43d64b13d0722c1c5d1b1e6d16415b560444d6d2",
+  "nativeVariantPackagingAdded": true
 }

@@ -1,0 +1,20 @@
+{
+  "references": [
+    {
+      "filename": "mutant_rabbit_boss_concept_v01.png",
+      "sha256": "03d1cb21fb7246840328d905e4f6dec829058520b77e3f2876b1560af0b8a288",
+      "personally_viewed": true,
+      "status": "Approved concept reference only, not an actual native mob"
+    },
+    {
+      "filename": "vorath_prismatic_development_teaser_v01.png",
+      "sha256": "05e4a9eeab86406d90537bc63e457f96c1f0aa5b58d70cb8eccdb30c021e4357",
+      "personally_viewed": true,
+      "status": "Approved concept reference only, not an actual native mob"
+    }
+  ],
+  "rejected_v03_actual_view": "public_source_v03/hosted_export_43372584324/downloaded/generated_rabbits_v03/mutant_rabbit_boss/previews/four_views.png",
+  "rejected_v03_view_personally_inspected": true,
+  "retained_original_exporter_sha256": "eea82b0653196f0cbf59db4bac860231d10dfc2d88728b4d4496712f5ce003cd",
+  "scope": "New original one-boss successor only. No source image pixels are copied into exported textures."
+}
