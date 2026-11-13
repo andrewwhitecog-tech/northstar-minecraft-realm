@@ -1,0 +1,779 @@
+{
+  "schema": "northstar.cat-representative-actual.v3",
+  "startedUtc": "2026-11-13T06:19:22Z",
+  "sourcePacketSha256": "d15f6e261e84f10e6c5b96b00b58d0fcda5a1094294f3af522186ea558700399",
+  "testsStarted": true,
+  "paintStarted": true,
+  "renderStarted": true,
+  "passed": true,
+  "errors": [],
+  "nativeRun": false,
+  "visualPersonalQC": false,
+  "gameInstalled": false,
+  "mappingIDsAssigned": false,
+  "full61Repainted": false,
+  "sheets": [
+    {
+      "path": "sheets/domestic_bengal_adult_4view.png",
+      "coat": "domestic_bengal",
+      "mode": "adult",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 30028,
+          "modelTriangles": 132,
+          "depthMin": -10.438193873395962,
+          "depthMax": 18.280267185216992,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 37605,
+          "modelTriangles": 132,
+          "depthMin": -7.822621313930559,
+          "depthMax": 16.711657078983126,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 18926,
+          "modelTriangles": 132,
+          "depthMin": -0.3835837210224706,
+          "depthMax": 4.3040105435502705,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 16532,
+          "modelTriangles": 132,
+          "depthMin": -11.628831630933385,
+          "depthMax": 13.720955430098552,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_bengal_baby_4view.png",
+      "coat": "domestic_bengal",
+      "mode": "baby",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 43328,
+          "modelTriangles": 120,
+          "depthMin": -3.882887428383155,
+          "depthMax": 1.3544512147159882,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 41146,
+          "modelTriangles": 120,
+          "depthMin": -2.4964553146556563,
+          "depthMax": 10.775731742071695,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 22585,
+          "modelTriangles": 120,
+          "depthMin": 0.2405722807221783,
+          "depthMax": 4.967393877144835,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 40070,
+          "modelTriangles": 120,
+          "depthMin": -4.689272328736893,
+          "depthMax": 8.587349696382207,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_bengal_bedrock_4view.png",
+      "coat": "domestic_bengal",
+      "mode": "bedrock",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 31642,
+          "modelTriangles": 144,
+          "depthMin": -10.021522247536721,
+          "depthMax": 1.996031110052789,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 39003,
+          "modelTriangles": 144,
+          "depthMin": -10.075744919165228,
+          "depthMax": 9.9267992736515,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 18576,
+          "modelTriangles": 144,
+          "depthMin": -5.028971057798923,
+          "depthMax": 0.8716545944038901,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 30150,
+          "modelTriangles": 144,
+          "depthMin": -14.528838068564543,
+          "depthMax": 6.174884327481443,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_adult_4view.png",
+      "coat": "domestic_maine_coon",
+      "mode": "adult",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 30028,
+          "modelTriangles": 132,
+          "depthMin": -10.438193873395962,
+          "depthMax": 18.280267185216992,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 37605,
+          "modelTriangles": 132,
+          "depthMin": -7.822621313930559,
+          "depthMax": 16.711657078983126,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 18926,
+          "modelTriangles": 132,
+          "depthMin": -0.3835837210224706,
+          "depthMax": 4.3040105435502705,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 16532,
+          "modelTriangles": 132,
+          "depthMin": -11.628831630933385,
+          "depthMax": 13.720955430098552,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_baby_4view.png",
+      "coat": "domestic_maine_coon",
+      "mode": "baby",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 43328,
+          "modelTriangles": 120,
+          "depthMin": -3.882887428383155,
+          "depthMax": 1.3544512147159882,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 41146,
+          "modelTriangles": 120,
+          "depthMin": -2.4964553146556563,
+          "depthMax": 10.775731742071695,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 22585,
+          "modelTriangles": 120,
+          "depthMin": 0.2405722807221783,
+          "depthMax": 4.967393877144835,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 40070,
+          "modelTriangles": 120,
+          "depthMin": -4.689272328736893,
+          "depthMax": 8.587349696382207,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_bedrock_4view.png",
+      "coat": "domestic_maine_coon",
+      "mode": "bedrock",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 33958,
+          "modelTriangles": 204,
+          "depthMin": -9.64522657835033,
+          "depthMax": 3.9753872905195076,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 40012,
+          "modelTriangles": 204,
+          "depthMin": -10.428487317201261,
+          "depthMax": 9.918503681291787,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 23015,
+          "modelTriangles": 204,
+          "depthMin": -5.360070690295693,
+          "depthMax": 1.4618521079639475,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 32414,
+          "modelTriangles": 204,
+          "depthMin": -14.51147025109118,
+          "depthMax": 6.147906773055127,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_sphynx_adult_4view.png",
+      "coat": "domestic_sphynx",
+      "mode": "adult",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 30028,
+          "modelTriangles": 132,
+          "depthMin": -10.438193873395962,
+          "depthMax": 18.280267185216992,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 37605,
+          "modelTriangles": 132,
+          "depthMin": -7.822621313930559,
+          "depthMax": 16.711657078983126,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 18926,
+          "modelTriangles": 132,
+          "depthMin": -0.3835837210224706,
+          "depthMax": 4.3040105435502705,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 16532,
+          "modelTriangles": 132,
+          "depthMin": -11.628831630933385,
+          "depthMax": 13.720955430098552,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_sphynx_baby_4view.png",
+      "coat": "domestic_sphynx",
+      "mode": "baby",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 43328,
+          "modelTriangles": 120,
+          "depthMin": -3.882887428383155,
+          "depthMax": 1.3544512147159882,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 41146,
+          "modelTriangles": 120,
+          "depthMin": -2.4964553146556563,
+          "depthMax": 10.775731742071695,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 22585,
+          "modelTriangles": 120,
+          "depthMin": 0.2405722807221783,
+          "depthMax": 4.967393877144835,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 40070,
+          "modelTriangles": 120,
+          "depthMin": -4.689272328736893,
+          "depthMax": 8.587349696382207,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/domestic_sphynx_bedrock_4view.png",
+      "coat": "domestic_sphynx",
+      "mode": "bedrock",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 29070,
+          "modelTriangles": 132,
+          "depthMin": -10.305931194675644,
+          "depthMax": 1.9951265656535384,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 40354,
+          "modelTriangles": 132,
+          "depthMin": -10.123593494156133,
+          "depthMax": 9.914206601810173,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 17949,
+          "modelTriangles": 132,
+          "depthMin": -5.394501790928838,
+          "depthMax": 0.6058285694083677,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 27430,
+          "modelTriangles": 132,
+          "depthMin": -14.514861850433054,
+          "depthMax": 6.428361376658037,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_adult_4view.png",
+      "coat": "fantasy_obsidian_rainbow",
+      "mode": "adult",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 30028,
+          "modelTriangles": 132,
+          "depthMin": -10.438193873395962,
+          "depthMax": 18.280267185216992,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 37605,
+          "modelTriangles": 132,
+          "depthMin": -7.822621313930559,
+          "depthMax": 16.711657078983126,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 18926,
+          "modelTriangles": 132,
+          "depthMin": -0.3835837210224706,
+          "depthMax": 4.3040105435502705,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 16532,
+          "modelTriangles": 132,
+          "depthMin": -11.628831630933385,
+          "depthMax": 13.720955430098552,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_baby_4view.png",
+      "coat": "fantasy_obsidian_rainbow",
+      "mode": "baby",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 43328,
+          "modelTriangles": 120,
+          "depthMin": -3.882887428383155,
+          "depthMax": 1.3544512147159882,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 41146,
+          "modelTriangles": 120,
+          "depthMin": -2.4964553146556563,
+          "depthMax": 10.775731742071695,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 22585,
+          "modelTriangles": 120,
+          "depthMin": 0.2405722807221783,
+          "depthMax": 4.967393877144835,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 40070,
+          "modelTriangles": 120,
+          "depthMin": -4.689272328736893,
+          "depthMax": 8.587349696382207,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_bedrock_4view.png",
+      "coat": "fantasy_obsidian_rainbow",
+      "mode": "bedrock",
+      "views": [
+        {
+          "view": "front",
+          "modelPixels": 34282,
+          "modelTriangles": 192,
+          "depthMin": -9.64822870936751,
+          "depthMax": -3.9506846769050386,
+          "viewSize": 384
+        },
+        {
+          "view": "three_quarter",
+          "modelPixels": 39000,
+          "modelTriangles": 192,
+          "depthMin": -10.164770077254976,
+          "depthMax": 9.883356566900126,
+          "viewSize": 384
+        },
+        {
+          "view": "side",
+          "modelPixels": 20363,
+          "modelTriangles": 192,
+          "depthMin": -5.03183616095606,
+          "depthMax": 1.0609664822114162,
+          "viewSize": 384
+        },
+        {
+          "view": "back",
+          "modelPixels": 31868,
+          "modelTriangles": 192,
+          "depthMin": -14.528838068564543,
+          "depthMax": 5.846672178752844,
+          "viewSize": 384
+        }
+      ],
+      "width": 768,
+      "height": 768,
+      "textOverlays": false,
+      "renderer": "CPU actual textured triangles with depth test; static authoring views, not native screenshots"
+    }
+  ],
+  "files": [
+    {
+      "path": "compat/originals/domestic_bengal/adult.png",
+      "bytes": 551,
+      "sha256": "748d5164a78bb690b6fac9f279d3e36e700161c379e4d9918e627003429be3b6"
+    },
+    {
+      "path": "compat/originals/domestic_bengal/baby.png",
+      "bytes": 317,
+      "sha256": "6e9b0cfcede024d53eaeea852943c10880d74946860f9f9fe17135bff8f94d5b"
+    },
+    {
+      "path": "compat/originals/domestic_bengal/bedrock.png",
+      "bytes": 598,
+      "sha256": "46d5df64134dd9467e616e61d65b1e6d61d8d03761e2eb6d3a5029c312262fe9"
+    },
+    {
+      "path": "detail/originals/domestic_bengal/adult.png",
+      "bytes": 2279,
+      "sha256": "4cd99ed92c37abfc24d44a078625dddce6cb3210666304e3050feb4699c0ae92"
+    },
+    {
+      "path": "detail/originals/domestic_bengal/baby.png",
+      "bytes": 1113,
+      "sha256": "6f42796a0689a5221ef5565f0eecb2d621090e99f4c69e086fff0cbd350fc975"
+    },
+    {
+      "path": "detail/originals/domestic_bengal/bedrock.png",
+      "bytes": 2762,
+      "sha256": "a8b1ea64754c65469e2eaf0005a6d48c58cd789922ac490a724d77b74a9e9381"
+    },
+    {
+      "path": "geometry_source/domestic_bengal.geo.json",
+      "bytes": 6383,
+      "sha256": "2f9a7a2abf63a0de43fd64268d4282d22f5ee4593a07bb883df6b96e458f08dd"
+    },
+    {
+      "path": "compat/originals/domestic_maine_coon/adult.png",
+      "bytes": 910,
+      "sha256": "7fa1a2582608fabf090ed5b1de5f3349b8004dbfcb35a55a760a768c8c4178e8"
+    },
+    {
+      "path": "compat/originals/domestic_maine_coon/baby.png",
+      "bytes": 543,
+      "sha256": "8b11160c3ec140db6efacbb63a6fb8a9de73e6111852ccb6d08f15f9cdf52702"
+    },
+    {
+      "path": "compat/originals/domestic_maine_coon/bedrock.png",
+      "bytes": 1594,
+      "sha256": "68d7a59c7b7cc0439a176d2c8c361fc642a876aa194627094c1497f27125ab92"
+    },
+    {
+      "path": "detail/originals/domestic_maine_coon/adult.png",
+      "bytes": 6477,
+      "sha256": "2e64f08adb70be0bb22f080392749207c09630b5dc3098274852e75b0976498d"
+    },
+    {
+      "path": "detail/originals/domestic_maine_coon/baby.png",
+      "bytes": 2872,
+      "sha256": "c227445456ab054912d1a150180e446b88dfe2d1cbcc1e5b0291f052f62395b5"
+    },
+    {
+      "path": "detail/originals/domestic_maine_coon/bedrock.png",
+      "bytes": 10466,
+      "sha256": "da2f48db7c89451dcd35870cc6fa0e5ef8a91833cf0b26dae68a9b37dea38e41"
+    },
+    {
+      "path": "geometry_source/domestic_maine_coon.geo.json",
+      "bytes": 8616,
+      "sha256": "283aa0d2658e2fe13930e44e9e6c32fb7f817b1ff4aab683da685f79bfa59744"
+    },
+    {
+      "path": "compat/originals/domestic_sphynx/adult.png",
+      "bytes": 442,
+      "sha256": "dba4f00c3b33bb8917386eb7e4d1384928c9bc0299721d3734491b91b359c317"
+    },
+    {
+      "path": "compat/originals/domestic_sphynx/baby.png",
+      "bytes": 306,
+      "sha256": "37448949b80622ec3444068768434bd7dd3af1d7c81113ff315e5f705905a0a6"
+    },
+    {
+      "path": "compat/originals/domestic_sphynx/bedrock.png",
+      "bytes": 529,
+      "sha256": "8f8073b27d32412c311bc9ddf9f8f0196e5176e7a9eeb28c5b3ad570d89a9679"
+    },
+    {
+      "path": "detail/originals/domestic_sphynx/adult.png",
+      "bytes": 1767,
+      "sha256": "64f3ad5ea08cce5d161066c77f3606b5e3d1c6a3bde4df51acab25edd56b42d5"
+    },
+    {
+      "path": "detail/originals/domestic_sphynx/baby.png",
+      "bytes": 986,
+      "sha256": "39edc9b0932a81bac638447444480b6af77d7aed09a4f9392acffe511dc9f755"
+    },
+    {
+      "path": "detail/originals/domestic_sphynx/bedrock.png",
+      "bytes": 2130,
+      "sha256": "049a43033e8ec4b65867402864c2bdca2c8d20c2dd38c696d868424f85e1bcb8"
+    },
+    {
+      "path": "geometry_source/domestic_sphynx.geo.json",
+      "bytes": 5884,
+      "sha256": "1faed2eb8826bd6f49348d9fad00ea44f079ad520837196db259f46b0f6e8c96"
+    },
+    {
+      "path": "compat/originals/fantasy_obsidian_rainbow/adult.png",
+      "bytes": 864,
+      "sha256": "3ab9fb5f742e27ea9ba5d7b0ce33f14e5ecce984264aac87c83322440a54802d"
+    },
+    {
+      "path": "compat/originals/fantasy_obsidian_rainbow/baby.png",
+      "bytes": 467,
+      "sha256": "28daccb052922cb2b322d5376e036253226b2df9f407226732b90159ed62b91c"
+    },
+    {
+      "path": "compat/originals/fantasy_obsidian_rainbow/bedrock.png",
+      "bytes": 834,
+      "sha256": "050010f638cdcd153d271dbda2012fabf411e2d1aee58d7dcfcf7b0c0ec345eb"
+    },
+    {
+      "path": "detail/originals/fantasy_obsidian_rainbow/adult.png",
+      "bytes": 5596,
+      "sha256": "5621aacbf7eb2e7ff8b1e5ef42038059f8624d789506941ea372caa3643847e0"
+    },
+    {
+      "path": "detail/originals/fantasy_obsidian_rainbow/baby.png",
+      "bytes": 2250,
+      "sha256": "c84bb5094394f1705ec961d767045a040bc56a0491dd0f8f55409a1f56cf1331"
+    },
+    {
+      "path": "detail/originals/fantasy_obsidian_rainbow/bedrock.png",
+      "bytes": 4808,
+      "sha256": "c4a6f58ec6eca30cbadad65e3285b936eeb91797c77b612e4f0373558c6c5ec4"
+    },
+    {
+      "path": "geometry_source/fantasy_obsidian_rainbow.geo.json",
+      "bytes": 8708,
+      "sha256": "43b643534e106d9596394cd7db85514db2ba036e7b6208b0e6325592be48c7ca"
+    },
+    {
+      "path": "sheets/domestic_bengal_adult_4view.png",
+      "bytes": 17132,
+      "sha256": "c8a0e66855498b4d69630a95b7d86f9e737f5bd29484d41588880e42fa0767ac"
+    },
+    {
+      "path": "sheets/domestic_bengal_baby_4view.png",
+      "bytes": 14563,
+      "sha256": "e5e46f60cadff54600084d2c2e14479426fafaafa056589e6b2fd1fb9c3dd197"
+    },
+    {
+      "path": "sheets/domestic_bengal_bedrock_4view.png",
+      "bytes": 17890,
+      "sha256": "6dde8d9947d6beceb59c0abff58e72b535bb45ac3e5aea1cd776a529767a020b"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_adult_4view.png",
+      "bytes": 27596,
+      "sha256": "3716565221b01d5caf1f86da88758b4a02d0716a947611614ec1c2e69419653b"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_baby_4view.png",
+      "bytes": 20317,
+      "sha256": "3d135a8fb8d20ca2392a731c1d987b504b8145934a2e9ca5383466eb659ed51c"
+    },
+    {
+      "path": "sheets/domestic_maine_coon_bedrock_4view.png",
+      "bytes": 32056,
+      "sha256": "ac7a8afa0306d4c3b56e3e29ea4e7a4af945b11f5b74d5f4fc7c65669c8cc04c"
+    },
+    {
+      "path": "sheets/domestic_sphynx_adult_4view.png",
+      "bytes": 16087,
+      "sha256": "282dd05ef9e08aeac4a1bc3d8617557c3210f5105d516d60198dde49546c5f1d"
+    },
+    {
+      "path": "sheets/domestic_sphynx_baby_4view.png",
+      "bytes": 13568,
+      "sha256": "92f94b6c17138a1ca8e98eb28b5fb2710f6216de7f03efd7725868b63dad5af9"
+    },
+    {
+      "path": "sheets/domestic_sphynx_bedrock_4view.png",
+      "bytes": 16235,
+      "sha256": "95266f289835622f17cea95d4d0dc090e6f0ad2151cc4175b831710b63f965d0"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_adult_4view.png",
+      "bytes": 21498,
+      "sha256": "5d4accb35244746381294b333188f9a75a27a25fc8dc120a718863a0456ebc95"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_baby_4view.png",
+      "bytes": 17338,
+      "sha256": "df4440a90a8097a3e2c1ea796528d7ad7b10206726f8ed16220862299d68beb0"
+    },
+    {
+      "path": "sheets/fantasy_obsidian_rainbow_bedrock_4view.png",
+      "bytes": 21372,
+      "sha256": "b5e163d99d1af67581e7be0b389b8584e978a93d9ee2e37f76cff8fe25d6234a"
+    }
+  ],
+  "tests": {
+    "testsRun": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "rows": [
+      {
+        "name": "test_representatives.RepresentativeTests.test_actual_textured_geometry_two_views_have_depth_and_different_pixels",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_geometry_has_real_ruff_tuft_muzzle_and_no_tool_fields_in_export",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_obsidian_anatomy_stays_dark_with_nonempty_prismatic_ink",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_only_four_selected_looks_no_expanded_catalog",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_png_file_roundtrip_and_bad_crc_rejected",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_renderer_rejects_bad_size_scale_and_aspect",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_resolution_is_scaled_uv_not_resized_previous_image",
+        "status": "passed"
+      },
+      {
+        "name": "test_representatives.RepresentativeTests.test_rosette_center_is_open_copper_inner_and_dark_ring",
+        "status": "passed"
+      }
+    ]
+  },
+  "pngCount": 36,
+  "representativeCount": 4,
+  "finishedUtc": "2026-11-13T06:19:46Z",
+  "scope": "Original four-look assets and real CPU textured-geometry review sheets only; no native/live/Bedrock acceptance."
+}

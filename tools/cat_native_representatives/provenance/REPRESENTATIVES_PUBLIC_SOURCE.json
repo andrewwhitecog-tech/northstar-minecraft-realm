@@ -1,0 +1,84 @@
+{
+  "schema": "northstar.cat-four-look-public-source.v3",
+  "status": "SOURCE_ONLY_NOT_EXECUTED",
+  "sourceExportRun": "43374368134",
+  "frozenV02PacketSha256": "1f8a2c17546b99106915f812ca3aa26eeda7c9c157b4658ea434eb84fa96d152",
+  "representatives": [
+    "domestic_bengal",
+    "domestic_maine_coon",
+    "domestic_sphynx",
+    "fantasy_obsidian_rainbow"
+  ],
+  "originalContributorCode": true,
+  "vanillaOrThirdPartyImageBytesIncluded": false,
+  "worldOrPrivateDataIncluded": false,
+  "numericRegistryAssignments": false,
+  "nativeRun": false,
+  "files": [
+    {
+      "path": "baseline_paint.py",
+      "bytes": 18889,
+      "sha256": "09281a2901ad663cb3a9353cc9f3ec16ab096924bb24f7049e9620c9ecb5d6c6"
+    },
+    {
+      "path": "representative_painter.py",
+      "bytes": 7188,
+      "sha256": "fb6ec382a6a0ad1661c5eddf35dc81cf4f707f556ebef900c37246ec91b1780f"
+    },
+    {
+      "path": "render_four_views.py",
+      "bytes": 8777,
+      "sha256": "e0dc46860d5851f31fc2c055f487c2aebfca01e0a80f27bd1662787b78c9f5be"
+    },
+    {
+      "path": "test_representatives.py",
+      "bytes": 4429,
+      "sha256": "be5480cd33bec235b8f94ef2dbac60bb5d3c17eecfe71a805452332880cfcd0b"
+    },
+    {
+      "path": "run_representatives.py",
+      "bytes": 7217,
+      "sha256": "bc91c84401c66bbac952624fb3b6da0d6f99b71406ab3e261d38a13aad87d402"
+    },
+    {
+      "path": "uv_models.json",
+      "bytes": 9256,
+      "sha256": "37f0bcbf01afbda1faac1d65eb14a730775dc11570c838eecb2fc796a885831f"
+    },
+    {
+      "path": "representatives.json",
+      "bytes": 1316,
+      "sha256": "5a07bb0c9f2fac16a3f6a819e0dc4e77b2b6d5adb13478735e2be6e5a58d32be"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4505,
+      "sha256": "1fe7f6baa2f91294edbc6c218c5b90e1a98aa7763e47251de6cce748db6d1f18"
+    },
+    {
+      "path": "workflow_candidate.yml",
+      "bytes": 1764,
+      "sha256": "a6f76ee9b954c6a6e4a213a92669254586839c0d01e2fc83a2ce97b0a89407a6"
+    },
+    {
+      "path": "geometry_source/bengal_athletic.geo.json",
+      "bytes": 6459,
+      "sha256": "e4aab2afc6dd3a4840d1033bf477f7638acb093a1b4e70cd58c6120b03798aa9"
+    },
+    {
+      "path": "geometry_source/maine_coon_ruff.geo.json",
+      "bytes": 8809,
+      "sha256": "b94d22eb405a29f555aad0310f3ce49381fbbb8bb6c8817215068b62ae3cecb2"
+    },
+    {
+      "path": "geometry_source/obsidian_prism.geo.json",
+      "bytes": 8948,
+      "sha256": "8f34ed54a14d57649ffca91260e1b132ff8b1daf07771d03e4f190fa95ae98df"
+    },
+    {
+      "path": "geometry_source/sphynx_folds.geo.json",
+      "bytes": 5923,
+      "sha256": "77468a4fb3b8c332f875477f6667af509def22b2346e23beb73b4090fe9ef3f1"
+    }
+  ]
+}
