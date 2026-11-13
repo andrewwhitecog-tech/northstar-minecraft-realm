@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "northstar_cat_instincts",
-  "version": "0.1.0-26.3-source",
+  "version": "0.1.1-26.3-scoped-candidate",
   "name": "NorthStar Cat Instincts",
-  "description": "Opt-in isolated server behaviour add-on; native acceptance pending.",
+  "description": "Default-off server canary behaviour: exact canary tag required; source candidate, native adoption pending.",
   "license": "MIT",
   "environment": "server",
   "entrypoints": {

@@ -52,7 +52,7 @@ def main():
    algorithm='sha256' if 'sha256' in item else 'sha1';need(path.stat().st_size==size and digest(path,algorithm)==item[algorithm],'Dependency byte pin mismatch: '+item['name'])
    report['downloads'].append({'path':item['path'],'bytes':size,'algorithm':algorithm,'digest':item[algorithm]});save()
   junit=cache/lock['junitPath'];cp=os.pathsep.join(str(cache/item['path']) for item in lock['artifacts'] if item['path']!=lock['junitPath'])
-  production=sorted((HOME/'src').rglob('*.java'));tests=sorted((HOME/'tests').rglob('*.java'));need(len(production)==14 and len(tests)==3,'Source census mismatch')
+  production=sorted((HOME/'src').rglob('*.java'));tests=sorted((HOME/'tests').rglob('*.java'));need(len(production)==16 and len(tests)==4,'Source census mismatch')
   classes=root/'classes';classes.mkdir();testclasses=root/'testclasses';testclasses.mkdir()
   def javac(name,files,classpath,dest):
    args=root/(name+'.args');values=['--release','25','-encoding','UTF-8','-proc:none','-cp',classpath,'-d',str(dest),*[str(f) for f in files]]
@@ -61,13 +61,13 @@ def main():
   need(javac('production',production,cp,classes).returncode==0,'Actual production javac failed')
   need(javac('test_compile',tests,str(classes)+os.pathsep+str(junit),testclasses).returncode==0,'Actual test javac failed')
   xml=evidence/'junit'
-  result=command('junit',['java','-XX:ActiveProcessorCount=2','-Xmx256M','-jar',junit,'execute','--class-path',str(classes)+os.pathsep+str(testclasses),'--select-class','net.northstar.cat.InstinctPolicyTest','--select-class','net.northstar.cat.InstinctLimitsTest','--select-class','net.northstar.cat.InstinctMotionTest','--reports-dir',xml,'--disable-ansi-colors'],60)
+  result=command('junit',['java','-XX:ActiveProcessorCount=2','-Xmx256M','-jar',junit,'execute','--class-path',str(classes)+os.pathsep+str(testclasses),'--select-class','net.northstar.cat.InstinctPolicyTest','--select-class','net.northstar.cat.InstinctLimitsTest','--select-class','net.northstar.cat.InstinctMotionTest','--select-class','net.northstar.cat.InstinctScopeTest','--reports-dir',xml,'--disable-ansi-colors'],60)
   counts={'tests':0,'failures':0,'errors':0,'skipped':0}
   for file in xml.glob('TEST-*.xml'):
    suite=ET.parse(file).getroot()
    for key in counts:counts[key]+=int(suite.attrib.get(key,0))
-  report['junitActual']=counts;save();need(result.returncode==0 and counts=={'tests':16,'failures':0,'errors':0,'skipped':0},'Actual JUnit outcome not16clean tests')
-  jar=evidence/'northstar_cat_instincts-0.1.0-26.3-candidate.jar'
+  report['junitActual']=counts;save();need(result.returncode==0 and counts=={'tests':22,'failures':0,'errors':0,'skipped':0},'Actual JUnit outcome not22clean tests')
+  jar=evidence/'northstar_cat_instincts-0.1.1-26.3-scoped-candidate.jar'
   with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as z:
    for file in sorted(classes.rglob('*.class')):z.write(file,file.relative_to(classes).as_posix())
    for name in ('fabric.mod.json','northstar_cat.mixins.json'):z.write(HOME/'resources'/name,name)
