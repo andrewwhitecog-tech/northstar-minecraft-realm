@@ -6,3 +6,4 @@ tools/private_media_conform/** -text whitespace=blank-at-eol,blank-at-eof,space-
 tools/hosted_ffmpeg_toolchain/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 tools/cat_native_representatives/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/cat_client_capture/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

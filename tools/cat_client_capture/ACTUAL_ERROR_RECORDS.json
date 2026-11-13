@@ -1,0 +1,44 @@
+{
+  "sourceRun": "43381942834",
+  "sourceLogSha256": "d0e887aad417f131b9843476eb30e6cea11643893e54c9b7f36dbe8739873c0d",
+  "records": [
+    {
+      "line": 61,
+      "thread": "Download-2",
+      "level": "ERROR",
+      "message": "Failed to fetch user properties",
+      "body": [
+        "com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401",
+        "\tat knot//com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:70)",
+        "\tat knot//com.mojang.authlib.services.MinecraftServicesUserApiService.fetchProperties(MinecraftServicesUserApiService.java:168)",
+        "\tat knot//net.minecraft.client.Minecraft.lambda$new$1(Minecraft.java:451)",
+        "\tat java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789)",
+        "\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)",
+        "\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)",
+        "\tat java.base/java.lang.Thread.run(Thread.java:1474)",
+        "Caused by: MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=ErrorResponse[path=/player/attributes, error=null, errorMessage=null, details=null]]",
+        "\tat knot//com.mojang.authlib.minecraft.client.MinecraftClient.buildHttpException(MinecraftClient.java:170)",
+        "\tat knot//com.mojang.authlib.minecraft.client.MinecraftClient.readServiceResponse(MinecraftClient.java:147)",
+        "\tat knot//com.mojang.authlib.minecraft.client.MinecraftClient.getWithEtag(MinecraftClient.java:81)",
+        "\tat knot//com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:65)",
+        "\tat knot//com.mojang.authlib.services.MinecraftServicesUserApiService.fetchProperties(MinecraftServicesUserApiService.java:118)",
+        "\t... 5 more"
+      ]
+    },
+    {
+      "line": 87,
+      "thread": "Download-1",
+      "level": "ERROR",
+      "message": "Failed to fetch Realms feature flags",
+      "body": [
+        "com.mojang.realmsclient.exception.RealmsServiceException: Realms authentication error with message 'java.lang.RuntimeException: Failed to parse into SignedJWT: 0'",
+        "\tat knot//com.mojang.realmsclient.client.RealmsClient.execute(RealmsClient.java:625)",
+        "\tat knot//com.mojang.realmsclient.client.RealmsClient.fetchFeatureFlags(RealmsClient.java:204)",
+        "\tat java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789)",
+        "\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)",
+        "\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)",
+        "\tat java.base/java.lang.Thread.run(Thread.java:1474)"
+      ]
+    }
+  ]
+}
