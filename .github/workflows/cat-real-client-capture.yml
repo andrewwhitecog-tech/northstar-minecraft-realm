@@ -7,6 +7,13 @@ on:
       - .github/workflows/cat-real-client-capture.yml
   workflow_dispatch:
     inputs:
+      capture_preset:
+        description: Explicit native capture qualification preset
+        required: true
+        type: choice
+        options:
+          - hero720
+          - close800
       expected_commit:
         description: Exact reviewed public main commit
         required: true
@@ -78,6 +85,7 @@ jobs:
       UV_PYTHON_DOWNLOADS: never
       NSP_PUBLIC_REPOSITORY: 'true'
       NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION: '1'
+      CAPTURE_PRESET: ${{ inputs.capture_preset }}
       EXPECTED_COMMIT: ${{ inputs.expected_commit }}
       CAPTURE_SHA: ${{ inputs.reviewed_capture_sha256 }}
       CAT_SHA: ${{ inputs.reviewed_cat_sha256 }}
@@ -121,7 +129,7 @@ jobs:
           command -v java javac ffmpeg ffprobe Xvfb
       - name: Actual real client, custom coats and original framebuffer capture
         id: capture
-        run: python3 -B tools/cat_client_capture/capture_client.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --representative-build-receipt "$GITHUB_WORKSPACE/tools/cat_native_representatives/native_representative_pack_v01/BUILD_ACTUAL.json" --reviewed-representative-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
+        run: python3 -B tools/cat_client_capture/capture_client.py --execute --capture-preset "$CAPTURE_PRESET" --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --representative-build-receipt "$GITHUB_WORKSPACE/tools/cat_native_representatives/native_representative_pack_v01/BUILD_ACTUAL.json" --reviewed-representative-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
       - name: Check tracked source remains unchanged
         if: always()
         run: git diff --exit-code
