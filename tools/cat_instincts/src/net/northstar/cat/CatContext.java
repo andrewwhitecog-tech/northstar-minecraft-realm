@@ -66,7 +66,7 @@ public final class CatContext {
         boolean hostile = target instanceof Enemy || target.entityTags().contains("nsp_cat.hostile");
         boolean playmate = target instanceof Animal && !friendlyNpc
             && (ownedPet || allied || protectedTarget || target.entityTags().contains("nsp_cat.playmate"));
-        return new InstinctPolicy.Contact(CatInstincts.enabled(), cat.isTame() && !cat.isBaby(),
+        return new InstinctPolicy.Contact(CatInstincts.active(cat), cat.isTame() && !cat.isBaby(),
             cat.isOrderedToSit() || cat.isLeashed(),
             cat.level() == target.level(), target.isAlive(), target instanceof Player,
             sameOwner(cat,target), ownedPet, friendlyNpc, allied, protectedTarget, playmate,
@@ -82,7 +82,7 @@ public final class CatContext {
     public static InstinctLimits.State state(Cat cat) {
         LivingEntity o=owner(cat);
         boolean ownerPresent=o != null && o.isAlive() && cat.level()==o.level();
-        return new InstinctLimits.State(CatInstincts.enabled(), cat.isTame() && !cat.isBaby(), ownerPresent,
+        return new InstinctLimits.State(CatInstincts.active(cat), cat.isTame() && !cat.isBaby(), ownerPresent,
             cat.isOrderedToSit(),cat.isLeashed(),cat.isPassenger(),cat.isNoAi(),
             recall(cat),healthy(cat),cat.level() instanceof ServerLevel level && safeFeet(level,cat.blockPosition()),
             ownerPresent && InstinctMotion.distanceReturn(engaged(cat),cat.distanceToSqr(o)));
@@ -90,12 +90,12 @@ public final class CatContext {
     public static boolean mayPursue(Cat cat) { return InstinctLimits.mayPursue(state(cat)); }
     public static boolean canReturn(Cat cat) {
         LivingEntity o=owner(cat);
-        return CatInstincts.enabled() && cat.isTame() && !cat.isBaby() && o!=null && o.isAlive()
+        return CatInstincts.active(cat) && cat.isTame() && !cat.isBaby() && o!=null && o.isAlive()
             && cat.level()==o.level() && !cat.isOrderedToSit() && !cat.isLeashed() && !cat.isPassenger() && !cat.isNoAi();
     }
     public static boolean returnNeeded(Cat cat) {
         LivingEntity o=owner(cat);
-        return CatInstincts.enabled() && cat.isTame() && !cat.isBaby() && o != null && o.isAlive()
+        return CatInstincts.active(cat) && cat.isTame() && !cat.isBaby() && o != null && o.isAlive()
             && cat.level()==o.level() && !cat.isOrderedToSit()
             && !cat.isLeashed() && !cat.isPassenger() && !cat.isNoAi()
             && (recall(cat) || !healthy(cat) || InstinctMotion.distanceReturn(engaged(cat),cat.distanceToSqr(o)))
