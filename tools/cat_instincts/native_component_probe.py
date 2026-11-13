@@ -330,7 +330,7 @@ def main():
    if row['leashed']is True and observe('execute as '+CAT+' on leasher if entity @s[type=minecraft:leash_knot]')==1:return row
   check(False,'actual saved fence leash resolves within40 frozen ticks '+label,rows)
  def persistence_and_default_off():
-  reset();cat(35.5);cmd('data merge entity '+CAT+' {Sitting:1b,Health:2.0f}');attach_saved_fence_leash();before=observer_state()
+  reset();ticks(25);check(observe('execute if entity @e[type=!minecraft:player,tag=nsp_cat.proof]')==0,'actual prior proof entities cleared before saved-fixture ray interaction',25);cat(35.5);attach_saved_fence_leash();cmd('data merge entity '+CAT+' {Sitting:1b,Health:2.0f}');before=observer_state()
   check(CANARY in before['tags'] and before['sitting']is True and before['leashed']is True and abs(before['health']-2)<.01,'actual tagged save fixture sits/leashes/low health before normal save',before)
   check(exact_goal(before,'net.northstar.cat.InstinctVanillaFollowGoal')['priority']==6,'actual active scoped goal before saved restart',before['goals'])
   report['persistedFixtureBefore']=before;close_boot();start_boot('enabled_reload',True);recover_actors();loaded=saved_state_ready(before,'enabled_reload')
