@@ -1,0 +1,32 @@
+{
+  "scope": "Original geometry/painted textures informed by primary references; no photograph, illustration, game texture or mesh bytes are part of the public packet.",
+  "references": [
+    {
+      "url": "https://www.merckvetmanual.com/all-other-pets/rabbits/description-and-physical-characteristics-of-rabbits",
+      "use": "Long ears, strong jumping hind limbs, short tail and two pairs of upper incisors. Actual rabbit-breed illustration personally viewed. Fantasy enlargement does not imply real animal anatomy."
+    },
+    {
+      "url": "https://www.vam.ac.uk/shop/prints/the-white-rabbit-as-herald-mounted-print-161744.html",
+      "use": "Actual Tenniel herald illustration personally viewed: animal muzzle and long feet remain readable beneath tailored clothing. Borrow structural cues only; original costume shapes, palette and eye motifs."
+    },
+    {
+      "url": "https://www.vam.ac.uk/articles/alice-through-the-pages",
+      "use": "Museum context for Tenniel's original illustrated books and subsequent reinterpretation; no film/comic character attribution."
+    }
+  ],
+  "owner_generated_reference": "Actual neon rodent and mutant rabbit concept PNGs personally viewed. Neon-rat crop is authoritative shared Prismatic material direction. Concepts are not in-game evidence.",
+  "design_changes": [
+    "Paired whisker beds, small dark nose, cleft lip and separate upper incisors",
+    "Unequal two-joint ears, hunched chest, bent hocks and long rear feet",
+    "Monster is a crouched power-hare with dominant hindquarters and smaller forepaws",
+    "Layered fur edges, dorsal aurora crystals and inlaid gold eye seals",
+    "Separate Victorian lapels, cuffs, moving coat tails, worn painted cloth and cracked porcelain"
+  ],
+  "retained_scope": "Only four rabbit replacements. Earlier six base and twelve expansion exports remain preserved. Existing rodents need a later separate quality pass; they are not regenerated here.",
+  "proof_status": {
+    "source_tests": "See actual private source-test receipt; these tests do not grade visuals",
+    "exported": false,
+    "personal_visual_acceptance": false,
+    "native_verified": false
+  }
+}

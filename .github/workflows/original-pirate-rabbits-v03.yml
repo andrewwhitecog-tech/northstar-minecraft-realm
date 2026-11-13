@@ -1,0 +1,81 @@
+name: Original pirate rabbits v03
+
+on:
+  pull_request:
+    paths:
+      - 'tools/pirate_rabbits_v03/**'
+      - '.github/workflows/original-pirate-rabbits-v03.yml'
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Exact reviewed main commit SHA to export
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: original-pirate-rabbits-v03-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+        working-directory: tools/pirate_rabbits_v03
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare exact source-test environment
+        run: |
+          python3.12 -m venv .venv
+          .venv/bin/python -m pip --disable-pip-version-check install --only-binary=:all: --require-hashes -r requirements-linux.lock
+      - name: Execute genuine source tests without rendering
+        run: |
+          .venv/bin/python -X utf8 -m compileall -q build_rabbits_v03.py validate_rabbits_v03.py test_rabbits_v03.py run_hosted_rabbits_v03.py
+          .venv/bin/python -X utf8 -m unittest -v test_rabbits_v03.py
+
+  export:
+    if: github.event_name == 'workflow_dispatch' && github.repository_owner == 'andrewwhitecog-tech' && github.event.repository.private == false && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      REVIEWED_SOURCE_COMMIT: ${{ inputs.source_commit }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: tools/pirate_rabbits_v03
+    steps:
+      - name: Read only original asset source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Require exact reviewed main commit
+        run: test "$GITHUB_SHA" = "$REVIEWED_SOURCE_COMMIT"
+      - name: Create pinned hosted Python environment
+        run: |
+          python3.12 -m venv .venv
+          .venv/bin/python -m pip --disable-pip-version-check install --only-binary=:all: --require-hashes -r requirements-linux.lock
+      - name: Execute actual tests, exports and byte validation
+        id: export
+        run: .venv/bin/python -X utf8 run_hosted_rabbits_v03.py
+      - name: Retain actual outputs and failure evidence
+        if: always() && steps.export.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-pirate-rabbits-v03-${{ github.run_id }}
+          retention-days: 1
+          compression-level: 6
+          if-no-files-found: error
+          path: |
+            tools/pirate_rabbits_v03/generated_rabbits_v03/
+            tools/pirate_rabbits_v03/HOSTED_RABBITS_V03_ACTUAL.json
+            tools/pirate_rabbits_v03/RABBIT_EXPORT_VALIDATION_V03_ACTUAL.json
+            tools/pirate_rabbits_v03/*.stdout
+            tools/pirate_rabbits_v03/*.stderr
