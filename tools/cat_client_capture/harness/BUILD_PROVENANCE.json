@@ -1,0 +1,61 @@
+{
+  "schema": "northstar.capture-unique-public-build-provenance.v1",
+  "buildDateUtc": "2026-11-13",
+  "sourceSha256": "cc490d8f3f97703b7fd580c3664c7394d22b0b939fc2cab8024ccdb58b3793e6",
+  "baselineSha256": "b19fefcfee9980099dbf3ebd8426fe8da1f13346c37c347723b6ebc4cc99b532",
+  "jar": {
+    "name": "nsp-route-walk-capture-unique-v01.jar",
+    "sha256": "7d4a68f17d78ae9299ce27dd8275a3ddd4e8c91b968a0d439e1c1ae6a6bead26",
+    "bytes": 20337
+  },
+  "changedOrAddedMembers": [
+    {
+      "path": "nsp/walk/FrameRecorder$Frame.class",
+      "beforeSha256": "09795eab4c0f01a62d33529a5b0b805ae7824a0e8c8186135480791e8bf89c22",
+      "afterSha256": "582343b0e565b2c344d050f1873ec41b84346d91f1afbc4fbfdb901ae16c3e6f"
+    },
+    {
+      "path": "nsp/walk/FrameRecorder$UniqueWriter.class",
+      "beforeSha256": null,
+      "afterSha256": "30b34139ef2b53e73cc60c526e9e69fc732c1d62d05df8c46290470a5703c369"
+    },
+    {
+      "path": "nsp/walk/FrameRecorder.class",
+      "beforeSha256": "8f7faf5412317a25d9bacc5883c5e6ada834023054be0468a3df346c566e265e",
+      "afterSha256": "11079ea1afc024d02d7f0cf31d04615acca62a2318e811f0bb5ec4c074998ad0"
+    }
+  ],
+  "unchangedMembers": 7,
+  "allOtherMemberPayloadsByteIdentical": true,
+  "fabricMetadataByteIdentical": true,
+  "actualBuild": {
+    "compiler": "Microsoft OpenJDK25.0.4.101, --release25",
+    "compilerExits": [
+      0,
+      0
+    ],
+    "junitActual": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "testClass": "nsp.walk.FrameRecorderUniqueWriterTest",
+    "allFourChildExitCodes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "allFourChildActiveProcesses": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "allOwnedTreesClosed": true,
+    "privateRootReceiptSha256": "c551409c73fcdc47ed1082ffbd9980b21ebd695c483b4376d8bdfd59290ec7b1"
+  },
+  "nativeAccepted": false,
+  "scope": "Capture-specific private component recorder. Existing shared heldproof-v02 JAR and LOCK unchanged. Same Fabric mod ID; stage exactly one recorder JAR per fresh capture profile. Full local logs/XML are private and intentionally excluded."
+}
