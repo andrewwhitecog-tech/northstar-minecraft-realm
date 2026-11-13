@@ -1,0 +1,46 @@
+name: Cat instincts Java source and JUnit
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/cat_instincts/**'
+      - '.github/workflows/cat-instincts-source.yml'
+permissions:
+  contents: read
+concurrency:
+  group: cat-instincts-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-build:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Actual javac and14JUnit tests; no Minecraft launch
+        id: build
+        run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "${{ github.sha }}" --output "$RUNNER_TEMP/cat-instincts-source"
+      - name: Verify tracked source remains unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Preserve original candidate and actual source evidence
+        if: always() && steps.build.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-instincts-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-instincts-source/evidence
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 6
+          include-hidden-files: false

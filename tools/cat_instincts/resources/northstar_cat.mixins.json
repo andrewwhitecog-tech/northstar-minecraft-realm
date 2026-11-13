@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.northstar.cat.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "CatGoalMixin",
+    "CatContactVetoMixin",
+    "NaturalWildClassifierMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
