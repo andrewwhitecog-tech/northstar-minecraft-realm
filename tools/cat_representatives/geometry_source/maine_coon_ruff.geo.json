@@ -1,0 +1,456 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.nsp_cat_representatives.maine_coon_ruff",
+        "texture_width": 128,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 2.5,
+        "visible_bounds_offset": [
+          0,
+          1,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "parent": "root",
+          "pivot": [
+            0,
+            7,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                4,
+                -4.5
+              ],
+              "size": [
+                5,
+                5,
+                10
+              ],
+              "uv": [
+                1,
+                1
+              ]
+            },
+            {
+              "origin": [
+                -3,
+                3.7,
+                -4.6
+              ],
+              "size": [
+                6,
+                5.8,
+                10.2
+              ],
+              "uv": [
+                33,
+                1
+              ],
+              "inflate": 0.1
+            },
+            {
+              "origin": [
+                -2.8,
+                3.3,
+                -4.2
+              ],
+              "size": [
+                5.6,
+                2,
+                4.3
+              ],
+              "uv": [
+                68,
+                1
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "paintRegion": "ruff"
+            }
+          ]
+        },
+        {
+          "name": "head",
+          "parent": "body",
+          "pivot": [
+            0,
+            8,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                6,
+                -8
+              ],
+              "size": [
+                6,
+                5,
+                5
+              ],
+              "uv": [
+                90,
+                1
+              ]
+            },
+            {
+              "origin": [
+                -3,
+                10,
+                -6
+              ],
+              "size": [
+                2,
+                3,
+                1
+              ],
+              "uv": [
+                114,
+                1
+              ]
+            },
+            {
+              "origin": [
+                1,
+                10,
+                -6
+              ],
+              "size": [
+                2,
+                3,
+                1
+              ],
+              "uv": [
+                1,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -3.5,
+                5.8,
+                -7.8
+              ],
+              "size": [
+                7,
+                5,
+                4
+              ],
+              "uv": [
+                9,
+                19
+              ],
+              "inflate": 0.1
+            },
+            {
+              "origin": [
+                -4,
+                5.5,
+                -7.3
+              ],
+              "size": [
+                1.4,
+                3.2,
+                3.1
+              ],
+              "uv": [
+                33,
+                19
+              ],
+              "rotation": [
+                0,
+                0,
+                -12
+              ],
+              "pivot": [
+                -2.7,
+                8,
+                -5
+              ],
+              "paintRegion": "ruff"
+            },
+            {
+              "origin": [
+                -2.8,
+                12.4,
+                -5.3
+              ],
+              "size": [
+                0.7,
+                2.2,
+                0.7
+              ],
+              "uv": [
+                44,
+                19
+              ],
+              "rotation": [
+                0,
+                0,
+                -12
+              ],
+              "pivot": [
+                -2.5,
+                11.5,
+                -5
+              ],
+              "paintRegion": "ear_tuft"
+            },
+            {
+              "origin": [
+                2.6,
+                5.5,
+                -7.3
+              ],
+              "size": [
+                1.4,
+                3.2,
+                3.1
+              ],
+              "uv": [
+                49,
+                19
+              ],
+              "rotation": [
+                0,
+                0,
+                12
+              ],
+              "pivot": [
+                2.7,
+                8,
+                -5
+              ],
+              "paintRegion": "ruff"
+            },
+            {
+              "origin": [
+                2.1,
+                12.4,
+                -5.3
+              ],
+              "size": [
+                0.7,
+                2.2,
+                0.7
+              ],
+              "uv": [
+                60,
+                19
+              ],
+              "rotation": [
+                0,
+                0,
+                12
+              ],
+              "pivot": [
+                2.5,
+                11.5,
+                -5
+              ],
+              "paintRegion": "ear_tuft"
+            }
+          ]
+        },
+        {
+          "name": "tail1",
+          "parent": "body",
+          "pivot": [
+            0,
+            7.5,
+            5
+          ],
+          "rotation": [
+            22,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.8,
+                6.8,
+                5
+              ],
+              "size": [
+                1.6,
+                1.6,
+                5
+              ],
+              "uv": [
+                65,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tail2",
+          "parent": "tail1",
+          "pivot": [
+            0,
+            7.5,
+            10
+          ],
+          "rotation": [
+            12,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.7,
+                6.8,
+                10
+              ],
+              "size": [
+                1.4,
+                1.4,
+                5
+              ],
+              "uv": [
+                81,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg_fl",
+          "parent": "body",
+          "pivot": [
+            -1.6,
+            5,
+            -3.2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.4000000000000004,
+                0,
+                -4
+              ],
+              "size": [
+                1.6,
+                5,
+                1.6
+              ],
+              "uv": [
+                96,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg_fr",
+          "parent": "body",
+          "pivot": [
+            1.6,
+            5,
+            -3.2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.8,
+                0,
+                -4
+              ],
+              "size": [
+                1.6,
+                5,
+                1.6
+              ],
+              "uv": [
+                105,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg_bl",
+          "parent": "body",
+          "pivot": [
+            -1.6,
+            5,
+            3.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.4000000000000004,
+                0,
+                2.7
+              ],
+              "size": [
+                1.6,
+                5,
+                1.6
+              ],
+              "uv": [
+                114,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg_br",
+          "parent": "body",
+          "pivot": [
+            1.6,
+            5,
+            3.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.8,
+                0,
+                2.7
+              ],
+              "size": [
+                1.6,
+                5,
+                1.6
+              ],
+              "uv": [
+                1,
+                30
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

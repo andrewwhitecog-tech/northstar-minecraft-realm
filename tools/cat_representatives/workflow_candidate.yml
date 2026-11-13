@@ -1,0 +1,45 @@
+name: Four original cat representatives and CPU geometry views
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/cat_representatives/**'
+      - '.github/workflows/cat-representatives.yml'
+permissions:
+  contents: read
+concurrency:
+  group: cat-representatives-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+jobs:
+  render-four:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Check out exact reviewed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Run actual focused tests, paint four coats and render actual geometry
+        id: representatives
+        run: |
+          python3 --version
+          python3 -B tools/cat_representatives/run_representatives.py --execute --out "$RUNNER_TEMP/cat-representatives" --atlas-scale 4 --view-size 384 --models adult,baby,bedrock
+      - name: Confirm tracked source unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Retain bounded original assets, actual4view renders and receipts
+        if: always() && steps.representatives.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-representatives-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-representatives
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false
+          compression-level: 6

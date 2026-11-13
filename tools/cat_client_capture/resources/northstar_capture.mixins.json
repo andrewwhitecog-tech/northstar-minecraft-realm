@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.northstar.capture",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "CaptureObserverMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
