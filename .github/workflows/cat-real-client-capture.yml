@@ -1,0 +1,131 @@
+name: Reviewed real cat client capture
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - tools/cat_client_capture/**
+      - .github/workflows/cat-real-client-capture.yml
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact reviewed public main commit
+        required: true
+        type: string
+      reviewed_capture_sha256:
+        description: CAPTURE_SOURCE.json SHA256
+        required: true
+        type: string
+      reviewed_cat_sha256:
+        description: Current cat PUBLIC_SOURCE.json SHA256
+        required: true
+        type: string
+      reviewed_native_sha256:
+        description: Current cat NATIVE_SOURCE.json SHA256
+        required: true
+        type: string
+      reviewed_coat_source_sha256:
+        description: Current menagerie PUBLIC_EXPORT_SOURCE.json SHA256
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: cat-real-client-capture-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-compile:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Actual pinned source guards
+        run: |
+          python3 -B - <<'PY'
+          import ast,hashlib,importlib.util,pathlib
+          p=pathlib.Path('tools/cat_client_capture/capture_client.py');ast.parse(p.read_text())
+          s=importlib.util.spec_from_file_location('capture',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+          sha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+          m.source_guard(sha('tools/cat_client_capture/CAPTURE_SOURCE.json'),sha('tools/cat_instincts/PUBLIC_SOURCE.json'),sha('tools/cat_instincts/NATIVE_SOURCE.json'))
+          PY
+      - name: Actual source build and JUnit for pinned client classpath
+        run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/capture-source-compile"
+      - name: Compile observer against actual pinned official client dependencies
+        run: |
+          python3 -B - <<'PY'
+          import os,pathlib,subprocess
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'capture-source-compile';jars=sorted((root/'dependencies').rglob('*.jar'));assert jars
+          out=root/'observer-classes';out.mkdir()
+          subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',os.pathsep.join(map(str,jars)),'-d',str(out),'tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java'],check=True,timeout=120)
+          print('Actual observer javac completed; native execution not run')
+          PY
+  client-capture:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'andrewwhitecog-tech'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+      UV_PYTHON_DOWNLOADS: never
+      NSP_PUBLIC_REPOSITORY: 'true'
+      NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION: '1'
+      EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+      CAPTURE_SHA: ${{ inputs.reviewed_capture_sha256 }}
+      CAT_SHA: ${{ inputs.reviewed_cat_sha256 }}
+      NATIVE_SHA: ${{ inputs.reviewed_native_sha256 }}
+      COAT_SHA: ${{ inputs.reviewed_coat_source_sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Source and exact hosted dispatch guard before downloads
+        run: |
+          python3 -B - <<'PY'
+          import ast,hashlib,importlib.util,os,pathlib
+          path=pathlib.Path('tools/cat_client_capture/capture_client.py');ast.parse(path.read_text())
+          s=importlib.util.spec_from_file_location('capture',path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+          n=m.source_guard(os.environ['CAPTURE_SHA'],os.environ['CAT_SHA'],os.environ['NATIVE_SHA'])
+          n.hosted_guard(os.environ['EXPECTED_COMMIT'])
+          assert hashlib.sha256(pathlib.Path('tools/cat_menagerie/PUBLIC_EXPORT_SOURCE.json').read_bytes()).hexdigest()==os.environ['COAT_SHA']
+          PY
+      - name: Actual source-built behavior mod and real JUnit
+        id: build
+        run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$EXPECTED_COMMIT" --output "$RUNNER_TEMP/cat-client-source"
+      - name: Actual original coat export and source-compiled Java candidate pack
+        id: coats
+        run: python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-coat-original-export"
+      - name: Actual real client, custom coats and original framebuffer capture
+        id: capture
+        run: python3 -B tools/cat_client_capture/capture_client.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Check tracked source remains unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Actual bounded private review footage, frames and original logs
+        if: always() && steps.capture.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-real-client-capture-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ github.workspace }}/cat-client-${{ github.run_id }}-${{ github.run_attempt }}/evidence
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false
+      - name: Actual source build receipt and candidate JAR
+        if: always() && steps.build.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-client-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-client-source/evidence
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false

@@ -1,0 +1,41 @@
+{
+  "schema": "northstar.cat-four-look.v3",
+  "sourceExportRun": "43374368134",
+  "sourceExportPacket": "1f8a2c17546b99106915f812ca3aa26eeda7c9c157b4658ea434eb84fa96d152",
+  "entries": [
+    {
+      "id": "nsp_cat_coats:domestic_bengal",
+      "label": "Bengal inspired domestic cat",
+      "geometryProfile": "bengal_athletic",
+      "baselineProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_maine_coon",
+      "label": "Maine Coon inspired domestic cat",
+      "geometryProfile": "maine_coon_ruff",
+      "baselineProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_sphynx",
+      "label": "Sphynx inspired domestic cat",
+      "geometryProfile": "sphynx_folds",
+      "baselineProfile": "fine_skin"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_obsidian_rainbow",
+      "label": "Obsidian Rainbow fantasy cat",
+      "geometryProfile": "obsidian_prism",
+      "baselineProfile": "stock_cat"
+    }
+  ],
+  "resolution": {
+    "compatibilityScale": 1,
+    "detailScale": 4,
+    "normalizedUVUnchanged": true,
+    "legacyCompilerAcceptsHD": false
+  },
+  "notes": [
+    "Only four representative looks. Frozen183PNGs are not overwritten.",
+    "Java official model silhouette remains stock. Extra shape is authored Bedrock geometry only, not registered/native-proven."
+  ]
+}

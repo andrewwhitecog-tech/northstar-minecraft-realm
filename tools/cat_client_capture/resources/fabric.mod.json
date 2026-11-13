@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "northstar_cat_capture_observer",
+  "version": "0.1.0",
+  "name": "NorthStar isolated capture observer",
+  "environment": "client",
+  "mixins": [
+    "northstar_capture.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "26.3",
+    "java": ">=25"
+  }
+}

@@ -1,0 +1,618 @@
+{
+  "schema": "northstar.cat-paint-models.v1",
+  "source": {
+    "clientSha1": "e877b6a07acd633fb3bb475002175cec036e7b87",
+    "version": "26.3",
+    "methods": [
+      "AdultFelineModel.createBodyMesh",
+      "BabyFelineModel.createBabyLayer"
+    ],
+    "adultHeadDefaultUV": [
+      0,
+      0
+    ],
+    "note": "Authored coordinate/UV transcription; no vanilla texture bytes copied. Adult body pose is default standing layout; renderer is static authoring preview."
+  },
+  "adult": {
+    "width": 64,
+    "height": 32,
+    "axis": "java_down",
+    "cubes": [
+      {
+        "name": "head",
+        "uv": [
+          0,
+          0
+        ],
+        "size": [
+          5,
+          4,
+          5
+        ],
+        "origin": [
+          -2.5,
+          -2,
+          -3
+        ],
+        "pivot": [
+          0,
+          15,
+          -9
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "head"
+      },
+      {
+        "name": "nose",
+        "uv": [
+          0,
+          24
+        ],
+        "size": [
+          3,
+          2,
+          2
+        ],
+        "origin": [
+          -1.5,
+          -0.001,
+          -4
+        ],
+        "pivot": [
+          0,
+          15,
+          -9
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "nose"
+      },
+      {
+        "name": "ear_left",
+        "uv": [
+          0,
+          10
+        ],
+        "size": [
+          1,
+          1,
+          2
+        ],
+        "origin": [
+          -2,
+          -3,
+          0
+        ],
+        "pivot": [
+          0,
+          15,
+          -9
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "ear_left"
+      },
+      {
+        "name": "ear_right",
+        "uv": [
+          6,
+          10
+        ],
+        "size": [
+          1,
+          1,
+          2
+        ],
+        "origin": [
+          1,
+          -3,
+          0
+        ],
+        "pivot": [
+          0,
+          15,
+          -9
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "ear_right"
+      },
+      {
+        "name": "body",
+        "uv": [
+          20,
+          0
+        ],
+        "size": [
+          4,
+          16,
+          6
+        ],
+        "origin": [
+          -2,
+          3,
+          -8
+        ],
+        "pivot": [
+          0,
+          12,
+          -10
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "region": "body"
+      },
+      {
+        "name": "tail1",
+        "uv": [
+          0,
+          15
+        ],
+        "size": [
+          1,
+          8,
+          1
+        ],
+        "origin": [
+          -0.5,
+          0,
+          0
+        ],
+        "pivot": [
+          0,
+          15,
+          8
+        ],
+        "rotation": [
+          51.5662,
+          0,
+          0
+        ],
+        "region": "tail"
+      },
+      {
+        "name": "tail2",
+        "uv": [
+          4,
+          15
+        ],
+        "size": [
+          1,
+          8,
+          1
+        ],
+        "origin": [
+          -0.5,
+          0,
+          0
+        ],
+        "pivot": [
+          0,
+          20,
+          14
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "tail"
+      },
+      {
+        "name": "left_hind_leg",
+        "uv": [
+          8,
+          13
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "origin": [
+          -1,
+          0,
+          1
+        ],
+        "pivot": [
+          1.1,
+          18,
+          5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "right_hind_leg",
+        "uv": [
+          8,
+          13
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "origin": [
+          -1,
+          0,
+          1
+        ],
+        "pivot": [
+          -1.1,
+          18,
+          5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "left_front_leg",
+        "uv": [
+          40,
+          0
+        ],
+        "size": [
+          2,
+          10,
+          2
+        ],
+        "origin": [
+          -1,
+          0,
+          0
+        ],
+        "pivot": [
+          1.2,
+          14.1,
+          -5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "right_front_leg",
+        "uv": [
+          40,
+          0
+        ],
+        "size": [
+          2,
+          10,
+          2
+        ],
+        "origin": [
+          -1,
+          0,
+          0
+        ],
+        "pivot": [
+          -1.2,
+          14.1,
+          -5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      }
+    ]
+  },
+  "baby": {
+    "width": 32,
+    "height": 32,
+    "axis": "java_down",
+    "cubes": [
+      {
+        "name": "head",
+        "uv": [
+          0,
+          0
+        ],
+        "size": [
+          5,
+          4,
+          4
+        ],
+        "origin": [
+          -2.5,
+          -3,
+          -2.875
+        ],
+        "pivot": [
+          0,
+          20,
+          -3.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "head"
+      },
+      {
+        "name": "ear_left",
+        "uv": [
+          18,
+          0
+        ],
+        "size": [
+          1,
+          1,
+          2
+        ],
+        "origin": [
+          -2,
+          -4,
+          -0.875
+        ],
+        "pivot": [
+          0,
+          20,
+          -3.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "ear_left"
+      },
+      {
+        "name": "ear_right",
+        "uv": [
+          24,
+          0
+        ],
+        "size": [
+          1,
+          1,
+          2
+        ],
+        "origin": [
+          1,
+          -4,
+          -0.875
+        ],
+        "pivot": [
+          0,
+          20,
+          -3.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "ear_right"
+      },
+      {
+        "name": "nose",
+        "uv": [
+          18,
+          3
+        ],
+        "size": [
+          3,
+          2,
+          1
+        ],
+        "origin": [
+          -1.5,
+          -1,
+          -3.875
+        ],
+        "pivot": [
+          0,
+          20,
+          -3.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "nose"
+      },
+      {
+        "name": "body",
+        "uv": [
+          0,
+          8
+        ],
+        "size": [
+          4,
+          3,
+          7
+        ],
+        "origin": [
+          -2,
+          -1.5,
+          -3.5
+        ],
+        "pivot": [
+          0,
+          20.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "body"
+      },
+      {
+        "name": "left_front_leg",
+        "uv": [
+          18,
+          18
+        ],
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "origin": [
+          -0.5,
+          0,
+          -1
+        ],
+        "pivot": [
+          1,
+          22,
+          -1.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "right_front_leg",
+        "uv": [
+          12,
+          18
+        ],
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "origin": [
+          -0.5,
+          0,
+          -1
+        ],
+        "pivot": [
+          -1,
+          22,
+          -1.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "left_hind_leg",
+        "uv": [
+          18,
+          22
+        ],
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "origin": [
+          -0.5,
+          0,
+          -1
+        ],
+        "pivot": [
+          1,
+          22,
+          2.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "right_hind_leg",
+        "uv": [
+          12,
+          22
+        ],
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "origin": [
+          -0.5,
+          0,
+          -1
+        ],
+        "pivot": [
+          -1,
+          22,
+          2.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "region": "leg"
+      },
+      {
+        "name": "tail1",
+        "uv": [
+          0,
+          18
+        ],
+        "size": [
+          1,
+          1,
+          5
+        ],
+        "origin": [
+          -0.5,
+          -0.107,
+          0.0849
+        ],
+        "pivot": [
+          0,
+          19.107,
+          3.9151
+        ],
+        "rotation": [
+          -32.5,
+          0,
+          0
+        ],
+        "region": "tail"
+      }
+    ]
+  }
+}
