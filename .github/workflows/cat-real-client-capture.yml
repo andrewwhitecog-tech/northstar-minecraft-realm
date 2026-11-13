@@ -105,6 +105,16 @@ jobs:
       - name: Actual original coat export and source-compiled Java candidate pack
         id: coats
         run: python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-coat-original-export"
+      - name: Prepare missing disposable hosted media/display tools
+        run: |
+          packages=()
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then packages+=(ffmpeg); fi
+          if ! command -v Xvfb >/dev/null; then packages+=(xvfb); fi
+          if [ ${#packages[@]} -gt 0 ]; then
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends "${packages[@]}"
+          fi
+          command -v java javac ffmpeg ffprobe Xvfb
       - name: Actual real client, custom coats and original framebuffer capture
         id: capture
         run: python3 -B tools/cat_client_capture/capture_client.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
