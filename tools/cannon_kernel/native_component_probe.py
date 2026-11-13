@@ -255,7 +255,13 @@ def main():
         steps(5);check(items(POWDER)==3 and items('minecraft:iron_ingot')==2,'held button does not consume twice',{'powder':items(POWDER),'iron':items('minecraft:iron_ingot')});release_button()
         cmd('clone 22 64 23 42 71 43 72 64 23 replace force')
         spawn_target(True);check(score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==40,'owned ship anchor registered',40)
-        press('fire');steps(16);check(score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp')==32,'actual marker trajectory hit owned anchor',score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp'))
+        press('fire');steps(16)
+        first_shot={'shots':score('#shots','ck_stat'),'hits':score('#hits','ck_stat'),'anchorHP':score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp'),'remainingShell':observe('execute if entity @e[type=minecraft:marker,tag=nsp_ck.shell]')}
+        report['firstShotObservation']={'afterTrajectory':first_shot};save()
+        steps(1)
+        next_tick={'shots':score('#shots','ck_stat'),'hits':score('#hits','ck_stat'),'anchorHP':score('@e[type=minecraft:marker,tag=ck.proof.target,limit=1]','ck_hp'),'remainingShell':observe('execute if entity @e[type=minecraft:marker,tag=nsp_ck.shell]')}
+        report['firstShotObservation']['oneActualTickLater']=next_tick
+        check(all(row['shots']==1 and row['hits']==1 and row['anchorHP']==32 and row['remainingShell']==0 for row in (first_shot,next_tick)),'actual first shot hits anchor exactly once and remains stable after shell cleanup',report['firstShotObservation'])
         same=observe('execute if blocks 22 64 23 42 71 43 72 64 23 all');check(same==1,'cannon shot leaves actual fixture blocks and inventory unchanged',same)
         check(score('#shots','ck_stat')==1 and score('#hits','ck_stat')==1,'real shot and hit counters',{'shots':score('#shots','ck_stat'),'hits':score('#hits','ck_stat')})
         release_button();before={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')};press('load');check(before=={'powder':items(POWDER),'iron':items('minecraft:iron_ingot')},'load during cooldown consumes nothing',before);release_button()

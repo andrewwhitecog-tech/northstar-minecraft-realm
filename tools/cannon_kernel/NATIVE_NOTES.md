@@ -2,7 +2,7 @@
 
 This separate manual workflow is a genuine server/Carpet component probe candidate. It is NOT a human-client, Bedrock, moving-ship, complete crafting-chain or live-installation test. No runtime/native/source-test execution was performed while preparing this revision.
 
-The corrected hit-time dimension/site-guard generator d6364d8b4d85b676325b5c303aef2157afbde427ce175dcb8fdc7f2815796825 and28 portable tests passed repaired source workflow43359723924 (Root inspected its actual results). The native workflow generates a fresh pack from those exact source pins; it does not repeat that old unit suite.
+Historical source workflow43359723924 passed the earlier dimension/site-guard generator d6364d8b…; it does not validate the later single-impact repair. The current generator is pinned in NATIVE_SOURCE.json and must pass fresh source CI for this exact change before merge and native dispatch. The native workflow builds a fresh pack from those reviewed pins; it does not silently treat an older source result as current.
 
 ## Runtime and containment
 
@@ -55,3 +55,9 @@ Before any firing, the probe requires two actual observation controls: the exist
 Run43362222649 passed actual actor readiness, positive1/negative0 boolean controls and the server parse audit, then failed reading ck_ld because no gun marker existed. The actor position was still falling above the flat ground, consistent with the demo deck not having been placed. The original failed receipt/log remain preserved; clean Java exit does not change that failed result.
 
 Before demo/build, the fresh component fixture now force-loads only the bounded0..127 x/z site (64chunks) and polls stored-success if-loaded observations for every chunk, breaking each unsuccessful sweep at its first missing chunk. Readiness is capped at120actual seconds within the existing overall native deadline. A timeout fails; no fixture function or actor spawn proceeds. Once all64are observed loaded, demo/build runs and actual block predicates must confirm the barrel, all five floor buttons and sampled platform corners/spawn/control supports. The actual tagged gun marker and its initialized unloaded score must also exist before the actor spawns. These are real hosted assertions awaiting execution, not presumed placements or passes. Production generator/gameplay bytes and all later gameplay assertions remain unchanged.
+
+## Actual first firing failure and exact-one-hit observation
+
+Run43362842158 passed fixture readiness, physical load/fire, authentic powder/iron consumption and held-button debouncing, then failed its first trajectory assertion: the registered anchor fell from40to24 rather than32. The failed native receipt/log remain unchanged. This is an observed gameplay failure; earlier setup repairs and clean server closure do not make it accepted.
+
+The first firing assertion now collects the actual shot counter, hit counter, anchor health and remaining-shell existence before evaluating acceptance. It preserves that snapshot, advances one actual world tick without changing gameplay state, then collects the same values again. Both observations must show exactly1shot,1hit, HP32 and no remaining shell. This detects repeat damage and later counter/health drift; it does not add diagnostic hooks to mutate the game. The production gameplay repair and its source pin are owned separately by Root. Native acceptance of those repaired bytes remains pending.
