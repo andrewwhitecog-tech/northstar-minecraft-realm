@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "northstar_cat_instincts",
+  "version": "0.1.0-26.3-source",
+  "name": "NorthStar Cat Instincts",
+  "description": "Opt-in isolated server behaviour add-on; native acceptance pending.",
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "net.northstar.cat.CatInstincts"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25"
+  },
+  "mixins": [
+    "northstar_cat.mixins.json"
+  ]
+}

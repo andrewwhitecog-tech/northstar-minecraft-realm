@@ -1,0 +1,28 @@
+{
+  "schema": "northstar.cat-public-source.v1",
+  "compiled": false,
+  "testsExecuted": false,
+  "nativeVerified": false,
+  "files": {
+    "tests/net/northstar/cat/InstinctPolicyTest.java": "9e0d87512b7d231292b0cb3f51f5085b4b214ff749f90bee54836f55d59a2b51",
+    "tests/net/northstar/cat/InstinctMotionTest.java": "3f2eb3e13d12a4d27156c28314bbf981ee1c29171d2d027ef4fdd61e804e7ae5",
+    "tests/net/northstar/cat/InstinctLimitsTest.java": "dfbdb22d38419ccc37116c61b0d8d9ba9f9a7680827faf739a4bc86222c7fb48",
+    "portable_build.py": "30e0bbf8313a49abfb12298e35ff0391017e302651e10fde89bd46ade6cec1e5",
+    "DEPENDENCIES.json": "a5c2524d5b93b1b1d0d01d0933aad2dfb3d938747043f60d7040b3485d477d95",
+    "README.md": "edb6bf4e8c1433131f272c2505650c98fb821f6147c25cd29d5208d784a7a623",
+    "resources/northstar_cat.mixins.json": "e5313d8162dc38984a4980ae1c52884420bfdf22ca9326d2d4a030ae7ff3a64c",
+    "resources/fabric.mod.json": "8fa472c6599bb78584b6a713767ee9be783c001c5bd95763f48603fff81b3535",
+    "src/net/northstar/cat/InstinctMotion.java": "90f99bad75f37a632680ef7d224a24a8d8fdaba0e2d613d8bd6ef8d2576995e8",
+    "src/net/northstar/cat/InstinctLimits.java": "df6e361c380de650eca15eba0e9bf973b5a70ca0bbc7c6d95a9f3c1fec624251",
+    "src/net/northstar/cat/InstinctHuntGoal.java": "0e2826039f6b617aa6b1afb4af528be0be546ec2007bd7a04683f11e703388f1",
+    "src/net/northstar/cat/CatInstincts.java": "dfbd99940811d6214ecc85d096694130ae14376cb4424c5eb10093603d341da0",
+    "src/net/northstar/cat/CatContext.java": "2c24fbc9d1042d89e22de19924d9922f2cb1c7013ea707b20d9a58aeb76217e1",
+    "src/net/northstar/cat/InstinctPolicy.java": "6be8e7bbe1400479d638814738084effbda567ae19f4fc53317fe5057f6e7c6b",
+    "src/net/northstar/cat/InstinctPlayGoal.java": "105be728861739b2b7fe5e1b9cfa5d099992ea52ebf02ab07493fb8968273ee4",
+    "src/net/northstar/cat/InstinctReturnGoal.java": "c4ba28ae990d2ec4455cda806bbb791394bf90631d89cfd06f780098a507329b",
+    "src/net/northstar/cat/InstinctSpawnPolicy.java": "d6d3d6c71a3d5d210829dacde6c22d9e6ebeffa1ef975fc8345f8cf2d8a50fd3",
+    "src/net/northstar/cat/mixin/NaturalWildClassifierMixin.java": "86765cefbd4bb12eb742ec846d4e0c5b9452439e6358f109ea5d8aa27375fa98",
+    "src/net/northstar/cat/mixin/CatGoalMixin.java": "577de07456b535af3206ac41f9a157a4ba2975f2afaf191da26246adc47ee82c",
+    "src/net/northstar/cat/mixin/CatContactVetoMixin.java": "dfa4f9515fee59ec8a80d72674c63b37b5a2cdad416531e8d9194502f9104e4e"
+  }
+}
