@@ -1,6 +1,6 @@
 # Cannon kernel: offline source/build fallback
 
-This directory contains a generic, relocatable cannon datapack generator and a synthetic fixture configuration. It does not contain a world save, native controller, player identity, live-server configuration or fishing-retreat content.
+This directory contains a generic, relocatable cannon datapack generator and a synthetic fixture configuration. It contains no existing world save, player identity, live-server configuration or fishing-retreat content. Any companion native component probe has its own source packet and explicit hosted execution guard.
 
 The generator/config bytes originate from the frozen source hashes recorded in PUBLIC_SOURCE.json. The portable tests retain ConfigTests and GeneratedPackTests plus their real unittest XML/JSON reporter. Three platform-specific local-wrapper path tests were omitted; the remaining source contains 28 test methods. That count is a source inventory, not a test result.
 
@@ -27,6 +27,8 @@ Official references:
 - https://docs.github.com/en/actions/concepts/billing-and-usage
 - https://docs.github.com/en/actions/tutorials/store-and-share-data
 
-## Current status
+## Validation boundaries
 
-Source preparation only. No tests, generator, build, cloud job, commit, push, PR or dispatch has been performed for this fallback. A successful future source job will still report nativeVerified=false and liveInstalled=false. It does not accept the full pirate encounter, moving ship, world integration or public release.
+The source workflow builds the datapack and executes the portable unittest suite. Its receipt records the actual result for that exact source revision. A passing source run reports nativeVerified=false and liveInstalled=false. Native component checks are separate and do not accept the full pirate encounter, moving ship, client presentation, world integration or public release.
+
+Hit-time target functions recheck the configured dimension and current site bounds, in addition to registration-time type and ownership checks. Previously registered targets that leave the area must not take damage from an in-area shot.
