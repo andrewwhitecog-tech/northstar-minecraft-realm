@@ -3,7 +3,7 @@
   "scope": "Source preparation only; no native execution",
   "catSourceBinding": "Separate current reviewed PUBLIC_SOURCE.json SHA required at dispatch; no old source pin",
   "files": {
-    "tools/cat_instincts/native_component_probe.py": "7688a4b6bddc0df2ffa0731bb023eb9aa1d16e743b636e540e77922f6afe067c",
+    "tools/cat_instincts/native_component_probe.py": "5bd2a3fcbf703bbefd30a75bcbed8042fc181cddad901a5e39b21e48dc50eafe",
     "tools/cat_instincts/fixtures/CARPET_RUNTIME.json": "89168dc04d3631d6c293e3fde66031476c8285daf82cbb9400fa18c5c8537b78",
     "tools/cat_instincts/OWNER_CODEC_PROVENANCE.json": "e92f48af608e34a143b75c34c79614714b5e394f7616354adf07d15e96db4e1b",
     "tools/cat_instincts/NATIVE_README.md": "3f6cda65dda36bb2d59faf9ffb8b384d7922115458c06d0fb3931f8e6c3802b0",
