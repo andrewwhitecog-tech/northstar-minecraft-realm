@@ -108,8 +108,10 @@ def main():
   try:need(select.select([rdf],[],[],10)[0],'Owned display timeout');display=':'+os.read(rdf,16).decode().strip();need(re.fullmatch(':[0-9]{1,3}',display),'Owned display malformed')
   finally:os.close(rdf)
   extra={'DISPLAY':display,'LIBGL_ALWAYS_SOFTWARE':'1','GALLIUM_DRIVER':'llvmpipe','LP_NUM_THREADS':'2','SDL_VIDEO_DRIVER':'x11','ALSOFT_DRIVERS':'null'};prep=prepare_egl(root);extra.update(prep['env']);report['egl']=prep['provenance'];selected=None;report['sdlProbes']=[]
+  # Keep only reviewed nonsecret host attestations; SDL still validates their real values.
+  probeenv=dict(childenv,**{k:os.environ[k]for k in ['CI','GITHUB_ACTIONS','RUNNER_ENVIRONMENT','RUNNER_OS','ImageOS','GITHUB_EVENT_NAME','GITHUB_REF','GITHUB_REPOSITORY','GITHUB_ACTOR','GITHUB_TRIGGERING_ACTOR','GITHUB_WORKSPACE','GITHUB_RUN_ID','NSP_PUBLIC_REPOSITORY','NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION']if k in os.environ})
   for mode in ['glx','egl']:
-   attempt=dict(extra,SDL_VIDEO_FORCE_EGL='1'if mode=='egl'else'0');p=subprocess.run([sys.executable,'-B',str(RUNTIME/'real_sdl_probe.py'),'--execute','--native-home',runtime['natives'],'--mode',mode],env=dict(childenv,**attempt),capture_output=True,text=True,timeout=30)
+   attempt=dict(extra,SDL_VIDEO_FORCE_EGL='1'if mode=='egl'else'0');p=subprocess.run([sys.executable,'-B',str(RUNTIME/'real_sdl_probe.py'),'--execute','--native-home',runtime['natives'],'--mode',mode],env=dict(probeenv,**attempt),capture_output=True,text=True,timeout=30)
    try:o=json.loads(p.stdout)
    except ValueError:o={}
    report['sdlProbes'].append({'mode':mode,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr});save()
