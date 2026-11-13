@@ -113,7 +113,9 @@ def main():
  def score():
   text=cmd('scoreboard players get #obs ncp');m=re.search(r'\bhas (-?\d+)\b',text);need(m is not None,'Actual score unreadable: '+text);return int(m.group(1))
  def observe(condition):
-  need(condition.startswith('execute ')and 'run say'not in condition,'Boolean execute required');cmd('scoreboard players set #obs ncp -1');cmd('execute store success score #obs ncp run '+condition);n=score();need(n in(0,1),'Actual boolean score not0/1');return n
+  # A zero-fork execute relation invokes no store callback: absent relation remains false.
+  # Real positive ownership and negative absent-entity controls independently test the observation.
+  need(condition.startswith('execute ')and 'run say'not in condition,'Boolean execute required');cmd('scoreboard players set #obs ncp 0');cmd('execute store success score #obs ncp run '+condition);n=score();need(n in(0,1),'Actual boolean score not0/1');return n
  def scalar(query):
   text=cmd('data get '+query);m=re.search(r':\s*(-?\d+(?:\.\d+)?)[bdfLs]?\s*$',text);need(m is not None,'Actual NBT scalar unreadable: '+text);return float(m.group(1))
  def pos(entity):return [scalar('entity '+entity+' Pos['+str(i)+']')for i in range(3)]
@@ -139,7 +141,7 @@ def main():
   while time.monotonic()<end:
    present=observe('execute if entity @a[name='+name+',gamemode=survival]');ops=json.loads((srv/'ops.json').read_text());need(ops==[],'Fresh proof actor must remain non-op');rows.append({'at':utc(),'survivalPresence':present,'ops':ops})
    if present:
-    actual=actual_uuid(name);report.setdefault('actors',{})[name]={'readiness':rows,'actualUuidInts':actual,'actualPosition':pos(name),'realHumanClient':False};check(True,'actual non-op Carpet owner/guest ready '+name,report['actors'][name]);return
+    actual=actual_uuid(name);expected=list(struct.unpack('>iiii',uuid.UUID(offline(name)).bytes));need(actual==expected,'Actual synthetic actor UUID differs from deterministic offline identity');report.setdefault('actors',{})[name]={'readiness':rows,'actualUuidInts':actual,'offlineUuidMatched':True,'actualPosition':pos(name),'realHumanClient':False};check(True,'actual non-op Carpet owner/guest ready '+name,report['actors'][name]);return
    time.sleep(.1)
   check(False,'bounded actual Carpet actor readiness '+name,rows)
  def reset():
@@ -292,8 +294,21 @@ def main():
   if log:log.close()
   lp=evidence/'server.actual.log'
   if lp.exists():
-   lines=lp.read_text(errors='replace').splitlines();patterns=[r'/(?:ERROR|FATAL)\]',r'Failed to (?:load|parse) (?:function|tag|registry|data)',r'Exception in (?:thread|server tick)',r'Encountered an unexpected exception',r'Mixin apply failed'];errors=[x for x in lines if any(re.search(p,x,re.I)for p in patterns)];report['serverLogAudit']={'lineCount':len(lines),'errors':errors}
-   if errors:report['success']=False
+   lines=lp.read_text(errors='replace').splitlines();patterns=[r'/(?:ERROR|FATAL)\]',r'Failed to (?:load|parse) (?:function|tag|registry|data)',r'Exception in (?:thread|server tick)',r'Encountered an unexpected exception',r'Mixin apply failed'];errors=[x for x in lines if any(re.search(p,x,re.I)for p in patterns)]
+   # Carpet asynchronously fetches optional cosmetic profiles even for offline test actors.
+   # Preserve every error; only this exact429 event may be nonfatal after actual actor/owner/closure proof.
+   actors_ok=all(report.get('actors',{}).get(n,{}).get('offlineUuidMatched') is True and report['actors'][n]['readiness'][-1]['survivalPresence']==1 and report['actors'][n]['readiness'][-1]['ops']==[] for n in [OWNER,GUEST])
+   owner_ok=any(c['pass'] and c['label']=='actual owner relation for '+CAT for c in report['checks'])
+   closure=report.get('serverClosure',{});closure_ok=closure.get('exitCode')==0 and closure.get('forced') is False and closure.get('processGroupAlive') is False
+   expected_ids={uuid.UUID(offline(n)).hex for n in [OWNER,GUEST]};warnings=[];fatal=[]
+   for line in errors:
+    match=re.search(r'\[Download-\d+/ERROR\]: Got an error with a html body connecting to https://sessionserver\.mojang\.com/session/minecraft/profile/([0-9a-f]{32})\?unsigned=false:',line)
+    index=lines.index(line);end=next((j for j in range(index+1,len(lines)) if re.match(r'^\[\d\d:\d\d:\d\d\] \[',lines[j])),len(lines));event='\n'.join(lines[index:end])
+    if match and match.group(1) in expected_ids and 'status=429' in event and actors_ok and owner_ok and closure_ok:
+     warnings.append({'rawErrorLine':line,'rawEvent':event,'classification':'Optional synthetic-player cosmetic profile HTTP429; actual actor identity/readiness/ownership and normal closure verified; transport not repaired'})
+    else:fatal.append(line)
+   report['serverLogAudit']={'lineCount':len(lines),'allErrorLines':errors,'fatalErrors':fatal,'nonfatalTransportWarnings':warnings,'actorReadinessIdentityProven':actors_ok,'ownerRelationProven':owner_ok,'normalClosureProven':closure_ok}
+   if fatal:report['success']=False
   report['finishedAt']=utc();save();total=sum(p.stat().st_size for p in evidence.rglob('*')if p.is_file());allowed=total+4096<=2*1024*1024;report['artifactUploadAllowed']=allowed
   if not allowed:report['success']=False;report['errors'].append('Evidence exceeds2MiB; upload withheld, no truncation')
   save()

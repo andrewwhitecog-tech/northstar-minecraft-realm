@@ -1,0 +1,460 @@
+{
+  "schema": "northstar.cat-paint-roster.v1",
+  "entries": [
+    {
+      "id": "nsp_cat_coats:domestic_abyssinian",
+      "label": "Abyssinian inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_american_bobtail",
+      "label": "American Bobtail inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "short_tail"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_american_curl",
+      "label": "American Curl inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "curled_ears"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_american_shorthair",
+      "label": "American Shorthair inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_american_wirehair",
+      "label": "American Wirehair inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_balinese",
+      "label": "Balinese inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_bengal",
+      "label": "Bengal inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_birman",
+      "label": "Birman inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_bombay",
+      "label": "Bombay inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "minecraft:british_shorthair",
+      "label": "British Shorthair inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": true,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_burmese",
+      "label": "Burmese inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_burmilla",
+      "label": "Burmilla inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_chartreux",
+      "label": "Chartreux inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_colorpoint_shorthair",
+      "label": "Colorpoint Shorthair inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_cornish_rex",
+      "label": "Cornish Rex inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "curled_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_devon_rex",
+      "label": "Devon Rex inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "large_ears"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_egyptian_mau",
+      "label": "Egyptian Mau inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_european_burmese",
+      "label": "European Burmese inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_exotic",
+      "label": "Exotic inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_havana_brown",
+      "label": "Havana Brown inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_japanese_bobtail",
+      "label": "Japanese Bobtail inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "short_tail"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_khao_manee",
+      "label": "Khao Manee inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_korat",
+      "label": "Korat inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_laperm",
+      "label": "LaPerm inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "curled_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_lykoi",
+      "label": "Lykoi inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "sparse_roan"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_maine_coon",
+      "label": "Maine Coon inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_manx",
+      "label": "Manx inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "tailless"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_norwegian_forest_cat",
+      "label": "Norwegian Forest Cat inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_ocicat",
+      "label": "Ocicat inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_oriental",
+      "label": "Oriental inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "minecraft:persian",
+      "label": "Persian inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": true,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_ragamuffin",
+      "label": "Ragamuffin inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "minecraft:ragdoll",
+      "label": "Ragdoll inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": true,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_russian_blue",
+      "label": "Russian Blue inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_scottish_fold",
+      "label": "Scottish Fold inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "folded_ear_look"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_selkirk_rex",
+      "label": "Selkirk Rex inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "curled_coat"
+    },
+    {
+      "id": "minecraft:siamese",
+      "label": "Siamese inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": true,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_siberian",
+      "label": "Siberian inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_singapura",
+      "label": "Singapura inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_somali",
+      "label": "Somali inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_sphynx",
+      "label": "Sphynx inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "fine_skin"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_tonkinese",
+      "label": "Tonkinese inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_toybob",
+      "label": "Toybob inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "short_tail"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_turkish_angora",
+      "label": "Turkish Angora inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_turkish_van",
+      "label": "Turkish Van inspired domestic cat",
+      "group": "domestic_breed_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_shorthair_mosaic",
+      "label": "Domestic Shorthair Mosaic",
+      "group": "household_coat_not_pedigree",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:domestic_longhair_tuxedo",
+      "label": "Domestic Longhair Tuxedo",
+      "group": "household_coat_not_pedigree",
+      "reuseVanilla": false,
+      "geometryProfile": "long_coat"
+    },
+    {
+      "id": "nsp_cat_coats:mini_lion",
+      "label": "Miniature Lion look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "mane"
+    },
+    {
+      "id": "nsp_cat_coats:mini_tiger",
+      "label": "Miniature Tiger look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:mini_leopard",
+      "label": "Miniature Leopard look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:mini_jaguar",
+      "label": "Miniature Jaguar look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "broad_muzzle"
+    },
+    {
+      "id": "nsp_cat_coats:mini_snow_leopard",
+      "label": "Miniature Snow Leopard look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "long_tail_fluff"
+    },
+    {
+      "id": "nsp_cat_coats:mini_cheetah",
+      "label": "Miniature Cheetah look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "slender"
+    },
+    {
+      "id": "nsp_cat_coats:mini_eurasian_lynx",
+      "label": "Miniature Eurasian Lynx look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "ear_tufts_short_tail"
+    },
+    {
+      "id": "nsp_cat_coats:mini_caracal",
+      "label": "Miniature Caracal look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "tall_ear_tufts"
+    },
+    {
+      "id": "nsp_cat_coats:mini_serval",
+      "label": "Miniature Serval look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "large_ears"
+    },
+    {
+      "id": "nsp_cat_coats:mini_cougar",
+      "label": "Miniature Cougar look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:mini_melanistic_leopard",
+      "label": "Miniature Melanistic Leopard look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:mini_melanistic_jaguar",
+      "label": "Miniature Melanistic Jaguar look — domestic Cat entity",
+      "group": "miniature_wildcat_look",
+      "reuseVanilla": false,
+      "geometryProfile": "broad_muzzle"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_portal_iris",
+      "label": "Portal Iris fantasy cat",
+      "group": "fictional_fantasy_coat",
+      "reuseVanilla": false,
+      "geometryProfile": "eye_trim"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_aurora_guilloche",
+      "label": "Aurora Guilloche fantasy cat",
+      "group": "fictional_fantasy_coat",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_opal_nebula",
+      "label": "Opal Nebula fantasy cat",
+      "group": "fictional_fantasy_coat",
+      "reuseVanilla": false,
+      "geometryProfile": "crystal_trim"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_obsidian_rainbow",
+      "label": "Obsidian Rainbow fantasy cat",
+      "group": "fictional_fantasy_coat",
+      "reuseVanilla": false,
+      "geometryProfile": "stock_cat"
+    },
+    {
+      "id": "nsp_cat_coats:fantasy_loomwheel_gold",
+      "label": "Loomwheel Gold fantasy cat",
+      "group": "fictional_fantasy_coat",
+      "reuseVanilla": false,
+      "geometryProfile": "eye_trim"
+    },
+    {
+      "id": "nsp_cat_coats:rare_nyan",
+      "label": "Nyan Cat — requested rare cosmic pastry-cat appearance",
+      "group": "requested_rare_fantasy",
+      "reuseVanilla": false,
+      "geometryProfile": "pastry_harness_rainbow_tail"
+    }
+  ]
+}
