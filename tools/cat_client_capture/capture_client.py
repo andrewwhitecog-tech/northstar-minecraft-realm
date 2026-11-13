@@ -21,10 +21,12 @@ def source_guard(capture,cat,native):
 def main():
  a=argparse.ArgumentParser(description=__doc__)
  for name in ['capture','cat','native','coat-source']:a.add_argument('--reviewed-'+name+'-sha256',required=True)
- a.add_argument('--capture-preset',required=True,choices=['hero720','close800']);a.add_argument('--execute',action='store_true');a.add_argument('--expected-commit');a.add_argument('--cat-build-receipt',type=pathlib.Path);a.add_argument('--coat-build-receipt',type=pathlib.Path);a.add_argument('--representative-build-receipt',type=pathlib.Path);a.add_argument('--reviewed-representative-adapter-sha256');a.add_argument('--output',type=pathlib.Path);args=a.parse_args()
+ a.add_argument('--capture-preset',required=True,choices=['hero720','close800']);a.add_argument('--capture-phases',choices=['all','protected'],default='all');a.add_argument('--execute',action='store_true');a.add_argument('--expected-commit');a.add_argument('--cat-build-receipt',type=pathlib.Path);a.add_argument('--coat-build-receipt',type=pathlib.Path);a.add_argument('--representative-build-receipt',type=pathlib.Path);a.add_argument('--reviewed-representative-adapter-sha256');a.add_argument('--output',type=pathlib.Path);args=a.parse_args()
  n=source_guard(args.reviewed_capture_sha256,args.reviewed_cat_sha256,args.reviewed_native_sha256)
  display_ready=load('nsp_capture_display_ready',HOME/'display_ready.py');read_display_number=display_ready.read_display_number;require_display_alive=display_ready.require_display_alive
  hero=load('nsp_cat_hero_fixture',HOME/'hero_fixture.py');config=hero.preset(args.capture_preset)
+ selected_plans=[plan for plan in hero.PHASES if args.capture_phases=='all' or plan['label']=='protected'];selected_labels=[plan['label']for plan in selected_plans]
+ need(selected_labels==(['return','protected']if args.capture_phases=='all'else['protected']),'Exact reviewed phase selection required')
  if not args.execute:print(json.dumps({'sourceVerified':True,'executed':False,'clientVerified':False}));return 0
  need(sha(REPO/'tools/cat_menagerie/PUBLIC_EXPORT_SOURCE.json')==args.reviewed_coat_source_sha256,'Reviewed coat source packet drift');sys.path.insert(0,str(REPO/'tools/cat_menagerie'));ex=load('nsp_capture_export',REPO/'tools/cat_menagerie/run_hosted_export.py');ex.source_guard()
  commit=n.hosted_guard(args.expected_commit);workspace=pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve();root=args.output.resolve();temp=pathlib.Path(os.environ['RUNNER_TEMP']).resolve()
@@ -42,6 +44,7 @@ def main():
   base_coat_sha=sha(args.coat_build_receipt);helper=load('nsp_capture_representative_input',HOME/'representative_input.py');coatroot,coat=helper.validate_adapted_input(args.coat_build_receipt,args.representative_build_receipt,ah,args.reviewed_representative_adapter_sha256)
   representative_input={'baseBuildReceiptSha256':base_coat_sha,'adaptedBuildReceiptSha256':sha(args.representative_build_receipt),'reviewedAdapterSourceSha256':args.reviewed_representative_adapter_sha256,'changedFiles':coat['changedFiles'],'unchangedPayloadFiles':coat['unchangedPayloadFiles'],'provenance':coat['provenance']}
  root.mkdir();e=root/'evidence';e.mkdir();route=root/'route';route.mkdir();report={'commit':commit,'success':False,'errors':[],'commands':[],'phases':[],'catJar':build['jar'],'coatInputReceiptSha256':sha(args.coat_build_receipt),'representativeCoatInput':representative_input,'coatFiles':coat['files'],'heroPreset':{'name':args.capture_preset,**config},'scope':'fresh scoped Java cat hero fixture; isolated actual native capture, NOT public/fullstack/Bedrock acceptance','silent':True,'humanClientProven':False,'bedrockProven':False,'defaultOffProven':False,'saveReloadProven':False,'allSpeciesProven':False,'naturalSpawnProven':False,'existingPetsChanged':False,'liveInstalled':False,'humanVisualAccepted':False,'anatomy':'Stock Java cat geometry with original custom coat CatVariants'}
+ report['requestedPhases']=selected_labels;report['completedPhases']=[];report['completePromo']=False;report['scope']='Private selected-phase Java component capture only; not a complete promo, public/fullstack or Bedrock acceptance'
  server=client=xvfb=r=None;handles=[];procs=[];end=time.monotonic()+1200
  def save():js(e/'CLIENT_CAPTURE_ACTUAL.json',report)
  def cmd(t):
@@ -137,7 +140,7 @@ def main():
   need(selected is not None,'Real SDL3 context failed; no client substitute');(profile/'options.txt').write_text('renderDistance:4\nsimulationDistance:5\nmaxFps:'+str(config['maxFps'])+'\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\nresourcePacks:["vanilla","file/nsp-cat-coats.zip"]\nincompatibleResourcePacks:[]\n');fresh_servers_dat(profile/'servers.dat','127.0.0.1:'+str(gp));values={'auth_player_name':CAM,'version_name':'26.3','game_directory':profile,'assets_root':runtime['assets'],'assets_index_name':'34','auth_uuid':uuid.UUID(offline(CAM)).hex,'auth_access_token':'0','clientid':'0','auth_xuid':'0','version_type':'release','resolution_width':config['width'],'resolution_height':config['height'],'quickPlayPath':str(profile/'quickplay.json'),'quickPlayMultiplayer':'127.0.0.1:'+str(gp),'natives_directory':runtime['natives'],'launcher_name':'northstar-cat-capture','launcher_version':'1','classpath':runtime['client_classpath']};features={'has_custom_resolution':True,'has_quick_plays_support':True,'is_quick_play_multiplayer':True};jvm=arguments(runtime['meta']['arguments']['jvm'],values,features)+arguments(runtime['client_profile'].get('arguments',{}).get('jvm',[]),values,features);game=arguments(runtime['meta']['arguments']['game'],values,features);report['syntheticOfflineFixture']=props.get('online-mode')=='false'and values.get('auth_access_token')=='0'and values.get('auth_player_name')==CAM;client=launch(['java','-Xms256M','-Xmx2G','-XX:ActiveProcessorCount=2','-Djava.awt.headless=false','-Dfabric.noGui=true','-Dnsp.cat.instincts.enabled=true','-Dnsp.walk.dir='+str(route),'-Dnsp.cat.capture.dir='+str(route),*jvm,runtime['client_profile']['mainClass'],*game],profile,'client.actual',selected)
   wait(lambda:observe('if entity @a[name='+CAM+']')==1 and camera_state().get('joined')is True,300,'Actual real client join failed');need('nsp-cat-coats.zip' in (e/'client.actual.log').read_text(errors='replace'),'Actual client log does not show selected custom resource pack');cmd('gamemode spectator '+CAM);check('actual no operators',json.loads((srv/'ops.json').read_text())==[],[]);wait(lambda:camera_state().get('spectator')is True,20,'Actual camera spectator mode was not observed')
   ffargs=['ffmpeg','-hide_banner','-nostdin','-loglevel','error','-f','rawvideo','-pixel_format','rgba','-video_size','{W}x{H}','-framerate','{FPS}','-i','pipe:0','-an','-vf','vflip','-c:v','libx264','-preset','ultrafast','-crf','18','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart',str(e/'{NAME}.mp4')];(route/'ffmpeg_args.txt').write_text('\n'.join(ffargs)+'\n')
-  for plan in hero.PHASES:
+  for plan in selected_plans:
    label=plan['label'];variant=plan['variant'];camera=list(plan['camera']);camera_end=list(plan['cameraEnd'])
    cmd('tick freeze');cmd('tp '+CAM+' 58 70 48 0 0');cmd('kill @e[type=!minecraft:player,tag=nsp_capture.fixture]');settle_frozen(45)
    cmd('tp '+OWNER+' 32.5 65 32.5')
@@ -155,12 +158,13 @@ def main():
    wait(lambda:camera_state().get('hudHidden')is True and any(c.get('alive')is True for c in camera_state().get('clientCats',[])),20,'Client did not observe a living cat with HUD hidden')
    phase={'label':label,'variant':variant,'cameraFeetStart':camera,'cameraFeetEnd':camera_end,'start':pos(CAT),'ownerStart':pos(OWNER),'samples':[],'clientBefore':camera_state(),'mechanism':'Actual spectator camera; autonomous scoped cat AI; no cat position/target/velocity/AI setter in shot'}
    phase['actualFrozenClockBeforeAction']=clock();phase['intentionalFrozenHoldSeconds']=0
+   report['phases'].append(phase);save()
    # Start actual autonomous action as soon as native recorder/HUD readiness is acknowledged.
    cmd('tick unfreeze');ack(prefix+'_recording');until=min(end,time.monotonic()+75)
    while mark(prefix+'_done')is None and time.monotonic()<until:
     alive();phase['samples'].append({'wallMonotonic':time.monotonic(),'cat':pos(CAT),'health':scalar(companion+' Health')if label=='protected'else None,'targetedProtectedVictim':observe('as '+CAT+' on target if entity @s[tag=nsp_capture.victim]')if label=='protected'else None});time.sleep(.1)
    need(mark(prefix+'_done')is not None,'Actual hero recorder did not finish');cmd('tick freeze');phase['clientAfter']=camera_state();phase['routeRows']=rows()[old:]
-   stats=[x['value']for x in phase['routeRows']if x.get('what')=='RECSTOP'];need(len(stats)==1 and isinstance(stats[0],dict),'Actual recorder stats missing');stats=stats[0];phase['recorder']=stats
+   stats=[x['value']for x in phase['routeRows']if x.get('what')=='RECSTOP'];need(len(stats)==1 and isinstance(stats[0],dict),'Actual recorder stats missing');stats=stats[0];phase['recorder']=stats;save()
    need(stats.get('ffmpegExit')==0 and not stats.get('error')and stats.get('width')==config['width']and stats.get('height')==config['height']and stats.get('fps')==config['fps'],'Actual preset/framebuffer/recorder mismatch')
    need(all(stats.get(k)==0 for k in ['framesRepeated','droppedNoGpuSlot','droppedNoRamSlot','gapFrames']),'Actual hero dropped/repeated/gap frames; requested preset is not accepted')
    need(type(stats.get('seconds'))in(int,float)and stats['seconds']>0,'Actual recorder wall duration absent')
@@ -172,14 +176,15 @@ def main():
    if label=='protected':
     check('actual protected companion retains health and no combat targeting',all(p['health']==100 and p['targetedProtectedVictim']==0 for p in phase['samples']),phase['samples'])
     check('actual harmless companion action occurs in shot',max(math.dist(phase['start'],p['cat'])for p in phase['samples'])>.4,{'start':phase['start'],'samples':phase['samples'],'exactGoalAttributionProven':False})
-   report['phases'].append(phase);save()
+   save()
    movie=e/(label+'.mp4');probe=subprocess.run(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(movie)],capture_output=True,text=True,timeout=20);need(probe.returncode==0,'Actual ffprobe failed');media=json.loads(probe.stdout);duration=float(media['format']['duration']);videos=[v for v in media['streams']if v['codec_type']=='video']
    need(6<=duration<15 and len(videos)==1 and videos[0]['width']==config['width']and videos[0]['height']==config['height']and videos[0]['avg_frame_rate']==str(config['fps'])+'/1'and not any(v['codec_type']=='audio'for v in media['streams']),'Actual silent hero media format/cadence mismatch')
    phase['ffprobe']=media;decode=subprocess.run(['ffmpeg','-v','error','-threads','2','-i',str(movie),'-f','null','-'],capture_output=True,text=True,timeout=75);need(decode.returncode==0 and not decode.stderr.strip(),'Actual full movie decode failed');phase['movie']={'sha256':sha(movie),'bytes':movie.stat().st_size}
    for i,fraction in enumerate([0,.25,.5,.75,1]):
     frame=e/(label+'_qc_'+str(i)+'.png');t=min(duration-.12,duration*fraction);q=subprocess.run(['ffmpeg','-v','error','-threads','2','-ss',str(max(0,t)),'-i',str(movie),'-frames:v','1',str(frame)],capture_output=True,text=True,timeout=20);need(q.returncode==0 and frame.is_file(),'Actual timeline frame extraction failed')
    for pic in (profile/'screenshots').glob(label+'*.png'):shutil.copyfile(pic,e/('client_'+pic.name))
-   ack(prefix+'_done');wait(lambda:any(x.get('what')=='DONE'for x in rows()[old:]),10,'Actual route completion absent');save()
+   ack(prefix+'_done');wait(lambda:any(x.get('what')=='DONE'for x in rows()[old:]),10,'Actual route completion absent');phase['technicalAccepted']=True;report['completedPhases'].append(label);save()
+  need(report['completedPhases']==selected_labels,'Every selected component phase must complete actual checks')
   (route/'STOP_CLIENT').write_text('normal owned shutdown\n');client.wait(timeout=45);check('actual client normal exit',client.returncode==0,{'exit':client.returncode,'observer':camera_state()});check('actual observer acknowledged owned stop',not (route/'CLIENT_ERROR.txt').exists() and camera_state().get('stopRequested') is True,camera_state());report['technicalCaptureCompleted']=True
  except BaseException:report['errors'].append(traceback.format_exc());print(report['errors'][-1],file=sys.stderr)
  finally:
