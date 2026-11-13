@@ -3,6 +3,8 @@ package net.northstar.cat.mixin;
 import java.util.ArrayList;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.CatLieOnBlockGoal;
+import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
+import net.northstar.cat.InstinctVanillaFollowGoal;
 import net.northstar.cat.CatInstincts;
 import net.northstar.cat.InstinctMotion;
 import net.minecraft.world.entity.TamableAnimal;
@@ -34,6 +36,8 @@ public abstract class CatGoalMixin extends TamableAnimal {
             for (var wrapped:new ArrayList<>(goalSelector.getAvailableGoals())) {
                 if (wrapped.getGoal() instanceof CatLieOnBlockGoal) {
                     var bed=wrapped.getGoal();goalSelector.removeGoal(bed);goalSelector.addGoal(InstinctMotion.BED_PRIORITY,bed);
+                } else if (wrapped.getGoal().getClass()==FollowOwnerGoal.class) {
+                    goalSelector.removeGoal(wrapped.getGoal());goalSelector.addGoal(6,new InstinctVanillaFollowGoal(cat));
                 }
             }
         }
