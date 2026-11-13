@@ -1,0 +1,79 @@
+name: Reviewed cannon kernel native component
+on:
+  workflow_dispatch:
+    inputs:
+      reviewed_source_sha256:
+        description: Root-reviewed tools/cannon_kernel/NATIVE_SOURCE.json SHA256
+        required: true
+        type: string
+      expected_commit:
+        description: Exact reviewed main commit (40 lowercase hexadecimal characters)
+        required: true
+        type: string
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/cannon_kernel/native_component_probe.py'
+      - 'tools/cannon_kernel/NATIVE_SOURCE.json'
+      - 'tools/cannon_kernel/fixtures/**'
+      - '.github/workflows/cannon-kernel-native.yml'
+permissions:
+  contents: read
+concurrency:
+  group: cannon-kernel-native-component
+  cancel-in-progress: false
+jobs:
+  source-parse:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Parse native source only and verify packet, no network or Java
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python3 -B -c "import ast,pathlib; ast.parse(pathlib.Path('tools/cannon_kernel/native_component_probe.py').read_text(encoding='utf-8'))"
+          PACKET_SHA=$(sha256sum tools/cannon_kernel/NATIVE_SOURCE.json | cut -d' ' -f1)
+          python3 -B tools/cannon_kernel/native_component_probe.py --reviewed-source-sha256 "$PACKET_SHA"
+      - run: git diff --exit-code
+  native-component:
+    if: github.event_name == 'workflow_dispatch' && github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'andrewwhitecog-tech'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+      REVIEWED_CANNON_SOURCE_SHA256: ${{ inputs.reviewed_source_sha256 }}
+      EXPECTED_CANNON_COMMIT: ${{ inputs.expected_commit }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Validate reviewed component source without runtime execution
+        run: python3 -B tools/cannon_kernel/native_component_probe.py --reviewed-source-sha256 "$REVIEWED_CANNON_SOURCE_SHA256"
+      - name: Generate fresh native input from the already source-tested exact generator
+        run: python3 -B tools/cannon_kernel/build_cannon.py --config tools/cannon_kernel/demo_config.json --output "$RUNNER_TEMP/cannon-native-pack" --receipt "$RUNNER_TEMP/cannon-native-manifest.json"
+      - name: Actual Fabric and Carpet server component probe
+        id: native
+        run: python3 -B tools/cannon_kernel/native_component_probe.py --execute --reviewed-source-sha256 "$REVIEWED_CANNON_SOURCE_SHA256" --expected-commit "$EXPECTED_CANNON_COMMIT" --pack "$RUNNER_TEMP/cannon-native-pack" --manifest "$RUNNER_TEMP/cannon-native-manifest.json" --output "$RUNNER_TEMP/cannon-native-component"
+      - name: Preserve only bounded actual server receipts and logs
+        if: always() && steps.native.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cannon-native-component-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cannon-native-component/evidence
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false
+      - name: Confirm tracked sources remain unchanged
+        if: always()
+        run: git diff --exit-code
+# No client, Xvfb, GPU, existing calibration guard, paid runner, secret or public-world access.
