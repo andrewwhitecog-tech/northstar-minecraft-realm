@@ -1,0 +1,102 @@
+name: Cat instincts fresh native component proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/cat_instincts/**'
+      - '.github/workflows/cat-instincts-native.yml'
+      - 'tools/cloud_survival_calibration/download_runtime.py'
+      - 'tools/cloud_survival_calibration/LOCK.json'
+      - 'tools/cloud_survival_calibration/metadata/**'
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact reviewed main commit (40 lowercase hex)
+        required: true
+        type: string
+      reviewed_source_sha256:
+        description: Reviewed NATIVE_SOURCE.json SHA256
+        required: true
+        type: string
+      reviewed_cat_source_sha256:
+        description: Reviewed current PUBLIC_SOURCE.json SHA256, after return repair
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: cat-native-component-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-only:
+    if: github.event_name == 'pull_request' && github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Parse source without running native or downloading dependencies
+        run: |
+          python3 -B - <<'PY'
+          import ast, hashlib, pathlib, subprocess
+          home=pathlib.Path('tools/cat_instincts')
+          ast.parse((home/'native_component_probe.py').read_text())
+          sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+          subprocess.run(['python3','-B',str(home/'native_component_probe.py'),'--reviewed-source-sha256',sha(home/'NATIVE_SOURCE.json'),'--reviewed-cat-source-sha256',sha(home/'PUBLIC_SOURCE.json')],check=True,timeout=20)
+          PY
+  native-component:
+    if: github.event_name == 'workflow_dispatch' && github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.actor == 'andrewwhitecog-tech' && github.ref == 'refs/heads/main' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+      EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+      NATIVE_SHA: ${{ inputs.reviewed_source_sha256 }}
+      CAT_SHA: ${{ inputs.reviewed_cat_source_sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Verify reviewed sources and exact hosted dispatch before downloads
+        run: |
+          python3 -B - <<'PY'
+          import importlib.util,os
+          s=importlib.util.spec_from_file_location('cat_native','tools/cat_instincts/native_component_probe.py')
+          m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+          m.source_guard(os.environ['NATIVE_SHA'],os.environ['CAT_SHA'])
+          m.hosted_guard(os.environ['EXPECTED_COMMIT'])
+          PY
+      - name: Build actual current cat source and run its real JUnit suite
+        id: build
+        run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$EXPECTED_COMMIT" --output "$RUNNER_TEMP/cat-native-source"
+      - name: Run fresh loopback server component proof with source-built JAR
+        id: native
+        run: python3 -B tools/cat_instincts/native_component_probe.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-source-sha256 "$NATIVE_SHA" --reviewed-cat-source-sha256 "$CAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-native-source/evidence/BUILD_TEST_ACTUAL.json" --output "$RUNNER_TEMP/cat-native-component"
+      - name: Check tracked source remains unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Preserve actual source-built candidate and JUnit evidence
+        if: always() && steps.build.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-native-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-native-source/evidence
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false
+      - name: Preserve actual bounded native evidence only, never worlds or dependencies
+        if: always() && steps.native.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-native-component-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-native-component/evidence
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false

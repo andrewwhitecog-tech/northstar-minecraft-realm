@@ -1,0 +1,35 @@
+{
+  "schema": "northstar.cat-owner-codec.v1",
+  "minecraft": "26.3",
+  "officialClientArtifact": {
+    "url": "https://piston-data.mojang.com/v1/objects/e877b6a07acd633fb3bb475002175cec036e7b87/client.jar",
+    "sha1": "e877b6a07acd633fb3bb475002175cec036e7b87"
+  },
+  "verifiedFromActualJavap": {
+    "TamableAnimal": {
+      "ownerKey": "Owner",
+      "sittingKey": "Sitting",
+      "writeMethod": "addAdditionalSaveData(ValueOutput)",
+      "readMethod": "readAdditionalSaveData(ValueInput)"
+    },
+    "EntityReference": {
+      "storeCodec": "UUIDUtil.CODEC",
+      "readMethod": "readWithOldOwnerConversion"
+    },
+    "ExecuteCommand": {
+      "observedRelationLiterals": [
+        "owner",
+        "leasher",
+        "target"
+      ]
+    },
+    "GameRules": {
+      "observedRegistryLiterals": [
+        "spawn_mobs",
+        "advance_time"
+      ]
+    }
+  },
+  "fixtureIdentity": "Owner UUID must be read from actually joined generic Carpet player, then copied as typed NBT; no private/static player UUID",
+  "nativeFixtureExecuted": false
+}
