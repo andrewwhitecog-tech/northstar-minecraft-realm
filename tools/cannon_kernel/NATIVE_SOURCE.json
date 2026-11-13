@@ -8,8 +8,8 @@
   "liveInstalled": false,
   "files": {
     ".github/workflows/cannon-kernel-native.yml": "5d0a382a0754c43c4633311fd1f51162e0791e31b93dde4d2584e9161bea2811",
-    "tools/cannon_kernel/native_component_probe.py": "abc4f063e8be9c4ad4b4874e9fb0d80f1b9415edb5d1e6a70026d393efeb3544",
-    "tools/cannon_kernel/NATIVE_NOTES.md": "ba1099c5abc5322565eb6323163ff2cc43776c9a364bf83d34ca4d3fc1c99003",
+    "tools/cannon_kernel/native_component_probe.py": "92901c403ce598091c3d70a5b68f61456862e7e7518cb22388961ebfcfe0cf32",
+    "tools/cannon_kernel/NATIVE_NOTES.md": "e3eca31ff51a0921dd5be3178802a91e7963476924764d130375c0d90b27b63d",
     "tools/cannon_kernel/fixtures/.gitattributes": "3882aa8fa8abb7be842944665ad62f39300cd673fc538b4c5fd433efc05946ea",
     "tools/cannon_kernel/fixtures/AMMO_PROVENANCE.json": "d4ea1fd74a891350f5708fd77f107b80daaa2d90f8162146b9434c6260ec68ea",
     "tools/cannon_kernel/fixtures/black_powder.json": "d2821c0ba580ec48180c820df8d9103e9ec0821aeb2f6c716cbbed726ff75f15",
