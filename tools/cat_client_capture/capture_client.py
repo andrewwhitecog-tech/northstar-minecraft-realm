@@ -4,6 +4,8 @@ import argparse,hashlib,importlib.util,json,math,os,pathlib,re,secrets,select,sh
 HOME=pathlib.Path(__file__).resolve().parent;REPO=HOME.parents[1];RUNTIME=REPO/'tools/cloud_survival_calibration'
 CAM='CatCaptureCam';OWNER='CatProofOwner';CAT='@e[type=minecraft:cat,tag=nsp_capture.main,limit=1]'
 IDS=['domestic_bengal','domestic_maine_coon','domestic_sphynx','fantasy_obsidian_rainbow']
+RECORDER_REL='tools/cat_client_capture/harness/nsp-route-walk-capture-unique-v01.jar'
+RECORDER_SHA='7d4a68f17d78ae9299ce27dd8275a3ddd4e8c91b968a0d439e1c1ae6a6bead26'
 def need(v,m):
  if not v:raise RuntimeError(m)
 def sha(p):return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
@@ -14,6 +16,7 @@ def load(name,path):
 def source_guard(capture,cat,native):
  need(re.fullmatch('[0-9a-f]{64}',capture or '')and sha(HOME/'CAPTURE_SOURCE.json')==capture,'Exact reviewed capture packet required')
  graph=json.loads((HOME/'CAPTURE_SOURCE.json').read_text())['files'];need('tools/cat_client_capture/hero_fixture.py'in graph,'Reviewed hero fixture must be in capture source graph')
+ need(graph.get(RECORDER_REL)==RECORDER_SHA,'Exact reviewed capture-only unique-frame recorder required')
  for rel,pin in graph.items():
   p=(REPO/rel).resolve();need(not pathlib.Path(rel).is_absolute()and '..'not in pathlib.Path(rel).parts and p.is_relative_to(REPO)and p.is_file()and not p.is_symlink()and sha(p)==pin,'Capture source drift: '+rel)
  n=load('nsp_capture_native',REPO/'tools/cat_instincts/native_component_probe.py');n.source_guard(native,cat);return n
@@ -105,7 +108,8 @@ def main():
     if p.is_file():z.write(p,p.relative_to(coatroot/'java_resourcepack').as_posix())
   report['selectedClientResourcePack']={'entry':'file/nsp-cat-coats.zip','sha256':sha(rp),'texturePins':{k:v for k,v in coat['files'].items()if k.endswith('.png')and any('/'+name+'.png' in k or '/'+name+'_baby.png'in k for name in IDS)}}
   for place in [srv/'mods',profile/'mods']:shutil.copyfile(jar,place/jar.name);shutil.copyfile(runtime['mods']['0.165.0+26.3'],place/'fabric-api.jar')
-  carpet=json.loads((REPO/'tools/cat_instincts/fixtures/CARPET_RUNTIME.json').read_text())['files'][0];from download_runtime import Downloader;d=Downloader(root/'runtime',lock['limits']);carpetjar=d.get(carpet['url'],root/'runtime/mods'/carpet['filename'],carpet['hashes'],carpet['size']);shutil.copyfile(carpetjar,srv/'mods/carpet.jar');shutil.copyfile(RUNTIME/lock['harness']['path'],profile/'mods/route-recorder.jar');shutil.copyfile(observer,profile/'mods/observer.jar')
+  carpet=json.loads((REPO/'tools/cat_instincts/fixtures/CARPET_RUNTIME.json').read_text())['files'][0];from download_runtime import Downloader;d=Downloader(root/'runtime',lock['limits']);carpetjar=d.get(carpet['url'],root/'runtime/mods'/carpet['filename'],carpet['hashes'],carpet['size']);shutil.copyfile(carpetjar,srv/'mods/carpet.jar');shutil.copyfile(REPO/RECORDER_REL,profile/'mods/route-recorder.jar');shutil.copyfile(observer,profile/'mods/observer.jar')
+  need(sha(profile/'mods/route-recorder.jar')==RECORDER_SHA,'Actual staged capture-only recorder drift');report['captureRecorder']={'artifact':RECORDER_REL,'sha256':sha(profile/'mods/route-recorder.jar'),'bytes':(profile/'mods/route-recorder.jar').stat().st_size,'baselineHarnessSha256':lock['harness']['sha256'],'singleRecorderStaged':'route-recorder.jar'};save()
   def offline(name):return str(uuid.UUID(bytes=hashlib.md5(('OfflinePlayer:'+name).encode()).digest(),version=3))
   profiles=[{'name':name,'uuid':offline(name)}for name in[CAM,OWNER]];(srv/'ops.json').write_text('[]');js(srv/'whitelist.json',profiles);js(srv/'usercache.json',[{**p,'expiresOn':'2099-01-01 00:00:00 +0000'}for p in profiles]);ports=[]
   for _ in range(2):
@@ -167,6 +171,10 @@ def main():
    stats=[x['value']for x in phase['routeRows']if x.get('what')=='RECSTOP'];need(len(stats)==1 and isinstance(stats[0],dict),'Actual recorder stats missing');stats=stats[0];phase['recorder']=stats;save()
    need(stats.get('ffmpegExit')==0 and not stats.get('error')and stats.get('width')==config['width']and stats.get('height')==config['height']and stats.get('fps')==config['fps'],'Actual preset/framebuffer/recorder mismatch')
    need(all(stats.get(k)==0 for k in ['framesRepeated','droppedNoGpuSlot','droppedNoRamSlot','gapFrames']),'Actual hero dropped/repeated/gap frames; requested preset is not accepted')
+   sequence_counts=['framesSubmitted','framesCopied','framesWritten','uniqueFramesWritten','firstWrittenSequence','lastWrittenSequence','lastWrittenSamplingIndex','samplingIntervalsSkipped','sourceSequenceGaps','duplicateOrOutOfOrderRejected','pendingGpuCopiesAtClose','callbacksAfterWriterClose']
+   need(all(type(stats.get(k))is int and stats[k]>=0 for k in sequence_counts),'Actual unique-frame sequence/drain diagnostics missing or malformed')
+   need(stats.get('writerProducerFinished')is True and stats.get('sourceFrameSequenceConsistent')is True and all(stats[k]==0 for k in ['sourceSequenceGaps','duplicateOrOutOfOrderRejected','pendingGpuCopiesAtClose','callbacksAfterWriterClose']),'Actual GPU producer/unique-frame sequence did not finish consistently')
+   need(stats['framesSubmitted']==stats['framesCopied']==stats['framesWritten']==stats['uniqueFramesWritten'] and stats['firstWrittenSequence']==1 and stats['lastWrittenSequence']==stats['framesWritten'],'Actual submitted/copied/written unique-frame identities disagree')
    need(type(stats.get('seconds'))in(int,float)and stats['seconds']>0,'Actual recorder wall duration absent')
    phase['actualCopiedFramesPerWallSecond']=stats['framesCopied']/stats['seconds'];need(stats['framesWritten']==stats['framesCopied']and stats['framesWritten']>=config['fps']*6 and phase['actualCopiedFramesPerWallSecond']>=config['fps']*.94,'Requested actual sustained cadence not met; do not duplicate/upscale or silently downgrade')
    need(phase['samples'],'Actual gameplay samples missing')
@@ -179,7 +187,7 @@ def main():
    save()
    movie=e/(label+'.mp4');probe=subprocess.run(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(movie)],capture_output=True,text=True,timeout=20);need(probe.returncode==0,'Actual ffprobe failed');media=json.loads(probe.stdout);duration=float(media['format']['duration']);videos=[v for v in media['streams']if v['codec_type']=='video']
    need(6<=duration<15 and len(videos)==1 and videos[0]['width']==config['width']and videos[0]['height']==config['height']and videos[0]['avg_frame_rate']==str(config['fps'])+'/1'and not any(v['codec_type']=='audio'for v in media['streams']),'Actual silent hero media format/cadence mismatch')
-   phase['ffprobe']=media;decode=subprocess.run(['ffmpeg','-v','error','-threads','2','-i',str(movie),'-f','null','-'],capture_output=True,text=True,timeout=75);need(decode.returncode==0 and not decode.stderr.strip(),'Actual full movie decode failed');phase['movie']={'sha256':sha(movie),'bytes':movie.stat().st_size}
+   phase['ffprobe']=media;save();encoded_count=videos[0].get('nb_frames');need(type(encoded_count)is str and re.fullmatch('[0-9]+',encoded_count)is not None,'Actual ffprobe encoded frame count missing');phase['encodedFrameCount']=int(encoded_count);save();need(phase['encodedFrameCount']==stats['framesWritten'],'Actual encoded frames differ from unique recorder writes');decode=subprocess.run(['ffmpeg','-v','error','-threads','2','-i',str(movie),'-f','null','-'],capture_output=True,text=True,timeout=75);need(decode.returncode==0 and not decode.stderr.strip(),'Actual full movie decode failed');phase['movie']={'sha256':sha(movie),'bytes':movie.stat().st_size}
    for i,fraction in enumerate([0,.25,.5,.75,1]):
     frame=e/(label+'_qc_'+str(i)+'.png');t=min(duration-.12,duration*fraction);q=subprocess.run(['ffmpeg','-v','error','-threads','2','-ss',str(max(0,t)),'-i',str(movie),'-frames:v','1',str(frame)],capture_output=True,text=True,timeout=20);need(q.returncode==0 and frame.is_file(),'Actual timeline frame extraction failed')
    for pic in (profile/'screenshots').glob(label+'*.png'):shutil.copyfile(pic,e/('client_'+pic.name))

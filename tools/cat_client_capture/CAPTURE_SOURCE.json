@@ -1,12 +1,12 @@
 {
   "schema": "northstar.cat-real-client-capture-source.v1",
-  "status": "PROPOSED_SOURCE_ONLY_SYNTAX_TESTS_NATIVE_NOT_RUN",
+  "status": "CAPTURE_RECORDER_COMPILED_AND_JUNIT8_PASSED; INTEGRATION_CI_AND_NATIVE_PENDING",
   "files": {
-    "tools/cat_client_capture/capture_client.py": "bc16a8478c82fd11e7f9e8c2c6fd96455ce0d29104a56ba4d4b8f5bbc8d034c9",
+    "tools/cat_client_capture/capture_client.py": "f02d851dde41cd62d929897c02c3a28648ee56475ac437b4cb2a590ee62eee99",
     "tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java": "a069ad20b4e6410c82fa3fe2c068ddea9a60b9ef05441aee7b914a7db1f7570c",
     "tools/cat_client_capture/resources/fabric.mod.json": "676f51aaea2efa2849b98b3bd0e9a7c1694511f54923fd2b9d5513e4e2673e49",
     "tools/cat_client_capture/resources/northstar_capture.mixins.json": "baae00fec2c80e347191f10de54e739b7c0b65a38f08fcf6ba769e0ec852655c",
-    ".github/workflows/cat-real-client-capture.yml": "2dcc11433ae2cc43a2055614a3d4cbc1100d4b32c5ddfcb2c6086113b302dbbc",
+    ".github/workflows/cat-real-client-capture.yml": "4d450ddf216912fd2002e6e1fbf71284eb3694ba5618ff7c7051d19c7c0034d0",
     "tools/cloud_survival_calibration/download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "tools/cloud_survival_calibration/native_calibration.py": "9bf65f9e27ee1b3db793ac4bebec1c52fe0602a7e8c3f86a59d3f8a629f1ed9e",
     "tools/cloud_survival_calibration/nbt_region.py": "0948c9ce6afa85a6e83beadbd4151e4101ed687a64c1f4a2b786c7bb3e782c2d",
@@ -46,7 +46,25 @@
     "tools/cat_native_representatives/inputs/representatives/compat/originals/fantasy_obsidian_rainbow/baby.png": "28daccb052922cb2b322d5376e036253226b2df9f407226732b90159ed62b91c",
     "tools/cat_client_capture/display_ready.py": "f20cef3665245924f102255ffec944ada632fd5a80389eb0d17bb8b23e197e38",
     "tools/cat_client_capture/test_display_ready.py": "505ba9541fa34c4abdfb8d7d00b85935a52b922ecc2802628f525dea8206f7ca",
-    "tools/cat_client_capture/hero_fixture.py": "dd334e6f56b4ca250df55cca85bccf5641e7e9e9c0f53f3cc3bec4f1def55ba9"
+    "tools/cat_client_capture/hero_fixture.py": "dd334e6f56b4ca250df55cca85bccf5641e7e9e9c0f53f3cc3bec4f1def55ba9",
+    "tools/cat_client_capture/harness/nsp-route-walk-capture-unique-v01.jar": "7d4a68f17d78ae9299ce27dd8275a3ddd4e8c91b968a0d439e1c1ae6a6bead26",
+    "tools/cat_client_capture/harness/src/nsp/walk/FrameRecorder.java": "cc490d8f3f97703b7fd580c3664c7394d22b0b939fc2cab8024ccdb58b3793e6",
+    "tools/cat_client_capture/harness/tests/nsp/walk/FrameRecorderUniqueWriterTest.java": "a731dd75284b476382753fff7eaa9ec35fdd105023013a5ca80d671097bdc3d5",
+    "tools/cat_client_capture/harness/package_capture_harness.py": "3708c34c948ed68cd2c0edaae9b1557dcde4dc299bfd20fc773c533bbe3bed9e",
+    "tools/cat_client_capture/harness/BUILD_PROVENANCE.json": "2d3716972afdfe83cced177ec49e3ce739e237db5f85f51e642bebc040c3d843",
+    "tools/cat_client_capture/harness/README.md": "81e8e8a339a6393dc98cb53fb2d261db82c02f0501ee060b73f3f4866d98f2bf"
   },
-  "scope": "Fresh synthetic Java component closeups with four improved COMPAT coats; no world-v2/Bloom installation or new production-mod authorization"
+  "scope": "Fresh synthetic Java component closeups with four improved COMPAT coats; no world-v2/Bloom installation or new production-mod authorization",
+  "captureRecorder": {
+    "path": "tools/cat_client_capture/harness/nsp-route-walk-capture-unique-v01.jar",
+    "sha256": "7d4a68f17d78ae9299ce27dd8275a3ddd4e8c91b968a0d439e1c1ae6a6bead26",
+    "baselineSharedHarnessUnchanged": true,
+    "localJunitActual": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nativeAccepted": false
+  }
 }

@@ -73,7 +73,7 @@ jobs:
         run: python3 -B -m unittest discover -s tools/cat_client_capture -p "test_*.py" -v
       - name: Actual source build and JUnit for pinned client classpath
         run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/capture-source-compile"
-      - name: Compile observer against actual pinned official client dependencies
+      - name: Compile observer and unique recorder; execute recorder JUnit8
         run: |
           python3 -B - <<'PY'
           import os,pathlib,subprocess
@@ -81,6 +81,20 @@ jobs:
           out=root/'observer-classes';out.mkdir()
           subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',os.pathsep.join(map(str,jars)),'-d',str(out),'tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java'],check=True,timeout=120)
           print('Actual observer javac completed; native execution not run')
+          # Reuse ONLY the already downloaded, pinned client/JUnit dependencies.
+          import json,xml.etree.ElementTree as ET
+          recorder=root/'recorder-classes';recorder.mkdir();tests=root/'recorder-tests';tests.mkdir()
+          cp=os.pathsep.join(map(str,jars))
+          subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',cp,'-d',str(recorder),'tools/cat_client_capture/harness/src/nsp/walk/FrameRecorder.java'],check=True,timeout=120)
+          testcp=str(recorder)+os.pathsep+cp
+          subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',testcp,'-d',str(tests),'tools/cat_client_capture/harness/tests/nsp/walk/FrameRecorderUniqueWriterTest.java'],check=True,timeout=120)
+          xml=root/'recorder-junit';run=subprocess.run(['java','-XX:ActiveProcessorCount=2','-Xmx512M','-Djava.awt.headless=true','-cp',str(tests)+os.pathsep+testcp,'org.junit.platform.console.ConsoleLauncher','execute','--select-class','nsp.walk.FrameRecorderUniqueWriterTest','--reports-dir',str(xml),'--fail-if-no-tests','--disable-banner','--details=tree'],timeout=60)
+          reports=list(xml.glob('TEST-*.xml'));assert reports,'Actual recorder JUnit XML missing'
+          counts={k:sum(int(ET.parse(p).getroot().attrib[k])for p in reports)for k in ['tests','failures','errors','skipped']}
+          (root/'recorder-junit-actual.json').write_text(json.dumps({'exitCode':run.returncode,'actual':counts},indent=2)+'\n')
+          print('Actual recorder JUnit',counts)
+          assert run.returncode==0 and counts=={'tests':8,'failures':0,'errors':0,'skipped':0},'Actual recorder JUnit8 did not pass'
+          print('Actual recorder source/JUnit completed; native execution not run')
           PY
   client-capture:
     if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'andrewwhitecog-tech'
