@@ -2,7 +2,7 @@
   "schema": "northstar.cat-real-client-capture-source.v1",
   "status": "SOURCE_ONLY_AST_PARSED_NATIVE_NOT_RUN",
   "files": {
-    "tools/cat_client_capture/capture_client.py": "91ba2092dd98cd13bed7cadeedf09102d2fb0e3ab78eb0442dad2a04d734769b",
+    "tools/cat_client_capture/capture_client.py": "5a8906535a839cda454a0ff6765c4ad516b4292bb6ec9ce07c78828704eb0ccc",
     "tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java": "a069ad20b4e6410c82fa3fe2c068ddea9a60b9ef05441aee7b914a7db1f7570c",
     "tools/cat_client_capture/resources/fabric.mod.json": "676f51aaea2efa2849b98b3bd0e9a7c1694511f54923fd2b9d5513e4e2673e49",
     "tools/cat_client_capture/resources/northstar_capture.mixins.json": "baae00fec2c80e347191f10de54e739b7c0b65a38f08fcf6ba769e0ec852655c",
