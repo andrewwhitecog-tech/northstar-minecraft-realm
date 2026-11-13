@@ -22,6 +22,7 @@ def main():
  for name in ['capture','cat','native','coat-source']:a.add_argument('--reviewed-'+name+'-sha256',required=True)
  a.add_argument('--execute',action='store_true');a.add_argument('--expected-commit');a.add_argument('--cat-build-receipt',type=pathlib.Path);a.add_argument('--coat-build-receipt',type=pathlib.Path);a.add_argument('--representative-build-receipt',type=pathlib.Path);a.add_argument('--reviewed-representative-adapter-sha256');a.add_argument('--output',type=pathlib.Path);args=a.parse_args()
  n=source_guard(args.reviewed_capture_sha256,args.reviewed_cat_sha256,args.reviewed_native_sha256)
+ display_ready=load('nsp_capture_display_ready',HOME/'display_ready.py');read_display_number=display_ready.read_display_number;require_display_alive=display_ready.require_display_alive
  if not args.execute:print(json.dumps({'sourceVerified':True,'executed':False,'clientVerified':False}));return 0
  need(sha(REPO/'tools/cat_menagerie/PUBLIC_EXPORT_SOURCE.json')==args.reviewed_coat_source_sha256,'Reviewed coat source packet drift');sys.path.insert(0,str(REPO/'tools/cat_menagerie'));ex=load('nsp_capture_export',REPO/'tools/cat_menagerie/run_hosted_export.py');ex.source_guard()
  commit=n.hosted_guard(args.expected_commit);workspace=pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve();root=args.output.resolve();temp=pathlib.Path(os.environ['RUNNER_TEMP']).resolve()
@@ -53,6 +54,7 @@ def main():
  def settle_frozen(ticks):
   start=clock();cmd('tick step '+str(ticks));wait(lambda:clock()>=start+ticks,15,'Actual frozen cleanup ticks did not advance')
  def alive():
+  if xvfb is not None:require_display_alive(xvfb)
   need(server is None or server.poll()is None,'Server exited prematurely');need(client is None or client.poll()is None,'Client exited prematurely; inspect actual logs')
   need(not (route/'CLIENT_ERROR.txt').exists(),'Actual client observer error')
  def wait(pred,secs,why):
@@ -114,16 +116,17 @@ def main():
   rdf,wdf=os.pipe()
   # Explicit pass_fds is required; do not leak the display pipe to Java or encoders.
   xf=(e/'xvfb.actual.log').open('xb');handles.append(xf);xvfb=subprocess.Popen(['Xvfb','-displayfd',str(wdf),'-screen','0','800x450x24','-nolisten','tcp','+extension','GLX','+render','-noreset'],pass_fds=(wdf,),cwd=root,env=childenv,stdout=xf,stderr=subprocess.STDOUT,start_new_session=True);procs.append(('xvfb',xvfb));os.close(wdf)
-  try:need(select.select([rdf],[],[],10)[0],'Owned display timeout');display=':'+os.read(rdf,16).decode().strip();need(re.fullmatch(':[0-9]{1,3}',display),'Owned display malformed')
+  try:display=read_display_number(rdf,xvfb,timeout=10);report['ownedDisplay']={'pid':xvfb.pid,'display':display,'notification':'complete newline-terminated displayfd','exitAfterNotification':xvfb.poll()};save()
   finally:os.close(rdf)
   extra={'DISPLAY':display,'LIBGL_ALWAYS_SOFTWARE':'1','GALLIUM_DRIVER':'llvmpipe','LP_NUM_THREADS':'2','SDL_VIDEO_DRIVER':'x11','ALSOFT_DRIVERS':'null'};prep=prepare_egl(root);extra.update(prep['env']);report['egl']=prep['provenance'];selected=None;report['sdlProbes']=[]
   # Keep only reviewed nonsecret host attestations; SDL still validates their real values.
   probeenv=dict(childenv,**{k:os.environ[k]for k in ['CI','GITHUB_ACTIONS','RUNNER_ENVIRONMENT','RUNNER_OS','ImageOS','GITHUB_EVENT_NAME','GITHUB_REF','GITHUB_REPOSITORY','GITHUB_ACTOR','GITHUB_TRIGGERING_ACTOR','GITHUB_WORKSPACE','GITHUB_RUN_ID','NSP_PUBLIC_REPOSITORY','NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION']if k in os.environ})
   for mode in ['glx','egl']:
+   require_display_alive(xvfb)
    attempt=dict(extra,SDL_VIDEO_FORCE_EGL='1'if mode=='egl'else'0');p=subprocess.run([sys.executable,'-B',str(RUNTIME/'real_sdl_probe.py'),'--execute','--native-home',runtime['natives'],'--mode',mode],env=dict(probeenv,**attempt),capture_output=True,text=True,timeout=30)
    try:o=json.loads(p.stdout)
    except ValueError:o={}
-   report['sdlProbes'].append({'mode':mode,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr});save()
+   report['sdlProbes'].append({'mode':mode,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr});save();require_display_alive(xvfb)
    if p.returncode==0 and observation_ok(o):selected=attempt;break
   need(selected is not None,'Real SDL3 context failed; no client substitute');(profile/'options.txt').write_text('renderDistance:4\nsimulationDistance:5\nmaxFps:20\nenableVsync:false\npauseOnLostFocus:false\nskipMultiplayerWarning:true\nonboardAccessibility:false\nsoundCategory_master:0.0\nguiScale:2\nresourcePacks:["vanilla","file/nsp-cat-coats.zip"]\nincompatibleResourcePacks:[]\n');fresh_servers_dat(profile/'servers.dat','127.0.0.1:'+str(gp));values={'auth_player_name':CAM,'version_name':'26.3','game_directory':profile,'assets_root':runtime['assets'],'assets_index_name':'34','auth_uuid':uuid.UUID(offline(CAM)).hex,'auth_access_token':'0','clientid':'0','auth_xuid':'0','version_type':'release','resolution_width':800,'resolution_height':450,'quickPlayPath':str(profile/'quickplay.json'),'quickPlayMultiplayer':'127.0.0.1:'+str(gp),'natives_directory':runtime['natives'],'launcher_name':'northstar-cat-capture','launcher_version':'1','classpath':runtime['client_classpath']};features={'has_custom_resolution':True,'has_quick_plays_support':True,'is_quick_play_multiplayer':True};jvm=arguments(runtime['meta']['arguments']['jvm'],values,features)+arguments(runtime['client_profile'].get('arguments',{}).get('jvm',[]),values,features);game=arguments(runtime['meta']['arguments']['game'],values,features);report['syntheticOfflineFixture']=props.get('online-mode')=='false'and values.get('auth_access_token')=='0'and values.get('auth_player_name')==CAM;client=launch(['java','-Xms256M','-Xmx2G','-XX:ActiveProcessorCount=2','-Djava.awt.headless=false','-Dfabric.noGui=true','-Dnsp.cat.instincts.enabled=true','-Dnsp.walk.dir='+str(route),'-Dnsp.cat.capture.dir='+str(route),*jvm,runtime['client_profile']['mainClass'],*game],profile,'client.actual',selected)
   wait(lambda:observe('if entity @a[name='+CAM+']')==1 and camera_state().get('joined')is True,300,'Actual real client join failed');need('nsp-cat-coats.zip' in (e/'client.actual.log').read_text(errors='replace'),'Actual client log does not show selected custom resource pack');cmd('gamemode spectator '+CAM);check('actual no operators',json.loads((srv/'ops.json').read_text())==[],[])
