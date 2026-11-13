@@ -185,7 +185,7 @@ def main():
    path=e/(name+'.log');raw=path.read_text(errors='replace')if path.exists()else'';lines=raw.splitlines();bad=[l for l in lines if re.search(r'/(?:ERROR|FATAL)\]|Missing (?:texture|model)|Failed to load (?:texture|model|resource)|Unable to load (?:texture|model)|Using missing texture',l,re.I)];report[name+'LogErrors']=bad;blocking=bad
    if name=='client.actual':
     try:
-     policy=load('nsp_capture_offline_service_records',HOME/'offline_service_records.py');assessment=policy.assess(raw,offline_fixture=report.get('syntheticOfflineFixture')is True);report['offlineServiceDiagnostics']=assessment['offlineServiceDiagnostics'];allowed={x['header']for x in assessment['offlineServiceDiagnostics']};blocking=[l for l in bad if l not in allowed]
+     policy=load('nsp_capture_offline_service_records',HOME/'offline_service_records.py');assessment=policy.audit_error_lines(raw,offline_fixture=report.get('syntheticOfflineFixture')is True);report['offlineServiceDiagnostics']=assessment['offlineServiceDiagnostics'];report['blockingClientErrorRecords']=assessment['blockingErrorRecords'];blocking=assessment['blockingLines']
     except Exception:report['errors'].append('Offline-service classification failed closed: '+traceback.format_exc())
    report[name+'BlockingErrors']=blocking
    if blocking:report['errors'].append(name+' contains actual blocking renderer/runtime errors; inspect preserved full log')

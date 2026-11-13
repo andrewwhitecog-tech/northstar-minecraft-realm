@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import unittest
-from offline_service_records import assess
+from offline_service_records import assess,audit_error_lines
 
 
 class ExactOfflineRecords(unittest.TestCase):
@@ -37,6 +37,21 @@ class ExactOfflineRecords(unittest.TestCase):
                 result=assess(text,offline_fixture=True)
                 self.assertEqual(len(result['blockingErrorRecords']),1)
                 self.assertEqual(len(result['offlineServiceDiagnostics']),1)
+
+    def test_capture_audit_keeps_unknown_record_with_identical_header(self):
+        row=self.rows[0];header='[06:56:31] [%s/%s]: %s'%(row['thread'],row['level'],row['message'])
+        exact=header+'\n'+'\n'.join(row['body'])
+        unknown=header+'\n'+'\n'.join(row['body'])+'\nCaused by: unexpected framebuffer failure'
+        result=audit_error_lines(exact+'\n'+unknown,offline_fixture=True)
+        self.assertEqual(len(result['offlineServiceDiagnostics']),1)
+        self.assertEqual(len(result['blockingErrorRecords']),1)
+        self.assertEqual(result['rawErrorHeaders'],[header,header])
+        self.assertEqual(result['blockingLines'],[header])
+    def test_capture_audit_preserves_nonerror_resource_failures_and_default_strict(self):
+        resource='[06:57:00] [Render thread/WARN]: Failed to load texture nsp_cat_coats:bad'
+        result=audit_error_lines(self.text+'\n'+resource,offline_fixture=True)
+        self.assertEqual(result['blockingLines'],[resource])
+        self.assertEqual(len(audit_error_lines(self.text)['blockingLines']),len(self.rows))
 
 
 if __name__=='__main__':unittest.main()

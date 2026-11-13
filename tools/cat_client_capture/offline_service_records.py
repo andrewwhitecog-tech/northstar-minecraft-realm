@@ -61,3 +61,12 @@ def assess(text, *, offline_fixture=False):
     return {'offlineFixture':offline_fixture is True,
             'offlineServiceDiagnostics':diagnostics,'blockingErrorRecords':blocking,
             'rendererAccepted':False,'humanVisualAccepted':False}
+
+
+def audit_error_lines(text, *, offline_fixture=False):
+    assessment=assess(text,offline_fixture=offline_fixture)
+    allowed_lines={record['line'] for record in assessment['offlineServiceDiagnostics']}
+    pattern=r'/(?:ERROR|FATAL)\]|Missing (?:texture|model)|Failed to load (?:texture|model|resource)|Unable to load (?:texture|model)|Using missing texture'
+    matches=[(number,line) for number,line in enumerate(text.splitlines(),1) if re.search(pattern,line,re.I)]
+    return {**assessment,'rawErrorHeaders':[line for _,line in matches],
+            'blockingLines':[line for number,line in matches if number not in allowed_lines]}
