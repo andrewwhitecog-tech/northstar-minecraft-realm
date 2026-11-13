@@ -1,0 +1,45 @@
+name: Original cat coat source, tests and authoring export
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/cat_menagerie/**'
+      - '.github/workflows/cat-coat-original-export.yml'
+permissions:
+  contents: read
+concurrency:
+  group: cat-coat-original-export-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+jobs:
+  original-export:
+    if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Check out the exact reviewed source revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Actual standard-library tests and original coat export
+        id: paint
+        run: |
+          python3 --version
+          python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-coat-original-export"
+      - name: Check tracked source remained unchanged
+        if: always()
+        run: git diff --exit-code
+      - name: Retain bounded original textures, model reviewer and authentic receipts
+        if: always() && steps.paint.outputs.upload_allowed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cat-coat-original-export-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cat-coat-original-export
+          retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: false
+          compression-level: 6

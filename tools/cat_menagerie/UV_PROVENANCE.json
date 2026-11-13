@@ -1,0 +1,55 @@
+{
+  "schema": "northstar.cat-uv-provenance.v1",
+  "officialVersion": "26.3",
+  "clientJarSha1": "e877b6a07acd633fb3bb475002175cec036e7b87",
+  "jarBytes": 41483720,
+  "sourceClasses": [
+    "net.minecraft.client.model.animal.feline.AdultFelineModel",
+    "net.minecraft.client.model.animal.feline.BabyFelineModel",
+    "net.minecraft.client.model.geom.ModelPart$Cube",
+    "net.minecraft.client.model.geom.ModelPart$Polygon"
+  ],
+  "methods": [
+    "createBodyMesh",
+    "createBabyLayer"
+  ],
+  "privateRetainedTranscriptSha256": "dad7ca81e36c28217426231e32bccb7020572767defa3e4f9630e105502b673e",
+  "publicContainsVanillaTextureBytes": false,
+  "publicContainsFullJavapTranscript": false,
+  "modelFacts": "Original coordinate/UV transcription; texture patterns authored independently.",
+  "dimensions": {
+    "adult": [
+      64,
+      32
+    ],
+    "baby": [
+      32,
+      32
+    ],
+    "bedrockAuthoring": [
+      128,
+      64
+    ]
+  },
+  "originalGeometryLineage": "19original profiles from prior NorthStar roster source; new Nyan per-face ribbon UVs changed only in this isolated authoring copy.",
+  "runtimeCapabilities": {
+    "javaVanillaCatVariant": "texture selection only; extra anatomy has no renderer registration",
+    "bedrock": "authoring geometry only; no mapping numericIDs/cliententity/runtime pack registration"
+  },
+  "qualityStatus": "NOT_EXPORTED_NOT_RENDERED_NOT_NATIVE_ACCEPTED",
+  "cubeUVCornerProof": {
+    "face": "minY/top",
+    "uv00": "minX,minY,maxZ",
+    "vertex": "23",
+    "polygonVertices": [
+      24,
+      23,
+      19,
+      20
+    ],
+    "normalDirectionInOfficialClass": "DOWN (model-space minY)",
+    "cubeTranscriptSha256": "4e019a7a27e57ba851bf94619e63f43a791d35a8d32f30370f2a047656560839",
+    "polygonTranscriptSha256": "0da68573ebf89599568849199d9462d70a914e0e8d8193087c4cb23ab15d5cd7"
+  },
+  "styleReference": "Owner-provided prismatic rat crop personally inspected: dark readable anatomy, localized flowing aurora ink and jewel detail. Reference image bytes are not included."
+}

@@ -3,10 +3,10 @@
   "scope": "Source preparation only; no native execution",
   "catSourceBinding": "Separate current reviewed PUBLIC_SOURCE.json SHA required at dispatch; no old source pin",
   "files": {
-    "tools/cat_instincts/native_component_probe.py": "4d4fc858adf55a709676c925879daacc389c473c668c86a699b51c3514661e00",
+    "tools/cat_instincts/native_component_probe.py": "a307cf3cf6864cba4b3f2e9c9c7915ec013415b67607a9926823a1fae001a6cb",
     "tools/cat_instincts/fixtures/CARPET_RUNTIME.json": "89168dc04d3631d6c293e3fde66031476c8285daf82cbb9400fa18c5c8537b78",
     "tools/cat_instincts/OWNER_CODEC_PROVENANCE.json": "e92f48af608e34a143b75c34c79614714b5e394f7616354adf07d15e96db4e1b",
-    "tools/cat_instincts/NATIVE_README.md": "5d9733cbb2d2f54ca5db8e756855161364134f0081360d2c8ea2780957859a26",
+    "tools/cat_instincts/NATIVE_README.md": "38532dff3367e87e05d35b1ea163e9e02b3a2782c4315031c07d0cbf225a82f2",
     ".github/workflows/cat-instincts-native.yml": "38567b3dcab75993ea15674c65a4d80dc56d93f501d4351cf7e4b386142ae01e",
     "tools/cloud_survival_calibration/download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "tools/cloud_survival_calibration/LOCK.json": "906e05ccd4802edd7cee05965416bd69728ea7191dbc5dbc802c0ebc9d010e84",
