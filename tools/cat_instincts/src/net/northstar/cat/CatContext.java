@@ -101,6 +101,23 @@ public final class CatContext {
             && (recall(cat) || !healthy(cat) || InstinctMotion.distanceReturn(engaged(cat),cat.distanceToSqr(o)))
             && cat.distanceToSqr(o)>4;
     }
+    /** PathNavigation defaults to16m; enlarge only this bounded search, then restore exact prior budget. */
+    public static Path createReturnPath(Cat cat) {
+        if (!canReturn(cat)) return null;
+        double radiusSquared=InstinctLimits.returnPathRadiusSquared(cat.distanceToSqr(owner(cat)));
+        if (radiusSquared<0) return null;
+        var navigation=cat.getNavigation();
+        float previous=((net.northstar.cat.mixin.PathRangeAccessor)navigation).northstar$getRequiredPathLength();
+        if (!Float.isFinite(previous) || previous<0) return null;
+        navigation.setRequiredPathLength(Math.max(previous,(float)Math.sqrt(radiusSquared)));
+        try {
+            Path path=navigation.createPath(owner(cat),1);
+            if (safeReturnPath(cat,path)) return path;
+            // A cached rejected owner path must not be reused on the next return attempt.
+            if (path!=null && navigation.getPath()==path) navigation.stop();
+            return null;
+        } finally { navigation.setRequiredPathLength(previous); }
+    }
     public static boolean safeFeet(ServerLevel level, BlockPos p) {
         if (!level.hasChunkAt(p) || !level.hasChunkAt(p.below())) return false;
         if (!level.getFluidState(p).isEmpty() || !level.getFluidState(p.below()).isEmpty()) return false;

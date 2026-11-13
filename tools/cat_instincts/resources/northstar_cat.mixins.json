@@ -5,7 +5,8 @@
   "mixins": [
     "CatGoalMixin",
     "CatContactVetoMixin",
-    "NaturalWildClassifierMixin"
+    "NaturalWildClassifierMixin",
+    "PathRangeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

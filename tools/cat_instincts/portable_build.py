@@ -52,7 +52,7 @@ def main():
    algorithm='sha256' if 'sha256' in item else 'sha1';need(path.stat().st_size==size and digest(path,algorithm)==item[algorithm],'Dependency byte pin mismatch: '+item['name'])
    report['downloads'].append({'path':item['path'],'bytes':size,'algorithm':algorithm,'digest':item[algorithm]});save()
   junit=cache/lock['junitPath'];cp=os.pathsep.join(str(cache/item['path']) for item in lock['artifacts'] if item['path']!=lock['junitPath'])
-  production=sorted((HOME/'src').rglob('*.java'));tests=sorted((HOME/'tests').rglob('*.java'));need(len(production)==12 and len(tests)==3,'Source census mismatch')
+  production=sorted((HOME/'src').rglob('*.java'));tests=sorted((HOME/'tests').rglob('*.java'));need(len(production)==14 and len(tests)==3,'Source census mismatch')
   classes=root/'classes';classes.mkdir();testclasses=root/'testclasses';testclasses.mkdir()
   def javac(name,files,classpath,dest):
    args=root/(name+'.args');values=['--release','25','-encoding','UTF-8','-proc:none','-cp',classpath,'-d',str(dest),*[str(f) for f in files]]
