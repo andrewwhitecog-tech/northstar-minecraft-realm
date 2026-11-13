@@ -31,11 +31,13 @@ jobs:
   source-only:
     if: github.event_name == 'pull_request' && github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+      - name: Run portable native-log regressions
+        run: python3 -B -m unittest discover -s tools/cat_instincts -p test_native_log_records.py -v
       - name: Parse source without running native or downloading dependencies
         run: |
           python3 -B - <<'PY'
@@ -44,6 +46,21 @@ jobs:
           ast.parse((home/'native_component_probe.py').read_text())
           sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
           subprocess.run(['python3','-B',str(home/'native_component_probe.py'),'--reviewed-source-sha256',sha(home/'NATIVE_SOURCE.json'),'--reviewed-cat-source-sha256',sha(home/'PUBLIC_SOURCE.json')],check=True,timeout=20)
+          PY
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '25.0.5+8'
+      - name: Build pinned source classpath and run actual JUnit
+        run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/scoped-observer-compile"
+      - name: Compile real scope observer against pinned official APIs
+        run: |
+          python3 -B - <<'PY'
+          import os,pathlib,subprocess
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'scoped-observer-compile';jars=sorted((root/'dependencies').rglob('*.jar'));assert jars
+          out=root/'scope-observer-classes';out.mkdir()
+          subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',os.pathsep.join(map(str,jars)),'-d',str(out),'tools/cat_instincts/native_scope_observer/src/net/northstar/scopeprobe/ScopeObserverMixin.java'],check=True,timeout=120)
+          print('Actual scope observer javac completed; native execution not run')
           PY
   native-component:
     if: github.event_name == 'workflow_dispatch' && github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.actor == 'andrewwhitecog-tech' && github.ref == 'refs/heads/main' && github.event.repository.private == false

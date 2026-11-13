@@ -3,15 +3,20 @@
   "scope": "Source preparation only; no native execution",
   "catSourceBinding": "Separate current reviewed PUBLIC_SOURCE.json SHA required at dispatch; no old source pin",
   "files": {
-    "tools/cat_instincts/native_component_probe.py": "a307cf3cf6864cba4b3f2e9c9c7915ec013415b67607a9926823a1fae001a6cb",
+    "tools/cat_instincts/native_component_probe.py": "bba77ee918f6868d47f12500c1b32224d9011d0e9f940d46386ec638d30c21e4",
     "tools/cat_instincts/fixtures/CARPET_RUNTIME.json": "89168dc04d3631d6c293e3fde66031476c8285daf82cbb9400fa18c5c8537b78",
     "tools/cat_instincts/OWNER_CODEC_PROVENANCE.json": "e92f48af608e34a143b75c34c79614714b5e394f7616354adf07d15e96db4e1b",
-    "tools/cat_instincts/NATIVE_README.md": "38532dff3367e87e05d35b1ea163e9e02b3a2782c4315031c07d0cbf225a82f2",
-    ".github/workflows/cat-instincts-native.yml": "38567b3dcab75993ea15674c65a4d80dc56d93f501d4351cf7e4b386142ae01e",
+    "tools/cat_instincts/NATIVE_README.md": "f4dab74d4a42f218aa0107e993179216e647e803598eeede3bc787f0a4d27cae",
+    ".github/workflows/cat-instincts-native.yml": "9cc71c3314258286c1edec0c892deeda2623ab7046e1835dd36764259dad5c49",
     "tools/cloud_survival_calibration/download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "tools/cloud_survival_calibration/LOCK.json": "906e05ccd4802edd7cee05965416bd69728ea7191dbc5dbc802c0ebc9d010e84",
     "tools/cloud_survival_calibration/metadata/minecraft-26.3.json": "a1831b3e5ffa479c02d88a441794ff0a69813215e5d0e945edf03a99c7608c2e",
     "tools/cloud_survival_calibration/metadata/fabric-server-0.20.1.json": "316aed046c606b51581413107bfb6d04b51357825a5a231a1d043743b34b54c8",
-    "tools/cloud_survival_calibration/metadata/server-transport.json": "4ed2159a2ace665510228b511fdd6ca7f6433065b38dbc1ef783f7e4eb96eaf4"
+    "tools/cloud_survival_calibration/metadata/server-transport.json": "4ed2159a2ace665510228b511fdd6ca7f6433065b38dbc1ef783f7e4eb96eaf4",
+    "tools/cat_instincts/audited_log_records.py": "f1ae00d15cdfdbb3cebaa454da84f94bfc89ea38fea08e48edbff700acd88d4c",
+    "tools/cat_instincts/test_native_log_records.py": "d39fffd8cf46db0e2ab4122c123db85c57c1eb0ea711bd89b1a0200e25f22612",
+    "tools/cat_instincts/native_scope_observer/src/net/northstar/scopeprobe/ScopeObserverMixin.java": "d1f40eccec7f41d9d3dd6637948b96c42d4c84f4ea06df5a9fc2831c23655a7e",
+    "tools/cat_instincts/native_scope_observer/resources/fabric.mod.json": "4c88a1979de3566be4c82924f2112862792649613e5c382ee9710441a03721a5",
+    "tools/cat_instincts/native_scope_observer/resources/northstar_scope_probe.mixins.json": "229d10dbdf186375c8b1ca4e040b9280f484b2280197298c59e237fb218940b2"
   }
 }

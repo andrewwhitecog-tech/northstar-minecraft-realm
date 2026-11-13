@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.northstar.scopeprobe",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ScopeObserverMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

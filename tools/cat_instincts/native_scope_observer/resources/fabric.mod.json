@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "northstar_cat_scope_probe",
+  "version": "0.1.0-26.3-proof",
+  "name": "Isolated scoped cat native observer",
+  "environment": "server",
+  "license": "MIT",
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "northstar_cat_instincts": "*"
+  },
+  "mixins": [
+    "northstar_scope_probe.mixins.json"
+  ]
+}
