@@ -1,0 +1,61 @@
+{
+  "dimension": "minecraft:overworld",
+  "site": {
+    "min": [
+      0,
+      40,
+      0
+    ],
+    "max": [
+      127,
+      127,
+      127
+    ]
+  },
+  "guns": [
+    {
+      "id": "battery",
+      "pivot": [
+        32.5,
+        65,
+        24.5
+      ],
+      "breech": [
+        30,
+        65,
+        24
+      ],
+      "yaw": 0,
+      "controls": {
+        "load": [
+          28,
+          65,
+          21
+        ],
+        "left": [
+          30,
+          65,
+          21
+        ],
+        "right": [
+          32,
+          65,
+          21
+        ],
+        "elevation": [
+          34,
+          65,
+          21
+        ],
+        "fire": [
+          36,
+          65,
+          21
+        ]
+      },
+      "muzzle_distance": 9,
+      "muzzle_height": 1.2
+    }
+  ],
+  "demo_fixture": true
+}
