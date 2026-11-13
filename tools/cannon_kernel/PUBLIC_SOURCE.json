@@ -1,19 +1,19 @@
 {
   "schema": 1,
   "scope": "generic public offline source/build only",
-  "originalGeneratorSha256": "d6364d8b4d85b676325b5c303aef2157afbde427ce175dcb8fdc7f2815796825",
+  "originalGeneratorSha256": "3dcdd306226f28182834fec6098ed452041d99e2a81cc953a6411c2da4541d6e",
   "originalConfigSha256": "b485cbd17bcefe3a94c3461fc84ed646e63659f1c4e9e2b2cedab40aa81f9d2f",
   "portableTestMethodCount": 28,
   "testTransformation": "Retain ConfigTests and GeneratedPackTests with unittest result reporter; omit RunnerPathTests and all local offline/geometry runner content",
   "nativeVerified": false,
   "liveInstalled": false,
   "files": {
-    "build_cannon.py": "d6364d8b4d85b676325b5c303aef2157afbde427ce175dcb8fdc7f2815796825",
+    "build_cannon.py": "3dcdd306226f28182834fec6098ed452041d99e2a81cc953a6411c2da4541d6e",
     "demo_config.json": "b485cbd17bcefe3a94c3461fc84ed646e63659f1c4e9e2b2cedab40aa81f9d2f",
     "test_cannon_config.py": "9ff31c6c2127dc9000ad70320bf041210f5ef9b7dd5ef4d8db7b0ac0756348a9",
     "run_source_checks.py": "394eb6eff3cf1daac919b26a93824b0698c88efa204fe8f558d9f4f076215807",
-    "README.md": "5fcea484fb535cb1fd7241220e3bdec8d3345eb20b62dabb66b915cbdd83db61",
+    "README.md": "8a9daccd782f1c5848bb06d43e7d255832b45692972c981d2b4ea1dc397151d9",
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
   },
-  "previousGeneratorSha256": "6c58e657bbe3b4faa11a007bddc8c781fe4a4e5a6ebde763fbf7b6c1ce9117fc"
+  "previousGeneratorSha256": "d6364d8b4d85b676325b5c303aef2157afbde427ce175dcb8fdc7f2815796825"
 }

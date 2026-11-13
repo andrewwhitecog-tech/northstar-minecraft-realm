@@ -32,3 +32,5 @@ Official references:
 The source workflow builds the datapack and executes the portable unittest suite. Its receipt records the actual result for that exact source revision. A passing source run reports nativeVerified=false and liveInstalled=false. Native component checks are separate and do not accept the full pirate encounter, moving ship, client presentation, world integration or public release.
 
 Hit-time target functions recheck the configured dimension and current site bounds, in addition to registration-time type and ownership checks. Previously registered targets that leave the area must not take damage from an in-area shot.
+
+Projectile impacts mark the shell spent before target callbacks, skip remaining substeps, and remove it at the end of its current tick. Missing age or position/velocity scores discard the shell rather than reusing shared movement storage. The actual native probe requires one shot, one hit, eight anchor damage, no remaining shell and stable results one tick later; source tests alone do not accept that behavior.

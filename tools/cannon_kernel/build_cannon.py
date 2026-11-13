@@ -101,12 +101,12 @@ def build(config, output):
     fn('target/register_anchor',['tag @s add nsp_ck.target','scoreboard players set @s ck_role 2','execute unless score @s ck_hp matches 1.. run scoreboard players set @s ck_hp 40'])
     fn('api/unregister_target',['tag @s remove nsp_ck.target','scoreboard players reset @s ck_role'])
     fn('shell/tick',[
-        'scoreboard players add @s ck_age 1',
-        'execute if score @s ck_age matches 81.. run return run function nsp_ck:shell/end',
-        'function nsp_ck:shell/step',
-        'execute if entity @s run function nsp_ck:shell/step',
-        'execute if entity @s run function nsp_ck:shell/step',
-        'execute if entity @s run function nsp_ck:shell/step',
+        'execute if entity @s[tag=nsp_ck.spent] run return run kill @s',
+        'execute unless score @s ck_age matches 0..80 run function nsp_ck:shell/discard',
+        'execute unless entity @s[tag=nsp_ck.spent] run scoreboard players add @s ck_age 1',
+        'execute unless entity @s[tag=nsp_ck.spent] if score @s ck_age matches 81.. run function nsp_ck:shell/end',
+    ]+['execute unless entity @s[tag=nsp_ck.spent] run function nsp_ck:shell/step']*4+[
+        'execute if entity @s[tag=nsp_ck.spent] run kill @s',
     ])
     solid_allow=['minecraft:air','minecraft:cave_air','minecraft:void_air','minecraft:water','minecraft:bubble_column']
     # Per-substep bounded movement; every hit path independently checks its actual entity type.
@@ -121,9 +121,12 @@ def build(config, output):
         'function nsp_ck:shell/move with storage nsp_ck:step',
         'execute at @s run function nsp_ck:shell/check',
     ]
-    fn('shell/step',['execute if score @s ck_age matches 81.. run return 0']+step)
+    fn('shell/step',['execute if entity @s[tag=nsp_ck.spent] run return 0','execute unless score @s ck_age matches 0..80 run return run function nsp_ck:shell/discard']+[
+        f'execute unless score @s {name} matches -2147483648..2147483647 run return run function nsp_ck:shell/discard'
+        for name in ['ck_x','ck_y','ck_z','ck_vx','ck_vy','ck_vz']
+    ]+step)
     fn('shell/move',['$tp @s $(x) $(y) $(z)'])
-    checks=[f'execute unless entity @s[{box}] run return run function nsp_ck:shell/discard',
+    checks=['execute if entity @s[tag=nsp_ck.spent] run return 0',f'execute unless entity @s[{box}] run return run function nsp_ck:shell/discard',
         'execute unless loaded ~ ~ ~ run return run function nsp_ck:shell/discard',
         'scoreboard players set #clear ck_tmp 0',
     ]
@@ -134,14 +137,20 @@ def build(config, output):
         'execute positioned ~ ~-0.9 ~ if entity @e[type=minecraft:drowned,tag=nsp_ck.target,scores={ck_role=1},distance=..0.95,limit=1] run return run function nsp_ck:hit/drowned',
         'execute positioned ~ ~-0.9 ~ if entity @e[type=minecraft:skeleton,tag=nsp_ck.target,scores={ck_role=1},distance=..0.95,limit=1] run return run function nsp_ck:hit/skeleton',
     ]
-    fn('shell/discard',['scoreboard players set @s ck_age 100000','kill @s'])
+    fn('shell/discard',['tag @s add nsp_ck.spent','scoreboard players set @s ck_age 100000'])
     fn('shell/check',checks)
     for typ in ['drowned','skeleton']:
         fn('hit/'+typ,[
+            'execute if entity @s[tag=nsp_ck.spent] run return 0',
+            'tag @s add nsp_ck.spent',
+            'scoreboard players set @s ck_age 100000',
             f'execute as @e[type=minecraft:{typ},tag=nsp_ck.target,scores={{ck_role=1}},distance=..0.95,sort=nearest,limit=1] run function nsp_ck:target/damage',
             'function nsp_ck:shell/end',
         ])
     fn('hit/anchor',[
+        'execute if entity @s[tag=nsp_ck.spent] run return 0',
+        'tag @s add nsp_ck.spent',
+        'scoreboard players set @s ck_age 100000',
         'execute as @e[type=minecraft:marker,tag=nsp_ck.target,tag=nsp_ck.ship_anchor,scores={ck_role=2},distance=..1.1,sort=nearest,limit=1] run function nsp_ck:target/anchor_hit',
         'function nsp_ck:shell/end',
     ])
@@ -165,10 +174,10 @@ def build(config, output):
         'function #nsp_ck:on_hit',
     ])
     fn('shell/end',[
+        'tag @s add nsp_ck.spent',
         'scoreboard players set @s ck_age 100000',
         'particle minecraft:splash ~ ~ ~ 0.2 0.1 0.2 0.05 8 force @a[distance=..96]',
         'playsound minecraft:entity.generic.splash master @a[distance=..64] ~ ~ ~ 0.3 0.8',
-        'kill @s',
     ])
     for g in config['guns']:
         ident=g['id']; bx,by,bz=g['breech']; gx,gy,gz=g['pivot']; prefix=f'g/{ident}'

@@ -1,20 +1,19 @@
 {
   "schema": "northstar.cannon-native-component-source.v1",
   "scope": "real fresh loopback Linux Fabric/Carpet server component only",
-  "prerequisiteSourceRun": "https://github.com/andrewwhitecog-tech/northstar-minecraft-realm/actions/runs/43359723924",
   "nativeExecuted": false,
   "humanClientProven": false,
   "bedrockProven": false,
   "liveInstalled": false,
   "files": {
     ".github/workflows/cannon-kernel-native.yml": "5d0a382a0754c43c4633311fd1f51162e0791e31b93dde4d2584e9161bea2811",
-    "tools/cannon_kernel/native_component_probe.py": "fc22d10e772b186bfb6ce262aa41f6d6aa369c92a641823efd5e5eeadd1053a0",
-    "tools/cannon_kernel/NATIVE_NOTES.md": "8a9581b5169b44d31a749f0f4bdee17d72b8e4e4d0e69928967b4e2a66360fea",
+    "tools/cannon_kernel/native_component_probe.py": "81f2d7982dbb22e8506bc4e1381a038d84f2c5d76b13e0075517cf26b72271d7",
+    "tools/cannon_kernel/NATIVE_NOTES.md": "7df738a0dc7fa85f62a3c66f5e0b65015c4c7d6e490deaa16e5cd1b0af044545",
     "tools/cannon_kernel/fixtures/.gitattributes": "3882aa8fa8abb7be842944665ad62f39300cd673fc538b4c5fd433efc05946ea",
     "tools/cannon_kernel/fixtures/AMMO_PROVENANCE.json": "d4ea1fd74a891350f5708fd77f107b80daaa2d90f8162146b9434c6260ec68ea",
     "tools/cannon_kernel/fixtures/black_powder.json": "d2821c0ba580ec48180c820df8d9103e9ec0821aeb2f6c716cbbed726ff75f15",
     "tools/cannon_kernel/fixtures/CARPET_RUNTIME.json": "89168dc04d3631d6c293e3fde66031476c8285daf82cbb9400fa18c5c8537b78",
-    "tools/cannon_kernel/build_cannon.py": "d6364d8b4d85b676325b5c303aef2157afbde427ce175dcb8fdc7f2815796825",
+    "tools/cannon_kernel/build_cannon.py": "3dcdd306226f28182834fec6098ed452041d99e2a81cc953a6411c2da4541d6e",
     "tools/cannon_kernel/demo_config.json": "b485cbd17bcefe3a94c3461fc84ed646e63659f1c4e9e2b2cedab40aa81f9d2f",
     "tools/cloud_survival_calibration/download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "tools/cloud_survival_calibration/LOCK.json": "906e05ccd4802edd7cee05965416bd69728ea7191dbc5dbc802c0ebc9d010e84",
@@ -23,5 +22,7 @@
     "tools/cloud_survival_calibration/metadata/fabric-server-0.20.1.json": "316aed046c606b51581413107bfb6d04b51357825a5a231a1d043743b34b54c8",
     "tools/cloud_survival_calibration/metadata/minecraft-26.3.json": "a1831b3e5ffa479c02d88a441794ff0a69813215e5d0e945edf03a99c7608c2e",
     "tools/cloud_survival_calibration/metadata/server-transport.json": "4ed2159a2ace665510228b511fdd6ca7f6433065b38dbc1ef783f7e4eb96eaf4"
-  }
+  },
+  "historicalSourceRun": "https://github.com/andrewwhitecog-tech/northstar-minecraft-realm/actions/runs/43359723924",
+  "currentGeneratorValidation": "Fresh actual source CI required for this exact single-impact change before merge/native dispatch"
 }
