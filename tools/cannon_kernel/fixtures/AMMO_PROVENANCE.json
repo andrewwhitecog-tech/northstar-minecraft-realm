@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "sourceArchiveSha256": "37aa12cc197259a9e3563f306a480a0f2cbf5152bd0b9aa4686832ef92306bda",
+  "member": "data/nsp_chain/loot_table/black_powder.json",
+  "bytes": 999,
+  "sha256": "d2821c0ba580ec48180c820df8d9103e9ec0821aeb2f6c716cbbed726ff75f15",
+  "extraction": "Exact unchanged member bytes only; complete archive not included",
+  "fullCraftingChainTested": false
+}

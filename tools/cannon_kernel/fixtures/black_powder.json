@@ -1,0 +1,47 @@
+{
+ "type": "minecraft:generic",
+ "pools": [
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:blade_pottery_sherd",
+     "modifier": [
+      {
+       "type": "minecraft:set_count",
+       "count": 4
+      },
+      {
+       "type": "minecraft:set_components",
+       "components": {
+        "minecraft:custom_data": {
+         "nsp_chain": "black_powder"
+        },
+        "minecraft:custom_name": {
+         "text": "Black Powder",
+         "color": "dark_gray",
+         "bold": true,
+         "italic": false
+        },
+        "minecraft:lore": [
+         {
+          "text": "Sulfur, saltpetre and charcoal: real gunpowder",
+          "color": "gray",
+          "italic": false
+         },
+         {
+          "text": "Fabricator: 1 of these, 1 Iron Nugget, 1 Copper Dust",
+          "color": "gray",
+          "italic": false
+         }
+        ],
+        "minecraft:item_model": "minecraft:gunpowder"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

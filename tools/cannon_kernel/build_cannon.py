@@ -146,6 +146,8 @@ def build(config, output):
         'function nsp_ck:shell/end',
     ])
     fn('target/damage',[
+        f'execute unless dimension {dim} run return 0',
+        f'execute unless entity @s[{box}] run return 0',
         'execute if entity @s[type=minecraft:player] run return 0',
         'execute unless entity @s[tag=nsp_ck.target,scores={ck_role=1}] run return 0',
         'execute unless entity @s[type=minecraft:drowned] unless entity @s[type=minecraft:skeleton] run return 0',
@@ -155,6 +157,8 @@ def build(config, output):
         'function #nsp_ck:on_hit',
     ])
     fn('target/anchor_hit',[
+        f'execute unless dimension {dim} run return 0',
+        f'execute unless entity @s[{box}] run return 0',
         'execute unless entity @s[type=minecraft:marker,tag=nsp_ck.target,tag=nsp_ck.ship_anchor,scores={ck_role=2}] run return 0',
         'scoreboard players remove @s ck_hp 8',
         'scoreboard players add #hits ck_stat 1',
