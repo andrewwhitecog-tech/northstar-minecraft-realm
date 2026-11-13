@@ -204,7 +204,43 @@ def main():
         need(rcon is not None,'Actual hosted Fabric server startup deadline');report['readyObservedAt']=utc();save()
         check('nsp_cannon_kernel' in cmd('datapack list enabled'),'kernel actually enabled',report['commands'][-1]['reply'])
         cmd('carpet commandPlayer true');cmd('time set midnight');cmd('weather clear')
+        # Fixture functions require real loaded chunks; RCON function completion alone does not prove placement.
+        cmd('forceload add 0 0 127 127')
+        chunk_deadline=min(native_end,time.monotonic()+120)
+        chunk_observations=[];all_chunks_loaded=False
+        while time.monotonic()<chunk_deadline:
+            loaded_count=0;first_missing=None
+            for chunk_x in range(8):
+                for chunk_z in range(8):
+                    x,z=chunk_x*16+8,chunk_z*16+8
+                    if observe(f'execute if loaded {x} 64 {z}')!=1:
+                        first_missing=[chunk_x,chunk_z];break
+                    loaded_count+=1
+                if first_missing is not None:break
+            chunk_observations.append({'at':utc(),'loadedChunksBeforeFirstMissing':loaded_count,'firstMissingChunk':first_missing})
+            report['fixtureChunkReadiness']={'requestedBlockBounds':[0,0,127,127],'expectedChunkCount':64,'timeoutSeconds':120,'observations':chunk_observations}
+            if loaded_count==64:
+                all_chunks_loaded=True;break
+            time.sleep(.25)
+        check(all_chunks_loaded,'all 64 fixture-site chunks actually loaded before demo build',report['fixtureChunkReadiness'])
         cmd('function nsp_ck:demo/build')
+        gun=manifest['config']['guns'][0]
+        fixture_blocks=[{'position':gun['breech'],'state':'minecraft:barrel[facing=up]'}]
+        fixture_blocks += [{'position':position,'state':'minecraft:stone_button[face=floor,facing=north,powered=false]'} for position in gun['controls'].values()]
+        # Native samples cover deck corners, spawn support and every control support.
+        platform_positions=[[22,64,14],[42,64,14],[22,64,42],[42,64,42],[32,64,20]]
+        platform_positions += [[position[0],position[1]-1,position[2]] for position in gun['controls'].values()]
+        fixture_blocks += [{'position':position,'state':'minecraft:polished_blackstone_bricks'} for position in platform_positions]
+        fixture_observations=[]
+        for block in fixture_blocks:
+            position=' '.join(str(v) for v in block['position'])
+            actual=observe('execute if block '+position+' '+block['state'])
+            fixture_observations.append({**block,'successScore':actual})
+        report['fixtureBlockPreflight']=fixture_observations
+        check(all(row['successScore']==1 for row in fixture_observations),'actual barrel, control buttons and critical platform samples exist before actor spawn',fixture_observations)
+        controller=observe('execute if entity @e[type=minecraft:marker,tag=nsp_ck.g.battery,limit=1]')
+        check(controller==1,'actual gun marker exists before actor spawn',controller)
+        check(score('@e[type=minecraft:marker,tag=nsp_ck.g.battery,limit=1]','ck_ld')==0,'actual gun marker initialized unloaded before actor spawn','ck_ld queried after native entity-presence check')
         cmd('player CannonProof spawn at 32.5 65 20.5 facing 0 0 in minecraft:overworld in survival')
         await_actor('CannonProof')
         observation_positive=observe('execute if entity @a[name=CannonProof,gamemode=survival]')
