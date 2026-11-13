@@ -54,6 +54,8 @@ jobs:
           sha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
           m.source_guard(sha('tools/cat_client_capture/CAPTURE_SOURCE.json'),sha('tools/cat_instincts/PUBLIC_SOURCE.json'),sha('tools/cat_instincts/NATIVE_SOURCE.json'))
           PY
+      - name: Actual strict input and offline-record regression tests
+        run: python3 -B -m unittest discover -s tools/cat_client_capture -p "test_*.py" -v
       - name: Actual source build and JUnit for pinned client classpath
         run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/capture-source-compile"
       - name: Compile observer against actual pinned official client dependencies
@@ -105,6 +107,8 @@ jobs:
       - name: Actual original coat export and source-compiled Java candidate pack
         id: coats
         run: python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-coat-original-export"
+      - name: Actual four improved COMPAT coat adoption
+        run: python3 -B tools/cat_native_representatives/adapt_representatives.py --execute --reviewed-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --original-pack "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate"
       - name: Prepare missing disposable hosted media/display tools
         run: |
           packages=()
@@ -117,7 +121,7 @@ jobs:
           command -v java javac ffmpeg ffprobe Xvfb
       - name: Actual real client, custom coats and original framebuffer capture
         id: capture
-        run: python3 -B tools/cat_client_capture/capture_client.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
+        run: python3 -B tools/cat_client_capture/capture_client.py --execute --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --representative-build-receipt "$GITHUB_WORKSPACE/tools/cat_native_representatives/native_representative_pack_v01/BUILD_ACTUAL.json" --reviewed-representative-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
       - name: Check tracked source remains unchanged
         if: always()
         run: git diff --exit-code
