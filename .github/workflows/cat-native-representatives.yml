@@ -1,0 +1,43 @@
+name: Four improved COMPAT cat coats into a new Java pack
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - tools/cat_native_representatives/**
+      - .github/workflows/cat-native-representatives.yml
+permissions:
+  contents: read
+concurrency:
+  group: cat-native-representatives-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-test-export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify reviewed adapter source and retained original inputs
+        run: python3 -B tools/cat_native_representatives/adapt_representatives.py --reviewed-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b
+      - name: Actual five adapter regression tests
+        run: |
+          set -o pipefail
+          python3 -B -m unittest discover -s tools/cat_native_representatives -p test_adapter.py -v 2>&1 | tee "$RUNNER_TEMP/cat-native-adapter-tests.log"
+      - name: Actual original source export and full61 native baseline
+        run: python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-native-adapter-base"
+      - name: Actual eight COMPAT replacements preserving all61 variants
+        run: python3 -B tools/cat_native_representatives/adapt_representatives.py --execute --reviewed-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --original-pack "$RUNNER_TEMP/cat-native-adapter-base/game_pack_candidate"
+      - name: Tracked source remains unchanged
+        if: always()
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: native-cat-representatives-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ github.workspace }}/tools/cat_native_representatives/native_representative_pack_v01
+            ${{ runner.temp }}/cat-native-adapter-tests.log
+          if-no-files-found: error
+          retention-days: 1
+          include-hidden-files: false

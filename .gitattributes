@@ -4,3 +4,5 @@ tools/cloud_survival_calibration/** -text whitespace=blank-at-eol,blank-at-eof,s
 tools/private_media_canary/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tools/private_media_conform/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tools/hosted_ffmpeg_toolchain/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+tools/cat_native_representatives/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

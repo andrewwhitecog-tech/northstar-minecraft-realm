@@ -1,0 +1,171 @@
+{
+  "schema": "northstar.cat-original-paint-public-packet.v1",
+  "status": "SOURCE_ONLY_EXPORT_AND_TEST_EXECUTION_PENDING",
+  "namespace": "nsp_cat_coats",
+  "sourceFiles": 30,
+  "targetEntries": 65,
+  "reusedVanillaReferences": 4,
+  "newOriginalSets": 61,
+  "targetPngCount": 183,
+  "standardLibraryOnly": true,
+  "vanillaImageBytesIncluded": false,
+  "retainedOfficialJavapIncluded": false,
+  "privateWorldOrProfileIncluded": false,
+  "existingPetsModified": false,
+  "numericMappingIDsAssigned": false,
+  "files": [
+    {
+      "path": "paint_cat_coats.py",
+      "bytes": 18889,
+      "sha256": "09281a2901ad663cb3a9353cc9f3ec16ab096924bb24f7049e9620c9ecb5d6c6"
+    },
+    {
+      "path": "test_paint_cat_coats.py",
+      "bytes": 11020,
+      "sha256": "00e3131d26dd0cec14d408f6dea00f2af5f5a9f017a1151416f9daa10fa63eae"
+    },
+    {
+      "path": "run_hosted_export.py",
+      "bytes": 6772,
+      "sha256": "22bb24e59d681c894820a7cfc4ccb5106efe784a848d4bebe8cbc06b54aedcce"
+    },
+    {
+      "path": "review_viewer.html",
+      "bytes": 9466,
+      "sha256": "39104d928f81afd29dcbc40fec6aa9ecdc192dc23c06ea0db5eb4eb28a01feda"
+    },
+    {
+      "path": "coat_recipes.json",
+      "bytes": 16365,
+      "sha256": "fb73e1c9980fbf80e9a2481224e1835673ef0fba01ac23083f453c2def53d893"
+    },
+    {
+      "path": "roster_public.json",
+      "bytes": 14375,
+      "sha256": "bdd43dc1254d264d537b4ad027eaec5a0f8a7aa62eb23ca4afeccdefae118f7b"
+    },
+    {
+      "path": "uv_models.json",
+      "bytes": 9256,
+      "sha256": "37f0bcbf01afbda1faac1d65eb14a730775dc11570c838eecb2fc796a885831f"
+    },
+    {
+      "path": "UV_PROVENANCE.json",
+      "bytes": 2033,
+      "sha256": "b4fabce41765a49262b5e95ca7d77b91da689a4734ce1f1ba78396edf5dbd6ed"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5377,
+      "sha256": "3744852e24e0cc7e0fd1fb75e02e283a1ad687d66a51d092e56faac381a22607"
+    },
+    {
+      "path": "workflow_candidate.yml",
+      "bytes": 1707,
+      "sha256": "7e31f14f4546bfa575e4b409712d7b28aac7a33c261fe5b18401bc362d12bbba"
+    },
+    {
+      "path": "geometry_source/broad_muzzle.geo.json",
+      "bytes": 5635,
+      "sha256": "8bcefa352f25bf77fefd28222f97eafd832704dcf55cc67ff9f1c718bfcece4f"
+    },
+    {
+      "path": "geometry_source/crystal_trim.geo.json",
+      "bytes": 9344,
+      "sha256": "8cefc2e65cbb6f63bd5d77a46d2702f4c9edf098e682b86251d783da67192f27"
+    },
+    {
+      "path": "geometry_source/curled_coat.geo.json",
+      "bytes": 6004,
+      "sha256": "9ead0da300a12d10cc249b88a7f07bad74cc9cb4f699a138c8b98256e31b3f02"
+    },
+    {
+      "path": "geometry_source/curled_ears.geo.json",
+      "bytes": 5936,
+      "sha256": "91d913afacffa67b172921372d3cfbcecc3b5f2343ad8c30be5560a9f888ef35"
+    },
+    {
+      "path": "geometry_source/ear_tufts_short_tail.geo.json",
+      "bytes": 5371,
+      "sha256": "d6d1c0a2096a99c8819901e68fa96c34e27d397fb9cda81933c6497ff58f8178"
+    },
+    {
+      "path": "geometry_source/eye_trim.geo.json",
+      "bytes": 9340,
+      "sha256": "46b63bad414767a53c162aee6d96e386f340f27ea3d8178ad3eaba3e605f6cd1"
+    },
+    {
+      "path": "geometry_source/fine_skin.geo.json",
+      "bytes": 5320,
+      "sha256": "d4789379980053aa91d88ea350b730641f4b222e8d73babfe63bf5bbe69c1554"
+    },
+    {
+      "path": "geometry_source/folded_ear_look.geo.json",
+      "bytes": 5330,
+      "sha256": "d8853d87a0fbd7155bd644e6925992741c31894767a22bbf0c94ca2a8ed4fbbc"
+    },
+    {
+      "path": "geometry_source/large_ears.geo.json",
+      "bytes": 5945,
+      "sha256": "0ebb12f1684c1f1c3434357446693de3599c64fdfc207cb8f6bd2aae7c07e9d2"
+    },
+    {
+      "path": "geometry_source/long_coat.geo.json",
+      "bytes": 6002,
+      "sha256": "8d572d3f22d9d34d15676c85f532738f3b8a448d2afa5b74248a8cb6f0286a0b"
+    },
+    {
+      "path": "geometry_source/long_tail_fluff.geo.json",
+      "bytes": 6008,
+      "sha256": "d5ce815aee1b938c2479b7b10e748dba66bf856b636c528c92abba1f3f89f2f1"
+    },
+    {
+      "path": "geometry_source/mane.geo.json",
+      "bytes": 6339,
+      "sha256": "43d9c285e66138c6ac6f6110ca138cb4058ab22782797ca7448e6c1a71347d18"
+    },
+    {
+      "path": "geometry_source/pastry_harness_rainbow_tail.geo.json",
+      "bytes": 7530,
+      "sha256": "830ee1f4dc3ebb14bd42b594bb7f7f4b35c27d376d98ea43ac0197f3c2635d1a"
+    },
+    {
+      "path": "geometry_source/short_tail.geo.json",
+      "bytes": 4737,
+      "sha256": "ef69490da818288d1026844b9c438eb419d7d197792d5edafed16deb048aa8b8"
+    },
+    {
+      "path": "geometry_source/slender.geo.json",
+      "bytes": 5320,
+      "sha256": "74a64b9874ddb2e49d1a0a87f862a9356f9bd288c54691b739ec7f15475cc109"
+    },
+    {
+      "path": "geometry_source/sparse_roan.geo.json",
+      "bytes": 5322,
+      "sha256": "9f2df42fdafe191392d9d7e7facb9eba48c7b92b861e07346d192bd0b50a2e65"
+    },
+    {
+      "path": "geometry_source/stock_cat.geo.json",
+      "bytes": 5320,
+      "sha256": "2b22104942943ce4da7bda04b0a2015ea9e929f16873593cfb76a76bfaf798ea"
+    },
+    {
+      "path": "geometry_source/tailless.geo.json",
+      "bytes": 4415,
+      "sha256": "120565f0dc881766de23f87b3aa9634df3564bf4500d3ab63f97dae6942d4af9"
+    },
+    {
+      "path": "geometry_source/tall_ear_tufts.geo.json",
+      "bytes": 5949,
+      "sha256": "2164d0d43b22611a20be709a20823bf2f6db7dcc13a25b7eed6ce2fcc593ba10"
+    },
+    {
+      "path": "compile_cat_coats.py",
+      "bytes": 8107,
+      "sha256": "cbeb90f4915330ff93be44bcee4ef350f3036a932cc884a4267d3d70415c0e0f"
+    }
+  ],
+  "revision": 3,
+  "supersedesPublicPacketSha256": "77c9e8d9ccb5372c3b746d6b43d64b13d0722c1c5d1b1e6d16415b560444d6d2",
+  "nativeVariantPackagingAdded": true
+}

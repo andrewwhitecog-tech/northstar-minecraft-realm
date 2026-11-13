@@ -1,0 +1,74 @@
+{
+  "schema": "northstar.cat-representative-native-adapter-source.v1",
+  "files": {
+    "adapt_representatives.py": {
+      "bytes": 12334,
+      "sha256": "0dd3843a6b04c05cf15fc4a8ce20482ea43ff20a6c0013775863bcf6f2c569d6"
+    },
+    "test_adapter.py": {
+      "bytes": 6354,
+      "sha256": "d1bee7a9c67cb2ab6aea4df8ec78b2336242b82698f373183c81a0d6e99504bf"
+    },
+    "INPUT_PINS.json": {
+      "bytes": 2092,
+      "sha256": "7a8c82012ff1397bf5397e592d05a76e173192c94bdaf3db9bcd91c0fce4a66e"
+    },
+    "dependencies/compile_cat_coats.py": {
+      "bytes": 8107,
+      "sha256": "cbeb90f4915330ff93be44bcee4ef350f3036a932cc884a4267d3d70415c0e0f"
+    },
+    "dependencies/roster_public.json": {
+      "bytes": 14375,
+      "sha256": "bdd43dc1254d264d537b4ad027eaec5a0f8a7aa62eb23ca4afeccdefae118f7b"
+    },
+    "provenance/ORIGINAL_EXPORT_PUBLIC_SOURCE.json": {
+      "bytes": 5630,
+      "sha256": "d5693ecc79c2f67393bf5ae17abe894fc18f47a384c2c0aa44faf1074e6224e8"
+    },
+    "provenance/REPRESENTATIVES_PUBLIC_SOURCE.json": {
+      "bytes": 2648,
+      "sha256": "d15f6e261e84f10e6c5b96b00b58d0fcda5a1094294f3af522186ea558700399"
+    },
+    "inputs/representatives/REPRESENTATIVE_ACTUAL.json": {
+      "bytes": 24119,
+      "sha256": "200b6963c6439ce5021ed15a81992a18d42133ee6ddf6da50bfa08453a032594"
+    },
+    "inputs/representatives/compat/originals/domestic_bengal/adult.png": {
+      "bytes": 551,
+      "sha256": "748d5164a78bb690b6fac9f279d3e36e700161c379e4d9918e627003429be3b6"
+    },
+    "inputs/representatives/compat/originals/domestic_bengal/baby.png": {
+      "bytes": 317,
+      "sha256": "6e9b0cfcede024d53eaeea852943c10880d74946860f9f9fe17135bff8f94d5b"
+    },
+    "inputs/representatives/compat/originals/domestic_maine_coon/adult.png": {
+      "bytes": 910,
+      "sha256": "7fa1a2582608fabf090ed5b1de5f3349b8004dbfcb35a55a760a768c8c4178e8"
+    },
+    "inputs/representatives/compat/originals/domestic_maine_coon/baby.png": {
+      "bytes": 543,
+      "sha256": "8b11160c3ec140db6efacbb63a6fb8a9de73e6111852ccb6d08f15f9cdf52702"
+    },
+    "inputs/representatives/compat/originals/domestic_sphynx/adult.png": {
+      "bytes": 442,
+      "sha256": "dba4f00c3b33bb8917386eb7e4d1384928c9bc0299721d3734491b91b359c317"
+    },
+    "inputs/representatives/compat/originals/domestic_sphynx/baby.png": {
+      "bytes": 306,
+      "sha256": "37448949b80622ec3444068768434bd7dd3af1d7c81113ff315e5f705905a0a6"
+    },
+    "inputs/representatives/compat/originals/fantasy_obsidian_rainbow/adult.png": {
+      "bytes": 864,
+      "sha256": "3ab9fb5f742e27ea9ba5d7b0ce33f14e5ecce984264aac87c83322440a54802d"
+    },
+    "inputs/representatives/compat/originals/fantasy_obsidian_rainbow/baby.png": {
+      "bytes": 467,
+      "sha256": "28daccb052922cb2b322d5376e036253226b2df9f407226732b90159ed62b91c"
+    }
+  },
+  "scope": "Exactly8 COMPAT textures over original61-coat Java output; native/visual acceptance pending",
+  "nativeVerified": false,
+  "worldOrPrivateDataIncluded": false,
+  "upstreamContributionPacketSha256": "8a20d85d8fc7e4c46a2edb20fd49c9fa30f20e012d36785504b79efaa306b6d9",
+  "integrationNote": "Portable source and retained actual COMPAT inputs only; Windows admission runner excluded; tests/export still require actual execution."
+}
