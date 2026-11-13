@@ -19,7 +19,7 @@ public final class InstinctReturnGoal extends Goal {
         if (!CatContext.returnNeeded(cat)) return false;
         owner=CatContext.owner(cat);
         initial=cat.getNavigation().createPath(owner,1);
-        return CatContext.safePath(cat,initial);
+        return CatContext.safeReturnPath(cat,initial);
     }
     @Override public void start() {
         CatContext.halt(cat);started=cat.tickCount;nextPathTick=started+10;
@@ -32,7 +32,7 @@ public final class InstinctReturnGoal extends Goal {
         if (cat.tickCount>=nextPathTick) {
             nextPathTick=cat.tickCount+10;
             Path path=cat.getNavigation().createPath(owner,1);
-            if (CatContext.safePath(cat,path)) cat.getNavigation().moveTo(path,1.1); else cat.getNavigation().stop();
+            if (CatContext.safeReturnPath(cat,path)) cat.getNavigation().moveTo(path,1.1); else cat.getNavigation().stop();
         }
     }
     @Override public void stop() { owner=null;initial=null;cat.getNavigation().stop();cat.setSprinting(false); }

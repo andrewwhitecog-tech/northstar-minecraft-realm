@@ -66,7 +66,7 @@ def main():
   for file in xml.glob('TEST-*.xml'):
    suite=ET.parse(file).getroot()
    for key in counts:counts[key]+=int(suite.attrib.get(key,0))
-  report['junitActual']=counts;save();need(result.returncode==0 and counts=={'tests':14,'failures':0,'errors':0,'skipped':0},'Actual JUnit outcome not14clean tests')
+  report['junitActual']=counts;save();need(result.returncode==0 and counts=={'tests':16,'failures':0,'errors':0,'skipped':0},'Actual JUnit outcome not16clean tests')
   jar=evidence/'northstar_cat_instincts-0.1.0-26.3-candidate.jar'
   with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as z:
    for file in sorted(classes.rglob('*.class')):z.write(file,file.relative_to(classes).as_posix())

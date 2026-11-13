@@ -23,7 +23,7 @@ import net.minecraft.world.level.pathfinder.Path;
 
 /** Converts ACTUAL current entities into policy facts; no remote/name-based trust grants. */
 public final class CatContext {
-    public static final int SEARCH_RADIUS = 16;
+    public static final int SEARCH_RADIUS = InstinctLimits.SEARCH_RADIUS;
     public static final int OWNER_RETURN_DISTANCE = 8;
     private static final Set<String> PROTECTED = Set.of(
         "nsp_cat.protected", "nsp_cat.no_hunt", "nsp_protected", "nsp_friendly", "nsp_npc",
@@ -115,15 +115,19 @@ public final class CatContext {
         }
         return true;
     }
-    public static boolean safePath(Cat cat, Path path) {
+    public static boolean safePath(Cat cat, Path path) { return safePath(cat,path,false); }
+    public static boolean safeReturnPath(Cat cat, Path path) { return safePath(cat,path,true); }
+    private static boolean safePath(Cat cat, Path path, boolean returning) {
         if (!(cat.level() instanceof ServerLevel level) || path==null || !path.canReach() || path.getNodeCount()>128) return false;
         LivingEntity o=owner(cat);
         if (o==null || o.level()!=level) return false;
+        double radiusSquared=returning?InstinctLimits.returnPathRadiusSquared(cat.distanceToSqr(o)):SEARCH_RADIUS*SEARCH_RADIUS;
+        if(radiusSquared<0) return false;
         Node previous=null;
         for (int i=0;i<path.getNodeCount();i++) {
             Node n=path.getNode(i);BlockPos pos=new BlockPos(n.x,n.y,n.z);
             if (!safeFeet(level,pos) || (previous!=null && Math.abs(previous.y-n.y)>1)
-                || o.distanceToSqr(n.x+0.5,n.y,n.z+0.5)>SEARCH_RADIUS*SEARCH_RADIUS) return false;
+                || o.distanceToSqr(n.x+0.5,n.y,n.z+0.5)>radiusSquared) return false;
             previous=n;
         }
         return true;

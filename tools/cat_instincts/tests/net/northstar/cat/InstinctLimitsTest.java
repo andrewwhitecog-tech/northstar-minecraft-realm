@@ -18,4 +18,17 @@ public class InstinctLimitsTest {
         assertFalse(InstinctLimits.mayPursue(state(7)));
         assertFalse(InstinctLimits.mayPursue(state(10)));
     }
+    @Test void ReturnCorridorAdmitsCatAlreadyOutsideTheHuntDisk() {
+        double catDistance=18;
+        double corridor=InstinctLimits.returnPathRadiusSquared(catDistance*catDistance);
+        assertTrue(corridor>=catDistance*catDistance,"The actual start node must be reachable on return");
+        assertEquals(400.0,corridor,"A short detour is allowed without widening hunting");
+        assertEquals(16,InstinctLimits.SEARCH_RADIUS);
+    }
+    @Test void ReturnCorridorRejectsUnboundedAndInvalidStarts() {
+        assertEquals(256.0,InstinctLimits.returnPathRadiusSquared(4));
+        assertEquals(4096.0,InstinctLimits.returnPathRadiusSquared(4096));
+        for(double invalid:new double[]{-1,Double.NaN,Double.POSITIVE_INFINITY,4225})
+            assertEquals(-1.0,InstinctLimits.returnPathRadiusSquared(invalid));
+    }
 }
