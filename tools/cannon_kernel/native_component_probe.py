@@ -110,6 +110,25 @@ def main():
                 report.setdefault('actualTickSteps',[]).append({'requested':n,'before':before,'after':after});return
             time.sleep(.1)
         raise RuntimeError('Actual world clock did not advance requested ticks: '+reply)
+    def await_actor(name):
+        # Carpet's profile resolution/join is asynchronous, including while world ticks are frozen.
+        deadline=min(native_end,time.monotonic()+30)
+        observations=[]
+        while time.monotonic()<deadline:
+            identity=cmd('execute if entity @a[name='+name+',gamemode=survival] run say CK_NONOP_SURVIVAL')
+            ops=json.loads((srv/'ops.json').read_text(encoding='utf-8'))
+            need(ops==[],'Fresh fixture unexpectedly contains operators during '+name+' readiness')
+            ready='CK_NONOP_SURVIVAL' in identity and ops==[]
+            row={'at':utc(),'identityReply':identity,'ops':ops}
+            observations.append(row)
+            report.setdefault('actorReadiness',{})[name]={'timeoutSeconds':30,'observations':observations}
+            if ready:
+                row['actualPosition']=cmd('data get entity '+name+' Pos')
+                check(ready,'Carpet survival player with no ops '+name,report['actorReadiness'][name])
+                return
+            time.sleep(.1)
+        check(False,'bounded actual Carpet actor readiness '+name,{'timeoutSeconds':30,'observations':observations})
+
     def press(action):
         x,y,z=manifest['config']['guns'][0]['controls'][action]
         cmd(f'player CannonProof look at {x+.5} {y+.06} {z+.5}');cmd('player CannonProof use once');steps(3)
@@ -153,6 +172,15 @@ def main():
         (srv/'server.properties').write_text(''.join(str(k)+'='+str(v)+'\n' for k,v in props.items()),encoding='utf-8');(srv/'eula.txt').write_text('eula=true\n',encoding='utf-8')
         def offline_uuid(name):return str(uuid.UUID(bytes=hashlib.md5(('OfflinePlayer:'+name).encode()).digest(),version=3))
         (srv/'ops.json').write_text('[]',encoding='utf-8');(srv/'whitelist.json').write_text(json.dumps([{'name':name,'uuid':offline_uuid(name)} for name in ['CannonProof','CannonBystander']]),encoding='utf-8')
+        # Only the same two generic offline fixture identities; no existing cache/account is read.
+        expires=(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S %z')
+        cache=[{'name':name,'uuid':offline_uuid(name),'expiresOn':expires} for name in ['CannonProof','CannonBystander']]
+        (srv/'usercache.json').write_text(json.dumps(cache),encoding='utf-8')
+        cache_actual=json.loads((srv/'usercache.json').read_text(encoding='utf-8'));whitelist_actual=json.loads((srv/'whitelist.json').read_text(encoding='utf-8'))
+        same_profiles={(row['name'],row['uuid']) for row in cache_actual}=={(row['name'],row['uuid']) for row in whitelist_actual}
+        need(same_profiles and len(cache_actual)==2,'Fresh generic cache/whitelist identity mismatch')
+        report['offlineFixtureProfileCache']={'names':[row['name'] for row in cache_actual],'count':len(cache_actual),'expiresOn':expires,'usesSameOfflineUUIDsAsWhitelist':same_profiles}
+
         env={key:os.environ[key] for key in ['PATH','JAVA_HOME','LANG','LC_ALL','HOME','TMPDIR'] if key in os.environ};env.update(PYTHONUTF8='1',PYTHONIOENCODING='utf-8')
         log=(artifacts/'server.actual.log').open('xb');logs.append(log)
         argv=['java','-Xms256M','-Xmx2G','-XX:ActiveProcessorCount=2','-Dmax.bg.threads=1','-Dfile.encoding=UTF-8','-Djava.awt.headless=true','-cp',runtime['server_classpath'],runtime['server_profile']['mainClass'],'--nogui']
@@ -169,8 +197,7 @@ def main():
         cmd('carpet commandPlayer true');cmd('time set midnight');cmd('weather clear')
         cmd('function nsp_ck:demo/build')
         cmd('player CannonProof spawn at 32.5 65 20.5 facing 0 0 in minecraft:overworld in survival')
-        identity=cmd('execute if entity @a[name=CannonProof,gamemode=survival] run say CK_NONOP_SURVIVAL')
-        check('CK_NONOP_SURVIVAL' in identity and json.loads((srv/'ops.json').read_text())==[],'Carpet survival player with no ops',identity)
+        await_actor('CannonProof')
         check(score('@e[type=minecraft:marker,tag=nsp_ck.g.battery,limit=1]','ck_ld')==0,'actual controller starts unloaded','ck_ld queried')
         cmd('tick freeze');steps(1)
         load_ammo();check(items(POWDER)==4,'authentic source powder recognized',items(POWDER))
@@ -189,6 +216,7 @@ def main():
         # Raised deck puts a vulnerable bystander inside the actual shot/collision envelope.
         cmd('fill 29 65 36 35 65 46 minecraft:stone')
         cmd('player CannonBystander spawn at 32.5 66 41.5 facing 0 0 in minecraft:overworld in survival')
+        await_actor('CannonBystander')
         cmd('execute as CannonBystander at @s run function nsp_ck:api/register_target')
         tags=cmd('data get entity CannonBystander Tags');check('nsp_ck.target' not in tags,'player cannot register as cannon target',tags)
         hp=value('entity CannonBystander Health');steps(125);release_button();press('load');release_button();press('fire')
