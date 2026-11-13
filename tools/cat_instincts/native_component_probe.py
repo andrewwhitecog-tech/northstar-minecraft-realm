@@ -309,13 +309,13 @@ def main():
   hunt();active=observer_state();before=hp(VICTIM);cmd('tag '+CAT+' remove '+CANARY);rows=track(20);revoked=observer_state();vanilla_goals(revoked)
   check(all(r['victimHealth']==before and r['quarryActive']==0 for r in rows),'actual20-tick tag revocation during pursuit clears target without damage',{'active':active,'samples':rows,'revoked':revoked})
  def attach_saved_fence_leash():
-  p=pos(CAT);cmd('tp '+OWNER+' 32.5 65 32.5');cmd('item replace entity '+OWNER+' weapon.mainhand with minecraft:lead');cmd('player '+OWNER+' look at '+str(p[0])+' 65.35 '+str(p[2]));cmd('player '+OWNER+' use once')
+  p=pos(CAT);cmd('tp '+OWNER+' '+str(p[0]-2)+' 65 '+str(p[2]));cmd('item replace entity '+OWNER+' weapon.mainhand with minecraft:lead');cmd('player '+OWNER+' look at '+str(p[0])+' 65.35 '+str(p[2]));cmd('player '+OWNER+' use once')
   attached=[]
   for _ in range(3):
    ticks(1);attached.append(relation('leasher'))
    if observe('execute as '+CAT+' on leasher if entity @s[name='+OWNER+']')==1:break
   check(observe('execute as '+CAT+' on leasher if entity @s[name='+OWNER+']')==1,'actual saved fixture lead attached by Carpet use',attached)
-  cmd('setblock 33 65 32 minecraft:oak_fence');cmd('player '+OWNER+' look at 33.5 65.5 32.5');cmd('player '+OWNER+' use once');ticks(2)
+  cmd('setblock 32 65 34 minecraft:oak_fence');cmd('player '+OWNER+' look at 32.5 65.75 34.5');cmd('player '+OWNER+' use once');ticks(2)
   check(observe('execute as '+CAT+' on leasher if entity @s[type=minecraft:leash_knot]')==1,'actual player use transfers lead to saved fence knot',cmd('data get entity '+CAT))
   cmd('item replace entity '+OWNER+' weapon.mainhand with minecraft:air')
  def recover_actors():
@@ -419,8 +419,8 @@ def main():
    logs=[{'file':p.name,'boot':p.name.removeprefix('server.').removesuffix('.log'),'text':p.read_text(errors='replace')}for p in sorted(evidence.glob('server*.log'))]
    report['serverLogAudit']=audit_log_records(logs,expected_ids={uuid.UUID(offline(n)).hex for n in [OWNER,GUEST]},actors_ok=actors_ok,owner_ok=owner_ok,closure_ok=closure_ok)
    if report['serverLogAudit']['fatalErrors']:report['success']=False
-  report['finishedAt']=utc();save();total=sum(p.stat().st_size for p in evidence.rglob('*')if p.is_file());allowed=total+4096<=2*1024*1024;report['artifactUploadAllowed']=allowed
-  if not allowed:report['success']=False;report['errors'].append('Evidence exceeds2MiB; upload withheld, no truncation')
+  report['finishedAt']=utc();save();total=sum(p.stat().st_size for p in evidence.rglob('*')if p.is_file());allowed=total+4096<=16*1024*1024;report['evidenceBudget']={'actualBytesBeforeFinalReceipt':total,'maximumBytes':16*1024*1024,'files':{p.relative_to(evidence).as_posix():p.stat().st_size for p in evidence.rglob('*')if p.is_file()}};report['artifactUploadAllowed']=allowed
+  if not allowed:report['success']=False;report['errors'].append('Evidence exceeds16MiB; upload withheld, no truncation')
   save()
   if os.environ.get('GITHUB_OUTPUT'):
    with open(os.environ['GITHUB_OUTPUT'],'a')as out:out.write('upload_allowed='+str(allowed).lower()+'\n')
