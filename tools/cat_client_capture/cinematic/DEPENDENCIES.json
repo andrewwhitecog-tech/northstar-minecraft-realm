@@ -310,15 +310,15 @@
       "name": "fabric-api-base",
       "path": "fabric-api/fabric-api-base-2.0.6+fcdff87f5d.jar",
       "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api-base/2.0.6+fcdff87f5d/fabric-api-base-2.0.6+fcdff87f5d.jar",
-      "size": 59837,
-      "sha256": "e3b64039e8f261cc24a5013cb8b442cf368f08afa28d01ecdf97f3ccdeb7b63c"
+      "size": 29248,
+      "sha256": "88485b1edbcb642fa28b8f53e173835b19f6b6e49aa5b088e3fe16653ef67a13"
     },
     {
       "name": "fabric-lifecycle-events-v1",
       "path": "fabric-api/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
       "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-lifecycle-events-v1/4.1.9+ffef5f675d/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
-      "size": 215217,
-      "sha256": "fc47f06fa9ce4145ad925164a6eccc436f7ff504cf7d1e766a15699b82cd3e74"
+      "size": 97913,
+      "sha256": "b9ba49109cf21f968d0b44c26b2c930af74d54e2f71d9fdf505e1359275842e2"
     }
   ]
 }

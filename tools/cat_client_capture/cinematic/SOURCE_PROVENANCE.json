@@ -93,5 +93,24 @@
     "skipped": 0,
     "scope": "Retained upstream build; not the portable port result."
   },
-  "dependencyCoordinateFetchesExecuted": false
+  "dependencyCoordinateFetchesExecuted": true,
+  "officialModuleFetchVerification": {
+    "updatedUTC": "2026-11-14T06:08:37.441Z",
+    "previousHostedRun": 43564551141,
+    "previousOutcome": "FAILED_BEFORE_JAVAC_DEPENDENCY_BYTE_PIN_MISMATCH",
+    "artifacts": [
+      {
+        "name": "fabric-api-base",
+        "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api-base/2.0.6+fcdff87f5d/fabric-api-base-2.0.6+fcdff87f5d.jar",
+        "bytes": 29248,
+        "sha256": "88485b1edbcb642fa28b8f53e173835b19f6b6e49aa5b088e3fe16653ef67a13"
+      },
+      {
+        "name": "fabric-lifecycle-events-v1",
+        "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-lifecycle-events-v1/4.1.9+ffef5f675d/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
+        "bytes": 97913,
+        "sha256": "b9ba49109cf21f968d0b44c26b2c930af74d54e2f71d9fdf505e1359275842e2"
+      }
+    ]
+  }
 }

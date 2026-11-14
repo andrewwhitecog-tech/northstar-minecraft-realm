@@ -34,7 +34,7 @@ Standalone stdlib regression command for Root/admitted execution:
 
 The independent workflow job compiles all9 production classes and all6 JUnit classes using the official locked dependencies, then requires actual XML totals39tests/0failures/0errors/0skips and actual stdlib totals4tests/0failures/0errors/0skips/0expectedFailures/0unexpectedSuccesses. It retains raw logs, counts and an own-classes-only candidate JAR. Missing/empty/partial reports fail. Neither compilation nor tests have been run for this new portable port. The retained upstream build recorded39clean JUnit cases; that historical result is not this port's result.
 
-Two Fabric API module dependencies are added using exact retained byte sizes/SHA256 and their official Fabric Maven coordinates. Their portable URL fetches remain unexecuted until Root/CI runs the builder. No extra installation or fee is required by this source.
+Two Fabric API modules use official Fabric Maven URLs with actual standalone artifact byte sizes/SHA256. The first hosted attempt stopped before javac because retained local module hashes did not match the standalone downloads. Both official module downloads were independently fetched and byte-pinned for this correction; the next hosted build must compile and run the tests against those exact bytes. No extra installation or fee is required by this source.
 
 ## Remaining native requirements
 
