@@ -1,0 +1,32 @@
+{
+  "schema": "northstar.portable-cinematic-source.v1",
+  "sourceOnly": true,
+  "portableBuildExecuted": false,
+  "nativeExecuted": false,
+  "files": {
+    "DEPENDENCIES.json": "228d6c420c11a97ae1aaa0bf237b4b137927704f6c90144d8c0ea1eb83cdf1a3",
+    "README.md": "13e173266bb8bc05587dc1a84bbadf70415331ab9c9c7e8a43dd3759bc95f7bb",
+    "SOURCE_PORT.patch": "e657945ed436fa0a30f679ff32291fde52d7c5ae071ecea3d6d1c6f7f675185d",
+    "SOURCE_PROVENANCE.json": "624d2a0243e63d43172dfd028c9572c153d7e9153023565bba015aea88c71f3f",
+    "portable_build.py": "ecfaeab4a6f57accc239ca78e882609d8446f6a36cad606357d2d158e8ab2b16",
+    "resources/fabric.mod.json": "a45ac0812e1f9089f44ed93b21b5755148ee1b40769e7dfdaa96e4088bcea796",
+    "resources/nsp_cinematic.mixins.json": "7e4799e229905a3d56498ff564b39e7560d0caeb96d3e64ea79774076b912c9d",
+    "spool_verify.py": "ae72e525b7890286ecca058804e5f7328f48cbfbadb8a4a905fd1905fb5f577e",
+    "src/nsp/walk/CinematicCommitter.java": "20936d367771d2825a58fbc0c9ae4af83dfefd95c63fd0aba61aa5ddcebb9fd5",
+    "src/nsp/walk/CinematicFrameRecorder.java": "9e471a563f21f3b07322a65a4f168756fa8dcc532c253cad06b25f61bde62af3",
+    "src/nsp/walk/CinematicFrameState.java": "f8ac6b483911ec15ad1c7e61299a020b2208d3209f1e8fc4762bfd005d845dfd",
+    "src/nsp/walk/CinematicProgram.java": "9ec87de0b60c05c3da11d5710287a5269d1e7a22453b848c956e4eea5b829e88",
+    "src/nsp/walk/CinematicTakePaths.java": "82d425554186a1617ae846d41d403d92be322f1724327e1d34cdfb9995f47c0f",
+    "src/nsp/walk/FrameRecorder.java": "29176d0da34f85a4efcb9b240783127369a030f756296cd03a8a02de7bf45516",
+    "src/nsp/walk/RawFrameSpool.java": "265e275ce404a8336d514b6f71371e76a4d4af786b5f7d8b565c62e7a77ed542",
+    "src/nsp/walk/RouteWalk.java": "ef6b60d2112d0088f944a3dbccb434b9114dfc8bf723bcdd272cbb7ff126233f",
+    "src/nsp/walk/mixin/MinecraftFrameMixin.java": "8e568c6dd72eafc1779cb02805212f2860bffb659c589a0e04f6ef11d3dddf7b",
+    "test_spool_verify_mode.py": "3dbb9f1655849fbbc354939774dcbf57a043762c9678e0c07c34b095be139502",
+    "tests/nsp/walk/CinematicAnimatedModeTest.java": "4a0943e3bc9f6ac66ef91773f7179dfda4edf44bbd5ff6ab3214834b8c0379c1",
+    "tests/nsp/walk/CinematicFrameDeferTest.java": "6ada06a58eb2915f9608724874b172c9768202ceee06a57c07a1a8de8aaee83b",
+    "tests/nsp/walk/CinematicFrameStateTest.java": "2c77133a780dec976bc7d5287c3f76d9edd279bb79a227ef10726e2769a2eb9c",
+    "tests/nsp/walk/CinematicTakePathsTest.java": "80b0d5106cc390fe62cdbb286002abc242040c9936d15ad2ef050f7582d3bcaf",
+    "tests/nsp/walk/FrameRecorderUniqueWriterTest.java": "a731dd75284b476382753fff7eaa9ec35fdd105023013a5ca80d671097bdc3d5",
+    "tests/nsp/walk/RawFrameSpoolTest.java": "3ac5babc74c5dd8bab1c6c632e37fa2c9c6a9a90224d3e646881876b016368bb"
+  }
+}

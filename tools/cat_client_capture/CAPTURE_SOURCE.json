@@ -6,7 +6,7 @@
     "tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java": "a069ad20b4e6410c82fa3fe2c068ddea9a60b9ef05441aee7b914a7db1f7570c",
     "tools/cat_client_capture/resources/fabric.mod.json": "676f51aaea2efa2849b98b3bd0e9a7c1694511f54923fd2b9d5513e4e2673e49",
     "tools/cat_client_capture/resources/northstar_capture.mixins.json": "baae00fec2c80e347191f10de54e739b7c0b65a38f08fcf6ba769e0ec852655c",
-    ".github/workflows/cat-real-client-capture.yml": "4d450ddf216912fd2002e6e1fbf71284eb3694ba5618ff7c7051d19c7c0034d0",
+    ".github/workflows/cat-real-client-capture.yml": "ab043dd7cbefb0193ec1e7432d12e016750ba1f2dc65ccc753a4662fbae17b51",
     "tools/cloud_survival_calibration/download_runtime.py": "2b4826e81337c6ce2a2a7db90f418697a43a291bdfea3409b2ebc55a5993fb81",
     "tools/cloud_survival_calibration/native_calibration.py": "9bf65f9e27ee1b3db793ac4bebec1c52fe0602a7e8c3f86a59d3f8a629f1ed9e",
     "tools/cloud_survival_calibration/nbt_region.py": "0948c9ce6afa85a6e83beadbd4151e4101ed687a64c1f4a2b786c7bb3e782c2d",

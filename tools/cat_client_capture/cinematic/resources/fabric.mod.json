@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "northstar_cinematic_admission",
+  "version": "0.1.0",
+  "name": "NorthStar explicit cinematic admission",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "nsp.walk.RouteWalk"
+    ]
+  },
+  "mixins": [
+    "nsp_cinematic.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "26.3",
+    "java": ">=25",
+    "fabric-lifecycle-events-v1": "*"
+  }
+}

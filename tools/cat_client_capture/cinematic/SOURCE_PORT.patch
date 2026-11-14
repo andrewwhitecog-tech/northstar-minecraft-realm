@@ -1,0 +1,2214 @@
+diff --git a/tools/cat_client_capture/cinematic/DEPENDENCIES.json b/tools/cat_client_capture/cinematic/DEPENDENCIES.json
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/DEPENDENCIES.json
+@@ -0,0 +1,324 @@
++{
++  "schema": "northstar.cat-build-dependencies.v1",
++  "minecraft": "26.3",
++  "java": "25",
++  "source": "Official pinned portable cat classpath plus byte-pinned Fabric API modules. Source preparation does not download or execute dependencies.",
++  "junitPath": "test/junit-platform-console-standalone-1.12.2.jar",
++  "artifacts": [
++    {
++      "name": "minecraft-client-26.3",
++      "path": "minecraft/client-26.3.jar",
++      "sha1": "e877b6a07acd633fb3bb475002175cec036e7b87",
++      "size": 41483720,
++      "url": "https://piston-data.mojang.com/v1/objects/e877b6a07acd633fb3bb475002175cec036e7b87/client.jar"
++    },
++    {
++      "name": "at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar",
++      "path": "mojang/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar",
++      "url": "https://libraries.minecraft.net/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar",
++      "sha1": "f541d7f910fe3d76f38f799c507c48cc81b12ecb",
++      "size": 910232
++    },
++    {
++      "name": "com/azure/azure-json/1.4.0/azure-json-1.4.0.jar",
++      "path": "mojang/com/azure/azure-json/1.4.0/azure-json-1.4.0.jar",
++      "url": "https://libraries.minecraft.net/com/azure/azure-json/1.4.0/azure-json-1.4.0.jar",
++      "sha1": "fcc1d354dbc3e0300e5276b1bf124d0247799cd8",
++      "size": 325945
++    },
++    {
++      "name": "com/github/oshi/oshi-core/6.9.0/oshi-core-6.9.0.jar",
++      "path": "mojang/com/github/oshi/oshi-core/6.9.0/oshi-core-6.9.0.jar",
++      "url": "https://libraries.minecraft.net/com/github/oshi/oshi-core/6.9.0/oshi-core-6.9.0.jar",
++      "sha1": "03224870731860cfcd7744581a05b559e94291e7",
++      "size": 1022125
++    },
++    {
++      "name": "com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
++      "path": "mojang/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
++      "url": "https://libraries.minecraft.net/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
++      "sha1": "efc0e34ede4e3204eaefb84a00e55e8c86634382",
++      "size": 313604
++    },
++    {
++      "name": "com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
++      "path": "mojang/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
++      "url": "https://libraries.minecraft.net/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
++      "sha1": "aeaffd00d57023a2c947393ed251f0354f0985fc",
++      "size": 10763
++    },
++    {
++      "name": "com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
++      "path": "mojang/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
++      "url": "https://libraries.minecraft.net/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
++      "sha1": "c376b13067cc99a5774403530953f7b05a91e218",
++      "size": 3064793
++    },
++    {
++      "name": "com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar",
++      "path": "mojang/com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar",
++      "url": "https://libraries.minecraft.net/com/microsoft/azure/msal4j/1.24.1/msal4j-1.24.1.jar",
++      "sha1": "c233f2d047b9755f7041adf21a858c680e4c9242",
++      "size": 396486
++    },
++    {
++      "name": "com/mojang/authlib/10.0.77/authlib-10.0.77.jar",
++      "path": "mojang/com/mojang/authlib/10.0.77/authlib-10.0.77.jar",
++      "url": "https://libraries.minecraft.net/com/mojang/authlib/10.0.77/authlib-10.0.77.jar",
++      "sha1": "add8754cda96cf0cd840441632875648836f8a71",
++      "size": 152645
++    },
++    {
++      "name": "com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar",
++      "path": "mojang/com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar",
++      "url": "https://libraries.minecraft.net/com/mojang/brigadier/1.3.11/brigadier-1.3.11.jar",
++      "sha1": "3373d1e7bf00c8b99bed1ea4efb8c47344e4a887",
++      "size": 80151
++    },
++    {
++      "name": "com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar",
++      "path": "mojang/com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar",
++      "url": "https://libraries.minecraft.net/com/mojang/datafixerupper/10.0.21/datafixerupper-10.0.21.jar",
++      "sha1": "b6b2ae770c02e0c1eb90f9985b151e9085a38d0b",
++      "size": 753612
++    },
++    {
++      "name": "com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar",
++      "path": "mojang/com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar",
++      "url": "https://libraries.minecraft.net/com/mojang/jtracy/1.14.38/jtracy-1.14.38.jar",
++      "sha1": "cc2ad81342001b4281c305a298d7f50332354058",
++      "size": 14292
++    },
++    {
++      "name": "com/mojang/logging/1.7.12/logging-1.7.12.jar",
++      "path": "mojang/com/mojang/logging/1.7.12/logging-1.7.12.jar",
++      "url": "https://libraries.minecraft.net/com/mojang/logging/1.7.12/logging-1.7.12.jar",
++      "sha1": "351cea64a5233361327d8d54c44277041beed97f",
++      "size": 19540
++    },
++    {
++      "name": "commons-io/commons-io/2.20.0/commons-io-2.20.0.jar",
++      "path": "mojang/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar",
++      "url": "https://libraries.minecraft.net/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar",
++      "sha1": "36f3474daec2849c149e877614e7f979b2082cd2",
++      "size": 563971
++    },
++    {
++      "name": "io/netty/netty-buffer/4.2.16.Final/netty-buffer-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-buffer/4.2.16.Final/netty-buffer-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-buffer/4.2.16.Final/netty-buffer-4.2.16.Final.jar",
++      "sha1": "05397ef65dcb60670e0e0dba4854522873af3070",
++      "size": 378032
++    },
++    {
++      "name": "io/netty/netty-codec-base/4.2.16.Final/netty-codec-base-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-codec-base/4.2.16.Final/netty-codec-base-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-codec-base/4.2.16.Final/netty-codec-base-4.2.16.Final.jar",
++      "sha1": "01a01d45a9efc228c6d747525848b065e0656b5f",
++      "size": 155355
++    },
++    {
++      "name": "io/netty/netty-codec-compression/4.2.16.Final/netty-codec-compression-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-codec-compression/4.2.16.Final/netty-codec-compression-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-codec-compression/4.2.16.Final/netty-codec-compression-4.2.16.Final.jar",
++      "sha1": "bdbbcfcdbe217b95c14a04df4fc5d31213d5c27c",
++      "size": 183349
++    },
++    {
++      "name": "io/netty/netty-codec-http/4.2.16.Final/netty-codec-http-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-codec-http/4.2.16.Final/netty-codec-http-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-codec-http/4.2.16.Final/netty-codec-http-4.2.16.Final.jar",
++      "sha1": "b5e0715df90047ee5a0138c8f704f43c751009e4",
++      "size": 678387
++    },
++    {
++      "name": "io/netty/netty-common/4.2.16.Final/netty-common-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-common/4.2.16.Final/netty-common-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-common/4.2.16.Final/netty-common-4.2.16.Final.jar",
++      "sha1": "c2bc7fa5acfa2afc777e944d84f0aa65559cc81e",
++      "size": 819965
++    },
++    {
++      "name": "io/netty/netty-handler/4.2.16.Final/netty-handler-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-handler/4.2.16.Final/netty-handler-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-handler/4.2.16.Final/netty-handler-4.2.16.Final.jar",
++      "sha1": "cc82873ae4b6d14effe480740ad838de09add70d",
++      "size": 587814
++    },
++    {
++      "name": "io/netty/netty-resolver/4.2.16.Final/netty-resolver-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-resolver/4.2.16.Final/netty-resolver-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-resolver/4.2.16.Final/netty-resolver-4.2.16.Final.jar",
++      "sha1": "fcea6d64273b59ab9127b68c16ae98af34642139",
++      "size": 32975
++    },
++    {
++      "name": "io/netty/netty-transport/4.2.16.Final/netty-transport-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-transport/4.2.16.Final/netty-transport-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport/4.2.16.Final/netty-transport-4.2.16.Final.jar",
++      "sha1": "ae87a3bec51d503475a19fbd718bf777f2fc06c6",
++      "size": 549855
++    },
++    {
++      "name": "io/netty/netty-transport-classes-epoll/4.2.16.Final/netty-transport-classes-epoll-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-transport-classes-epoll/4.2.16.Final/netty-transport-classes-epoll-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-classes-epoll/4.2.16.Final/netty-transport-classes-epoll-4.2.16.Final.jar",
++      "sha1": "cf90c7b892e284ba9f1545dce170168369b3b9d6",
++      "size": 159935
++    },
++    {
++      "name": "io/netty/netty-transport-classes-kqueue/4.2.16.Final/netty-transport-classes-kqueue-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-transport-classes-kqueue/4.2.16.Final/netty-transport-classes-kqueue-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-classes-kqueue/4.2.16.Final/netty-transport-classes-kqueue-4.2.16.Final.jar",
++      "sha1": "0fa2bcf8c71626510f6fae173f78182117b70f7a",
++      "size": 116819
++    },
++    {
++      "name": "io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-x86_64.jar",
++      "path": "mojang/io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-x86_64.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-x86_64.jar",
++      "sha1": "439c24f5c27c220deb042b42e4048d606edeb78d",
++      "size": 42393
++    },
++    {
++      "name": "io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-aarch_64.jar",
++      "path": "mojang/io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-aarch_64.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-epoll/4.2.16.Final/netty-transport-native-epoll-4.2.16.Final-linux-aarch_64.jar",
++      "sha1": "eed34f3b37b4c46a0cbb49456ccc4e3bd7195e4c",
++      "size": 43899
++    },
++    {
++      "name": "io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-x86_64.jar",
++      "path": "mojang/io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-x86_64.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-x86_64.jar",
++      "sha1": "dd9d41b06355a6a1815d902ee087a693aab83755",
++      "size": 26737
++    },
++    {
++      "name": "io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-aarch_64.jar",
++      "path": "mojang/io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-aarch_64.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-kqueue/4.2.16.Final/netty-transport-native-kqueue-4.2.16.Final-osx-aarch_64.jar",
++      "sha1": "ddb942cad6c0e978caa2215757512b36c5ffacec",
++      "size": 27482
++    },
++    {
++      "name": "io/netty/netty-transport-native-unix-common/4.2.16.Final/netty-transport-native-unix-common-4.2.16.Final.jar",
++      "path": "mojang/io/netty/netty-transport-native-unix-common/4.2.16.Final/netty-transport-native-unix-common-4.2.16.Final.jar",
++      "url": "https://libraries.minecraft.net/io/netty/netty-transport-native-unix-common/4.2.16.Final/netty-transport-native-unix-common-4.2.16.Final.jar",
++      "sha1": "3cf32390f1b80af890ac44aa0698c2ff58c2a4d7",
++      "size": 46877
++    },
++    {
++      "name": "it/unimi/dsi/fastutil/8.5.18/fastutil-8.5.18.jar",
++      "path": "mojang/it/unimi/dsi/fastutil/8.5.18/fastutil-8.5.18.jar",
++      "url": "https://libraries.minecraft.net/it/unimi/dsi/fastutil/8.5.18/fastutil-8.5.18.jar",
++      "sha1": "a6cff377eecc19c2037bf31568a6d7106b50ba1f",
++      "size": 23965563
++    },
++    {
++      "name": "net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar",
++      "path": "mojang/net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar",
++      "url": "https://libraries.minecraft.net/net/java/dev/jna/jna/5.17.0/jna-5.17.0.jar",
++      "sha1": "33d12735bef894440780fce64f9758d420c7bae2",
++      "size": 2002589
++    },
++    {
++      "name": "net/java/dev/jna/jna-platform/5.17.0/jna-platform-5.17.0.jar",
++      "path": "mojang/net/java/dev/jna/jna-platform/5.17.0/jna-platform-5.17.0.jar",
++      "url": "https://libraries.minecraft.net/net/java/dev/jna/jna-platform/5.17.0/jna-platform-5.17.0.jar",
++      "sha1": "a4934c44d25a9d8c2ddf4203affd20330cb3426f",
++      "size": 1378617
++    },
++    {
++      "name": "net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar",
++      "path": "mojang/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar",
++      "url": "https://libraries.minecraft.net/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar",
++      "sha1": "4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c",
++      "size": 78146
++    },
++    {
++      "name": "org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
++      "path": "mojang/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
++      "url": "https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
++      "sha1": "65897b3e5731220962e659e001904af3c3cbeba9",
++      "size": 713862
++    },
++    {
++      "name": "org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar",
++      "path": "mojang/org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar",
++      "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-api/2.26.0/log4j-api-2.26.0.jar",
++      "sha1": "ad52af0ecf054a7e3f275a2e180ee06d9c490951",
++      "size": 351126
++    },
++    {
++      "name": "org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar",
++      "path": "mojang/org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar",
++      "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.26.0/log4j-core-2.26.0.jar",
++      "sha1": "d267ca60b27ddb075e0b4e75e7875859717bf85f",
++      "size": 2015101
++    },
++    {
++      "name": "org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar",
++      "path": "mojang/org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar",
++      "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-slf4j2-impl/2.26.0/log4j-slf4j2-impl-2.26.0.jar",
++      "sha1": "668c0f0e813d83f00a7182533aa658ec7e7a0a0d",
++      "size": 30211
++    },
++    {
++      "name": "org/joml/joml/1.10.9/joml-1.10.9.jar",
++      "path": "mojang/org/joml/joml/1.10.9/joml-1.10.9.jar",
++      "url": "https://libraries.minecraft.net/org/joml/joml/1.10.9/joml-1.10.9.jar",
++      "sha1": "438e036486bad66b189bff385dd07dea4f74a146",
++      "size": 814581
++    },
++    {
++      "name": "org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
++      "path": "mojang/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
++      "url": "https://libraries.minecraft.net/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
++      "sha1": "7425a601c1c7ec76645a78d22b8c6a627edee507",
++      "size": 3819
++    },
++    {
++      "name": "org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar",
++      "path": "mojang/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar",
++      "url": "https://libraries.minecraft.net/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar",
++      "sha1": "d9e58ac9c7779ba3bf8142aff6c830617a7fe60f",
++      "size": 69908
++    },
++    {
++      "name": "fabric-loader",
++      "path": "fabric/fabric-loader-0.20.1.jar",
++      "url": "https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.20.1/fabric-loader-0.20.1.jar",
++      "size": 1988880,
++      "sha256": "d0c5a082e07410aaff9de7ab196aa6b4236002870f9ba3ad5c1260fcce5110ad"
++    },
++    {
++      "name": "sponge-mixin",
++      "path": "fabric/sponge-mixin-0.17.5+mixin.0.8.7.jar",
++      "url": "https://maven.fabricmc.net/net/fabricmc/sponge-mixin/0.17.5+mixin.0.8.7/sponge-mixin-0.17.5+mixin.0.8.7.jar",
++      "size": 1551593,
++      "sha256": "03f0065023bfc3045d71bfb99872451d9ad5a0800a5a0dac34ab8c7d5c134f5d"
++    },
++    {
++      "name": "junit",
++      "path": "test/junit-platform-console-standalone-1.12.2.jar",
++      "url": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar",
++      "size": 2950047,
++      "sha256": "329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a"
++    },
++    {
++      "name": "fabric-api-base",
++      "path": "fabric-api/fabric-api-base-2.0.6+fcdff87f5d.jar",
++      "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api-base/2.0.6+fcdff87f5d/fabric-api-base-2.0.6+fcdff87f5d.jar",
++      "size": 59837,
++      "sha256": "e3b64039e8f261cc24a5013cb8b442cf368f08afa28d01ecdf97f3ccdeb7b63c"
++    },
++    {
++      "name": "fabric-lifecycle-events-v1",
++      "path": "fabric-api/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
++      "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-lifecycle-events-v1/4.1.9+ffef5f675d/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
++      "size": 215217,
++      "sha256": "fc47f06fa9ce4145ad925164a6eccc436f7ff504cf7d1e766a15699b82cd3e74"
++    }
++  ]
++}
+diff --git a/tools/cat_client_capture/cinematic/README.md b/tools/cat_client_capture/cinematic/README.md
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/README.md
+@@ -0,0 +1,41 @@
++# Portable cinematic admission source
++
++This is a complete source-only Fabric client module for Minecraft26.3/Java25. It does not start Minecraft, launch a recorder, install a profile, or qualify native footage. Root owns runtime integration and pixel review. Optional Iris/Sodium observers and private world/profile data are excluded.
++
++## Explicit modes
++
++The default three-argument CinematicProgram constructor retains OFFLINE_NATIVE_CINEMATIC and rejects translation below0.01blocks. OFFLINE_NATIVE_ANIMATED_SUBJECT explicitly permits an exactly fixed XYZ/yaw/pitch camera; its endpoints must match exactly. That permission proves neither animated subjects, advancing world ticks, shader health nor real-time gameplay FPS. Those require actual runtime state, observed changing frames and personal visual review. Encoded fps describes the authored output timeline only.
++
++RouteWalk accepts a cinematic step with cinematic (relative take name), mode (one exact supported label), poses (two concatenated5-component feetXYZ/yaw/pitch poses), frames2..600 and fps1..60. It retains the existing real-time recorder/camera branch separately. The HEAD mixin sets the pending authored pose; TAIL captures one actual1280x720 RGBA framebuffer. Reserved RAM is retained until actual raw+index flush. The camera advances only after commitment; no duplicate padding, interpolation or still-image camera trick is introduced.
++
++## Deferral contract
++
++CinematicFrameState.deferRender(ticket,now) accepts only the exact current RENDER ticket before GPU submission. It returns READY without advancing the committed index. The next ticket requires a strictly larger render ID. Old tickets fail closed; GPU/WRITE/READY deferrals fail. Pending/overall deadlines are checked before deferral; the global start and budget never reset. It is a state API, not a readiness bypass: an external renderer observer must establish actual current readiness before admission/submission. No synthetic zero queues or compatibility fallback is provided here.
++
++## Portable paths and source completeness
++
++All nine production classes compile from this directory; no private baseline JAR or precompiled payload is read. Fabric metadata owns only nsp.walk.mixin, leaving the entrypoint/helper package separate. The official client JAR is a byte-pinned build dependency downloaded during hosted compilation; it is not committed or bundled in the output JAR.
++
++The old workstation-specific real-time spool allowlist is replaced by an explicit existing task directory below nsp.walk.dir/realtime_spool/<run>. It must be exactly one child, regular/resolved without a linked ancestor; spool files use CREATE_NEW. The caller prepares that private run directory. The wall-clock sampler, loss counters, queue/drain behavior and existing real-time acceptance semantics are otherwise unchanged. Cinematic destinations use fresh per-take directories below nsp.walk.dir/cinematic_spool/<name>. No local path, world, account or credential is required.
++
++## Source-only commands
++
++Hosted public pull-request source compilation (the builder rejects local execution):
++
++    python3 -B tools/cat_client_capture/cinematic/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/cinematic-source"
++
++Source-pin check without downloads/processes:
++
++    python3 -B tools/cat_client_capture/cinematic/portable_build.py
++
++Standalone stdlib regression command for Root/admitted execution:
++
++    python3 -B -m unittest discover -s tools/cat_client_capture/cinematic -p test_spool_verify_mode.py -v
++
++The independent workflow job compiles all9 production classes and all6 JUnit classes using the official locked dependencies, then requires actual XML totals39tests/0failures/0errors/0skips and actual stdlib totals4tests/0failures/0errors/0skips/0expectedFailures/0unexpectedSuccesses. It retains raw logs, counts and an own-classes-only candidate JAR. Missing/empty/partial reports fail. Neither compilation nor tests have been run for this new portable port. The retained upstream build recorded39clean JUnit cases; that historical result is not this port's result.
++
++Two Fabric API module dependencies are added using exact retained byte sizes/SHA256 and their official Fabric Maven coordinates. Their portable URL fetches remain unexecuted until Root/CI runs the builder. No extra installation or fee is required by this source.
++
++## Remaining native requirements
++
++Initial/dynamic/postcapture renderer readiness, current world/chunk and pose evidence, animation/tick measurements, strict spool CRC/IDs, normal owned-process closure, decode/PTS checks and personal image/audio QC remain the capture controller's responsibility. No native controller, native acceptance, gameplay proof or finished promo is supplied or implied. Existing capture workflow jobs and guards are preserved.
+diff --git a/tools/cat_client_capture/cinematic/SOURCE_PROVENANCE.json b/tools/cat_client_capture/cinematic/SOURCE_PROVENANCE.json
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/SOURCE_PROVENANCE.json
+@@ -0,0 +1,97 @@
++{
++  "schema": "northstar.cinematic-owned-source-port.v1",
++  "sourceOnly": true,
++  "portablePortTestsExecuted": false,
++  "nativeExecuted": false,
++  "upstreamFamilies": [
++    "stationary-animated-recorder/defer-v02",
++    "motion-backpressure/candidate",
++    "offline-cinematic-v03/take-paths",
++    "offline-cinematic-v01/mixin"
++  ],
++  "files": [
++    {
++      "file": "src/nsp/walk/CinematicCommitter.java",
++      "upstreamSha256": "20936d367771d2825a58fbc0c9ae4af83dfefd95c63fd0aba61aa5ddcebb9fd5"
++    },
++    {
++      "file": "src/nsp/walk/CinematicFrameRecorder.java",
++      "upstreamSha256": "23851a67d3980372508f07af1f52783f9f2e793d1b96d8053e437e98cba76e97"
++    },
++    {
++      "file": "src/nsp/walk/CinematicFrameState.java",
++      "upstreamSha256": "f8ac6b483911ec15ad1c7e61299a020b2208d3209f1e8fc4762bfd005d845dfd"
++    },
++    {
++      "file": "src/nsp/walk/CinematicProgram.java",
++      "upstreamSha256": "9ec87de0b60c05c3da11d5710287a5269d1e7a22453b848c956e4eea5b829e88"
++    },
++    {
++      "file": "src/nsp/walk/RouteWalk.java",
++      "upstreamSha256": "ef6b60d2112d0088f944a3dbccb434b9114dfc8bf723bcdd272cbb7ff126233f"
++    },
++    {
++      "file": "src/nsp/walk/FrameRecorder.java",
++      "upstreamSha256": "45dc2064a243d6d07ada87f074bd7f13b19047d9127fcc71255a9b98311bd71d"
++    },
++    {
++      "file": "src/nsp/walk/RawFrameSpool.java",
++      "upstreamSha256": "265e275ce404a8336d514b6f71371e76a4d4af786b5f7d8b565c62e7a77ed542"
++    },
++    {
++      "file": "src/nsp/walk/CinematicTakePaths.java",
++      "upstreamSha256": "82d425554186a1617ae846d41d403d92be322f1724327e1d34cdfb9995f47c0f"
++    },
++    {
++      "file": "src/nsp/walk/mixin/MinecraftFrameMixin.java",
++      "upstreamSha256": "8e568c6dd72eafc1779cb02805212f2860bffb659c589a0e04f6ef11d3dddf7b"
++    },
++    {
++      "file": "tests/nsp/walk/FrameRecorderUniqueWriterTest.java",
++      "upstreamSha256": "a731dd75284b476382753fff7eaa9ec35fdd105023013a5ca80d671097bdc3d5"
++    },
++    {
++      "file": "tests/nsp/walk/RawFrameSpoolTest.java",
++      "upstreamSha256": "3ac5babc74c5dd8bab1c6c632e37fa2c9c6a9a90224d3e646881876b016368bb"
++    },
++    {
++      "file": "tests/nsp/walk/CinematicFrameStateTest.java",
++      "upstreamSha256": "2c77133a780dec976bc7d5287c3f76d9edd279bb79a227ef10726e2769a2eb9c"
++    },
++    {
++      "file": "tests/nsp/walk/CinematicTakePathsTest.java",
++      "upstreamSha256": "80b0d5106cc390fe62cdbb286002abc242040c9936d15ad2ef050f7582d3bcaf"
++    },
++    {
++      "file": "tests/nsp/walk/CinematicAnimatedModeTest.java",
++      "upstreamSha256": "4a0943e3bc9f6ac66ef91773f7179dfda4edf44bbd5ff6ab3214834b8c0379c1"
++    },
++    {
++      "file": "tests/nsp/walk/CinematicFrameDeferTest.java",
++      "upstreamSha256": "6ada06a58eb2915f9608724874b172c9768202ceee06a57c07a1a8de8aaee83b"
++    },
++    {
++      "file": "spool_verify.py",
++      "upstreamSha256": "ae72e525b7890286ecca058804e5f7328f48cbfbadb8a4a905fd1905fb5f577e"
++    },
++    {
++      "file": "test_spool_verify_mode.py",
++      "upstreamSha256": "3dbb9f1655849fbbc354939774dcbf57a043762c9678e0c07c34b095be139502"
++    }
++  ],
++  "portAdaptations": [
++    {
++      "file": "src/nsp/walk/FrameRecorder.java",
++      "reason": "Replace private absolute spool boundary with explicit task-owned route/realtime_spool/run containment. Real-time sampler/queue logic unchanged."
++    }
++  ],
++  "historicalJavaTestCensus": {
++    "classes": 6,
++    "tests": 39,
++    "failures": 0,
++    "errors": 0,
++    "skipped": 0,
++    "scope": "Retained upstream build; not the portable port result."
++  },
++  "dependencyCoordinateFetchesExecuted": false
++}
+diff --git a/tools/cat_client_capture/cinematic/portable_build.py b/tools/cat_client_capture/cinematic/portable_build.py
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/portable_build.py
+@@ -0,0 +1,90 @@
++#!/usr/bin/env python3
++"""Pinned public GitHub-hosted Java source/JUnit build only. Never starts Minecraft."""
++import argparse,hashlib,json,os,pathlib,platform,re,subprocess,sys,time,traceback,unittest,urllib.parse,urllib.request,xml.etree.ElementTree as ET,zipfile
++HOME=pathlib.Path(__file__).resolve().parent
++REPO=HOME.parents[2]
++REPOSITORY='andrewwhitecog-tech/northstar-minecraft-realm'
++HOSTS={'piston-data.mojang.com','libraries.minecraft.net','maven.fabricmc.net','repo.maven.apache.org'}
++
++def need(ok,msg):
++ if not ok:raise RuntimeError(msg)
++def digest(path,algorithm='sha256'):
++ h=hashlib.new(algorithm)
++ with path.open('rb') as f:
++  for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
++ return h.hexdigest()
++def main():
++ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--execute',action='store_true');ap.add_argument('--output',type=pathlib.Path);ap.add_argument('--expected-commit');a=ap.parse_args()
++ packet=HOME/'PUBLIC_SOURCE.json';pins=json.loads(packet.read_text(encoding='utf-8'))
++ for rel,sha in pins['files'].items():
++  path=(HOME/rel).resolve();need(path.is_relative_to(HOME) and path.is_file() and not path.is_symlink() and digest(path)==sha,'Source drift: '+rel)
++ if not a.execute:print(json.dumps({'sourceVerified':True,'executed':False}));return 0
++ need(platform.system()=='Linux' and os.environ.get('GITHUB_ACTIONS')=='true' and os.environ.get('RUNNER_ENVIRONMENT')=='github-hosted','Genuine Linux hosted source job required; local work uses admitted local runner')
++ need(os.environ.get('GITHUB_REPOSITORY')==REPOSITORY and os.environ.get('GITHUB_EVENT_NAME') in ('pull_request','workflow_dispatch'),'Wrong repository/event')
++ event=json.loads(pathlib.Path(os.environ['GITHUB_EVENT_PATH']).read_text(encoding='utf-8'));need(event['repository']['private'] is False,'Public standard-runner source route only')
++ need(a.expected_commit and re.fullmatch('[0-9a-f]{40}',a.expected_commit) and a.expected_commit==os.environ.get('GITHUB_SHA'),'Exact hosted commit required')
++ actual_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip();need(actual_head==a.expected_commit,'Checkout drift')
++ root=a.output.resolve();temp=pathlib.Path(os.environ['RUNNER_TEMP']).resolve();need(root.is_relative_to(temp) and root!=temp and not root.exists(),'Fresh hosted output required')
++ root.mkdir();evidence=root/'evidence';evidence.mkdir();cache=root/'dependencies';cache.mkdir()
++ report={'commit':actual_head,'sourcePacketSha256':digest(packet),'success':False,'nativeExecuted':False,'liveInstalled':False,'downloads':[],'steps':[],'errors':[]}
++ def save():(evidence/'BUILD_TEST_ACTUAL.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
++ def env():return {k:v for k,v in os.environ.items() if k in ('PATH','JAVA_HOME','HOME','TMPDIR','LANG','LC_ALL')}
++ def command(name,argv,timeout=90):
++  r=subprocess.run([str(v) for v in argv],cwd=HOME,env=env(),capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=timeout)
++  (evidence/(name+'.stdout.log')).write_text(r.stdout,encoding='utf-8');(evidence/(name+'.stderr.log')).write_text(r.stderr,encoding='utf-8')
++  report['steps'].append({'name':name,'exitCode':r.returncode});save();return r
++ try:
++  version=command('java_version',['java','-version']);need(version.returncode==0 and re.search(r'version "25(?:\.|\")',version.stderr+version.stdout),'Actual Java25 required')
++  lock=json.loads((HOME/'DEPENDENCIES.json').read_text(encoding='utf-8'));need(len(lock['artifacts'])<=64,'Unbounded dependency list')
++  total=0;deadline=time.monotonic()+600
++  for item in lock['artifacts']:
++   url=urllib.parse.urlparse(item['url']);need(url.scheme=='https' and url.hostname in HOSTS and not url.username and not url.password and not url.query,'Unexpected dependency source')
++   path=(cache/item['path']).resolve();need(path.is_relative_to(cache),'Dependency path escape');path.parent.mkdir(parents=True,exist_ok=True)
++   size=item['size'];total+=size;need(type(size) is int and 0<size<=64*1024*1024 and total<=256*1024*1024,'Dependency byte cap exceeded')
++   need(time.monotonic()<deadline,'Bounded dependency download deadline')
++   with urllib.request.urlopen(urllib.request.Request(item['url'],headers={'User-Agent':'NorthStar-source-build'}),timeout=45) as response,path.open('wb') as output:
++    need(urllib.parse.urlparse(response.url).hostname in HOSTS,'Unapproved redirect')
++    count=0
++    while True:
++     block=response.read(1024*1024)
++     if not block:break
++     count+=len(block);need(count<=size,'Oversize dependency');output.write(block)
++   algorithm='sha256' if 'sha256' in item else 'sha1';need(path.stat().st_size==size and digest(path,algorithm)==item[algorithm],'Dependency byte pin mismatch: '+item['name'])
++   report['downloads'].append({'path':item['path'],'bytes':size,'algorithm':algorithm,'digest':item[algorithm]});save()
++  junit=cache/lock['junitPath'];cp=os.pathsep.join(str(cache/item['path']) for item in lock['artifacts'] if item['path']!=lock['junitPath'])
++  production=sorted((HOME/'src').rglob('*.java'));tests=sorted((HOME/'tests').rglob('*.java'));need(len(production)==9 and len(tests)==6,'Source census mismatch')
++  classes=root/'classes';classes.mkdir();testclasses=root/'testclasses';testclasses.mkdir()
++  def javac(name,files,classpath,dest):
++   args=root/(name+'.args');values=['--release','25','-encoding','UTF-8','-proc:none','-cp',classpath,'-d',str(dest),*[str(f) for f in files]]
++   args.write_text('\n'.join('"'+v.replace('\\','/')+'"' for v in values),encoding='utf-8')
++   return command(name,['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','@'+str(args)],120)
++  need(javac('production',production,cp,classes).returncode==0,'Actual production javac failed')
++  need(javac('test_compile',tests,str(classes)+os.pathsep+str(junit)+os.pathsep+cp,testclasses).returncode==0,'Actual test javac failed')
++  xml=evidence/'junit'
++  result=command('junit',['java','-XX:ActiveProcessorCount=2','-Xmx256M','-jar',junit,'execute','--class-path',str(classes)+os.pathsep+str(testclasses)+os.pathsep+cp,'--select-class','nsp.walk.FrameRecorderUniqueWriterTest','--select-class','nsp.walk.RawFrameSpoolTest','--select-class','nsp.walk.CinematicFrameStateTest','--select-class','nsp.walk.CinematicTakePathsTest','--select-class','nsp.walk.CinematicAnimatedModeTest','--select-class','nsp.walk.CinematicFrameDeferTest','--fail-if-no-tests','--reports-dir',xml,'--disable-ansi-colors'],60)
++  counts={'tests':0,'failures':0,'errors':0,'skipped':0}
++  for file in xml.glob('TEST-*.xml'):
++   suite=ET.parse(file).getroot()
++   for key in counts:counts[key]+=int(suite.attrib.get(key,0))
++  report['junitActual']=counts;save();need(result.returncode==0 and counts=={'tests':39,'failures':0,'errors':0,'skipped':0},'Actual JUnit outcome not39clean tests')
++  sys.path.insert(0,str(HOME))
++  with (evidence/'python-unittest.log').open('w',encoding='utf-8') as log:
++   suite=unittest.defaultTestLoader.discover(str(HOME),pattern='test_spool_verify_mode.py')
++   result=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
++  actual={'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'expectedFailures':len(result.expectedFailures),'unexpectedSuccesses':len(result.unexpectedSuccesses)}
++  report['pythonActual']=actual;save()
++  need(result.wasSuccessful() and actual=={'tests':4,'failures':0,'errors':0,'skipped':0,'expectedFailures':0,'unexpectedSuccesses':0},'Actual stdlib unittest outcome not4clean tests')
++  jar=evidence/'northstar-cinematic-admission-source-candidate.jar'
++  with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as z:
++   for file in sorted(classes.rglob('*.class')):z.write(file,file.relative_to(classes).as_posix())
++   for name in ('fabric.mod.json','nsp_cinematic.mixins.json'):z.write(HOME/'resources'/name,name)
++  report['jar']={'name':jar.name,'sha256':digest(jar),'bytes':jar.stat().st_size,'nativeVerified':False};report['success']=True;return 0
++ except BaseException:report['errors'].append(traceback.format_exc());raise
++ finally:
++  save();size=sum(p.stat().st_size for p in evidence.rglob('*') if p.is_file());allowed=size<=2*1024*1024
++  output=os.environ.get('GITHUB_OUTPUT')
++  if output:
++   with open(output,'a',encoding='utf-8') as f:f.write('upload_allowed='+str(allowed).lower()+'\n')
++  need(allowed,'Evidence exceeds2MiB: artifact upload withheld, no truncation')
++  print(json.dumps({'receipt':str(evidence/'BUILD_TEST_ACTUAL.json'),'success':report['success'],'nativeExecuted':False}))
++if __name__=='__main__':raise SystemExit(main())
+diff --git a/tools/cat_client_capture/cinematic/resources/fabric.mod.json b/tools/cat_client_capture/cinematic/resources/fabric.mod.json
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/resources/fabric.mod.json
+@@ -0,0 +1,21 @@
++{
++  "schemaVersion": 1,
++  "id": "northstar_cinematic_admission",
++  "version": "0.1.0",
++  "name": "NorthStar explicit cinematic admission",
++  "environment": "client",
++  "entrypoints": {
++    "client": [
++      "nsp.walk.RouteWalk"
++    ]
++  },
++  "mixins": [
++    "nsp_cinematic.mixins.json"
++  ],
++  "depends": {
++    "fabricloader": ">=0.20.1",
++    "minecraft": "26.3",
++    "java": ">=25",
++    "fabric-lifecycle-events-v1": "*"
++  }
++}
+diff --git a/tools/cat_client_capture/cinematic/resources/nsp_cinematic.mixins.json b/tools/cat_client_capture/cinematic/resources/nsp_cinematic.mixins.json
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/resources/nsp_cinematic.mixins.json
+@@ -0,0 +1,11 @@
++{
++  "required": true,
++  "package": "nsp.walk.mixin",
++  "compatibilityLevel": "JAVA_25",
++  "client": [
++    "MinecraftFrameMixin"
++  ],
++  "injectors": {
++    "defaultRequire": 1
++  }
++}
+diff --git a/tools/cat_client_capture/cinematic/spool_verify.py b/tools/cat_client_capture/cinematic/spool_verify.py
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/spool_verify.py
+@@ -0,0 +1,29 @@
++"""Postclosure raw/index integrity only. Never a visual or real-time FPS acceptance."""
++from pathlib import Path
++import json,math,zlib
++
++def verify_spool(base,frames,fps,start,end,*,frame_bytes=1280*720*4,expected_mode="OFFLINE_NATIVE_CINEMATIC"):
++ if expected_mode not in ("OFFLINE_NATIVE_CINEMATIC","OFFLINE_NATIVE_ANIMATED_SUBJECT"):raise ValueError("explicit supported spool mode required")
++ base=Path(base);raw=base.with_name(base.name+'.rgba');index=base.with_name(base.name+'.frames.jsonl')
++ if not(2<=frames<=600 and 1<=fps<=60 and 0<frame_bytes<=1280*720*4):raise ValueError('finite raw cap')
++ if len(start)!=5 or len(end)!=5 or not all(math.isfinite(x)for x in start+end):raise ValueError('pose bounds')
++ if expected_mode=="OFFLINE_NATIVE_ANIMATED_SUBJECT" and any(a!=b for a,b in zip(start,end)):raise ValueError("animated subject requires exact fixed camera pose")
++ if expected_mode=="OFFLINE_NATIVE_CINEMATIC" and math.dist(start[:3],end[:3])<.01:raise ValueError('real translating route required')
++ for p in [raw,index]:
++  if not p.is_file()or any(q.is_symlink()or q.is_junction()for q in[p,*p.parents]):raise ValueError('missing/linked spool')
++ if raw.stat().st_size!=frames*frame_bytes or index.stat().st_size>frames*2048:raise ValueError('exact bounded spool length')
++ last=-1
++ with raw.open('rb')as r,index.open(encoding='utf-8')as idx:
++  for i in range(frames):
++   line=idx.readline(2049)
++   if len(line)>2048 or not line.endswith('\n'):raise ValueError('bounded complete index line')
++   row=json.loads(line);render=row.get('renderId');data=r.read(frame_bytes)
++   if type(render)is not int or render<=last:raise ValueError('duplicate/reordered actual render identity')
++   if row.get('mode')!=expected_mode or row.get('index')!=i or row.get('offset')!=i*frame_bytes or row.get('bytes')!=frame_bytes:raise ValueError('index order/offset/size')
++   if row.get('crc32')!=zlib.crc32(data):raise ValueError('actual raw CRC mismatch')
++   k=i/(frames-1);e=k*k*(3-2*k);delta=(end[3]-start[3]+180)%360-180
++   expected=[start[j]+(end[j]-start[j])*e for j in range(5)];expected[3]=start[3]+delta*e;pose=row.get('pose')
++   if not isinstance(pose,list)or len(pose)!=5 or not all(isinstance(x,(int,float))and math.isfinite(x)for x in pose)or any(abs(a-b)>1e-4 for a,b in zip(pose,expected)):raise ValueError('authored index pose mismatch')
++   last=render
++  if idx.read(1)or r.read(1):raise ValueError('extra index/raw payload')
++ return {'mode':expected_mode,'frames':frames,'fps':fps,'outputSeconds':frames/fps,'rawBytes':frames*frame_bytes,'crcVerifiedFrames':frames,'contiguousIndices':True,'increasingRenderIdentities':True,'authoredPoseVerifiedFrames':frames,'scope':'raw/index integrity; native rendering and pixels require actual runtime and Root QC','humanVisualAccepted':False}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicCommitter.java b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicCommitter.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicCommitter.java
+@@ -0,0 +1,26 @@
++package nsp.walk;
++import java.io.OutputStream;
++import java.io.Writer;
++import java.io.IOException;
++import java.util.function.LongSupplier;
++import java.util.zip.CRC32;
++
++/** Single writer commits a real framebuffer and its identity together; no frame synthesis. */
++public final class CinematicCommitter {
++    private CinematicCommitter() {}
++    public static void write(CinematicFrameState state,CinematicFrameState.Ticket t,byte[] data,int frameBytes,OutputStream raw,Writer index,LongSupplier clock) throws IOException {
++        write(state,t,data,frameBytes,raw,index,clock,"OFFLINE_NATIVE_CINEMATIC");
++    }
++    public static void write(CinematicFrameState state,CinematicFrameState.Ticket t,byte[] data,int frameBytes,OutputStream raw,Writer index,LongSupplier clock,String mode) throws IOException {
++        try {
++            if(!"OFFLINE_NATIVE_CINEMATIC".equals(mode)&&!"OFFLINE_NATIVE_ANIMATED_SUBJECT".equals(mode))throw new IOException("explicit supported spool mode required");
++            if(data.length!=frameBytes||!state.writable(t))throw new IOException("frame ownership/size mismatch");
++            raw.write(data);raw.flush();
++            CRC32 crc=new CRC32();crc.update(data);
++            var p=t.pose();
++            index.write("{\"mode\":\""+mode+"\",\"index\":"+t.index()+",\"renderId\":"+t.renderId()+",\"offset\":"+((long)t.index()*frameBytes)+",\"bytes\":"+frameBytes+",\"crc32\":"+crc.getValue()+",\"pose\":["+p.x()+","+p.y()+","+p.z()+","+p.yaw()+","+p.pitch()+"]}\n");
++            index.flush();
++            if(!state.committed(t,clock.getAsLong()))throw new IOException("frame not committed: "+state.error());
++        } catch(IOException|RuntimeException e){state.fail("write/index failure: "+e);throw e;}
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameRecorder.java b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameRecorder.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameRecorder.java
+@@ -0,0 +1,113 @@
++package nsp.walk;
++import com.mojang.blaze3d.pipeline.RenderTarget;
++import com.mojang.blaze3d.systems.RenderSystem;
++import com.mojang.renderpearl.api.buffers.GpuBuffer;
++import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
++import java.io.OutputStream;
++import java.io.BufferedOutputStream;
++import java.io.BufferedWriter;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
++import java.util.LinkedHashMap;
++import java.util.Map;
++import java.util.concurrent.ArrayBlockingQueue;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicBoolean;
++import net.minecraft.client.Minecraft;
++import net.minecraft.world.phys.Vec3;
++
++/** OFFLINE_NATIVE_CINEMATIC. Does not promise real-time gameplay cadence or freeze server time. */
++final class CinematicFrameRecorder {
++    private final CinematicProgram program;
++    private final CinematicFrameState state;
++    private final int bytes;
++    private final GpuBuffer gpu;
++    private final byte[] ram;
++    private final AtomicBoolean callbackPending=new AtomicBoolean();
++    private final ArrayBlockingQueue<CinematicFrameState.Ticket> ready=new ArrayBlockingQueue<>(1);
++    private final OutputStream raw;
++    private final BufferedWriter index;
++    private final Path receipt;
++    private final Thread writer;
++    private volatile boolean writerClosed,gpuClosed;
++    private volatile CinematicFrameState.Ticket renderTicket;
++    private long renderId,submitted,copied;
++    private final long started=System.nanoTime();
++    CinematicFrameRecorder(CinematicProgram program,Path base,Path receipt) throws Exception {
++        this.program=program;this.receipt=receipt;this.bytes=1280*720*4;
++        state=new CinematicFrameState(program.frames,started,TimeUnit.SECONDS.toNanos(600),TimeUnit.SECONDS.toNanos(30));
++        // All RAM exists before any GPU submission; only one frame may own it.
++        ram=new byte[bytes];
++        OutputStream openedRaw=new BufferedOutputStream(Files.newOutputStream(base.resolveSibling(base.getFileName()+".rgba"),StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE));
++        BufferedWriter openedIndex;
++        try { openedIndex=Files.newBufferedWriter(base.resolveSibling(base.getFileName()+".frames.jsonl"),StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE); }
++        catch(Exception e){openedRaw.close();throw e;}
++        GpuBuffer openedGpu;
++        try{openedGpu=RenderSystem.getDevice().createBuffer(()->"nsp offline cinematic frame",9,bytes);}
++        catch(Throwable e){openedRaw.close();openedIndex.close();throw e;}
++        raw=openedRaw;index=openedIndex;gpu=openedGpu;
++        writer=new Thread(this::writeLoop,"nsp-offline-cinematic-writer");writer.setDaemon(true);writer.setPriority(Thread.NORM_PRIORITY-1);writer.start();
++    }
++    private static CinematicFrameState.Pose actual(Minecraft c){return new CinematicFrameState.Pose(c.player.getX(),c.player.getY(),c.player.getZ(),c.player.getYRot(),c.player.getXRot());}
++    void beforeFrame(Minecraft c){ synchronized(state) {
++        renderId++;renderTicket=null;state.check(System.nanoTime());disposeIfDrained();
++        if(state.phase()==CinematicFrameState.Phase.COMPLETE||state.phase()==CinematicFrameState.Phase.FAILED)return;
++        if(c.player==null||c.level==null){state.fail("world/player lost");return;}
++        // Keep the pending authored pose while its asynchronous copy/write is outstanding.
++        var p=program.pose(state.index());
++        c.player.setPos(p.x(),p.y(),p.z());c.player.setYRot(p.yaw());c.player.setXRot(p.pitch());
++        c.player.setDeltaMovement(Vec3.ZERO);c.player.setOldPosAndRot();
++        if(state.phase()!=CinematicFrameState.Phase.READY||callbackPending.get())return;
++        renderTicket=state.begin(renderId,p,true,System.nanoTime());
++    }}
++    void afterFrame(Minecraft c){
++        var t=renderTicket;renderTicket=null;state.check(System.nanoTime());
++        if(t!=null){
++            if(c.player==null||c.level==null){state.fail("world/player lost before capture");return;}
++            RenderTarget target=c.gameRenderer.mainRenderTarget();
++            var tex=target.getColorTexture();
++            if(tex==null||target.width!=1280||target.height!=720||tex.getFormat().blockSize()!=4){state.fail("exact 1280x720 RGBA framebuffer required");return;}
++            if(!state.rendered(t,actual(c),System.nanoTime())){return;}
++            callbackPending.set(true);submitted++;
++            try{RenderSystem.getDevice().createCommandEncoder().copyTextureToBuffer(tex,gpu,0L,()->onCopied(t),0);}
++            catch(Throwable e){callbackPending.set(false);state.fail("GPU submission: "+e);}
++        }
++        disposeIfDrained();
++    }
++    private void onCopied(CinematicFrameState.Ticket t){
++        try{
++
++            if(!state.copied(t,System.nanoTime())){return;}
++            try(GpuBufferSlice.MappedView view=gpu.map(true,false)){view.data().get(0,ram);}
++            copied++;
++            if(!ready.offer(t))throw new IllegalStateException("single-frame queue overflow");
++        }catch(Throwable e){state.fail("GPU callback: "+e);}
++        finally{callbackPending.set(false);}
++    }
++    private void writeLoop(){
++        try{
++            while(true){
++                var t=ready.poll(100,TimeUnit.MILLISECONDS);
++                if(t!=null){
++                    // The pending state owns RAM until the final commit publishes READY.
++                    CinematicCommitter.write(state,t,ram,bytes,raw,index,System::nanoTime,program.mode);
++                }
++                state.check(System.nanoTime());
++                if((state.phase()==CinematicFrameState.Phase.COMPLETE||state.phase()==CinematicFrameState.Phase.FAILED)&&!callbackPending.get()&&ready.isEmpty())break;
++            }
++        }catch(Throwable e){state.fail("writer: "+e);}
++        finally{
++            try{raw.close();}catch(Exception e){state.fail("raw close: "+e);}
++            try{index.close();}catch(Exception e){state.fail("index close: "+e);}
++            writerClosed=true;
++            try{Files.writeString(receipt,new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(stats()),StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE);}
++            catch(Exception e){state.fail("receipt: "+e);}
++        }
++    }
++    private void disposeIfDrained(){if(writerClosed&&!callbackPending.get()&&!gpuClosed){try{gpu.close();gpuClosed=true;}catch(Throwable e){state.fail("GPU close: "+e);}}}
++    boolean isClosed(){return writerClosed&&gpuClosed;}
++    String error(){return state.error();}
++    void fail(String why){state.fail(why);}
++    Map<String,Object> stats(){var m=new LinkedHashMap<String,Object>();m.put("mode",program.mode);m.put("fps",program.fps);m.put("expectedFrames",program.frames);m.put("framesCommitted",state.index());m.put("framesSubmitted",submitted);m.put("framesCopied",copied);m.put("phase",state.phase().toString());m.put("error",state.error());m.put("writerClosed",writerClosed);m.put("gpuClosed",gpuClosed);m.put("callbackPending",callbackPending.get());m.put("ramReserved",state.phase()==CinematicFrameState.Phase.RENDER||state.phase()==CinematicFrameState.Phase.GPU||state.phase()==CinematicFrameState.Phase.WRITE);m.put("wallSeconds",(System.nanoTime()-started)/1e9);m.put("width",1280);m.put("height",720);m.put("humanInputProof",false);m.put("realTimeGameplayFpsProof",false);return m;}
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameState.java b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameState.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicFrameState.java
+@@ -0,0 +1,60 @@
++package nsp.walk;
++
++/** Pure single-frame ownership/order protocol; no clock, game, GPU or filesystem access. */
++public final class CinematicFrameState {
++    public enum Phase { READY, RENDER, GPU, WRITE, COMPLETE, FAILED }
++    public record Pose(double x,double y,double z,float yaw,float pitch) {
++        public Pose { if (!Double.isFinite(x)||!Double.isFinite(y)||!Double.isFinite(z)||!Float.isFinite(yaw)||!Float.isFinite(pitch)) throw new IllegalArgumentException("nonfinite pose"); }
++    }
++    public record Ticket(int index,long renderId,Pose pose) {}
++    private final int frames;
++    private final long started,totalBudget,frameBudget;
++    private long pendingSince,lastRender;
++    private int committed;
++    private Phase phase=Phase.READY;
++    private Ticket pending;
++    private String error;
++    public CinematicFrameState(int frames,long now,long totalBudget,long frameBudget) {
++        if(frames<2||frames>600||totalBudget<=0||frameBudget<=0||frameBudget>totalBudget) throw new IllegalArgumentException("finite frame/deadline bounds");
++        this.frames=frames;this.started=now;this.totalBudget=totalBudget;this.frameBudget=frameBudget;
++    }
++    public synchronized void check(long now) {
++        if(phase==Phase.COMPLETE||phase==Phase.FAILED)return;
++        if(now-started>=totalBudget)fail("overall deadline");
++        else if(pending!=null&&now-pendingSince>=frameBudget)fail("pending frame deadline");
++    }
++    /** RAM must already be exclusively reserved before this render ticket is admitted. */
++    public synchronized Ticket begin(long renderId,Pose pose,boolean ramReserved,long now) {
++        check(now);if(phase!=Phase.READY)return null;
++        if(!ramReserved){fail("RAM not reserved before rendering");return null;}
++        if(renderId<=lastRender){fail("render identity order");return null;}
++        pending=new Ticket(committed,renderId,pose);lastRender=renderId;pendingSince=now;phase=Phase.RENDER;return pending;
++    }
++    private boolean expect(Ticket t,Phase wanted) {
++        if(phase==Phase.FAILED)return false;
++        if(phase!=wanted||t==null||!t.equals(pending)){fail("wrong ticket or phase: "+wanted);return false;}return true;
++    }
++    /** Release an unsubmitted render only. IDs and global deadline are never rewound. */
++    public synchronized boolean deferRender(Ticket t,long now) {
++        check(now);if(!expect(t,Phase.RENDER))return false;
++        pending=null;phase=Phase.READY;return true;
++    }
++    public synchronized boolean rendering(Ticket t){return phase==Phase.RENDER&&t!=null&&t.equals(pending);}
++    public synchronized boolean rendered(Ticket t,Pose actual,long now) {
++        check(now);if(!expect(t,Phase.RENDER))return false;
++        if(!t.pose().equals(actual)){fail("rendered pose differs from HEAD pose");return false;}
++        phase=Phase.GPU;return true;
++    }
++    public synchronized boolean copied(Ticket t,long now) {check(now);if(!expect(t,Phase.GPU))return false;phase=Phase.WRITE;return true;}
++    /** Called only after both actual raw write/flush and actual index write/flush succeed. */
++    public synchronized boolean committed(Ticket t,long now) {
++        check(now);if(!expect(t,Phase.WRITE))return false;
++        committed++;pending=null;phase=committed==frames?Phase.COMPLETE:Phase.READY;return true;
++    }
++    public synchronized void fail(String why){if(error==null)error=why;phase=Phase.FAILED;}
++    public synchronized boolean writable(Ticket t){return phase==Phase.WRITE&&t!=null&&t.equals(pending);}
++    public synchronized int index(){return committed;}
++    public synchronized int count(){return frames;}
++    public synchronized Phase phase(){return phase;}
++    public synchronized String error(){return error;}
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicProgram.java b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicProgram.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicProgram.java
+@@ -0,0 +1,32 @@
++package nsp.walk;
++
++/** Explicit offline camera program: one authored pose for each committed output index. */
++public final class CinematicProgram {
++    public final int fps,frames;
++    public final String mode;
++    private final double[] p;
++    public static boolean allowStationaryForMode(String mode){
++        if("OFFLINE_NATIVE_ANIMATED_SUBJECT".equals(mode))return true;
++        if("OFFLINE_NATIVE_CINEMATIC".equals(mode))return false;
++        throw new IllegalArgumentException("explicit supported cinematic mode required");
++    }
++    public CinematicProgram(double[] p,int fps,int frames){this(p,fps,frames,false);}
++    public CinematicProgram(double[] p,int fps,int frames,boolean allowStationary){
++        if(p.length!=10||fps<1||fps>60||frames<2||frames>600)throw new IllegalArgumentException("camera/fps/frame bounds");
++        this.p=p.clone();this.fps=fps;this.frames=frames;
++        this.mode=allowStationary?"OFFLINE_NATIVE_ANIMATED_SUBJECT":"OFFLINE_NATIVE_CINEMATIC";
++        for(double v:p)if(!Double.isFinite(v))throw new IllegalArgumentException("nonfinite camera");
++        if(Math.abs(p[0])>29999984||Math.abs(p[2])>29999984||Math.abs(p[5])>29999984||Math.abs(p[7])>29999984||p[1]<-64||p[1]>512||p[6]<-64||p[6]>512||Math.abs(p[4])>90||Math.abs(p[9])>90)throw new IllegalArgumentException("camera bounds");
++        if(allowStationary){
++            for(int i=0;i<5;i++)if(Double.compare(p[i],p[i+5])!=0)throw new IllegalArgumentException("animated subject requires exact fixed camera pose");
++        }else{
++        if(Math.hypot(Math.hypot(p[5]-p[0],p[7]-p[2]),p[6]-p[1])<0.01)throw new IllegalArgumentException("translating camera required");
++        }
++    }
++    public CinematicFrameState.Pose pose(int index){
++        if(index<0||index>=frames)throw new IllegalArgumentException("frame index");
++        double k=index/(double)(frames-1),e=k*k*(3-2*k);
++        double yawDelta=((p[8]-p[3]+180)%360+360)%360-180;
++        return new CinematicFrameState.Pose(p[0]+(p[5]-p[0])*e,p[1]+(p[6]-p[1])*e,p[2]+(p[7]-p[2])*e,(float)(p[3]+yawDelta*e),(float)(p[4]+(p[9]-p[4])*e));
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicTakePaths.java b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicTakePaths.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/CinematicTakePaths.java
+@@ -0,0 +1,17 @@
++package nsp.walk;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.LinkOption;
++import java.io.IOException;
++/** Fresh per-take destinations only; never remove/reuse an earlier raw frame or receipt. */
++final class CinematicTakePaths {
++    record Take(Path base,Path receipt) {}
++    static Take create(Path route,String name)throws IOException {
++        if(name==null||!name.matches("[a-z0-9_]{1,48}"))throw new IOException("relative take allowlist");
++        Path parent=route.resolve("cinematic_spool");
++        if(!Files.exists(parent,LinkOption.NOFOLLOW_LINKS))Files.createDirectory(parent);
++        if(Files.isSymbolicLink(parent)||!Files.isDirectory(parent,LinkOption.NOFOLLOW_LINKS)||!parent.toRealPath().equals(parent.toAbsolutePath().normalize()))throw new IOException("owned spool directory required");
++        Path take=parent.resolve(name);Files.createDirectory(take);
++        return new Take(take.resolve(name),take.resolve("writer.json"));
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/FrameRecorder.java b/tools/cat_client_capture/cinematic/src/nsp/walk/FrameRecorder.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/FrameRecorder.java
+@@ -0,0 +1,332 @@
++package nsp.walk;
++
++import com.mojang.blaze3d.pipeline.RenderTarget;
++import com.mojang.blaze3d.systems.RenderSystem;
++import com.mojang.renderpearl.api.buffers.GpuBuffer;
++import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
++import com.mojang.renderpearl.api.textures.GpuTexture;
++
++import java.io.File;
++import java.io.IOException;
++import java.io.OutputStream;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.util.ArrayList;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.concurrent.ArrayBlockingQueue;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicIntegerArray;
++import java.util.concurrent.atomic.AtomicLong;
++import java.util.function.BooleanSupplier;
++import java.util.function.IntSupplier;
++import java.util.function.LongSupplier;
++import java.util.function.Consumer;
++
++/**
++ * Copies the game's own framebuffer to raw RGBA frames and pipes them to ffmpeg's stdin.
++ * Nothing here touches the desktop, so a hidden window records fine and Andrew's screen can never leak in.
++ *
++ * Render thread: picks frames on a fixed 1/fps clock and asks the GPU to copy them into a small ring of read buffers.
++ * Writer thread: feeds each genuinely copied framebuffer once. Missed sampling indices are reported, never padded.
++ * Both ends are bounded. If anything lags, frames are dropped and counted; the game never stalls waiting for the disk.
++ */
++final class FrameRecorder {
++    private static final int GPU_SLOTS = 4;
++    private static final int RAM_SLOTS = 6;
++    private static final int USAGE_MAP_READ_COPY_DST = 9; // the usage flags Mojang's Screenshot class passes
++
++    private record Frame(byte[] data, long sequence, long index) {}
++
++    private final int width;
++    private final int height;
++    private final int fps;
++    private final UniqueWriter queueWriter;
++    private final Object producerLock = new Object();
++    private final RawFrameSpool spool;
++    private final AtomicLong renderCalls = new AtomicLong(), mapNanos = new AtomicLong(), maxMapNanos = new AtomicLong();
++    private final OutputStream sink;
++    private final Thread writer;
++    private final GpuBuffer[] slots = new GpuBuffer[GPU_SLOTS];
++    private final AtomicIntegerArray busy = new AtomicIntegerArray(GPU_SLOTS);
++    private final ArrayBlockingQueue<byte[]> free = new ArrayBlockingQueue<>(RAM_SLOTS);
++    private final long startNanos = System.nanoTime();
++    private long lastIndex = -1;
++    private volatile boolean closing;
++    private volatile boolean producerFinished;
++    private volatile long stopRequestedNanos;
++    private volatile boolean closed;
++    private volatile String error;
++
++    private final AtomicLong copied = new AtomicLong();
++    private final AtomicLong droppedGpu = new AtomicLong();
++    private final AtomicLong droppedRam = new AtomicLong();
++    private final AtomicLong submitted = new AtomicLong();
++    private final AtomicLong callbacksAfterClose = new AtomicLong();
++    private volatile int ffmpegExit = Integer.MIN_VALUE;
++
++    FrameRecorder(RenderTarget target, int fps, Path argsFile, Path logFile) throws IOException {
++        this.width = target.width;
++        this.height = target.height;
++        this.fps = fps;
++        this.queueWriter = new UniqueWriter(RAM_SLOTS, fps * 2L);
++        GpuTexture tex = target.getColorTexture();
++        if (tex == null) throw new IllegalStateException("framebuffer has no colour texture");
++        long size = (long) width * height * tex.getFormat().blockSize();
++        if (size != width * height * 4L) throw new IllegalStateException("framebuffer is not 4 bytes per pixel: " + size);
++        for (int i = 0; i < GPU_SLOTS; i++) {
++            final int n = i;
++            slots[i] = RenderSystem.getDevice().createBuffer(() -> "nsp walk frame " + n, USAGE_MAP_READ_COPY_DST, size);
++        }
++        for (int i = 0; i < RAM_SLOTS; i++) free.add(new byte[(int) size]);
++
++        if (!Boolean.getBoolean("nsp.capture.spool.enabled")) throw new IOException("Explicit private two-stage spool opt-in required");
++        String rawRoot=System.getProperty("nsp.capture.spool.root");
++        if(rawRoot==null)throw new IOException("Explicit task-owned spool directory required");
++        Path spoolRoot=Path.of(rawRoot).toAbsolutePath().normalize();
++        Path approved=Path.of(System.getProperty("nsp.walk.dir", "nsp_walk")).toAbsolutePath().normalize().resolve("realtime_spool");
++        if(!spoolRoot.startsWith(approved)||spoolRoot.getNameCount()!=approved.getNameCount()+1||!Files.isDirectory(spoolRoot)||Files.isSymbolicLink(spoolRoot)||!spoolRoot.toRealPath().equals(spoolRoot))throw new IOException("Exact fresh task-owned realtime spool run directory required");
++        this.spool = new RawFrameSpool(spoolRoot.resolve(argsFile.getFileName()), size, 600);
++        this.sink = spool.output();
++        this.writer = new Thread(this::writeLoop, "nsp-walk-writer");
++        this.writer.setDaemon(true);
++        this.writer.setPriority(Thread.NORM_PRIORITY - 1);
++        this.writer.start();
++    }
++
++    /** Render thread, once per frame. No new copies are admitted after stop. */
++    void onFrame(RenderTarget target) {
++        renderCalls.incrementAndGet();
++        synchronized (producerLock) {
++            if (closing || error != null) return;
++            if (target.width != width || target.height != height) {
++                fail("framebuffer changed size to " + target.width + "x" + target.height);
++                return;
++            }
++            long index = (System.nanoTime() - startNanos) * fps / 1_000_000_000L;
++            if (index <= lastIndex) return;
++            int slot = -1;
++            for (int i = 0; i < GPU_SLOTS; i++) {
++                if (busy.compareAndSet(i, 0, 1)) { slot = i; break; }
++            }
++            if (slot < 0) { droppedGpu.incrementAndGet(); return; }
++            lastIndex = index;
++            final int selected = slot;
++            final long sequence = submitted.incrementAndGet();
++            try {
++                RenderSystem.getDevice().createCommandEncoder()
++                    .copyTextureToBuffer(target.getColorTexture(), slots[selected], 0L,
++                        () -> onCopied(selected, sequence, index), 0);
++            } catch (Throwable failure) {
++                busy.set(selected, 0);
++                fail(failure.toString());
++                finishProducerIfDrained();
++            }
++        }
++    }
++
++    private void onCopied(int slot, long sequence, long index) {
++        try {
++            // Stop forbids new submissions, but every already-issued callback must still drain.
++            if (closed) {
++                callbacksAfterClose.incrementAndGet();
++                fail("GPU copy callback arrived after writer closure");
++                return;
++            }
++            byte[] data = free.poll();
++            if (data == null) { droppedRam.incrementAndGet(); return; }
++            long mapStart = System.nanoTime();
++            try (GpuBufferSlice.MappedView view = slots[slot].map(true, false)) {
++                view.data().get(0, data);
++            }
++            long mapped = System.nanoTime() - mapStart; mapNanos.addAndGet(mapped); maxMapNanos.accumulateAndGet(mapped, Math::max);
++            copied.incrementAndGet();
++            if (!queueWriter.offer(data, sequence, index)) {
++                free.offer(data);
++                droppedRam.incrementAndGet();
++            }
++        } catch (Throwable failure) {
++            fail(failure.toString());
++        } finally {
++            busy.set(slot, 0);
++            finishProducerIfDrained();
++        }
++    }
++
++    private int pendingCopies() {
++        int pending = 0;
++        for (int i = 0; i < GPU_SLOTS; i++) pending += busy.get(i);
++        return pending;
++    }
++
++    private void finishProducerIfDrained() {
++        synchronized (producerLock) {
++            if (closing && !producerFinished && pendingCopies() == 0) {
++                producerFinished = true;
++                queueWriter.finishProducer(); // Wake an empty-queue writer immediately; no 200ms stop tail.
++            }
++        }
++    }
++
++    private void writeLoop() {
++        try {
++            queueWriter.drain(sink, () -> !closed, () -> -1, free::offer,
++                () -> closing, () -> stopRequestedNanos, spool::recordFrame);
++            if (!producerFinished || queueWriter.written.get() != copied.get()) {
++                throw new IOException("Producer/queue did not drain every copied frame");
++            }
++        } catch (Throwable failure) {
++            fail(failure.toString());
++        } finally {
++            try { sink.flush(); spool.close(); } catch (IOException failure) { fail("Raw spool close failed: " + failure); }
++            closed = true;
++        }
++    }
++
++    /** Pure queue/I/O core: unit-testable without constructing a GPU recorder or launching ffmpeg. */
++    static final class UniqueWriter {
++        private static final Frame END = new Frame(null, -1, -1);
++        private final ArrayBlockingQueue<Frame> ready;
++        private final long longGapThreshold;
++        private volatile boolean producerFinished;
++        final AtomicLong written = new AtomicLong();
++        final AtomicLong uniqueWritten = new AtomicLong();
++        final AtomicLong samplingIntervalsSkipped = new AtomicLong();
++        final AtomicLong gapFrames = new AtomicLong();
++        final AtomicLong sequenceGaps = new AtomicLong();
++        final AtomicLong rejectedOrder = new AtomicLong();
++        final AtomicLong firstSequence = new AtomicLong(-1);
++        final AtomicLong lastSequence = new AtomicLong(-1);
++        final AtomicLong lastSamplingIndex = new AtomicLong(-1);
++
++        UniqueWriter(int capacity, long longGapThreshold) {
++            if (capacity < 1 || longGapThreshold < 0) throw new IllegalArgumentException("Bounded queue required");
++            this.ready = new ArrayBlockingQueue<>(capacity);
++            this.longGapThreshold = longGapThreshold;
++        }
++
++        boolean offer(byte[] data, long sequence, long samplingIndex) {
++            if (data == null || sequence < 1 || samplingIndex < 0) throw new IllegalArgumentException("Real frame identity required");
++            if (producerFinished) throw new IllegalStateException("Frame after producer finished");
++            return ready.offer(new Frame(data, sequence, samplingIndex));
++        }
++
++        void finishProducer() {
++            producerFinished = true;
++            ready.offer(END); // If full, real queued frames already wake the consumer; its next empty check exits.
++        }
++
++        interface FrameWritten { void record(long sequence,long samplingIndex,int bytes) throws IOException; }
++        final AtomicLong sinkWriteNanos=new AtomicLong(), maxSinkWriteNanos=new AtomicLong(), sinkWriteCalls=new AtomicLong(), sinkBytes=new AtomicLong();
++        void drain(OutputStream sink, BooleanSupplier encoderAlive, IntSupplier encoderExit, Consumer<byte[]> recycle, BooleanSupplier stopping, LongSupplier stopTime) throws IOException,InterruptedException {
++            drain(sink,encoderAlive,encoderExit,recycle,stopping,stopTime,(sequence,index,bytes)->{});
++        }
++        void drain(OutputStream sink, BooleanSupplier encoderAlive, IntSupplier encoderExit,
++                   Consumer<byte[]> recycle, BooleanSupplier stopping, LongSupplier stopTime, FrameWritten observer)
++                   throws IOException, InterruptedException {
++            long previousSequence = 0;
++            long previousIndex = -1;
++            while (true) {
++                if (producerFinished && ready.isEmpty()) return;
++                if (stopping.getAsBoolean() && !producerFinished && stopTime.getAsLong() > 0
++                    && System.nanoTime() - stopTime.getAsLong() > TimeUnit.SECONDS.toNanos(10)) {
++                    throw new IOException("Already-issued GPU copies did not finish within 10 s");
++                }
++                Frame frame = ready.poll(200, TimeUnit.MILLISECONDS);
++                if (frame == null) {
++                    if (!encoderAlive.getAsBoolean()) throw new IOException("ffmpeg exited " + encoderExit.getAsInt());
++                    continue;
++                }
++                if (frame == END) continue;
++                try {
++                    if (frame.sequence() <= previousSequence || frame.index() <= previousIndex) {
++                        rejectedOrder.incrementAndGet();
++                        throw new IOException("Duplicate/out-of-order framebuffer identity");
++                    }
++                    sequenceGaps.addAndGet(frame.sequence() - previousSequence - 1);
++                    long missed = previousIndex < 0 ? 0 : frame.index() - previousIndex - 1;
++                    samplingIntervalsSkipped.addAndGet(missed);
++                    // Keep original gapFrames meaning: only stalls longer than fps*2 were counted there.
++                    if (missed > longGapThreshold) gapFrames.addAndGet(missed);
++                    long writeStart=System.nanoTime();
++                    sink.write(frame.data()); // Exactly ONE actual frame, now sequential disk rather than live encoder pipe.
++                    long elapsed=System.nanoTime()-writeStart;sinkWriteNanos.addAndGet(elapsed);maxSinkWriteNanos.accumulateAndGet(elapsed,Math::max);sinkWriteCalls.incrementAndGet();sinkBytes.addAndGet(frame.data().length);
++                    observer.record(frame.sequence(),frame.index(),frame.data().length);
++                    written.incrementAndGet();
++                    uniqueWritten.incrementAndGet();
++                    if (firstSequence.get() < 0) firstSequence.set(frame.sequence());
++                    lastSequence.set(frame.sequence());
++                    lastSamplingIndex.set(frame.index());
++                    previousSequence = frame.sequence();
++                    previousIndex = frame.index();
++                } finally { recycle.accept(frame.data()); }
++            }
++        }
++
++        void appendStats(Map<String,Object> stats) {
++            stats.put("sinkWriteCalls",sinkWriteCalls.get());stats.put("sinkBytes",sinkBytes.get());stats.put("sinkWriteNanos",sinkWriteNanos.get());stats.put("maxSinkWriteNanos",maxSinkWriteNanos.get());
++            stats.put("framesWritten", written.get());
++            stats.put("uniqueFramesWritten", uniqueWritten.get());
++            stats.put("framesRepeated", written.get() - uniqueWritten.get());
++            stats.put("samplingIntervalsSkipped", samplingIntervalsSkipped.get());
++            stats.put("gapFrames", gapFrames.get());
++            stats.put("sourceSequenceGaps", sequenceGaps.get());
++            stats.put("duplicateOrOutOfOrderRejected", rejectedOrder.get());
++            stats.put("firstWrittenSequence", firstSequence.get());
++            stats.put("lastWrittenSequence", lastSequence.get());
++            stats.put("lastWrittenSamplingIndex", lastSamplingIndex.get());
++            stats.put("writerProducerFinished", producerFinished);
++        }
++    }
++
++    void fail(String why) {
++        if (error == null) error = why;
++        requestStop();
++    }
++
++    /** Asks for a clean end. Finishes on the writer thread, so the game keeps ticking while ffmpeg closes the clip. */
++    void requestStop() {
++        synchronized (producerLock) {
++            if (!closing) { stopRequestedNanos = System.nanoTime(); closing = true; }
++        }
++        finishProducerIfDrained();
++    }
++
++    boolean isClosed() {
++        return closed;
++    }
++
++    String error() {
++        return error;
++    }
++
++    Map<String, Object> stats() {
++        Map<String, Object> m = new LinkedHashMap<>();
++        m.put("width", width);
++        m.put("height", height);
++        m.put("fps", fps);
++        m.put("seconds", (System.nanoTime() - startNanos) / 1e9);
++        m.put("framesCopied", copied.get());
++        queueWriter.appendStats(m);
++        m.put("framesSubmitted", submitted.get());
++        m.put("pendingGpuCopiesAtClose", pendingCopies());
++        m.put("callbacksAfterWriterClose", callbacksAfterClose.get());
++        m.put("sourceFrameSequenceConsistent", producerFinished && pendingCopies() == 0
++            && submitted.get() == copied.get() && copied.get() == queueWriter.written.get()
++            && queueWriter.written.get() == queueWriter.uniqueWritten.get()
++            && queueWriter.sequenceGaps.get() == 0 && queueWriter.rejectedOrder.get() == 0
++            && callbacksAfterClose.get() == 0);
++        m.put("droppedNoGpuSlot", droppedGpu.get());
++        m.put("droppedNoRamSlot", droppedRam.get());
++        m.put("encodingDeferred",true);m.put("spool",spool.stats());m.put("renderCallsObserved",renderCalls.get());m.put("gpuMapCopyNanos",mapNanos.get());m.put("maxGpuMapCopyNanos",maxMapNanos.get());m.put("gpuSlots",GPU_SLOTS);m.put("ramSlots",RAM_SLOTS);
++        m.put("ffmpegExit", null); // No encoder was launched; Root must record actual separate encode exit.
++        m.put("error", error);
++        return m;
++    }
++
++    static boolean exists(File f) {
++        return f != null && f.exists();
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/RawFrameSpool.java b/tools/cat_client_capture/cinematic/src/nsp/walk/RawFrameSpool.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/RawFrameSpool.java
+@@ -0,0 +1,22 @@
++package nsp.walk;
++import java.io.*;import java.nio.charset.StandardCharsets;import java.nio.file.*;import java.util.*;
++/** Bounded sequential genuine RGBA sink; no encoder/process exists during capture. */
++final class RawFrameSpool implements AutoCloseable {
++ final Path rawPath,indexPath;final long frameBytes,maxFrames;private final OutputStream file;private final BufferedWriter index;
++ private long bytes,frames,lastSequence,lastSampling=-1;private boolean closed;
++ RawFrameSpool(Path base,long frameBytes,long maxFrames)throws IOException{
++  if(frameBytes<1||frameBytes>Integer.MAX_VALUE||maxFrames<1||maxFrames>600)throw new IllegalArgumentException("Finite genuine raw spool bound required");
++  this.frameBytes=frameBytes;this.maxFrames=maxFrames;rawPath=base.resolveSibling(base.getFileName()+".rgba");indexPath=base.resolveSibling(base.getFileName()+".frames.jsonl");
++  file=Files.newOutputStream(rawPath,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE);
++  BufferedWriter opened=null;try{opened=Files.newBufferedWriter(indexPath,StandardCharsets.UTF_8,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE);}catch(IOException failure){file.close();throw failure;}index=opened;
++ }
++ OutputStream output(){return new OutputStream(){public void write(int ignored)throws IOException{throw new IOException("Whole genuine frame writes only");}public void write(byte[]data)throws IOException{write(data,0,data.length);}public void write(byte[]data,int off,int len)throws IOException{
++  if(closed||off!=0||len!=frameBytes||bytes+len>frameBytes*maxFrames)throw new IOException("Raw spool closed/frame width/finite capacity violated");file.write(data,off,len);bytes+=len;
++ }public void flush()throws IOException{file.flush();}public void close(){} };}
++ void recordFrame(long sequence,long samplingIndex,int length)throws IOException{
++  if(closed||length!=frameBytes||bytes!=(frames+1)*frameBytes||sequence<=lastSequence||samplingIndex<=lastSampling)throw new IOException("Actual spool identity/byte position invalid");
++  index.write("{\"sequence\":"+sequence+",\"samplingIndex\":"+samplingIndex+",\"offset\":"+(frames*frameBytes)+",\"bytes\":"+length+"}\n");frames++;lastSequence=sequence;lastSampling=samplingIndex;
++ }
++ public void close()throws IOException{if(closed)return;IOException error=null;try{file.close();}catch(IOException e){error=e;}try{index.close();}catch(IOException e){if(error==null)error=e;else error.addSuppressed(e);}closed=true;if(error!=null)throw error;if(Files.size(rawPath)!=bytes||bytes!=frames*frameBytes)throw new IOException("Actual closed spool length/index differs");}
++ Map<String,Object> stats(){Map<String,Object> s=new LinkedHashMap<>();s.put("rawPath",rawPath.toString());s.put("indexPath",indexPath.toString());s.put("frameBytes",frameBytes);s.put("maximumFrames",maxFrames);s.put("writtenBytes",bytes);s.put("indexedFrames",frames);s.put("closed",closed);return s;}
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/RouteWalk.java b/tools/cat_client_capture/cinematic/src/nsp/walk/RouteWalk.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/RouteWalk.java
+@@ -0,0 +1,358 @@
++package nsp.walk;
++
++import com.google.gson.Gson;
++import com.google.gson.GsonBuilder;
++import com.google.gson.JsonArray;
++import com.google.gson.JsonObject;
++import com.google.gson.JsonParser;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.util.ArrayList;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++import net.fabricmc.api.ClientModInitializer;
++import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
++import net.minecraft.client.Minecraft;
++import net.minecraft.core.BlockPos;
++import net.minecraft.core.Direction;
++import net.minecraft.world.InteractionHand;
++import net.minecraft.world.entity.Interaction;
++import net.minecraft.world.phys.AABB;
++import net.minecraft.world.phys.BlockHitResult;
++import net.minecraft.world.phys.EntityHitResult;
++import net.minecraft.world.phys.Vec3;
++
++/**
++ * Walks a route and presses buttons on the real client, using key mapping and the game's own interaction, so the server sees a real walk and a real press. No OS input, and it
++ * never reads the session. Waits for steps.json in the folder named by nsp.walk.dir, runs it, writes walk_log.json after every step, and reports where it stuck.
++ * Steps: {"walk":[x,z]}, {"press":[x,y,z],"face":"NORTH"}, {"wait":ticks}, {"mark":"text"}, {"slot":n}, {"cmd":"trigger x set 1"}.
++ * Filming: {"rec":"name","fps":30} starts recording the game's own framebuffer, {"recstop":true} ends it and waits for ffmpeg, {"cam":[x,y,z,yaw,pitch, x,y,z,yaw,pitch],"seconds":8} moves a spectator
++ * from the first pose to the second, set on every rendered frame so the shot stays smooth. ffmpeg's arguments come from ffmpeg_args.txt in the same folder, with {NAME} for the take.
++ */
++public final class RouteWalk implements ClientModInitializer {
++    private static volatile FrameRecorder recorder;
++    private static volatile CinematicFrameRecorder cinematic;
++    public static void beforeFrame(Minecraft c) {
++        CinematicFrameRecorder r=cinematic;
++        if(r!=null)try{r.beforeFrame(c);}catch(Throwable e){r.fail("HEAD: "+e);}
++    }
++    private static volatile double[] cam;
++    private static volatile long camStart, camNanos;
++    private static volatile boolean camDone;
++    private final Path dir = Path.of(System.getProperty("nsp.walk.dir", "nsp_walk"));
++    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
++    private final List<Map<String, Object>> rows = new ArrayList<>();
++    private JsonArray steps;
++    private int step, stepTicks, stuckCount, total;
++    private float turnYaw, turnPitch;
++    private double lastDist = 1e9;
++    private boolean done;
++
++    @Override
++    public void onInitializeClient() {
++        ClientTickEvents.END_CLIENT_TICK.register(c -> {
++            try {
++                tick(c);
++            } catch (Throwable e) {
++                row(c, "ERROR", e.toString());
++                done = true;
++            }
++        });
++    }
++
++    /** Called by the mixin on every rendered frame: keeps the finished frame, then sets the camera for the next one. */
++    public static void onFrame(Minecraft c) {
++        CinematicFrameRecorder offline=cinematic;
++        if(offline!=null){try{offline.afterFrame(c);}catch(Throwable e){offline.fail("TAIL: "+e);}return;}
++        FrameRecorder r = recorder;
++        if (r != null) r.onFrame(c.gameRenderer.mainRenderTarget());
++        double[] p = cam;
++        if (p == null || c.player == null) return;
++        double k = Math.min(1.0, (System.nanoTime() - camStart) / (double) camNanos);
++        double e = k * k * (3 - 2 * k);
++        double yaw = p[3] + net.minecraft.util.Mth.wrapDegrees(p[8] - p[3]) * e;
++        double pitch = p[4] + (p[9] - p[4]) * e;
++        c.player.setPos(p[0] + (p[5] - p[0]) * e, p[1] + (p[6] - p[1]) * e, p[2] + (p[7] - p[2]) * e);
++        c.player.setYRot((float) yaw);
++        c.player.setXRot((float) pitch);
++        c.player.setDeltaMovement(Vec3.ZERO);
++        c.player.setOldPosAndRot();
++        if (k >= 1.0) {
++            cam = null;
++            camDone = true;
++        }
++    }
++
++    private void row(Minecraft c, String what, Object value) {
++        Map<String, Object> m = new LinkedHashMap<>();
++        m.put("utc", java.time.Instant.now().toString());
++        m.put("step", step);
++        m.put("what", what);
++        m.put("value", value);
++        if (c.player != null) {
++            m.put("pos", List.of(c.player.getX(), c.player.getY(), c.player.getZ()));
++            m.put("onGround", c.player.onGround());
++        }
++        rows.add(m);
++        try {
++            Files.writeString(dir.resolve("walk_log.json"), gson.toJson(rows));
++        } catch (Exception ignore) {
++        }
++    }
++
++    private void next(Minecraft c) {
++        c.options.keyUp.setDown(false);
++        step++;
++        stepTicks = 0;
++        stuckCount = 0;
++        lastDist = 1e9;
++    }
++
++    /** Ready for the next steps.json, so a stop doesn't need a client restart. */
++    private void reset(Minecraft c) {
++        c.options.keyUp.setDown(false);
++        steps = null;
++        step = 0;
++        stepTicks = 0;
++        stuckCount = 0;
++        lastDist = 1e9;
++    }
++
++    private void tick(Minecraft c) throws Exception {
++        if (c.player == null || c.level == null || done) return;
++        total++;
++        if (steps == null) {
++            Path p = dir.resolve("steps.json");
++            if (total % 20 == 0 && Files.exists(p)) {
++                steps = JsonParser.parseString(Files.readString(p)).getAsJsonArray();
++                Files.move(p, dir.resolve("steps_running.json"), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
++                row(c, "START", steps.size());
++            }
++            return;
++        }
++        if (step >= steps.size()) {
++            row(c, "DONE", total);
++            reset(c);
++            return;
++        }
++        JsonObject s = steps.get(step).getAsJsonObject();
++        stepTicks++;
++        if (s.has("mark")) {
++            row(c, "MARK", s.get("mark").getAsString());
++            next(c);
++        } else if (s.has("cmd")) {
++            c.getConnection().sendCommand(s.get("cmd").getAsString());
++            row(c, "CMD", s.get("cmd").getAsString());
++            next(c);
++        } else if (s.has("slot")) {
++            c.player.getInventory().setSelectedSlot(s.get("slot").getAsInt());
++            row(c, "SLOT", s.get("slot").getAsInt());
++            next(c);
++        } else if (s.has("wait")) {
++            if (stepTicks >= s.get("wait").getAsInt()) next(c);
++        } else if (s.has("cinematic")) {
++            if(stepTicks==1){
++                if(recorder!=null||cam!=null||cinematic!=null)throw new IllegalStateException("recording/camera modes overlap");
++                String name=s.get("cinematic").getAsString();
++                if(!name.matches("[a-z0-9_]{1,48}"))throw new IllegalArgumentException("owned relative take name");
++                String mode=s.get("mode").getAsString();
++                boolean allowStationary=CinematicProgram.allowStationaryForMode(mode);
++                JsonArray a=s.getAsJsonArray("poses");if(a.size()!=10)throw new IllegalArgumentException("exact two poses required");
++                double[] p=new double[10];for(int i=0;i<10;i++)p[i]=a.get(i).getAsDouble();
++                CinematicTakePaths.Take take=CinematicTakePaths.create(dir,name);
++                cinematic=new CinematicFrameRecorder(new CinematicProgram(p,s.get("fps").getAsInt(),s.get("frames").getAsInt(),allowStationary),take.base(),take.receipt());
++                row(c,"CINEMATIC_START",Map.of("mode",mode,"name",name,"poses",p,"frames",s.get("frames").getAsInt(),"fps",s.get("fps").getAsInt()));
++            }
++            CinematicFrameRecorder r=cinematic;
++            if(r!=null&&r.isClosed()){
++                row(c,"CINEMATIC_CLOSED",r.stats());cinematic=null;
++                if(r.error()!=null)throw new IllegalStateException(r.error());
++                next(c);
++            }
++        } else if (s.has("rec")) {
++            String name = s.get("rec").getAsString();
++            int fps = s.has("fps") ? s.get("fps").getAsInt() : 30;
++            Path args = dir.resolve("args_" + name + ".txt");
++            Files.writeString(args, Files.readString(dir.resolve("ffmpeg_args.txt")).replace("{NAME}", name));
++            recorder = new FrameRecorder(c.gameRenderer.mainRenderTarget(), fps, args, dir.resolve("ffmpeg_" + name + ".log"));
++            row(c, "REC", name);
++            next(c);
++        } else if (s.has("recstop")) {
++            FrameRecorder r = recorder;
++            if (r == null) {
++                row(c, "RECSTOP", "nothing recording");
++                next(c);
++            } else {
++                if (stepTicks == 1) r.requestStop();
++                if (r.isClosed() || stepTicks > 800) {
++                    row(c, "RECSTOP", r.stats());
++                    recorder = null;
++                    next(c);
++                }
++            }
++        } else if (s.has("cam")) {
++            if (stepTicks == 1) {
++                JsonArray t = s.getAsJsonArray("cam");
++                double[] p = new double[10];
++                for (int i = 0; i < 10; i++) p[i] = t.get(i).getAsDouble();
++                camNanos = (long) (s.get("seconds").getAsDouble() * 1e9);
++                camStart = System.nanoTime();
++                camDone = false;
++                cam = p;
++                row(c, "CAM", t.toString());
++            }
++            if (camDone) next(c);
++        } else if (s.has("walk")) {
++            JsonArray t = s.getAsJsonArray("walk");
++            double dx = t.get(0).getAsDouble() - c.player.getX(), dz = t.get(1).getAsDouble() - c.player.getZ(), d = Math.hypot(dx, dz);
++            if (d < 0.4) {
++                row(c, "REACHED", t.toString());
++                next(c);
++                return;
++            }
++            c.player.setYRot((float) Math.toDegrees(Math.atan2(-dx, dz)));
++            c.player.setXRot(0);
++            c.options.keyUp.setDown(true);
++            if (stepTicks % 40 == 0) {
++                stuckCount = lastDist - d < 0.3 ? stuckCount + 1 : 0;
++                lastDist = d;
++                if (stuckCount >= 3) {
++                    c.options.keyUp.setDown(false);
++                    row(c, "STUCK", t.toString());
++                    reset(c);
++                }
++            }
++        } else if (s.has("press")) {
++            JsonArray t = s.getAsJsonArray("press");
++            BlockPos p = new BlockPos(t.get(0).getAsInt(), t.get(1).getAsInt(), t.get(2).getAsInt());
++            Direction f = Direction.valueOf(s.get("face").getAsString());
++            Vec3 at = Vec3.atCenterOf(p);
++            double dx = at.x - c.player.getX(), dy = at.y - c.player.getEyeY(), dz = at.z - c.player.getZ();
++            c.player.setYRot((float) Math.toDegrees(Math.atan2(-dx, dz)));
++            c.player.setXRot((float) -Math.toDegrees(Math.atan2(dy, Math.hypot(dx, dz))));
++            if (stepTicks >= 4) {
++                var r = c.gameMode.useItemOn(c.player, InteractionHand.MAIN_HAND, new BlockHitResult(at, f, p, false));
++                row(c, "PRESS", p.toShortString() + " " + r);
++                next(c);
++            }
++        } else if (s.has("click")) {
++            c.gameMode.handleContainerInput(c.player.containerMenu.containerId, s.get("click").getAsInt(), 0, net.minecraft.world.inventory.ContainerInput.PICKUP, c.player);
++            row(c, "CLICK", s.get("click").getAsInt() + " in " + c.player.containerMenu.getClass().getSimpleName());
++            next(c);
++        } else if (s.has("close")) {
++            c.player.closeContainer();
++            row(c, "CLOSE", "menu closed");
++            next(c);
++        } else if (s.has("menu")) {
++            row(c, "MENU", c.player.containerMenu.getClass().getSimpleName());
++            next(c);
++        } else if (s.has("use")) {
++            var r = c.gameMode.useItem(c.player, InteractionHand.MAIN_HAND);
++            row(c, "USE", String.valueOf(r));
++            next(c);
++        } else if (s.has("await")) {
++            // The external judge acknowledges a run-specific mark only after its authoritative reads.
++            String a = s.get("await").getAsString();
++            int max = s.has("ticks") ? s.get("ticks").getAsInt() : 2400;
++            if (Files.exists(dir.resolve("ack_" + a))) {
++                row(c, "ACK", a + " after " + stepTicks + " ticks");
++                next(c);
++            } else if (stepTicks >= max) {
++                // Match the existing ERROR terminal lifecycle: no later step or replacement route can run.
++                done = true;
++                c.options.keyUp.setDown(false);
++                row(c, "AWAIT_TIMEOUT", a);
++                c.gameMode.stopDestroyBlock();
++            }
++        } else if (s.has("dighold")) {
++            // Hard-block survival proof: sustain mining; one start alone may only begin damage.
++            // Instant-break exceptions still exist. Old "dig" semantics are deliberately unchanged.
++            // DIGHOLD reports the client only; the judge must read the authoritative server state.
++            boolean holdPending = false;
++            try {
++                JsonArray t = s.getAsJsonArray("dighold");
++                BlockPos p = new BlockPos(t.get(0).getAsInt(), t.get(1).getAsInt(), t.get(2).getAsInt());
++                Direction f = Direction.valueOf(s.get("face").getAsString());
++                int max = s.has("ticks") ? s.get("ticks").getAsInt() : 160;
++                Vec3 at = Vec3.atCenterOf(p);
++                double dx = at.x - c.player.getX(), dy = at.y - c.player.getEyeY(), dz = at.z - c.player.getZ();
++                c.player.setYRot((float) Math.toDegrees(Math.atan2(-dx, dz)));
++                c.player.setXRot((float) -Math.toDegrees(Math.atan2(dy, Math.hypot(dx, dz))));
++                if (stepTicks == 2) {
++                    row(c, "DIGSTART", p.toShortString() + " " + c.gameMode.startDestroyBlock(p, f) + " " + c.level.getBlockState(p));
++                } else if (stepTicks > 2) {
++                    c.gameMode.continueDestroyBlock(p, f);
++                    boolean air = c.level.getBlockState(p).isAir();
++                    if (air || stepTicks >= max) {
++                        row(c, "DIGHOLD", p.toShortString() + " ticks " + stepTicks + " client_sees " + c.level.getBlockState(p));
++                        next(c);
++                        return;
++                    }
++                }
++                holdPending = true;
++            } finally {
++                // Runs on completion, predicted air, deadline, or any thrown failure; never retarget a neighbor.
++                if (!holdPending) {
++                    c.options.keyUp.setDown(false);
++                    c.gameMode.stopDestroyBlock();
++                }
++            }
++        } else if (s.has("dig")) {
++            JsonArray t = s.getAsJsonArray("dig");
++            BlockPos p = new BlockPos(t.get(0).getAsInt(), t.get(1).getAsInt(), t.get(2).getAsInt());
++            row(c, "DIG", p.toShortString() + " " + c.gameMode.startDestroyBlock(p, Direction.valueOf(s.get("face").getAsString())));
++            next(c);
++        } else if (s.has("clouds")) {
++            c.options.cloudStatus().set(s.get("clouds").getAsBoolean() ? net.minecraft.client.CloudStatus.FANCY : net.minecraft.client.CloudStatus.OFF);
++            row(c, "CLOUDS", String.valueOf(c.options.cloudStatus().get()));
++            next(c);
++        } else if (s.has("gamma")) {
++            c.options.gamma().set(s.get("gamma").getAsDouble());
++            row(c, "GAMMA", String.valueOf(c.options.gamma().get()));
++            next(c);
++        } else if (s.has("turn")) {
++            JsonArray t = s.getAsJsonArray("turn");
++            if (stepTicks == 1) { turnYaw = c.player.getYRot(); turnPitch = c.player.getXRot(); }
++            float k = Math.min(1f, stepTicks / t.get(2).getAsFloat());
++            c.player.setYRot(turnYaw + net.minecraft.util.Mth.wrapDegrees(t.get(0).getAsFloat() - turnYaw) * k);
++            c.player.setXRot(turnPitch + (t.get(1).getAsFloat() - turnPitch) * k);
++            if (k >= 1f) { row(c, "TURN", c.player.getYRot() + " " + c.player.getXRot()); next(c); }
++        } else if (s.has("foveffect")) {
++            c.options.fovEffectScale().set(s.get("foveffect").getAsDouble());
++            row(c, "FOVEFFECT", String.valueOf(c.options.fovEffectScale().get()));
++            next(c);
++        } else if (s.has("hud")) {
++            if (c.gui.hud.isHidden() == s.get("hud").getAsBoolean()) c.gui.hud.toggle();
++            row(c, "HUD", "hidden " + c.gui.hud.isHidden());
++            next(c);
++        } else if (s.has("shot")) {
++            net.minecraft.client.Screenshot.grab(c.gameDirectory, s.get("shot").getAsString() + ".png", c.gameRenderer.mainRenderTarget(), 1, m -> {});
++            row(c, "SHOT", s.get("shot").getAsString());
++            next(c);
++        } else if (s.has("particles")) {
++            c.options.particles().set(net.minecraft.server.level.ParticleStatus.values()[s.get("particles").getAsInt()]);
++            row(c, "PARTICLES", String.valueOf(c.options.particles().get()));
++            next(c);
++        } else if (s.has("interact")) {
++            JsonArray t = s.getAsJsonArray("interact");
++            Vec3 at = new Vec3(t.get(0).getAsDouble(), t.get(1).getAsDouble(), t.get(2).getAsDouble());
++            net.minecraft.world.entity.Entity e = c.level.getEntitiesOfClass(net.minecraft.world.entity.Entity.class, new AABB(at, at).inflate(1.5), x -> x != c.player && (x instanceof Interaction || x instanceof net.minecraft.world.entity.LivingEntity)).stream()
++                    .min(java.util.Comparator.comparingDouble(x -> x.distanceToSqr(at))).orElse(null);
++            if (e == null) {
++                row(c, "INTERACT", "no entity at " + at);
++                next(c);
++            } else {
++                Vec3 mid = e.getBoundingBox().getCenter();
++                double dx = mid.x - c.player.getX(), dy = mid.y - c.player.getEyeY(), dz = mid.z - c.player.getZ();
++                c.player.setYRot((float) Math.toDegrees(Math.atan2(-dx, dz)));
++                c.player.setXRot((float) -Math.toDegrees(Math.atan2(dy, Math.hypot(dx, dz))));
++                if (stepTicks >= 4) {
++                    var r = c.gameMode.interact(c.player, e, new EntityHitResult(e, mid), InteractionHand.MAIN_HAND);
++                    row(c, "INTERACT", e.getId() + " " + r);
++                    next(c);
++                }
++            }
++        }
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/src/nsp/walk/mixin/MinecraftFrameMixin.java b/tools/cat_client_capture/cinematic/src/nsp/walk/mixin/MinecraftFrameMixin.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/src/nsp/walk/mixin/MinecraftFrameMixin.java
+@@ -0,0 +1,21 @@
++package nsp.walk.mixin;
++
++import net.minecraft.client.Minecraft;
++import nsp.walk.RouteWalk;
++import org.spongepowered.asm.mixin.Mixin;
++import org.spongepowered.asm.mixin.injection.At;
++import org.spongepowered.asm.mixin.injection.Inject;
++import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
++
++/** Calls the recorder and the camera once per rendered frame, after the frame is finished. */
++@Mixin(Minecraft.class)
++abstract class MinecraftFrameMixin {
++    @Inject(method = "renderFrame(Z)V", at = @At("HEAD"))
++    private void nspOfflineHead(boolean advanceGameTime, CallbackInfo ci) {
++        RouteWalk.beforeFrame((Minecraft)(Object)this);
++    }
++    @Inject(method = "renderFrame(Z)V", at = @At("TAIL"))
++    private void nspWalkFrame(boolean advanceGameTime, CallbackInfo ci) {
++        RouteWalk.onFrame((Minecraft) (Object) this);
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/test_spool_verify_mode.py b/tools/cat_client_capture/cinematic/test_spool_verify_mode.py
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/test_spool_verify_mode.py
+@@ -0,0 +1,30 @@
++"""Actual stdlib unittest definitions; tiny synthetic raw fixtures, NOT native proof."""
++import json,tempfile,unittest,zlib
++from pathlib import Path
++from spool_verify import verify_spool
++class StationarySpoolTests(unittest.TestCase):
++ def fixture(self,root,mode='OFFLINE_NATIVE_ANIMATED_SUBJECT',duplicate=False,corrupt=False):
++  base=Path(root)/'take';data=[bytes([1,2,3,4]),bytes([7,11,13,17])];pose=[1,2,3,0,0]
++  base.with_suffix('.rgba').write_bytes(b''.join(data))
++  rows=[dict(mode=mode,index=i,renderId=10 if duplicate else 10+i,offset=i*4,bytes=4,crc32=zlib.crc32(b)+(1 if corrupt else 0),pose=pose) for i,b in enumerate(data)]
++  base.with_suffix('.frames.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
++  return base,pose
++ def test_explicit_mode_verifies_actual_bytes_and_labels(self):
++  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as d:
++   b,p=self.fixture(d);r=verify_spool(b,2,24,p,p,frame_bytes=4,expected_mode='OFFLINE_NATIVE_ANIMATED_SUBJECT')
++   self.assertEqual(r['mode'],'OFFLINE_NATIVE_ANIMATED_SUBJECT');self.assertEqual(r['crcVerifiedFrames'],2)
++ def test_default_translating_contract_does_not_accept_still(self):
++  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as d:
++   b,p=self.fixture(d)
++   with self.assertRaises(ValueError):verify_spool(b,2,24,p,p,frame_bytes=4)
++ def test_explicit_stationary_rejects_motion_and_mislabeled_spool(self):
++  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as d:
++   b,p=self.fixture(d,'OFFLINE_NATIVE_CINEMATIC')
++   with self.assertRaises(ValueError):verify_spool(b,2,24,p,p,frame_bytes=4,expected_mode='OFFLINE_NATIVE_ANIMATED_SUBJECT')
++   with self.assertRaises(ValueError):verify_spool(b,2,24,p,[2,2,3,0,0],frame_bytes=4,expected_mode='OFFLINE_NATIVE_ANIMATED_SUBJECT')
++ def test_actual_crc_and_duplicate_identity_still_rejected(self):
++  for options in ({'duplicate':True},{'corrupt':True}):
++   with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as d:
++    b,p=self.fixture(d,**options)
++    with self.assertRaises(ValueError):verify_spool(b,2,24,p,p,frame_bytes=4,expected_mode='OFFLINE_NATIVE_ANIMATED_SUBJECT')
++if __name__=='__main__':unittest.main(verbosity=2)
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicAnimatedModeTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicAnimatedModeTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicAnimatedModeTest.java
+@@ -0,0 +1,64 @@
++package nsp.walk;
++import org.junit.jupiter.api.Test;
++import static org.junit.jupiter.api.Assertions.*;
++import java.io.ByteArrayOutputStream;
++import java.io.StringWriter;
++import java.util.zip.CRC32;
++final class CinematicAnimatedModeTest {
++ private static double[] still(){return new double[]{-2856,106,-1790,-90,0,-2856,106,-1790,-90,0};}
++ @Test void originalModeStillRejectsStationary(){
++  var e=assertThrows(IllegalArgumentException.class,()->new CinematicProgram(still(),24,600));
++  assertEquals("translating camera required",e.getMessage());
++  assertFalse(CinematicProgram.allowStationaryForMode("OFFLINE_NATIVE_CINEMATIC"));
++ }
++ @Test void explicitAnimatedModeAcceptsAll600ExactPoses(){
++  boolean allow=CinematicProgram.allowStationaryForMode("OFFLINE_NATIVE_ANIMATED_SUBJECT");
++  assertTrue(allow);var p=new CinematicProgram(still(),24,600,allow);
++  assertEquals("OFFLINE_NATIVE_ANIMATED_SUBJECT",p.mode);
++  for(int i=0;i<600;i++)assertEquals(new CinematicFrameState.Pose(-2856,106,-1790,-90,0),p.pose(i));
++  assertThrows(IllegalArgumentException.class,()->p.pose(600));
++ }
++ @Test void animatedModeRejectsTranslationAndRotation(){
++  for(int component=0;component<5;component++){
++   double[] p=still();p[component+5]+=.125;
++   assertThrows(IllegalArgumentException.class,()->new CinematicProgram(p,24,600,true));
++  }
++ }
++ @Test void onlyExactModeNamesAccepted(){
++  for(String s:new String[]{"", "OFFLINE_NATIVE_ANIMATED_SUBJECT ","allowStationary", "offline_native_cinematic"})
++   assertThrows(IllegalArgumentException.class,()->CinematicProgram.allowStationaryForMode(s));
++  assertThrows(IllegalArgumentException.class,()->CinematicProgram.allowStationaryForMode(null));
++ }
++ @Test void originalTranslationAndAllInputBoundsRemain(){
++  double[] moving=still();moving[5]+=1;var p=new CinematicProgram(moving,24,600);
++  assertEquals("OFFLINE_NATIVE_CINEMATIC",p.mode);assertEquals(-2855,p.pose(599).x());
++  for(int n:new int[]{0,1,601})assertThrows(IllegalArgumentException.class,()->new CinematicProgram(still(),24,n,true));
++  for(int fps:new int[]{0,61})assertThrows(IllegalArgumentException.class,()->new CinematicProgram(still(),fps,600,true));
++  assertThrows(IllegalArgumentException.class,()->new CinematicProgram(new double[9],24,600,true));
++  double[] bad=still();bad[0]=Double.NaN;assertThrows(IllegalArgumentException.class,()->new CinematicProgram(bad,24,600,true));
++  double[] pitch=still();pitch[4]=pitch[9]=91;assertThrows(IllegalArgumentException.class,()->new CinematicProgram(pitch,24,600,true));
++ }
++ @Test void frameStateStillRejectsChangedPoseAndDuplicateRenderId(){
++  var pose=new CinematicFrameState.Pose(1,2,3,0,0);
++  var s=new CinematicFrameState(2,0,1000,100);var t=s.begin(7,pose,true,1);
++  assertFalse(s.rendered(t,new CinematicFrameState.Pose(2,2,3,0,0),2));
++  assertEquals(CinematicFrameState.Phase.FAILED,s.phase());
++  var a=new CinematicFrameState(2,0,1000,100);var q=a.begin(7,pose,true,1);
++  assertTrue(a.rendered(q,pose,2));assertTrue(a.copied(q,3));assertTrue(a.committed(q,4));
++  assertNull(a.begin(7,pose,true,5));assertEquals("render identity order",a.error());
++ }
++ @Test void realCommitBytesCrcAndActualModeTravelTogether() throws Exception {
++  var pose=new CinematicFrameState.Pose(1,2,3,0,0);var state=new CinematicFrameState(2,0,1000,100);
++  var raw=new ByteArrayOutputStream();var index=new StringWriter();byte[] data={1,7,19,31};
++  for(int i=0;i<2;i++){
++   var ticket=state.begin(100+i,pose,true,1+i*4);assertTrue(state.rendered(ticket,pose,2+i*4));assertTrue(state.copied(ticket,3+i*4));
++   final long now=4+i*4;CinematicCommitter.write(state,ticket,data,4,raw,index,()->now,"OFFLINE_NATIVE_ANIMATED_SUBJECT");
++  }
++  assertEquals(CinematicFrameState.Phase.COMPLETE,state.phase());assertArrayEquals(new byte[]{1,7,19,31,1,7,19,31},raw.toByteArray());
++  var crc=new CRC32();crc.update(data);String[] rows=index.toString().split("\n");assertEquals(2,rows.length);
++  for(int i=0;i<2;i++){
++   assertTrue(rows[i].contains("\"mode\":\"OFFLINE_NATIVE_ANIMATED_SUBJECT\""));
++   assertTrue(rows[i].contains("\"renderId\":"+(100+i)));assertTrue(rows[i].contains("\"crc32\":"+crc.getValue()));
++  }
++ }
++}
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameDeferTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameDeferTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameDeferTest.java
+@@ -0,0 +1,23 @@
++package nsp.walk;
++import org.junit.jupiter.api.Test;
++import static org.junit.jupiter.api.Assertions.*;
++/** Pure state transitions; no game, GPU or claimed native proof. */
++final class CinematicFrameDeferTest {
++ private static final CinematicFrameState.Pose P=new CinematicFrameState.Pose(1,2,3,4,5);
++ private CinematicFrameState fresh(){return new CinematicFrameState(2,0,1000,100);}
++ @Test void deferKeepsIndexRequiresNewRenderAndThenCommits(){
++  var s=fresh();var t=s.begin(8,P,true,1);assertTrue(s.deferRender(t,2));
++  assertEquals(0,s.index());assertEquals(CinematicFrameState.Phase.READY,s.phase());
++  var next=s.begin(9,P,true,3);assertEquals(0,next.index());assertTrue(s.rendered(next,P,4));assertTrue(s.copied(next,5));assertTrue(s.committed(next,6));assertEquals(1,s.index());
++ }
++ @Test void deferredIdCannotBeUsedAgain(){var s=fresh();var t=s.begin(8,P,true,1);assertTrue(s.deferRender(t,2));assertNull(s.begin(8,P,true,3));assertEquals("render identity order",s.error());}
++ @Test void oldTicketCannotCaptureLaterRetry(){var s=fresh();var old=s.begin(8,P,true,1);assertTrue(s.deferRender(old,2));s.begin(9,P,true,3);assertFalse(s.rendered(old,P,4));assertEquals(CinematicFrameState.Phase.FAILED,s.phase());}
++ @Test void wrongAndNullTicketFailClosed(){for(boolean nul:new boolean[]{false,true}){var s=fresh();var t=s.begin(8,P,true,1);assertFalse(s.deferRender(nul?null:new CinematicFrameState.Ticket(0,9,P),2));assertEquals(CinematicFrameState.Phase.FAILED,s.phase());}}
++ @Test void noReadyGpuOrWriteDeferral(){
++  var ready=fresh();assertFalse(ready.deferRender(null,1));
++  for(boolean written:new boolean[]{false,true}){var s=fresh();var t=s.begin(8,P,true,1);assertTrue(s.rendered(t,P,2));if(written)assertTrue(s.copied(t,3));assertFalse(s.deferRender(t,4));assertEquals(CinematicFrameState.Phase.FAILED,s.phase());}
++ }
++ @Test void pendingTimeoutCannotBeDeflected(){var s=fresh();var t=s.begin(8,P,true,1);assertFalse(s.deferRender(t,101));assertEquals("pending frame deadline",s.error());}
++ @Test void globalDeadlineSurvivesRepeatedDeferrals(){var s=new CinematicFrameState(2,0,10,5);for(int i=1;i<5;i++){var t=s.begin(i,P,true,2*i-1);assertTrue(s.deferRender(t,2*i));}var t=s.begin(5,P,true,9);assertFalse(s.deferRender(t,10));assertEquals("overall deadline",s.error());}
++ @Test void retryStillNeedsRam(){var s=fresh();var t=s.begin(8,P,true,1);assertTrue(s.deferRender(t,2));assertNull(s.begin(9,P,false,3));assertEquals(CinematicFrameState.Phase.FAILED,s.phase());}
++}
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameStateTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameStateTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicFrameStateTest.java
+@@ -0,0 +1,61 @@
++package nsp.walk;
++import org.junit.jupiter.api.Test;
++import static org.junit.jupiter.api.Assertions.*;
++import java.io.*;
++import java.util.concurrent.*;
++import java.util.concurrent.atomic.AtomicLong;
++
++final class CinematicFrameStateTest {
++    private static final CinematicFrameState.Pose P=new CinematicFrameState.Pose(1,2,3,4,5);
++    private CinematicFrameState state(){return new CinematicFrameState(2,0,1000,100);}
++    @Test void delayedGpuDoesNotAdvanceOrAdmitSecondRender(){
++        var s=state();var t=s.begin(1,P,true,1);assertTrue(s.rendered(t,P,2));
++        assertNull(s.begin(2,P,true,50));assertEquals(0,s.index());
++        assertTrue(s.copied(t,60));assertEquals(0,s.index());assertTrue(s.committed(t,70));assertEquals(1,s.index());
++    }
++    @Test void missingRamPreventsSubmission(){var s=state();assertNull(s.begin(1,P,false,1));assertEquals(CinematicFrameState.Phase.FAILED,s.phase());assertEquals(0,s.index());}
++    @Test void wrongPoseAndOutOfOrderCallbackFailClosed(){
++        var s=state();var t=s.begin(1,P,true,1);assertFalse(s.rendered(t,new CinematicFrameState.Pose(2,2,3,4,5),2));assertNotNull(s.error());
++        var s2=state();var t2=s2.begin(1,P,true,1);assertFalse(s2.copied(t2,2));assertEquals(0,s2.index());
++    }
++    @Test void wrongTicketAndDuplicateCommitAreErrors(){
++        var s=state();var t=s.begin(1,P,true,1);s.rendered(t,P,2);assertFalse(s.copied(new CinematicFrameState.Ticket(0,2,P),3));
++        var s2=state();var t2=s2.begin(1,P,true,1);s2.rendered(t2,P,2);s2.copied(t2,3);assertTrue(s2.committed(t2,4));assertFalse(s2.committed(t2,5));assertEquals(1,s2.index());
++    }
++    @Test void frameAndOverallDeadlinesNeverFabricateCommit(){
++        var s=state();s.begin(1,P,true,1);s.check(101);assertEquals(CinematicFrameState.Phase.FAILED,s.phase());assertEquals(0,s.index());
++        var idle=state();idle.check(1000);assertEquals("overall deadline",idle.error());
++    }
++    @Test void delayedActualWriteAndIndexFlushHoldCameraIndex() throws Exception {
++        var s=state();var t=s.begin(1,P,true,1);s.rendered(t,P,2);s.copied(t,3);
++        var rawEntered=new CountDownLatch(1);var releaseRaw=new CountDownLatch(1);var indexEntered=new CountDownLatch(1);var releaseIndex=new CountDownLatch(1);
++        OutputStream raw=new OutputStream(){public void write(int b){} public void write(byte[] b)throws IOException{rawEntered.countDown();await(releaseRaw);}};
++        Writer idx=new StringWriter(){public void flush(){indexEntered.countDown();try{if(!releaseIndex.await(2,TimeUnit.SECONDS))throw new AssertionError("index test timeout");}catch(InterruptedException e){throw new AssertionError(e);}}};
++        var pool=Executors.newSingleThreadExecutor();try{
++            var f=pool.submit(()->{CinematicCommitter.write(s,t,new byte[4],4,raw,idx,()->4);return null;});
++            assertTrue(rawEntered.await(2,TimeUnit.SECONDS));assertEquals(0,s.index());assertNull(s.begin(2,P,true,4));releaseRaw.countDown();
++            assertTrue(indexEntered.await(2,TimeUnit.SECONDS));assertEquals(0,s.index());assertEquals(CinematicFrameState.Phase.WRITE,s.phase());releaseIndex.countDown();f.get(2,TimeUnit.SECONDS);
++            assertEquals(1,s.index());assertTrue(idx.toString().contains("\"index\":0"));
++        }finally{releaseRaw.countDown();releaseIndex.countDown();pool.shutdownNow();assertTrue(pool.awaitTermination(2,TimeUnit.SECONDS));}
++    }
++    private static void await(CountDownLatch l)throws IOException{try{if(!l.await(2,TimeUnit.SECONDS))throw new IOException("raw test timeout");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new IOException(e);}}
++    @Test void partialRawOrIndexFailureCannotAdvance() {
++        for(boolean rawFails:new boolean[]{true,false}){
++            var s=state();var t=s.begin(1,P,true,1);s.rendered(t,P,2);s.copied(t,3);
++            OutputStream raw=new OutputStream(){public void write(int b)throws IOException{if(rawFails)throw new IOException("actual raw failure");}};
++            Writer idx=new Writer(){public void write(char[] b,int o,int n)throws IOException{throw new IOException("actual index failure");}public void flush(){}public void close(){}};
++            assertThrows(IOException.class,()->CinematicCommitter.write(s,t,new byte[4],4,raw,idx,()->4));assertEquals(0,s.index());assertEquals(CinematicFrameState.Phase.FAILED,s.phase());
++        }
++    }
++    @Test void finalFrameDrainsExactlyAndRejectsFurtherAdmission() throws Exception {
++        var s=state();var raw=new ByteArrayOutputStream();var idx=new StringWriter();
++        for(int i=0;i<2;i++){var t=s.begin(i+1,P,true,1+i*4);s.rendered(t,P,2+i*4);s.copied(t,3+i*4);final long now=4+i*4;CinematicCommitter.write(s,t,new byte[4],4,raw,idx,()->now);}
++        assertEquals(8,raw.size());assertEquals(2,idx.toString().lines().count());assertEquals(CinematicFrameState.Phase.COMPLETE,s.phase());assertNull(s.begin(3,P,true,10));assertEquals(2,s.index());
++    }
++    @Test void authoredProgramHasRealTranslationEndpointsAndFiniteBounds(){
++        var p=new CinematicProgram(new double[]{0,2,0,170,0,10,4,5,-170,10},24,144);
++        assertEquals(0,p.pose(0).x());assertEquals(10,p.pose(143).x());assertTrue(p.pose(72).x()>p.pose(71).x());assertThrows(IllegalArgumentException.class,()->p.pose(144));
++        assertThrows(IllegalArgumentException.class,()->new CinematicProgram(new double[]{0,2,0,0,0,0,2,0,10,0},24,144));
++        assertThrows(IllegalArgumentException.class,()->new CinematicProgram(new double[]{0,Double.NaN,0,0,0,1,2,0,0,0},24,144));
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicTakePathsTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicTakePathsTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/CinematicTakePathsTest.java
+@@ -0,0 +1,11 @@
++package nsp.walk;
++import java.nio.file.*;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++import static org.junit.jupiter.api.Assertions.*;
++final class CinematicTakePathsTest {
++ @TempDir Path route;
++ @Test void successiveTakesHaveDisjointActualFiles()throws Exception{var a=CinematicTakePaths.create(route,"hall_eye");var b=CinematicTakePaths.create(route,"aerial");Files.writeString(a.receipt(),"actual first receipt",StandardOpenOption.CREATE_NEW);Files.writeString(b.receipt(),"actual second receipt",StandardOpenOption.CREATE_NEW);assertNotEquals(a.base().getParent(),b.base().getParent());assertEquals("actual first receipt",Files.readString(a.receipt()));}
++ @Test void duplicateNameRefusesWithoutChangingEarlierEvidence()throws Exception{var a=CinematicTakePaths.create(route,"hall_eye");Files.writeString(a.receipt(),"preserve",StandardOpenOption.CREATE_NEW);assertThrows(FileAlreadyExistsException.class,()->CinematicTakePaths.create(route,"hall_eye"));assertEquals("preserve",Files.readString(a.receipt()));}
++ @Test void traversalAbsoluteAndInvalidNamesRefuse()throws Exception{for(String name:new String[]{"../escape","/absolute","C:/outside","A","x/y",""})assertThrows(java.io.IOException.class,()->CinematicTakePaths.create(route,name));assertFalse(Files.exists(route.resolve("cinematic_spool")));}
++}
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/FrameRecorderUniqueWriterTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/FrameRecorderUniqueWriterTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/FrameRecorderUniqueWriterTest.java
+@@ -0,0 +1,99 @@
++package nsp.walk;
++
++import static org.junit.jupiter.api.Assertions.*;
++import java.io.ByteArrayOutputStream;
++import java.io.IOException;
++import java.io.OutputStream;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicReference;
++import org.junit.jupiter.api.Test;
++
++/** Synthetic queue/I/O unit cases only. They do not create a framebuffer, ffmpeg, game or native proof. */
++final class FrameRecorderUniqueWriterTest {
++    private static void drain(FrameRecorder.UniqueWriter queue, OutputStream sink, List<byte[]> recycled) throws Exception {
++        queue.drain(sink, () -> true, () -> 0, recycled::add, () -> false, () -> 0L);
++    }
++
++    @Test void shortSamplingGapNeverPadsWithDuplicateFrameBytes() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(4, 48);
++        var sink = new ByteArrayOutputStream(); var recycled = new ArrayList<byte[]>();
++        assertTrue(queue.offer(new byte[]{1,2,3,4},1,10));
++        assertTrue(queue.offer(new byte[]{5,6,7,8},2,12));
++        assertTrue(queue.offer(new byte[]{9,10,11,12},3,13));
++        queue.finishProducer(); drain(queue,sink,recycled);
++        assertArrayEquals(new byte[]{1,2,3,4,5,6,7,8,9,10,11,12},sink.toByteArray());
++        assertEquals(3,queue.written.get()); assertEquals(3,queue.uniqueWritten.get());
++        assertEquals(1,queue.samplingIntervalsSkipped.get()); assertEquals(0,queue.gapFrames.get());
++        assertEquals(0,queue.sequenceGaps.get()); assertEquals(3,recycled.size());
++    }
++
++    @Test void fullQueueDoesNotLoseLastFramesWhenEndMarkerCannotFit() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(2,48); var sink = new ByteArrayOutputStream();
++        var recycled = new ArrayList<byte[]>();
++        assertTrue(queue.offer(new byte[]{21},1,0));assertTrue(queue.offer(new byte[]{22},2,1));
++        queue.finishProducer();drain(queue,sink,recycled);
++        assertArrayEquals(new byte[]{21,22},sink.toByteArray());assertEquals(2,queue.written.get());
++    }
++
++    @Test void alreadyIssuedCallbackMayPublishBeforeProducerFinishedAndIsDrained() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(4,48);var sink = new ByteArrayOutputStream();
++        var firstWritten = new CountDownLatch(1);var failure = new AtomicReference<Throwable>();
++        assertTrue(queue.offer(new byte[]{31},1,0));
++        Thread worker = new Thread(() -> {
++            try {queue.drain(sink,()->true,()->0,data->firstWritten.countDown(),()->true,System::nanoTime);}
++            catch(Throwable error){failure.set(error);}
++        });
++        worker.start();
++        try {
++            assertTrue(firstWritten.await(3,TimeUnit.SECONDS));
++            assertTrue(worker.isAlive(),"A temporary empty queue is not producer completion");
++            assertTrue(queue.offer(new byte[]{32},2,1));queue.finishProducer();
++            worker.join(3000);assertFalse(worker.isAlive(),"End marker must wake/drain the writer");
++            assertNull(failure.get());assertArrayEquals(new byte[]{31,32},sink.toByteArray());
++            assertEquals(2,queue.written.get());
++        } finally {queue.finishProducer();worker.interrupt();worker.join(3000);}
++    }
++
++    @Test void duplicateSequenceIsRejectedBeforeSecondSinkWrite() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(4,48);var sink = new ByteArrayOutputStream();
++        assertTrue(queue.offer(new byte[]{41},1,0));assertTrue(queue.offer(new byte[]{42},1,1));
++        queue.finishProducer();var recycled = new ArrayList<byte[]>();
++        assertThrows(IOException.class,()->drain(queue,sink,recycled));
++        assertArrayEquals(new byte[]{41},sink.toByteArray());assertEquals(1,queue.rejectedOrder.get());
++        assertEquals(1,queue.written.get());assertEquals(2,recycled.size());
++    }
++
++    @Test void backwardsSamplingIdentityIsRejectedBeforeSecondSinkWrite() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(4,48);var sink = new ByteArrayOutputStream();
++        assertTrue(queue.offer(new byte[]{51},1,5));assertTrue(queue.offer(new byte[]{52},2,4));
++        queue.finishProducer();assertThrows(IOException.class,()->drain(queue,sink,new ArrayList<>()));
++        assertArrayEquals(new byte[]{51},sink.toByteArray());assertEquals(1,queue.rejectedOrder.get());
++    }
++
++    @Test void longGapAndMissingProducerSequenceRemainVisible() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(4,2);var sink = new ByteArrayOutputStream();
++        assertTrue(queue.offer(new byte[]{61},1,0));assertTrue(queue.offer(new byte[]{62},3,5));
++        queue.finishProducer();drain(queue,sink,new ArrayList<>());
++        assertArrayEquals(new byte[]{61,62},sink.toByteArray());assertEquals(4,queue.gapFrames.get());
++        assertEquals(4,queue.samplingIntervalsSkipped.get());assertEquals(1,queue.sequenceGaps.get());
++    }
++
++    @Test void sinkFailureIsNotConvertedIntoAnAcceptedFrame() throws Exception {
++        var queue = new FrameRecorder.UniqueWriter(2,48);assertTrue(queue.offer(new byte[]{71},1,0));
++        queue.finishProducer();var recycled = new ArrayList<byte[]>();
++        OutputStream broken = new OutputStream(){@Override public void write(int value)throws IOException{throw new IOException("UNIT sink failure");}};
++        assertThrows(IOException.class,()->drain(queue,broken,recycled));
++        assertEquals(0,queue.written.get());assertEquals(0,queue.uniqueWritten.get());assertEquals(1,recycled.size());
++    }
++
++    @Test void latePublishAndStalledProducerRemainFailures() {
++        var finished = new FrameRecorder.UniqueWriter(1,48);finished.finishProducer();
++        assertThrows(IllegalStateException.class,()->finished.offer(new byte[]{81},1,0));
++        var stalled = new FrameRecorder.UniqueWriter(1,48);
++        assertThrows(IOException.class,()->stalled.drain(new ByteArrayOutputStream(),()->true,()->0,data->{},()->true,
++            ()->System.nanoTime()-TimeUnit.SECONDS.toNanos(11)));
++    }
++}
+diff --git a/tools/cat_client_capture/cinematic/tests/nsp/walk/RawFrameSpoolTest.java b/tools/cat_client_capture/cinematic/tests/nsp/walk/RawFrameSpoolTest.java
+new file mode 100644
+--- /dev/null
++++ b/tools/cat_client_capture/cinematic/tests/nsp/walk/RawFrameSpoolTest.java
+@@ -0,0 +1,10 @@
++package nsp.walk;
++import org.junit.jupiter.api.*;import org.junit.jupiter.api.io.TempDir;import java.nio.file.*;import java.io.*;import java.util.*;import static org.junit.jupiter.api.Assertions.*;
++/** Real local file/identity unit tests, not GPU/native capture proof. */
++class RawFrameSpoolTest{
++ @TempDir Path temp;
++ @Test void writesRealBytesAndIndexWithoutEncoder()throws Exception{Path base=temp.resolve("take");RawFrameSpool s=new RawFrameSpool(base,4,2);s.output().write(new byte[]{1,2,3,4});s.recordFrame(1,0,4);s.output().write(new byte[]{5,6,7,8});s.recordFrame(2,1,4);s.close();assertArrayEquals(new byte[]{1,2,3,4,5,6,7,8},Files.readAllBytes(s.rawPath));assertEquals(2,Files.readAllLines(s.indexPath).size());assertEquals(8L,s.stats().get("writtenBytes"));assertEquals(true,s.stats().get("closed"));}
++ @Test void capacityRefusalDoesNotWriteExtraBytes()throws Exception{RawFrameSpool s=new RawFrameSpool(temp.resolve("bounded"),4,1);s.output().write(new byte[4]);s.recordFrame(1,0,4);assertThrows(IOException.class,()->s.output().write(new byte[4]));s.close();assertEquals(4,Files.size(s.rawPath));}
++ @Test void oldSpoolIsNeverOverwritten()throws Exception{Path base=temp.resolve("existing");RawFrameSpool s=new RawFrameSpool(base,4,1);s.output().write(new byte[]{9,8,7,6});s.recordFrame(1,0,4);s.close();assertThrows(FileAlreadyExistsException.class,()->new RawFrameSpool(base,4,1));assertArrayEquals(new byte[]{9,8,7,6},Files.readAllBytes(s.rawPath));}
++ @Test void missingIndexCannotBecomeSuccessfulClose()throws Exception{RawFrameSpool s=new RawFrameSpool(temp.resolve("unindexed"),4,1);s.output().write(new byte[4]);assertThrows(IOException.class,s::close);}
++}
+--- a/.github/workflows/cat-real-client-capture.yml
++++ b/.github/workflows/cat-real-client-capture.yml
+@@ -1,176 +1,204 @@
+ name: Reviewed real cat client capture
+ on:
+   pull_request:
+     branches: [main]
+     paths:
+       - tools/cat_client_capture/**
+       - .github/workflows/cat-real-client-capture.yml
+   workflow_dispatch:
+     inputs:
+       capture_preset:
+         description: Explicit native capture qualification preset
+         required: true
+         type: choice
+         options:
+           - hero720
+           - close800
+       capture_phases:
+         description: Exact private component coverage (protected reuses no old pass)
+         required: true
+         default: all
+         type: choice
+         options:
+           - all
+           - protected
+       expected_commit:
+         description: Exact reviewed public main commit
+         required: true
+         type: string
+       reviewed_capture_sha256:
+         description: CAPTURE_SOURCE.json SHA256
+         required: true
+         type: string
+       reviewed_cat_sha256:
+         description: Current cat PUBLIC_SOURCE.json SHA256
+         required: true
+         type: string
+       reviewed_native_sha256:
+         description: Current cat NATIVE_SOURCE.json SHA256
+         required: true
+         type: string
+       reviewed_coat_source_sha256:
+         description: Current menagerie PUBLIC_EXPORT_SOURCE.json SHA256
+         required: true
+         type: string
+ permissions:
+   contents: read
+ concurrency:
+   group: cat-real-client-capture-${{ github.ref }}
+   cancel-in-progress: false
+ jobs:
+   source-compile:
+     if: github.event_name == 'pull_request'
+     runs-on: ubuntu-24.04
+     timeout-minutes: 10
+     steps:
+       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+         with:
+           persist-credentials: false
+       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+         with:
+           distribution: temurin
+           java-version: '25.0.5+8'
+       - name: Actual pinned source guards
+         run: |
+           python3 -B - <<'PY'
+           import ast,hashlib,importlib.util,pathlib
+           p=pathlib.Path('tools/cat_client_capture/capture_client.py');ast.parse(p.read_text())
+           s=importlib.util.spec_from_file_location('capture',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+           sha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+           m.source_guard(sha('tools/cat_client_capture/CAPTURE_SOURCE.json'),sha('tools/cat_instincts/PUBLIC_SOURCE.json'),sha('tools/cat_instincts/NATIVE_SOURCE.json'))
+           PY
+       - name: Actual strict input and offline-record regression tests
+         run: python3 -B -m unittest discover -s tools/cat_client_capture -p "test_*.py" -v
+       - name: Actual source build and JUnit for pinned client classpath
+         run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/capture-source-compile"
+       - name: Compile observer and unique recorder; execute recorder JUnit8
+         run: |
+           python3 -B - <<'PY'
+           import os,pathlib,subprocess
+           root=pathlib.Path(os.environ['RUNNER_TEMP'])/'capture-source-compile';jars=sorted((root/'dependencies').rglob('*.jar'));assert jars
+           out=root/'observer-classes';out.mkdir()
+           subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',os.pathsep.join(map(str,jars)),'-d',str(out),'tools/cat_client_capture/src/net/northstar/capture/CaptureObserverMixin.java'],check=True,timeout=120)
+           print('Actual observer javac completed; native execution not run')
+           # Reuse ONLY the already downloaded, pinned client/JUnit dependencies.
+           import json,xml.etree.ElementTree as ET
+           recorder=root/'recorder-classes';recorder.mkdir();tests=root/'recorder-tests';tests.mkdir()
+           cp=os.pathsep.join(map(str,jars))
+           subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',cp,'-d',str(recorder),'tools/cat_client_capture/harness/src/nsp/walk/FrameRecorder.java'],check=True,timeout=120)
+           testcp=str(recorder)+os.pathsep+cp
+           subprocess.run(['javac','-J-XX:ActiveProcessorCount=2','-J-Xmx512M','--release','25','-encoding','UTF-8','-proc:none','-cp',testcp,'-d',str(tests),'tools/cat_client_capture/harness/tests/nsp/walk/FrameRecorderUniqueWriterTest.java'],check=True,timeout=120)
+           xml=root/'recorder-junit';run=subprocess.run(['java','-XX:ActiveProcessorCount=2','-Xmx512M','-Djava.awt.headless=true','-cp',str(tests)+os.pathsep+testcp,'org.junit.platform.console.ConsoleLauncher','execute','--select-class','nsp.walk.FrameRecorderUniqueWriterTest','--reports-dir',str(xml),'--fail-if-no-tests','--disable-banner','--details=tree'],timeout=60)
+           reports=list(xml.glob('TEST-*.xml'));assert reports,'Actual recorder JUnit XML missing'
+           counts={k:sum(int(ET.parse(p).getroot().attrib[k])for p in reports)for k in ['tests','failures','errors','skipped']}
+           (root/'recorder-junit-actual.json').write_text(json.dumps({'exitCode':run.returncode,'actual':counts},indent=2)+'\n')
+           print('Actual recorder JUnit',counts)
+           assert run.returncode==0 and counts=={'tests':8,'failures':0,'errors':0,'skipped':0},'Actual recorder JUnit8 did not pass'
+           print('Actual recorder source/JUnit completed; native execution not run')
+           PY
++  cinematic-source:
++    if: github.event_name == 'pull_request'
++    runs-on: ubuntu-24.04
++    timeout-minutes: 10
++    env:
++      PYTHONUTF8: '1'
++      PYTHONIOENCODING: utf-8
++      PYTHONDONTWRITEBYTECODE: '1'
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          persist-credentials: false
++      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
++        with:
++          distribution: temurin
++          java-version: '25.0.5+8'
++      - name: Compile complete cinematic source and run actual JUnit39 and stdlib4
++        id: cinematic
++        run: python3 -B tools/cat_client_capture/cinematic/portable_build.py --execute --expected-commit "$GITHUB_SHA" --output "$RUNNER_TEMP/cinematic-source"
++      - name: Retain bounded source-only build and actual test evidence
++        if: always() && steps.cinematic.outputs.upload_allowed == 'true'
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: cinematic-source-tests-${{ github.run_id }}-${{ github.run_attempt }}
++          path: ${{ runner.temp }}/cinematic-source/evidence
++          retention-days: 1
++          if-no-files-found: error
++          include-hidden-files: false
+   client-capture:
+     if: github.repository == 'andrewwhitecog-tech/northstar-minecraft-realm' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'andrewwhitecog-tech'
+     runs-on: ubuntu-24.04
+     timeout-minutes: 40
+     env:
+       PYTHONUTF8: '1'
+       PYTHONIOENCODING: utf-8
+       PYTHONDONTWRITEBYTECODE: '1'
+       UV_PYTHON_DOWNLOADS: never
+       NSP_PUBLIC_REPOSITORY: 'true'
+       NSP_ALLOW_CLOUD_SURVIVAL_CALIBRATION: '1'
+       CAPTURE_PRESET: ${{ inputs.capture_preset }}
+       CAPTURE_PHASES: ${{ inputs.capture_phases }}
+       EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+       CAPTURE_SHA: ${{ inputs.reviewed_capture_sha256 }}
+       CAT_SHA: ${{ inputs.reviewed_cat_sha256 }}
+       NATIVE_SHA: ${{ inputs.reviewed_native_sha256 }}
+       COAT_SHA: ${{ inputs.reviewed_coat_source_sha256 }}
+     steps:
+       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+         with:
+           persist-credentials: false
+       - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+         with:
+           distribution: temurin
+           java-version: '25.0.5+8'
+       - name: Source and exact hosted dispatch guard before downloads
+         run: |
+           python3 -B - <<'PY'
+           import ast,hashlib,importlib.util,os,pathlib
+           path=pathlib.Path('tools/cat_client_capture/capture_client.py');ast.parse(path.read_text())
+           s=importlib.util.spec_from_file_location('capture',path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+           n=m.source_guard(os.environ['CAPTURE_SHA'],os.environ['CAT_SHA'],os.environ['NATIVE_SHA'])
+           n.hosted_guard(os.environ['EXPECTED_COMMIT'])
+           assert hashlib.sha256(pathlib.Path('tools/cat_menagerie/PUBLIC_EXPORT_SOURCE.json').read_bytes()).hexdigest()==os.environ['COAT_SHA']
+           PY
+       - name: Actual source-built behavior mod and real JUnit
+         id: build
+         run: python3 -B tools/cat_instincts/portable_build.py --execute --expected-commit "$EXPECTED_COMMIT" --output "$RUNNER_TEMP/cat-client-source"
+       - name: Actual original coat export and source-compiled Java candidate pack
+         id: coats
+         run: python3 -B tools/cat_menagerie/run_hosted_export.py --execute --out "$RUNNER_TEMP/cat-coat-original-export"
+       - name: Actual four improved COMPAT coat adoption
+         run: python3 -B tools/cat_native_representatives/adapt_representatives.py --execute --reviewed-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --original-pack "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate"
+       - name: Prepare missing disposable hosted media/display tools
+         run: |
+           packages=()
+           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then packages+=(ffmpeg); fi
+           if ! command -v Xvfb >/dev/null; then packages+=(xvfb); fi
+           if [ ${#packages[@]} -gt 0 ]; then
+             sudo apt-get update
+             sudo apt-get install --yes --no-install-recommends "${packages[@]}"
+           fi
+           command -v java javac ffmpeg ffprobe Xvfb
+       - name: Actual real client, custom coats and original framebuffer capture
+         id: capture
+         run: python3 -B tools/cat_client_capture/capture_client.py --execute --capture-preset "$CAPTURE_PRESET" --capture-phases "$CAPTURE_PHASES" --expected-commit "$EXPECTED_COMMIT" --reviewed-capture-sha256 "$CAPTURE_SHA" --reviewed-cat-sha256 "$CAT_SHA" --reviewed-native-sha256 "$NATIVE_SHA" --reviewed-coat-source-sha256 "$COAT_SHA" --cat-build-receipt "$RUNNER_TEMP/cat-client-source/evidence/BUILD_TEST_ACTUAL.json" --coat-build-receipt "$RUNNER_TEMP/cat-coat-original-export/game_pack_candidate/BUILD_ACTUAL.json" --representative-build-receipt "$GITHUB_WORKSPACE/tools/cat_native_representatives/native_representative_pack_v01/BUILD_ACTUAL.json" --reviewed-representative-adapter-sha256 d78211fb89d61bca3c7e5b92532c65d0fe7a53fe50a1d4266af8bb8700a2af0b --output "$GITHUB_WORKSPACE/cat-client-${{ github.run_id }}-${{ github.run_attempt }}"
+       - name: Check tracked source remains unchanged
+         if: always()
+         run: git diff --exit-code
+       - name: Actual bounded private review footage, frames and original logs
+         if: always() && steps.capture.outputs.upload_allowed == 'true'
+         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+         with:
+           name: cat-real-client-capture-${{ github.run_id }}-${{ github.run_attempt }}
+           path: ${{ github.workspace }}/cat-client-${{ github.run_id }}-${{ github.run_attempt }}/evidence
+           retention-days: 1
+           if-no-files-found: error
+           include-hidden-files: false
+       - name: Actual source build receipt and candidate JAR
+         if: always() && steps.build.outputs.upload_allowed == 'true'
+         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+         with:
+           name: cat-client-source-${{ github.run_id }}-${{ github.run_attempt }}
+           path: ${{ runner.temp }}/cat-client-source/evidence
+           retention-days: 1
+           if-no-files-found: error
+           include-hidden-files: false
