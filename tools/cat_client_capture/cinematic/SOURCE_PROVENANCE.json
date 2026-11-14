@@ -1,0 +1,116 @@
+{
+  "schema": "northstar.cinematic-owned-source-port.v1",
+  "sourceOnly": true,
+  "portablePortTestsExecuted": false,
+  "nativeExecuted": false,
+  "upstreamFamilies": [
+    "stationary-animated-recorder/defer-v02",
+    "motion-backpressure/candidate",
+    "offline-cinematic-v03/take-paths",
+    "offline-cinematic-v01/mixin"
+  ],
+  "files": [
+    {
+      "file": "src/nsp/walk/CinematicCommitter.java",
+      "upstreamSha256": "20936d367771d2825a58fbc0c9ae4af83dfefd95c63fd0aba61aa5ddcebb9fd5"
+    },
+    {
+      "file": "src/nsp/walk/CinematicFrameRecorder.java",
+      "upstreamSha256": "23851a67d3980372508f07af1f52783f9f2e793d1b96d8053e437e98cba76e97"
+    },
+    {
+      "file": "src/nsp/walk/CinematicFrameState.java",
+      "upstreamSha256": "f8ac6b483911ec15ad1c7e61299a020b2208d3209f1e8fc4762bfd005d845dfd"
+    },
+    {
+      "file": "src/nsp/walk/CinematicProgram.java",
+      "upstreamSha256": "9ec87de0b60c05c3da11d5710287a5269d1e7a22453b848c956e4eea5b829e88"
+    },
+    {
+      "file": "src/nsp/walk/RouteWalk.java",
+      "upstreamSha256": "ef6b60d2112d0088f944a3dbccb434b9114dfc8bf723bcdd272cbb7ff126233f"
+    },
+    {
+      "file": "src/nsp/walk/FrameRecorder.java",
+      "upstreamSha256": "45dc2064a243d6d07ada87f074bd7f13b19047d9127fcc71255a9b98311bd71d"
+    },
+    {
+      "file": "src/nsp/walk/RawFrameSpool.java",
+      "upstreamSha256": "265e275ce404a8336d514b6f71371e76a4d4af786b5f7d8b565c62e7a77ed542"
+    },
+    {
+      "file": "src/nsp/walk/CinematicTakePaths.java",
+      "upstreamSha256": "82d425554186a1617ae846d41d403d92be322f1724327e1d34cdfb9995f47c0f"
+    },
+    {
+      "file": "src/nsp/walk/mixin/MinecraftFrameMixin.java",
+      "upstreamSha256": "8e568c6dd72eafc1779cb02805212f2860bffb659c589a0e04f6ef11d3dddf7b"
+    },
+    {
+      "file": "tests/nsp/walk/FrameRecorderUniqueWriterTest.java",
+      "upstreamSha256": "a731dd75284b476382753fff7eaa9ec35fdd105023013a5ca80d671097bdc3d5"
+    },
+    {
+      "file": "tests/nsp/walk/RawFrameSpoolTest.java",
+      "upstreamSha256": "3ac5babc74c5dd8bab1c6c632e37fa2c9c6a9a90224d3e646881876b016368bb"
+    },
+    {
+      "file": "tests/nsp/walk/CinematicFrameStateTest.java",
+      "upstreamSha256": "2c77133a780dec976bc7d5287c3f76d9edd279bb79a227ef10726e2769a2eb9c"
+    },
+    {
+      "file": "tests/nsp/walk/CinematicTakePathsTest.java",
+      "upstreamSha256": "80b0d5106cc390fe62cdbb286002abc242040c9936d15ad2ef050f7582d3bcaf"
+    },
+    {
+      "file": "tests/nsp/walk/CinematicAnimatedModeTest.java",
+      "upstreamSha256": "4a0943e3bc9f6ac66ef91773f7179dfda4edf44bbd5ff6ab3214834b8c0379c1"
+    },
+    {
+      "file": "tests/nsp/walk/CinematicFrameDeferTest.java",
+      "upstreamSha256": "6ada06a58eb2915f9608724874b172c9768202ceee06a57c07a1a8de8aaee83b"
+    },
+    {
+      "file": "spool_verify.py",
+      "upstreamSha256": "ae72e525b7890286ecca058804e5f7328f48cbfbadb8a4a905fd1905fb5f577e"
+    },
+    {
+      "file": "test_spool_verify_mode.py",
+      "upstreamSha256": "3dbb9f1655849fbbc354939774dcbf57a043762c9678e0c07c34b095be139502"
+    }
+  ],
+  "portAdaptations": [
+    {
+      "file": "src/nsp/walk/FrameRecorder.java",
+      "reason": "Replace private absolute spool boundary with explicit task-owned route/realtime_spool/run containment. Real-time sampler/queue logic unchanged."
+    }
+  ],
+  "historicalJavaTestCensus": {
+    "classes": 6,
+    "tests": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "scope": "Retained upstream build; not the portable port result."
+  },
+  "dependencyCoordinateFetchesExecuted": true,
+  "officialModuleFetchVerification": {
+    "updatedUTC": "2026-11-14T06:08:37.441Z",
+    "previousHostedRun": 43564551141,
+    "previousOutcome": "FAILED_BEFORE_JAVAC_DEPENDENCY_BYTE_PIN_MISMATCH",
+    "artifacts": [
+      {
+        "name": "fabric-api-base",
+        "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api-base/2.0.6+fcdff87f5d/fabric-api-base-2.0.6+fcdff87f5d.jar",
+        "bytes": 29248,
+        "sha256": "88485b1edbcb642fa28b8f53e173835b19f6b6e49aa5b088e3fe16653ef67a13"
+      },
+      {
+        "name": "fabric-lifecycle-events-v1",
+        "url": "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-lifecycle-events-v1/4.1.9+ffef5f675d/fabric-lifecycle-events-v1-4.1.9+ffef5f675d.jar",
+        "bytes": 97913,
+        "sha256": "b9ba49109cf21f968d0b44c26b2c930af74d54e2f71d9fdf505e1359275842e2"
+      }
+    ]
+  }
+}
