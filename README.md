@@ -16,7 +16,8 @@ Welcome to the public player directory and world atlas for the **NorthStar Livin
 ### 1. Minecraft Java Edition (26.3)
 - **Server Address:** `play.northstarprime.net`
 - **Port:** `25565` (default)
-- **Client Version:** Release `26.3`, the launcher's Latest Release at the time of writing (no mods or custom launcher required)
+- **Client Version:** Release `26.3`. If the launcher offers a newer release, choose **Installations → New installation** and select this version.
+- Open **Multiplayer → Add Server**, enter the address above, then join and accept the required server resource pack. Declining it disconnects you.
 - **List check, 9 Nov 2026:** version name `26.3`, protocol `777`, 0 of 100. The list did not say 1.21.1.
 
 ### 2. Minecraft Bedrock Edition (Windows 10/11, iOS, Android, Tablet)
@@ -27,9 +28,11 @@ The port answers. A list ping on 9 Nov 2026 reported version 26.60, protocol 222
 
 ### 3. Xbox Series X|S & Xbox One (Friends Tab Route)
 The public guide last saw an Xbox console on 2 Nov 2026, after the move to 26.3, and a Friends-route Bedrock join from Windows on 4 Nov 2026. Those joins were not repeated in the 9 Nov list check.
-1. Add Xbox gamertag **`UncleVorath`** as a friend (our 24/7 broadcaster automatically accepts friend requests within seconds).
+1. Add Xbox gamertag **`UncleVorath`** as a friend. The broadcaster accepts requests automatically.
 2. Open Minecraft, choose **Play**, and switch to the **Friends** tab.
 3. Select **`UncleVorath`** under **Joinable Friends** to enter the NorthStar world.
+
+PlayStation and Switch joins still need player verification. The [console join guide](https://northstarprime.net/realm/) lists the available options for those devices.
 
 ---
 
@@ -74,6 +77,7 @@ The `seen` notes record Arrival Plaza height `65` and Civic Quarter height `68`.
 ---
 
 ## Official Links
+- **Watch the Minecraft films:** [Arrival in NorthStar on X](https://x.com/xNorthstarprime/status/2123807181359431736) and [The Shadow Syndicate on YouTube](https://youtu.be/EJ5S0lIrFjI).
 - **Live Join Guide & Status:** [https://northstarprime.net/realm/](https://northstarprime.net/realm/)
 - **Direct Minecraft Hub:** [https://northstarprime.net/minecraft/](https://northstarprime.net/minecraft/)
 - **59 Free Browser Games (IDG Arcade):** [https://northstarprime.net/arcade/](https://northstarprime.net/arcade/)
