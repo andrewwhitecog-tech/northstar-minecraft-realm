@@ -77,7 +77,8 @@ The `seen` notes record Arrival Plaza height `65` and Civic Quarter height `68`.
 ---
 
 ## Official Links
-- **Watch the Minecraft films:** [Arrival in NorthStar on X](https://x.com/xNorthstarprime/status/2123807181359431736) and [The Shadow Syndicate on YouTube](https://youtu.be/EJ5S0lIrFjI).
+- **Arrival in NorthStar** follows the harbor from sunset to fireworks. Watch the [49-second film on YouTube](https://www.youtube.com/watch?v=cNTKPqOIsd4), the [28-second vertical Short](https://www.youtube.com/shorts/zGzQZTvUfpE), or the [landscape cut on X](https://x.com/xNorthstarprime/status/2123807181359431736).
+- **The Shadow Syndicate** is also available [on YouTube](https://youtu.be/EJ5S0lIrFjI).
 - **Live Join Guide & Status:** [https://northstarprime.net/realm/](https://northstarprime.net/realm/)
 - **Direct Minecraft Hub:** [https://northstarprime.net/minecraft/](https://northstarprime.net/minecraft/)
 - **59 Free Browser Games (IDG Arcade):** [https://northstarprime.net/arcade/](https://northstarprime.net/arcade/)
